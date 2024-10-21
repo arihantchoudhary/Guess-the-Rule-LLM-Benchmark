@@ -24,7 +24,7 @@ rules_storage = {
 
 # Function to send a prompt to the LLM and get the response
 def get_llm_response(prompt):
-    response = openai.Completion.create( # this is outdated btw
+    response = openai.Completion.create(
         model="gpt-4o",  # You can replace this with any LLM model you're using
         prompt=prompt,
         max_tokens=100,  # Adjust token size based on expected response length

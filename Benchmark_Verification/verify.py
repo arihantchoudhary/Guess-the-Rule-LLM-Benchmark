@@ -2,6 +2,7 @@ import csv
 import os
 import openai
 import pdb
+import argparse
 
 def load_rule(rule_path):
     with open(rule_path, 'r') as rule_file:
@@ -35,7 +36,7 @@ def read_dataset(dataset_path):
 def save_inconsistent_results(output_path, inconsistent_results):
     with open(output_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['Item Details'])
+        writer.writerow(["Index","Item Details"])
         writer.writerows(inconsistent_results)
 
 def main(dir_path):
@@ -68,5 +69,10 @@ def main(dir_path):
     print(f"Inconsistent results saved to {output_path}")
 
 if __name__ == "__main__":
-    dir_path = './demo_rule'
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dir_path", type=str, default='./demo_rule', help="the dictionary to save the generated dataset")
+    args = parser.parse_args()
+    dir_path = args.dir_path
+    
+    # Run the main function
     main(dir_path)

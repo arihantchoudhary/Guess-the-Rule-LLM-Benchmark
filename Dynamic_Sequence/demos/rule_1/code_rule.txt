@@ -1,2 +1,5 @@
 def generate_next(current_value, index):
-    return current_value * 2 - index**2
+    if index % 2 == 0:
+        return current_value * 2
+    else:
+        return current_value - 1

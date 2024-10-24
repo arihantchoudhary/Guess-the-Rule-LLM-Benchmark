@@ -1,1 +1,1 @@
-Multiply the current value by the index squared and then subtract the index plus 1 to get the next value
+Multiply the current value by the index, then add 1.

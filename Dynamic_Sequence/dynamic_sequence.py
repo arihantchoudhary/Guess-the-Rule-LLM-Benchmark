@@ -3,6 +3,7 @@ import csv
 import os
 import random
 import pdb
+import argparse
 
 # Initialize OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -80,8 +81,7 @@ def save_to_dataset(sequence, dataset_path):
         writer = csv.writer(csvfile)
         writer.writerow(sequence)
 
-def main():
-    dir_path = './demos'
+def main(dir_path):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
 
@@ -119,4 +119,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--save_dir", type=str, default='./demos', help="the dictionary to save the generated dataset")
+    args = parser.parse_args()
+    main(args.save_dir)

@@ -1,1 +1,1 @@
-Multiply the current value by the index, then add the square of the index, and finally subtract the index.
+Multiply the current value by the index + 2 and then subtract the index.

@@ -2,6 +2,7 @@ import openai
 import os
 import csv
 import pdb
+import argparse
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -34,7 +35,11 @@ def save_to_csv(content, filename='dataset.csv'):
                 writer.writerow([parts[0].strip(), parts[1].strip()])
 
 if __name__ == "__main__":
-    dir_path = './demo_rule'
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dir_path", type=str, default='./demo_rule', help="the dictionary to save the generated dataset")
+    args = parser.parse_args()
+    dir_path = args.dir_path
+
     with open(os.path.join(dir_path, 'rule.txt'), 'r', encoding='utf-8') as file:
         content = file.read()
     prompt = (

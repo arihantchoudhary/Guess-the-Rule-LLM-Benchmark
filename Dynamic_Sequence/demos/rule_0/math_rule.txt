@@ -1,0 +1,1 @@
+To get the next value in the sequence, square the index and add 2 times the current value, then take the square root of the result and add 1.

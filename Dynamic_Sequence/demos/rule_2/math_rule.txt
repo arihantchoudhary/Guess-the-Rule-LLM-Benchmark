@@ -1,0 +1,1 @@
+Multiply the current value by the index + 2 and then subtract the index.

@@ -1,0 +1,1 @@
+Square the current value, then subtract the index squared from it.

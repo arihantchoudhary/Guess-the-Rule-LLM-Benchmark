@@ -1,0 +1,1 @@
+Square the current value and add the index to it

@@ -1,0 +1,2 @@
+def generate_next(current_value, index):
+    return current_value * 2 - index**2

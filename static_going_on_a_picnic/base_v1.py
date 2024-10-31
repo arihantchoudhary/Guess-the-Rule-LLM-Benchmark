@@ -321,6 +321,7 @@ def check_guess(user_guess, actual_rule):
     :param actual_rule: The correct rule.
     :return: Boolean indicating whether the guess is correct.
     """
+    # print(f'--DEBUG-- rule {actual_rule}, user {user_guess}')
     prompt = f"Determine if the following user guess is semantically equivalent to the actual rule:\n" \
              f"User Guess: {user_guess}\n" \
              f"Actual Rule: {actual_rule}\n" \
@@ -331,7 +332,7 @@ def check_guess(user_guess, actual_rule):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are a semantic evaluator for a guess the rule game called 'going on a picnic'"},
+                {"role": "system", "content": "You are a semantic evaluator for a guess-the-rule game called 'going on a picnic'"},
                 {"role": "user", "content": prompt}
             ],
         )
@@ -394,22 +395,25 @@ def play_game():
         # Provide a hint if the user opted for it
         if hints_enabled:
             if rule["type"] == "category":
-                print("\nHint: Your answer should be like 'Items from the category X'.")
+                print("\nHint: The answer is something like 'Items from the category X'.")
             elif rule["type"] == "semantic":
-                print("\nHint: Your answer should be like 'Items related to X'.")
+                print("\nHint: The answer is something like 'Items related to X'.")
             elif rule["type"] == "attribute":
-                print(f"\nHint: Your answer should be like 'Items with {rule['attribute_type']} X'.")
+                print(f"\nHint: The answer is something like 'Items with {rule['attribute_type']} X'.")
             elif rule["type"] == "attribute_combo":
-                print(f"\nHint: Your answer should be like 'Items that are {rule['attribute_type1']} and {rule['attribute_type2']}'.")
+                print(f"\nHint: The answer is something like 'Items that are {rule['attribute_type1']} and {rule['attribute_type2']}'.")
             elif rule["type"] == "attribute_category_combo":
-                print(f"\nHint: Your answer should be like 'Items that are {rule['attribute_type']} and from the category X'.")
+                print(f"\nHint: The answer is something like 'Items that are {rule['attribute_type']} and from the category X'.")
 
         # User guesses the rule
-        user_input = input("\nWhat's the rule? (Or type 'more' for more examples): ").strip().lower()
+        user_input = input("\nWhat's the rule? \nType 'more' for more examples \nType 'give up' to end the game and see the rule): ").strip().lower()
         
         if user_input == "more":
             turn += 1
             continue
+        elif user_input == "give up":
+            print(f'The rule was: {rule['rule']}')
+            return
         
         # Check the user's guess with the actual rule using canonicalized comparison
         if check_guess(user_input, rule["rule"]):

@@ -10,56 +10,119 @@
 
 .mainContainer {
     display: flex;
+    flex-direction: row;
+    /* Ensure a side-by-side layout */
     width: 100%;
     height: 100%;
 }
 
 .leftPanel {
     flex: 1;
+    /* Take 1 part of the available space */
     padding: 20px;
+    background-color: #ffe0cc;
+    /* Light peach background for left panel */
+    border: 2px dashed #d2691e;
+    border-radius: 20px;
     box-sizing: border-box;
+    margin-right: 20px;
+    /* Add space between left and right panels */
 }
 
 .rightPanel {
     flex: 2;
+    /* Take 2 parts of the available space */
     padding: 20px;
+    background-color: #ccf2ff;
+    /* Light blue background for right panel */
+    border: 2px dashed #1e90ff;
+    border-radius: 20px;
     box-sizing: border-box;
-}
-
-.roundInfo {
-    margin-bottom: 10px;
-}
-
-.inputArea {
-    border: 1px solid #000;
-    padding: 20px;
-    margin-top: 20px;
 }
 
 .modelRow {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    background-color: #ffe0cc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+    /* Space between rows */
 }
 
 .chooseButton {
-    flex: 0 0 auto;
+    background-color: #87cefa;
+    color: black;
+    border-radius: 5px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
     margin-right: 10px;
 }
 
-.modelOutput {
-    flex: 1;
+.button-74 {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
     text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-74:hover {
+    background-color: #fff;
+}
+
+.button-74:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+    .button-74 {
+        min-width: 120px;
+        padding: 0 25px;
+    }
+}
+
+
+.modelOutput,
+.modelScore,
+.modelCorrect {
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.modelOutput {
+    background-color: #ffe0cc;
+    flex: 1;
     border: 1px solid #000;
-    padding: 8px;
-    margin: 5px 5px;
+}
+
+.modelScore {
+    width: 40px;
+    background-color: #ffd9b3;
+    border: 1px solid #000;
 }
 
 .modelCorrect {
-    flex: 0 0 auto;
-    text-align: center;
+    background-color: #ffd9b3;
     border: 1px solid #000;
-    padding: 8px;
 }
 
 .dropdownMenu {
@@ -70,40 +133,10 @@
     background-color: white;
     border: 1px solid #ccc;
     z-index: 1000;
-}
-
-.dropdownItem {
-    padding: 8px;
-    cursor: pointer;
-}
-
-.dropdownItem:hover {
-    background-color: #f0f0f0;
-}
-
-.buttonContainer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.newRoundButton {
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-}
-
-.newRoundButton:hover {
-    background-color: #e0e0e0;
-}
-
-.modelScore {
-    flex: 0 0 auto;
-    text-align: center;
-    border: 1px solid #000;
-    padding: 8px;
-    width: 30px;
-    margin: 0px 10px;
-
+    width: 100px;
+    /* Adjust width as needed */
+    top: 100%;
+    /* Position below the button */
+    left: 0;
+    /* Align to the left of the button */
 }

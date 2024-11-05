@@ -98,7 +98,7 @@ export default function LLMCompetePage() {
         <div className={styles.rightPanel}>
           {models.map((model, index) => (
             <div key={model} className={styles.modelRow}>
-              <button onClick={() => handleShowOptions(index)}>
+              <button className={styles['button-74']} onClick={() => handleShowOptions(index)}>
                 {selectedModels[index]}
               </button>
               {showOptions[index] && (

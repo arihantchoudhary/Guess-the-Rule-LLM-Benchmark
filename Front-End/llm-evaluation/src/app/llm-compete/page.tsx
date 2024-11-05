@@ -13,7 +13,6 @@ export default function LLMCompetePage() {
   const [selectedModels, setSelectedModels] = useState<string[]>(Array(maxLength).fill("Select Model"));
   const [showOptions, setShowOptions] = useState<boolean[]>(Array(maxLength).fill(false));
   const [roundNumber, setRoundNumber] = useState(1);
-  const [modules, setModules] = useState([{ id: 1, model: "Select Model", output: "Model's Output", score: 0, isCorrect: null }]);
 
 
 

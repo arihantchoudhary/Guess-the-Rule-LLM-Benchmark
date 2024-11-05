@@ -1,0 +1,86 @@
+/* src/app/choose-model/ChooseModel.module.css */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.leftPanel {
+    flex: 2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-right: 20px;
+}
+
+.roundInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.inputArea {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+.rightPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chooseButton {
+    padding: 10px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.chooseButton:hover {
+    background-color: #005bb5;
+}
+
+.outputArea {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.dropdownMenu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.dropdownItem {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdownItem:hover {
+    background-color: #f0f0f0;
+}
+
+.modelRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modelOutput,
+.modelCorrect {
+    width: 100px;
+    /* 根据需求调整宽度 */
+    text-align: center;
+    border: 1px solid #000;
+    padding: 8px;
+    margin-left: 10px;
+}

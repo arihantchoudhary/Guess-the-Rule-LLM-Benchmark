@@ -5,7 +5,6 @@ import { useState } from 'react';
 import styles from './LLMCompete.module.css';
 
 export default function LLMCompetePage() {
-  const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [questionType, setQuestionType] = useState("Math Sequence"); // 初始化默认选择
   const [showGameTypeOptions, setShowGameTypeOptions] = useState(false);
 
@@ -13,6 +12,10 @@ export default function LLMCompetePage() {
   const maxLength = Math.max(...models.map(model => model.length));
   const [selectedModels, setSelectedModels] = useState<string[]>(Array(maxLength).fill("Select Model"));
   const [showOptions, setShowOptions] = useState<boolean[]>(Array(maxLength).fill(false));
+  const [roundNumber, setRoundNumber] = useState(1);
+  const [modules, setModules] = useState([{ id: 1, model: "Select Model", output: "Model's Output", score: 0, isCorrect: null }]);
+
+
 
   const handleChooseModel = (index: number, model: string) => {
     setSelectedModels((prev) =>
@@ -29,14 +32,28 @@ export default function LLMCompetePage() {
     );
   };
 
+
+
   const handleNewRound = () => {
     // 在这里定义 New Round 按钮的功能逻辑
-    alert("New round started!");
+    setRoundNumber((roundNumber) => roundNumber + 1);
   };
+
+  const handleAddModule = () => {
+    const newModule = {
+      id: modules.length + 1,
+      selectedModel: "Select Model",
+      showOptions: false,
+      output: "Model’s Output",
+      score: 0,
+      correct: "True / False",
+    };
+    setModules([...modules, newModule]);
+  };
+  
 
   return (
     <div className={styles.pageContainer}>
-      {/* 将标题独立放在页面顶部 */}
       <h1 className={styles.pageTitle}>LLM Reasoning Rule Finding</h1>
       
       {/* 主容器 */}
@@ -45,7 +62,7 @@ export default function LLMCompetePage() {
         {/* 左侧面板 */}
         <div className={styles.leftPanel}>
           <div className={styles.roundInfo}>
-            <span>Round 1</span>
+            <span>Round {roundNumber}</span>
             <div className={styles.buttonContainer}>
               <label>Type: </label>
               <button onClick={() => setShowGameTypeOptions(!showGameTypeOptions)}>
@@ -95,6 +112,7 @@ export default function LLMCompetePage() {
                 </ul>
               )}
               <div className={styles.modelOutput}>Model’s Output</div>
+              <div className={styles.modelScore}>0</div> 
               <div className={styles.modelCorrect}>True / False</div>
             </div>
           ))}

@@ -41,7 +41,7 @@ If the player attempts to guess the rule, respond with:
 - "Correct! The rule is {secret_rule}." if they guess correctly.
 - "Incorrect. Please try again." if they guess incorrectly.
 
-Do not reveal the secret rule unless the player guesses it correctly.
+Do not reveal the secret rule unless the player guesses it correctly. The rule should be counted as correct if the player guesses anything semantically similar to the rule or something reasonably similar.
 
 Keep your responses concise and do not provide additional hints unless specified.
 """
@@ -139,7 +139,7 @@ def play_game(rule_type):
     log = []
 
     # Welcome message
-    print("Welcome to 'Going on a Picnic'!")
+    print("\n\nWelcome to 'Going on a Picnic'!")
     print("Try to figure out the secret rule by asking if you can bring certain items.")
     print("You can also try to guess the rule at any time.")
     print("Type 'quit' to exit the game.")
@@ -207,6 +207,56 @@ def play_game(rule_type):
     # Save the log
     save_log(log, rule_type)
 
+def automated_player_game(rule_type, max_turns=20):
+    # Load the secret rule for the game
+    rules_directory = os.path.join(script_dir, 'rules', rule_type)
+    secret_rule = load_secret_rule(rule_type, rules_directory)
+
+    # Generate the game master's initial prompt with the secret rule
+    game_master_prompt = generate_game_master_prompt(secret_rule)
+
+    # Initialize the conversation history and examples for both LLMs
+    conversation = [{"role": "system", "content": game_master_prompt}]
+    provided_examples = set()
+    
+    # Generate initial examples for the player
+    examples = generate_examples(secret_rule, num_examples=2)
+    examples_text = ' and '.join(f'"{item}"' for item in examples)
+    conversation.append({"role": "assistant", "content": f"To start, here are some examples of items you can bring: {examples_text}."})
+
+    # Initialize the player as another GPT-4 model (gpt4o)
+    player = OpenAI(api_key=OPENAI_KEY)
+
+    attempts = 0
+    game_over = False
+
+    # Simulate the player's turn loop
+    while not game_over and attempts < max_turns:
+        # Player LLM makes a guess
+        player_message = f"Can I bring {examples[attempts % len(examples)]}?"  # Basic cyclic attempt pattern for variety
+
+        conversation.append({"role": "user", "content": player_message})
+
+        # Game master responds
+        reply = game_master_response(player_message, conversation, provided_examples)
+        conversation.append({"role": "assistant", "content": reply})
+
+        print(f"Attempt {attempts + 1}: Player: {player_message}")
+        print(f"Game Master: {reply}\n")
+
+        # Check if the rule was guessed correctly
+        if "Correct! The rule is" in reply:
+            print(f"Rule guessed correctly in {attempts + 1} attempts!")
+            game_over = True
+        elif attempts + 1 >= max_turns:
+            print("Game over: Maximum attempts reached.")
+            print(f"The secret rule was: {secret_rule}")
+            game_over = True
+
+        attempts += 1
+
 if __name__ == "__main__":
     rule_type = 'attribute_based'  # You can change this to any rule type
-    play_game(rule_type)
+    max_turns = 20
+    automated_player_game(rule_type, max_turns)
+    # play_game(rule_type)

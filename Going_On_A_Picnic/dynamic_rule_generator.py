@@ -1,5 +1,7 @@
 # dynamic_rule_generator.py
 
+# run this file to generate more rules
+
 import os
 import sys
 import json

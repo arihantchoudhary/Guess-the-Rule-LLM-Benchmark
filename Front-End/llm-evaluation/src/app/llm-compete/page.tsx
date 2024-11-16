@@ -3,10 +3,32 @@
 
 import { useState } from 'react';
 import styles from './LLMCompete.module.css';
+import { CssBaseline, FormControl, InputLabel, Select, MenuItem, ListSubheader, Button, Box, createTheme, ThemeProvider, TextField } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'sans-serif',
+    button: {
+      fontFamily: 'sans-serif',
+      fontSize: '20px',
+      fontWeight: 'bold',
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          fontFamily: 'sans-serif', // 强制应用到 body
+        },
+      },
+    },
+  },
+});
+
 
 export default function LLMCompetePage() {
-  const [questionType, setQuestionType] = useState("Math Sequence"); // 初始化默认选择
-  const [showGameTypeOptions, setShowGameTypeOptions] = useState(false);
+  const [questionType, setQuestionType] = useState("Game Type"); // 初始化默认选择
+  // const [showGameTypeOptions, setShowGameTypeOptions] = useState(false);
 
   const models: string[] = ["Chatgpt4", "Lama-3.5", "GPT-3.5-Turbo"];
   const maxLength = Math.max(...models.map(model => model.length));
@@ -34,7 +56,6 @@ export default function LLMCompetePage() {
 
 
   const handleNewRound = () => {
-    // 在这里定义 New Round 按钮的功能逻辑
     setRoundNumber((roundNumber) => roundNumber + 1);
   };
 
@@ -52,71 +73,122 @@ export default function LLMCompetePage() {
   
 
   return (
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
     <div className={styles.pageContainer}>
       <h1 className={styles.pageTitle}>LLM Reasoning Rule Finding</h1>
       
-      {/* 主容器 */}
+      {/* Main */}
       <div className={styles.mainContainer}>
         
-        {/* 左侧面板 */}
+        {/* left */}
         <div className={styles.leftPanel}>
           <div className={styles.roundInfo}>
-            <span>Round {roundNumber}</span>
-            <div className={styles.buttonContainer}>
-              <label>Type: </label>
-              <button onClick={() => setShowGameTypeOptions(!showGameTypeOptions)}>
-                {questionType}
-              </button>
-              {showGameTypeOptions && (
-                <ul className={styles.dropdownMenu}>
-                  {["Math Sequence", "Picnic", "Graphic"].map((type) => (
-                    <li
-                      key={type}
-                      className={styles.dropdownItem}
-                      onClick={() => {
-                        setQuestionType(type);
-                        setShowGameTypeOptions(false); // 关闭菜单
-                      }}
-                    >
-                      {type}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <button onClick={handleNewRound} className={styles.newRoundButton}>
+            <span style={{ fontFamily: 'sans-serif', fontSize: '18px', fontWeight: 'bold', marginBottom: '16px', display: 'block' }}>Round {roundNumber}</span>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                width: '100%', 
+              }}
+            >
+              <FormControl sx={{ flex: 1 }}>
+                <InputLabel htmlFor="grouped-select">Game Type</InputLabel>
+                <Select
+                  value={questionType}
+                  onChange={(event) => setQuestionType(event.target.value as string)}
+                  label="Question Type"
+                  id="grouped-select"
+                >
+                  <ListSubheader>Math</ListSubheader>
+                  <MenuItem value="Math Sequence">Math Sequence</MenuItem>
+                  <ListSubheader>Textual Game</ListSubheader>
+                  <MenuItem value="Picnic">Picnic</MenuItem>
+                  <ListSubheader>Graphic</ListSubheader>
+                  <MenuItem value="Graphic">Graphic</MenuItem>
+                </Select>
+              </FormControl>
+              
+              <Button variant="contained" size="large" sx={{ flex: 1 }} onClick={handleNewRound}>
                 New Round
-              </button>
-            </div>
+              </Button>
+            </Box>
           </div>
           <div className={styles.inputArea}>
-            <p>Input Area:</p>
+            <p style={{ fontFamily: 'sans-serif', fontSize: '18px', fontWeight: 'bold' }}>Input Area:</p>
             <p><em>Questions will appear here</em></p>
           </div>
         </div>
         
-        {/* 右侧面板 */}
+        {/* right */}
         <div className={styles.rightPanel}>
           {models.map((model, index) => (
             <div key={model} className={styles.modelRow}>
-              <button className={styles['button-74']} onClick={() => handleShowOptions(index)}>
-                {selectedModels[index]}
-              </button>
-              {showOptions[index] && (
-                <ul className={styles.dropdownMenu}>
-                  {models.map((option) => (
-                    <li key={option} className={styles.dropdownItem} onClick={() => handleChooseModel(index, option)}>
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <div className={styles.modelOutput}>Model’s Output</div>
-              <div className={styles.modelScore}>0</div> 
-              <div className={styles.modelCorrect}>True / False</div>
+              
+              <FormControl sx={{ m: 1, minWidth: 120, height: '60px' }} size="small">
+              <InputLabel id={`select-label-${index}`}>Select Model</InputLabel>
+              <Select
+                labelId={`select-label-${index}`}
+                id={`select-${index}`}
+                value={selectedModels[index]}
+                onChange={(event) => handleChooseModel(index, event.target.value)}
+                sx={{
+                  height: '60px', 
+                  '.MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#ffa726', 
+                    borderWidth: '3px',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#ff8c00',
+                    borderWidth: '3px',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#ff8c00',
+                    borderWidth: '3px',
+                  },
+                }}
+              >
+                {models.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+
+              
+              
+              <div className={styles.modelOutput} 
+              style={{
+                fontFamily: 'sans-serif',
+                fontSize: '18px',
+                // fontWeight: 'bold',
+                color: '#333',
+              }} 
+              >Model’s Output
+              </div>
+              <div className={styles.modelScore}
+              style={{
+                fontFamily: 'sans-serif',
+                fontSize: '18px',
+                // fontWeight: 'bold',
+                color: '#333',
+              }} 
+              >0</div> 
+              <div className={styles.modelCorrect}
+              style={{
+                fontFamily: 'sans-serif',
+                fontSize: '18px',
+                // fontWeight: 'bold',
+                color: '#333',
+              }} 
+              >True / False</div>
             </div>
           ))}
         </div>
       </div>
     </div>
+    </ThemeProvider>
   );
 }

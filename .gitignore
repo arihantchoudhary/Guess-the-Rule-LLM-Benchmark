@@ -1,10 +1,4 @@
 /test/
-<<<<<<< HEAD
-
 .env
-
 *.json
-=======
-.env
 train-annotations-human-imagelabels.csv
->>>>>>> ali-static-games-1

@@ -4,20 +4,37 @@ import React, { useState } from "react";
 import "./styles.css";
 
 const DynamicDatasetPage: React.FC = () => {
+  //Variables for game controls
+  //1. game type,
   const [gameType, setGameType] = useState("Select Game Type");
+
+  //2. selected language models,
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
+
+  //3. difficulty level,
   const [difficulty, setDifficulty] = useState("Select Difficulty");
+
+  //4. human mode enabled
   const [humanModeEnabled, setHumanModeEnabled] = useState(false);
+
+  //5. chat messages
   const [chatMessages, setChatMessages] = useState<
     { sender: string; message: string }[]
   >([]);
+
+  //6. current message
   const [currentMessage, setCurrentMessage] = useState("");
+
+  //7. model performance
   const [modelPerformance, setModelPerformance] = useState<
     { model: string; performance: string }[]
   >([]);
 
+  //8. game message
+  const [gameMessage, setGameMessage] = useState(""); // New state for the returned message
+
   const gameTypes = ["Math Sequence", "Picnic", "Graphic"];
-  const models = ["Chatgpt4", "Lama-3.5", "GPT-3.5-Turbo"];
+  const models = ["GPT 4o", "GPT o1-preview", "GPT-3.5-Turbo"];
   const difficulties = ["Easy", "Medium", "Hard"];
 
   const handleGameTypeChange = async (type: string) => {
@@ -78,7 +95,7 @@ const DynamicDatasetPage: React.FC = () => {
 
   const handleStartGame = async () => {
     try {
-      const response = await fetch("http://localhost:8000/start-game", {
+      const response = await fetch("http://localhost:8000/api/start-game", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,10 +114,13 @@ const DynamicDatasetPage: React.FC = () => {
 
       const data = await response.json();
       // Assuming data contains model performance metrics
+
       setModelPerformance(data.performance);
+      setGameMessage(data.message); // Set the message returned from the backend
       console.log("Game started:", data);
     } catch (error) {
       console.error("Error starting game:", error);
+      setGameMessage("Error starting game"); // Set an error message if the request fails
     }
   };
 
@@ -207,7 +227,8 @@ const DynamicDatasetPage: React.FC = () => {
       </div>
 
       <div className="mainContent">
-        {modelPerformance.length > 0 && (
+        {/* Conditionally render the message */}
+        {Array.isArray(modelPerformance) && modelPerformance.length > 0 && (
           <div className="performanceArea">
             <h3>Model Performance</h3>
             <ul>
@@ -219,7 +240,6 @@ const DynamicDatasetPage: React.FC = () => {
             </ul>
           </div>
         )}
-
         {humanModeEnabled && (
           <div className="chatInterface">
             <h3>Chat Interface</h3>
@@ -240,9 +260,10 @@ const DynamicDatasetPage: React.FC = () => {
                 type="text"
                 value={currentMessage}
                 onChange={(e) => setCurrentMessage(e.target.value)}
-                placeholder="Type your message..."
+                placeholder={gameMessage ? gameMessage : "Type your message..."} // Use a string for the placeholder
                 className="chatInput"
               />
+
               <button onClick={handleSendMessage} className="chatButton">
                 Send
               </button>

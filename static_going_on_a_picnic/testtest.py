@@ -1,10 +1,28 @@
-import pandas as pd
+from final_base import StaticGoingOnAPicnic
 
-filename = "experiment_agg_11_13_2024"
-exp_result = pd.read_csv(f'{filename}.csv')
-# Model	Difficulty	Max Turns	Win	Turns Taken	Duration (s)	Total Examples Available	Positive Examples Shown	Negative Examples Shown
-cols_for_analysis = ['Model','Difficulty', 'Max Turns', 'Turns Taken', 'Duration (s)', 'Total Examples Available', 'Positive Examples Shown', 'Negative Examples Shown']
-cols_for_grouping = ['Model', 'Difficulty', 'Max Turns']
-mean_results = exp_result[cols_for_analysis].groupby(cols_for_grouping).agg({'Win': 'sum', 'Turns Taken': 'mean', 'Duration (s)': 'mean', 'Total Examples Available': 'mean', 'Positive Examples Shown': 'mean', 'Negative Examples Shown': 'mean'})
+# Creating a new game instance
+game = StaticGoingOnAPicnic(domain='natural_language', difficulty='L1', num_init_examples=3, game_gen_type='static')
+game.create_game_instance()
+print(game.get_game_summary())
+# Save the game (already done in create_game_instance)
 
-mean_results.to_csv(f"{filename}_agg.csv", index=True)
+# Later on, load the game using its UUID
+loaded_game = StaticGoingOnAPicnic.load_game(str(game.uuid))
+print(loaded_game.get_game_summary(include_rule=True))
+
+# Continue playing
+more_examples = loaded_game.get_more_examples(n=1)
+print(more_examples)
+guess_result = loaded_game.validate_guess(guess='is it a flying insect')
+print(guess_result)
+print(loaded_game.get_game_summary(include_rule=True))
+
+
+# Again load the game using its UUID
+loaded_game = StaticGoingOnAPicnic.load_game('650499e9-a5da-4129-b426-8d6517bf65e6')
+# Continue playing
+more_examples = loaded_game.get_more_examples(n=2)
+print(more_examples)
+guess_result = loaded_game.validate_guess(guess='marine invertebrates')
+print(guess_result)
+print(loaded_game.get_game_summary(include_rule=True))

@@ -384,7 +384,7 @@ if __name__ == "__main__":
     total_iterations = 5
     llm_models = {
         'openai': [
-                # 'gpt-4o-mini',
+                'gpt-4o-mini',
                 'gpt-4o',
         ], # good, fast and cheap
         'anthropic': [

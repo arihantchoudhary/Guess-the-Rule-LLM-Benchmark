@@ -115,8 +115,12 @@ export default function LLMCompetePage() {
             </Box>
           </div>
           <div className={styles.inputArea}>
+            <p style={{ fontFamily: 'sans-serif', fontSize: '18px', fontWeight: 'bold' }}>Rule:</p>
+            <p><em>Rule will appear here</em></p>
+          </div>
+          <div className={styles.inputArea}>
             <p style={{ fontFamily: 'sans-serif', fontSize: '18px', fontWeight: 'bold' }}>Input Area:</p>
-            <p><em>Questions will appear here</em></p>
+            <p><em>Prompt for models will appear here</em></p>
           </div>
         </div>
         
@@ -155,18 +159,32 @@ export default function LLMCompetePage() {
                 ))}
               </Select>
             </FormControl>
-
-
               
-              
-              <div className={styles.modelOutput} 
-              style={{
-                fontFamily: 'sans-serif',
-                fontSize: '18px',
-                // fontWeight: 'bold',
-                color: '#333',
-              }} 
-              >Model’s Output
+            <div
+                className={styles.modelOutput}
+                style={{
+                  flexGrow: 1,
+                  marginLeft: '10px',
+                  marginRight: '10px',
+                  height: '150px',
+                  lineHeight: '30px',
+                  border: '1px solid orange',
+                  borderRadius: '4px',
+                  padding: '0 10px',
+                  overflowY: 'scroll', 
+                  maxHeight: '150px',
+                  whiteSpace: 'nowrap',
+                  borderWidth: '3px',
+                  borderColor: '#ffa726'
+                }}
+              >
+                {Array.from({ length: 20 }, (_, i) => (
+                <p key={i} style={{ margin: '0' }}>
+                  {i % 2 === 0
+                    ? `Line ${i + 1}: Model’s Output...`
+                    : `Line ${i + 1}: Teacher’s Output...`}
+                </p>
+              ))}
               </div>
               <div className={styles.modelScore}
               style={{
@@ -174,6 +192,8 @@ export default function LLMCompetePage() {
                 fontSize: '18px',
                 // fontWeight: 'bold',
                 color: '#333',
+                border: 'none',
+                boxShadow: 'none',
               }} 
               >0</div> 
               <div className={styles.modelCorrect}
@@ -181,7 +201,8 @@ export default function LLMCompetePage() {
                 fontFamily: 'sans-serif',
                 fontSize: '18px',
                 // fontWeight: 'bold',
-                color: '#333',
+                border: 'none',
+                boxShadow: 'none',
               }} 
               >True / False</div>
             </div>

@@ -18,7 +18,7 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          fontFamily: 'sans-serif', // 强制应用到 body
+          fontFamily: 'sans-serif',
         },
       },
     },
@@ -27,8 +27,14 @@ const theme = createTheme({
 
 
 export default function LLMCompetePage() {
-  const [questionType, setQuestionType] = useState("Game Type"); // 初始化默认选择
+  const [questionType, setQuestionType] = useState("Game Type");
   // const [showGameTypeOptions, setShowGameTypeOptions] = useState(false);
+  const [rule, setRule] = useState<string>("Rule will appear here");
+  const [inputArea, setInputArea] = useState<string>("Prompt for models will appear here");
+  const [outputs, setOutputs] = useState<Array<{ output: string[]; turn: number; isCorrect: boolean }>>(
+    Array(3).fill({ output: [], turn: 1, isCorrect: false })
+  );  
+  
 
   const models: string[] = ["Chatgpt4", "Lama-3.5", "GPT-3.5-Turbo"];
   const maxLength = Math.max(...models.map(model => model.length));
@@ -36,7 +42,33 @@ export default function LLMCompetePage() {
   const [showOptions, setShowOptions] = useState<boolean[]>(Array(maxLength).fill(false));
   const [roundNumber, setRoundNumber] = useState(1);
 
+  const fetchRulePrompt = async (questionType: string) => {
+    try {
+      const response = await fetch('/api/getRule', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          questionType,
+        }),
+      });
 
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setRule(data.rule);
+      setInputArea(data.prompt);
+
+    } catch (error) {
+      console.error(error);
+      setRule("Failed to fetch rule.");
+      setInputArea("Failed to fetch prompt.");
+    }
+  };
+  
 
   const handleChooseModel = (index: number, model: string) => {
     setSelectedModels((prev) =>
@@ -54,23 +86,48 @@ export default function LLMCompetePage() {
   };
 
 
-
-  const handleNewRound = () => {
+  const handleNewRound = async () => {
     setRoundNumber((roundNumber) => roundNumber + 1);
+    await fetchRulePrompt(questionType);
   };
 
-  const handleAddModule = () => {
-    const newModule = {
-      id: modules.length + 1,
-      selectedModel: "Select Model",
-      showOptions: false,
-      output: "Model’s Output",
-      score: 0,
-      correct: "True / False",
-    };
-    setModules([...modules, newModule]);
+  const handleStartGame = async (modelIndex: number, modelType: string) => {
+    try {
+      const response = await fetch('/api/startGame', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          modelType,
+          turn: outputs[modelIndex].turn,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+  
+      setOutputs((prevOutputs) =>
+        prevOutputs.map((output, index) =>
+          index === modelIndex
+            ? {
+                output: [...output.output, data.output || "Model’s Output..."], // 追加新行
+                turn: output.turn + 1,
+                isCorrect: data.isCorrect || false,
+              }
+            : output
+        )
+      );
+    } catch (error) {
+      console.error("Failed to fetch game response:", error);
+    }
   };
   
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -109,18 +166,28 @@ export default function LLMCompetePage() {
                 </Select>
               </FormControl>
               
-              <Button variant="contained" size="large" sx={{ flex: 1 }} onClick={handleNewRound}>
+              <Button variant="contained" size="large" sx={{ flex: 1 }} onClick={() => {
+                handleNewRound();
+              }}>
                 New Round
+              </Button>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{ flex: 1 }}
+                onClick={handleStartGame(questionType, rule, "Prompt")}
+              >
+                Start Game
               </Button>
             </Box>
           </div>
           <div className={styles.inputArea}>
             <p style={{ fontFamily: 'sans-serif', fontSize: '18px', fontWeight: 'bold' }}>Rule:</p>
-            <p><em>Rule will appear here</em></p>
+            <p>{rule}</p>
           </div>
           <div className={styles.inputArea}>
             <p style={{ fontFamily: 'sans-serif', fontSize: '18px', fontWeight: 'bold' }}>Input Area:</p>
-            <p><em>Prompt for models will appear here</em></p>
+            <p>{inputArea}</p>
           </div>
         </div>
         
@@ -178,11 +245,9 @@ export default function LLMCompetePage() {
                   borderColor: '#ffa726'
                 }}
               >
-                {Array.from({ length: 20 }, (_, i) => (
-                <p key={i} style={{ margin: '0' }}>
-                  {i % 2 === 0
-                    ? `Line ${i + 1}: Model’s Output...`
-                    : `Line ${i + 1}: Teacher’s Output...`}
+               {outputs[index].output.map((line, lineIndex) => (
+                <p key={lineIndex} style={{ margin: '0' }}>
+                  {line}
                 </p>
               ))}
               </div>
@@ -190,21 +255,23 @@ export default function LLMCompetePage() {
               style={{
                 fontFamily: 'sans-serif',
                 fontSize: '18px',
-                // fontWeight: 'bold',
                 color: '#333',
                 border: 'none',
                 boxShadow: 'none',
               }} 
-              >0</div> 
+              >
+                {outputs[index].turn - 1}
+              </div> 
               <div className={styles.modelCorrect}
               style={{
                 fontFamily: 'sans-serif',
                 fontSize: '18px',
-                // fontWeight: 'bold',
                 border: 'none',
                 boxShadow: 'none',
               }} 
-              >True / False</div>
+              >
+                {outputs[index].isCorrect ? "True" : "False"}
+              </div>
             </div>
           ))}
         </div>
@@ -213,3 +280,4 @@ export default function LLMCompetePage() {
     </ThemeProvider>
   );
 }
+

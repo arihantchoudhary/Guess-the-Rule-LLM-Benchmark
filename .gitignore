@@ -1,5 +1,8 @@
 /test/
-
 .env
-
+train-annotations-human-imagelabels.csv
+**/.DS_Store
+experiment_*
+saved_games*
+*.pyc
 *.json

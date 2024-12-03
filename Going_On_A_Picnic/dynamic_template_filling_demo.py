@@ -10,6 +10,7 @@ OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_KEY)
 
 # Define the rule templates for each rule type with placeholders.
+# attribute_based, categorical, relational, logical, semantic
 rule_templates = {
     "attribute_based": "An object must have the attribute {attribute} equal to {value}.",
     "categorical": "An object must belong to the category '{category}'.",
@@ -29,20 +30,16 @@ rules_storage = {
 
 # Function to send a prompt to the LLM and get the response
 def get_llm_response(prompt, sysprompt="You are a helpful assistant."):
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4",  # Replace with "gpt-3.5-turbo" or your desired model
-            messages=[
-                {"role": "system", "content": sysprompt},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
-        )
-        generated_text = response.choices[0].message.content.strip()
-        return generated_text
-    except Exception as e:
-        print("Error communicating with OpenAI:\n", e)
-        return ""
+    response = client.chat.completions.create(
+        model="gpt-4",  # Replace with "gpt-3.5-turbo" or your desired model
+        messages=[
+            {"role": "system", "content": sysprompt},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.7
+    )
+    generated_text = response.choices[0].message.content.strip()
+    return generated_text
 
 # Function to generate a rule prompt for each rule type
 def generate_rule_prompt(rule_type):

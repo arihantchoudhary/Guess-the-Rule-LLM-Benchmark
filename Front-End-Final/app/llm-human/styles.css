@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 25%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+}
+
+.buttonContainer, .modelCheckbox {
+  margin-bottom: 15px;
+}
+
+.dropdownMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+}
+
+.dropdownItem {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #e0e0e0;
+}
+
+button, .startGameButton {
+  padding: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: #e3e3e3;
+  border-radius: 5px;
+}
+
+button:hover, .startGameButton:hover {
+  background-color: #cfcfcf;
+}
+
+.mainContent {
+  padding: 10px;
+  width: 75%;
+}
+
+.performanceArea {
+  margin-bottom: 20px;
+}
+
+.chatInterface {
+  margin-top: 20px;
+}
+
+.chatWindow {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.chatMessage {
+  margin: 5px 0;
+}
+
+.humanMessage {
+  color: blue;
+}
+
+.llmMessage {
+  color: green;
+}
+
+.chatInputContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.chatInput {
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.chatButton {
+  padding: 10px;
+}

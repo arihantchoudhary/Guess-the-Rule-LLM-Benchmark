@@ -5,4 +5,3 @@ train-annotations-human-imagelabels.csv
 experiment_*
 saved_games*
 *.pyc
-*.json

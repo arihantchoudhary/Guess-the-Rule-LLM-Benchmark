@@ -216,6 +216,7 @@ def request_game_instance(domain=None, difficulty=None, init_examples=None, use_
 def request_more_examples(game_id, n_examples=5):
     if game_id not in game_dct:
         raise Exception('Invalid game id!')
+    print('sdfsdfsdf', game_id)
     game = game_dct[game_id]
     exs = []
     for _ in range(n_examples):

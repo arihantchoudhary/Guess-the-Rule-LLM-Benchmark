@@ -15,10 +15,6 @@ export default function HomePage() {
     router.push("/llm-human");
   };
 
-  const goToAri = () => {
-    router.push("/Ari");
-  };
-
   return (
     <div className={styles.container}>
       <h1>Welcome to the Game-Playing LLM Evaluation Benchmark</h1>
@@ -30,9 +26,6 @@ export default function HomePage() {
       </button>
       <button onClick={goToLLMHumanModel} className={styles.startButton}>
         Go to LLM Human Page
-      </button>
-      <button onClick={goToAri} className={styles.startButton}>
-        Ari's Front-End Idea
       </button>
     </div>
   );

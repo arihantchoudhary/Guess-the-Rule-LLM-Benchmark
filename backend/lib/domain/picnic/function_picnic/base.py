@@ -347,45 +347,42 @@ def request_guess_validation(game_id, guess):
     game = game_dct[game_id]
     return game.validate_guess(guess)
 
+# def main():
+#     init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
 
-# Main loop to generate and display a set of rules, and store them
+#     print('Lexical style rules (string manipulation)')
+#     print('5 random game instances (hardcoded rule fns)')
+#     for i in range(5):
+#         print(f'Game {i}')
+#         random.seed(42 + i)
+#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns)
+#         print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
+#         for _ in range(10):
+#             random_word, is_rule_true = game.generate_example()
+#             print(random_word, is_rule_true)
+#     print('5 LLM-generated rules (standard English corpus)')
+#     for i in range(5):
+#         print(f'Game {i}')
+#         random.seed(42 + i)
+#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
+#             use_llm=True)
+#         print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
+#         for _ in range(10):
+#             random_word, is_rule_true = game.generate_example()
+#             print(random_word, is_rule_true)
 
-def main():
-    init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
-
-    print('Lexical style rules (string manipulation)')
-    print('5 random game instances (hardcoded rule fns)')
-    for i in range(5):
-        print(f'Game {i}')
-        random.seed(42 + i)
-        game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns)
-        print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
-        for _ in range(10):
-            random_word, is_rule_true = game.generate_example()
-            print(random_word, is_rule_true)
-    print('5 LLM-generated rules (standard English corpus)')
-    for i in range(5):
-        print(f'Game {i}')
-        random.seed(42 + i)
-        game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
-            use_llm=True)
-        print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
-        for _ in range(10):
-            random_word, is_rule_true = game.generate_example()
-            print(random_word, is_rule_true)
-
-if __name__ == "__main__":
-    if sys.flags.interactive:
-        print('Interactive mode')
-        print('Help (Function Signatures):')
-        print('------------------------------')
-        print('request_game_instance(domain=None, difficulty=None, init_examples=None, use_llm=False)')
-        print('request_more_examples(game_id)')
-        print('request_guess_validation(game_id, guess)')
-        init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
-        print('------------------------------')
-        game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
-            use_llm=True)
-        pass
-    else:
-        main()
+# if __name__ == "__main__":
+#     if sys.flags.interactive:
+#         print('Interactive mode')
+#         print('Help (Function Signatures):')
+#         print('------------------------------')
+#         print('request_game_instance(domain=None, difficulty=None, init_examples=None, use_llm=False)')
+#         print('request_more_examples(game_id)')
+#         print('request_guess_validation(game_id, guess)')
+#         init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
+#         print('------------------------------')
+#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
+#             use_llm=True)
+#         pass
+#     else:
+#         main()

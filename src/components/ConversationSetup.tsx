@@ -3,25 +3,25 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 
-const LLM_OPTIONS = [
-  { id: "gpt4", name: "GPT-4", personality: "Precise and analytical" },
-  { id: "claude", name: "Claude", personality: "Thoughtful and nuanced" },
-  { id: "llama", name: "LLaMA", personality: "Creative and exploratory" },
-  { id: "palm", name: "PaLM", personality: "Concise and direct" },
+const PLAYER_OPTIONS = [
+  { id: "user", name: "User (Self)", description: "Play the game yourself" },
+  { id: "gpt4o", name: "GPT-4o", description: "Most capable OpenAI model" },
+  { id: "gpt4o-mini", name: "GPT-4o Mini", description: "Faster OpenAI model" },
+  { id: "claude-3-haiku", name: "Claude 3 Haiku", description: "Fast and efficient" },
+  { id: "claude-3.5-haiku", name: "Claude 3.5 Haiku", description: "Latest Anthropic model" },
 ];
 
 interface ConversationSetupProps {
-  onStart: (topic: string, participants: string[]) => void;
+  onStart: (topic: string, player: string) => void;
 }
 
 export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
   const [topic, setTopic] = useState("");
-  const [participant1, setParticipant1] = useState("");
-  const [participant2, setParticipant2] = useState("");
+  const [selectedPlayer, setSelectedPlayer] = useState("");
 
   const handleStart = () => {
-    if (topic && participant1 && participant2) {
-      onStart(topic, [participant1, participant2]);
+    if (topic && selectedPlayer) {
+      onStart(topic, selectedPlayer);
     }
   };
 
@@ -37,52 +37,31 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
         />
       </div>
 
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium">First Participant</label>
-          <Select value={participant1} onValueChange={setParticipant1}>
-            <SelectTrigger className="bg-white bg-opacity-50">
-              <SelectValue placeholder="Select LLM" />
-            </SelectTrigger>
-            <SelectContent>
-              {LLM_OPTIONS.map((llm) => (
-                <SelectItem key={llm.id} value={llm.id}>
-                  <div className="flex flex-col">
-                    <span>{llm.name}</span>
-                    <span className="text-xs text-muted-foreground">{llm.personality}</span>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Second Participant</label>
-          <Select value={participant2} onValueChange={setParticipant2}>
-            <SelectTrigger className="bg-white bg-opacity-50">
-              <SelectValue placeholder="Select LLM" />
-            </SelectTrigger>
-            <SelectContent>
-              {LLM_OPTIONS.map((llm) => (
-                <SelectItem key={llm.id} value={llm.id}>
-                  <div className="flex flex-col">
-                    <span>{llm.name}</span>
-                    <span className="text-xs text-muted-foreground">{llm.personality}</span>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Select Player</label>
+        <Select value={selectedPlayer} onValueChange={setSelectedPlayer}>
+          <SelectTrigger className="bg-white bg-opacity-50">
+            <SelectValue placeholder="Choose who will play" />
+          </SelectTrigger>
+          <SelectContent>
+            {PLAYER_OPTIONS.map((player) => (
+              <SelectItem key={player.id} value={player.id}>
+                <div className="flex flex-col">
+                  <span>{player.name}</span>
+                  <span className="text-xs text-muted-foreground">{player.description}</span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Button 
         onClick={handleStart}
-        disabled={!topic || !participant1 || !participant2}
+        disabled={!topic || !selectedPlayer}
         className="w-full transition-all hover:scale-[1.02] active:scale-[0.98]"
       >
-        Start Conversation
+        Start Game
       </Button>
     </div>
   );

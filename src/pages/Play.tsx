@@ -12,21 +12,34 @@ const Play = () => {
   const [isConversationStarted, setIsConversationStarted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState<string>("");
+  const [isUserPlaying, setIsUserPlaying] = useState(false);
 
-  const handleStart = (topic: string, participants: string[]) => {
+  const handleStart = (topic: string, player: string) => {
     setIsConversationStarted(true);
+    setCurrentPlayer(player);
+    setIsUserPlaying(player === "user");
     setMessages([
       {
         id: Date.now().toString(),
         content: `Let's play a guess-the-rule game about: ${topic}`,
-        sender: participants[0],
+        sender: "system",
       },
     ]);
+    
+    if (player !== "user") {
+      // Start AI gameplay simulation
+      setIsLoading(true);
+      // TODO: Implement AI gameplay logic
+      setTimeout(() => setIsLoading(false), 1000);
+    }
   };
 
   const handleReset = () => {
     setIsConversationStarted(false);
     setMessages([]);
+    setCurrentPlayer("");
+    setIsUserPlaying(false);
   };
 
   return (
@@ -42,6 +55,7 @@ const Play = () => {
             messages={messages}
             isLoading={isLoading}
             onReset={handleReset}
+            isUserPlaying={isUserPlaying}
           />
         )}
       </div>

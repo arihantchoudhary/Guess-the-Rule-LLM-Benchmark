@@ -8,21 +8,47 @@ interface Message {
   sender: string;
 }
 
+interface GameDetails {
+  domain: string;
+  difficulty: string;
+  datasetType: string;
+  startTime: Date;
+  status: "ongoing" | "won" | "lost";
+  turnsTaken: number;
+}
+
 const Play = () => {
   const [isConversationStarted, setIsConversationStarted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState<string>("");
   const [isUserPlaying, setIsUserPlaying] = useState(false);
+  const [gameDetails, setGameDetails] = useState<GameDetails>({
+    domain: "",
+    difficulty: "",
+    datasetType: "",
+    startTime: new Date(),
+    status: "ongoing",
+    turnsTaken: 0
+  });
 
-  const handleStart = (topic: string, player: string) => {
+  const handleStart = (domain: string, difficulty: string, player: string, isDynamic: boolean) => {
     setIsConversationStarted(true);
     setCurrentPlayer(player);
     setIsUserPlaying(player === "user");
+    setGameDetails({
+      domain,
+      difficulty,
+      datasetType: isDynamic ? "Dynamic" : "Static",
+      startTime: new Date(),
+      status: "ongoing",
+      turnsTaken: 0
+    });
+    
     setMessages([
       {
         id: Date.now().toString(),
-        content: `Let's play a guess-the-rule game about: ${topic}`,
+        content: `Welcome to the Guess the Rule game! Domain: ${domain}, Difficulty: ${difficulty}`,
         sender: "system",
       },
     ]);
@@ -40,6 +66,14 @@ const Play = () => {
     setMessages([]);
     setCurrentPlayer("");
     setIsUserPlaying(false);
+    setGameDetails({
+      domain: "",
+      difficulty: "",
+      datasetType: "",
+      startTime: new Date(),
+      status: "ongoing",
+      turnsTaken: 0
+    });
   };
 
   return (
@@ -56,6 +90,7 @@ const Play = () => {
             isLoading={isLoading}
             onReset={handleReset}
             isUserPlaying={isUserPlaying}
+            gameDetails={gameDetails}
           />
         )}
       </div>

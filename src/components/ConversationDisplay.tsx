@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
+import { Copy, Clock, RotateCcw } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -11,26 +11,50 @@ interface Message {
   sender: string;
 }
 
+interface GameDetails {
+  domain: string;
+  difficulty: string;
+  datasetType: string;
+  startTime: Date;
+  status: "ongoing" | "won" | "lost";
+  turnsTaken: number;
+}
+
 interface ConversationDisplayProps {
   messages: Message[];
   isLoading: boolean;
   onReset: () => void;
   isUserPlaying: boolean;
+  gameDetails: GameDetails;
 }
 
 export const ConversationDisplay = ({ 
   messages, 
   isLoading, 
   onReset,
-  isUserPlaying 
+  isUserPlaying,
+  gameDetails
 }: ConversationDisplayProps) => {
   const { toast } = useToast();
   const bottomRef = useRef<HTMLDivElement>(null);
   const [userInput, setUserInput] = useState("");
+  const [elapsedTime, setElapsedTime] = useState("0:00");
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const diff = now.getTime() - gameDetails.startTime.getTime();
+      const minutes = Math.floor(diff / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      setElapsedTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [gameDetails.startTime]);
 
   const copyConversation = () => {
     const text = messages
@@ -46,14 +70,60 @@ export const ConversationDisplay = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userInput.trim()) return;
-
-    // TODO: Implement message sending logic
     console.log("Sending message:", userInput);
     setUserInput("");
   };
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "ongoing":
+        return "text-blue-600";
+      case "won":
+        return "text-green-600";
+      case "lost":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
+    }
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Game Details Panel */}
+        <div className="glass-panel p-4 space-y-2">
+          <h3 className="font-semibold text-lg mb-2">Game Details</h3>
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <span className="text-muted-foreground">Domain:</span>
+            <span>{gameDetails.domain}</span>
+            <span className="text-muted-foreground">Difficulty:</span>
+            <span>{gameDetails.difficulty}</span>
+            <span className="text-muted-foreground">Dataset:</span>
+            <span>{gameDetails.datasetType}</span>
+            <span className="text-muted-foreground">Status:</span>
+            <span className={`font-medium ${getStatusColor(gameDetails.status)}`}>
+              {gameDetails.status.charAt(0).toUpperCase() + gameDetails.status.slice(1)}
+            </span>
+          </div>
+        </div>
+
+        {/* Game Stats Panel */}
+        <div className="glass-panel p-4 space-y-2">
+          <h3 className="font-semibold text-lg mb-2">Game Stats</h3>
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <span className="text-muted-foreground">Start Time:</span>
+            <span>{gameDetails.startTime.toLocaleTimeString()}</span>
+            <span className="text-muted-foreground">Time Elapsed:</span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-4 h-4" />
+              {elapsedTime}
+            </span>
+            <span className="text-muted-foreground">Turns Taken:</span>
+            <span>{gameDetails.turnsTaken}</span>
+          </div>
+        </div>
+      </div>
+
       <div className="min-h-[400px] max-h-[600px] overflow-y-auto p-6 glass-panel space-y-4">
         {messages.map((message) => (
           <div
@@ -100,7 +170,8 @@ export const ConversationDisplay = ({
           onClick={onReset}
           className="transition-all hover:scale-[1.02] active:scale-[0.98]"
         >
-          Reset
+          <RotateCcw className="w-4 h-4 mr-2" />
+          Reset Game
         </Button>
         <Button
           variant="outline"

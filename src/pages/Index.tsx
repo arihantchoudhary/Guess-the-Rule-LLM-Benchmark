@@ -12,7 +12,7 @@ const Index = () => {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="text-xl font-bold text-primary">
-                LLM Benchmark
+                Guess The Rule Bench
               </Link>
             </div>
             <div className="flex items-center space-x-4">
@@ -119,7 +119,7 @@ const Index = () => {
       <footer className="py-8 px-4 border-t bg-white/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground">
-            © 2024 LLM Benchmark. All rights reserved.
+            © 2024 Guess The Rule Bench. All rights reserved.
           </div>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a

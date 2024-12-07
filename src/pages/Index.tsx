@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { ConversationSetup } from "@/components/ConversationSetup";
 import { ConversationDisplay } from "@/components/ConversationDisplay";
+import { Card, CardContent } from "@/components/ui/card";
+import { MessageSquare, RefreshCw, List } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 interface Message {
   id: string;
@@ -10,24 +13,24 @@ interface Message {
 
 const MOCK_RESPONSES: { [key: string]: string[] } = {
   gpt4: [
-    "From an analytical perspective, this is quite interesting.",
-    "Let me break this down systematically.",
-    "Based on the available data, I would suggest...",
+    "Let me analyze this systematically. Is it related to objects being alive?",
+    "Interesting. Could the rule involve the number of syllables?",
+    "Based on previous responses, I hypothesize the rule involves consonants.",
   ],
   claude: [
-    "That's an intriguing perspective to consider.",
-    "We should examine this from multiple angles.",
-    "Building on that thought, I wonder...",
+    "I notice a pattern in the accepted items. Does it involve their properties?",
+    "Let me test my understanding. Would a 'book' be allowed?",
+    "I'm starting to see a connection. Is it about the first letter?",
   ],
   llama: [
-    "Here's a creative way to look at this...",
-    "What if we approached this differently?",
-    "This reminds me of an interesting pattern...",
+    "What an intriguing puzzle! Could temperature be relevant?",
+    "I'm exploring different angles. Would 'sunshine' be permitted?",
+    "This reminds me of word patterns. Is it about vowels?",
   ],
   palm: [
-    "The key point here is...",
-    "Simply put, we should focus on...",
-    "To be direct, I think...",
+    "Is size a factor in this rule?",
+    "Would color make a difference here?",
+    "Could the rule involve time-related aspects?",
   ],
 };
 
@@ -47,6 +50,8 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentParticipants, setCurrentParticipants] = useState<string[]>([]);
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
+  const [turnCount, setTurnCount] = useState(0);
+  const [score, setScore] = useState(0);
 
   const simulateResponse = async (sender: string) => {
     setIsLoading(true);
@@ -63,12 +68,12 @@ const Index = () => {
       },
     ]);
     setIsLoading(false);
+    setTurnCount((prev) => prev + 1);
+    setScore((prev) => prev + Math.random() * 20); // Simulated score increase
     
-    // Switch to the next speaker
     setCurrentSpeakerIndex((prevIndex) => (prevIndex + 1) % 2);
   };
 
-  // Effect to continue the conversation
   useEffect(() => {
     if (isConversationStarted && !isLoading && currentParticipants.length === 2) {
       const timeoutId = setTimeout(() => {
@@ -83,10 +88,12 @@ const Index = () => {
     setCurrentParticipants(participants);
     setIsConversationStarted(true);
     setCurrentSpeakerIndex(0);
+    setTurnCount(0);
+    setScore(0);
     setMessages([
       {
         id: Date.now().toString(),
-        content: `Let's discuss: ${topic}`,
+        content: `Let's play a guess-the-rule game about: ${topic}`,
         sender: getLLMName(participants[0]),
       },
     ]);
@@ -97,17 +104,49 @@ const Index = () => {
     setMessages([]);
     setCurrentParticipants([]);
     setCurrentSpeakerIndex(0);
+    setTurnCount(0);
+    setScore(0);
   };
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12 animate-fade-in-slow">
-          <h1 className="text-4xl font-bold mb-4">LLM Conversation Simulator</h1>
+        <div className="text-center mb-8 animate-fade-in-slow">
+          <h1 className="text-4xl font-bold mb-4">Guess the Rule Game</h1>
           <p className="text-muted-foreground">
-            Watch AI models engage in thoughtful discussion
+            Test LLM agents with interactive rule-guessing challenges
           </p>
         </div>
+
+        {isConversationStarted && (
+          <div className="mb-6 grid grid-cols-3 gap-4">
+            <Card className="p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-primary" />
+                <span className="font-medium">Messages</span>
+              </div>
+              <span className="text-lg font-bold">{messages.length}</span>
+            </Card>
+
+            <Card className="p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <List className="w-5 h-5 text-primary" />
+                <span className="font-medium">Turns</span>
+              </div>
+              <span className="text-lg font-bold">{turnCount}</span>
+            </Card>
+
+            <Card className="p-4">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">Score</span>
+                  <span className="text-sm text-muted-foreground">{Math.round(score)}%</span>
+                </div>
+                <Progress value={score} className="h-2" />
+              </div>
+            </Card>
+          </div>
+        )}
 
         {!isConversationStarted ? (
           <ConversationSetup onStart={handleStart} />

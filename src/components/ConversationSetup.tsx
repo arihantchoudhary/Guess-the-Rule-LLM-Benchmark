@@ -47,16 +47,16 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
   };
 
   return (
-    <div className="animate-fade-in-slow space-y-6 w-full max-w-md mx-auto p-6 glass-panel hover:shadow-lg transition-shadow duration-300">
+    <div className="animate-fade-in-slow space-y-6 w-full max-w-md mx-auto p-6 glass-panel hover:shadow-lg transition-shadow duration-300 bg-white/30 backdrop-blur-md border border-white/20">
       <div className="space-y-2">
         <label className="text-sm font-medium">Domain</label>
         <Select value={domain} onValueChange={setDomain}>
-          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all">
+          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all text-left">
             <SelectValue placeholder="Select domain" />
           </SelectTrigger>
           <SelectContent>
             {DOMAIN_OPTIONS.map((option) => (
-              <SelectItem key={option.id} value={option.id}>
+              <SelectItem key={option.id} value={option.id} className="text-left">
                 {option.name}
               </SelectItem>
             ))}
@@ -67,12 +67,12 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
       <div className="space-y-2">
         <label className="text-sm font-medium">Difficulty</label>
         <Select value={difficulty} onValueChange={setDifficulty}>
-          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all">
+          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all text-left">
             <SelectValue placeholder="Select difficulty" />
           </SelectTrigger>
           <SelectContent>
             {DIFFICULTY_OPTIONS.map((option) => (
-              <SelectItem key={option.id} value={option.id}>
+              <SelectItem key={option.id} value={option.id} className="text-left">
                 <div className="flex flex-col">
                   <span>{option.name}</span>
                   <span className="text-xs text-muted-foreground">{option.description}</span>
@@ -86,12 +86,12 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
       <div className="space-y-2">
         <label className="text-sm font-medium">Select Player</label>
         <Select value={selectedPlayer} onValueChange={setSelectedPlayer}>
-          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all">
+          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all text-left">
             <SelectValue placeholder="Choose who will play" />
           </SelectTrigger>
           <SelectContent>
             {PLAYER_OPTIONS.map((player) => (
-              <SelectItem key={player.id} value={player.id}>
+              <SelectItem key={player.id} value={player.id} className="text-left">
                 <div className="flex flex-col">
                   <span>{player.name}</span>
                   <span className="text-xs text-muted-foreground">{player.description}</span>
@@ -113,7 +113,7 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
             Dynamic Dataset
           </label>
           <TooltipProvider>
-            <Tooltip delayDuration={300}>
+            <Tooltip>
               <TooltipTrigger asChild>
                 <Info className="w-4 h-4 text-muted-foreground cursor-help transition-colors hover:text-primary" />
               </TooltipTrigger>

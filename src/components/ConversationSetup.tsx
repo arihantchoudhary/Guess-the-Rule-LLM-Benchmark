@@ -1,6 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Info } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useState } from "react";
 
 const PLAYER_OPTIONS = [
@@ -11,30 +18,69 @@ const PLAYER_OPTIONS = [
   { id: "claude-3.5-haiku", name: "Claude 3.5 Haiku", description: "Latest Anthropic model" },
 ];
 
+const DOMAIN_OPTIONS = [
+  { id: "natural-language", name: "Natural Language" },
+  { id: "lexical", name: "Lexical" },
+  { id: "math", name: "Math" },
+];
+
+const DIFFICULTY_OPTIONS = [
+  { id: "l1", name: "L1", description: "Basic difficulty" },
+  { id: "l2", name: "L2", description: "Intermediate difficulty" },
+  { id: "l3", name: "L3", description: "Advanced difficulty" },
+];
+
 interface ConversationSetupProps {
-  onStart: (topic: string, player: string) => void;
+  onStart: (domain: string, difficulty: string, player: string, isDynamic: boolean) => void;
 }
 
 export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
-  const [topic, setTopic] = useState("");
+  const [domain, setDomain] = useState("");
+  const [difficulty, setDifficulty] = useState("");
   const [selectedPlayer, setSelectedPlayer] = useState("");
+  const [isDynamic, setIsDynamic] = useState(false);
 
   const handleStart = () => {
-    if (topic && selectedPlayer) {
-      onStart(topic, selectedPlayer);
+    if (domain && difficulty && selectedPlayer) {
+      onStart(domain, difficulty, selectedPlayer, isDynamic);
     }
   };
 
   return (
     <div className="animate-fade-in-slow space-y-6 w-full max-w-md mx-auto p-6 glass-panel">
       <div className="space-y-2">
-        <label className="text-sm font-medium">Conversation Topic</label>
-        <Input
-          placeholder="Enter a topic for discussion..."
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
-          className="bg-white bg-opacity-50"
-        />
+        <label className="text-sm font-medium">Domain</label>
+        <Select value={domain} onValueChange={setDomain}>
+          <SelectTrigger className="bg-white bg-opacity-50">
+            <SelectValue placeholder="Select domain" />
+          </SelectTrigger>
+          <SelectContent>
+            {DOMAIN_OPTIONS.map((option) => (
+              <SelectItem key={option.id} value={option.id}>
+                {option.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Difficulty</label>
+        <Select value={difficulty} onValueChange={setDifficulty}>
+          <SelectTrigger className="bg-white bg-opacity-50">
+            <SelectValue placeholder="Select difficulty" />
+          </SelectTrigger>
+          <SelectContent>
+            {DIFFICULTY_OPTIONS.map((option) => (
+              <SelectItem key={option.id} value={option.id}>
+                <div className="flex flex-col">
+                  <span>{option.name}</span>
+                  <span className="text-xs text-muted-foreground">{option.description}</span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="space-y-2">
@@ -56,9 +102,32 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
         </Select>
       </div>
 
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <Switch
+            id="dataset-type"
+            checked={isDynamic}
+            onCheckedChange={setIsDynamic}
+          />
+          <label htmlFor="dataset-type" className="text-sm font-medium">
+            Dynamic Dataset
+          </label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Info className="w-4 h-4 text-muted-foreground" />
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                <p>Static datasets are predefined and pre-vetted by us. Dynamic datasets will be generated on the fly by our LLM, powered by OpenAI's GPT models, based on the game rule.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      </div>
+
       <Button 
         onClick={handleStart}
-        disabled={!topic || !selectedPlayer}
+        disabled={!domain || !difficulty || !selectedPlayer}
         className="w-full transition-all hover:scale-[1.02] active:scale-[0.98]"
       >
         Start Game

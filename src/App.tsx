@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Docs from "./pages/Docs";
 import Play from "./pages/Play";
-import Compare from "./pages/Compare";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +19,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/docs" element={<Docs />} />
           <Route path="/play" element={<Play />} />
-          <Route path="/compare" element={<Compare />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

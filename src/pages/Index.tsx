@@ -1,163 +1,150 @@
-import { useState, useEffect } from "react";
-import { ConversationSetup } from "@/components/ConversationSetup";
-import { ConversationDisplay } from "@/components/ConversationDisplay";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageSquare, RefreshCw, List } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
-
-interface Message {
-  id: string;
-  content: string;
-  sender: string;
-}
-
-const MOCK_RESPONSES: { [key: string]: string[] } = {
-  gpt4: [
-    "Let me analyze this systematically. Is it related to objects being alive?",
-    "Interesting. Could the rule involve the number of syllables?",
-    "Based on previous responses, I hypothesize the rule involves consonants.",
-  ],
-  claude: [
-    "I notice a pattern in the accepted items. Does it involve their properties?",
-    "Let me test my understanding. Would a 'book' be allowed?",
-    "I'm starting to see a connection. Is it about the first letter?",
-  ],
-  llama: [
-    "What an intriguing puzzle! Could temperature be relevant?",
-    "I'm exploring different angles. Would 'sunshine' be permitted?",
-    "This reminds me of word patterns. Is it about vowels?",
-  ],
-  palm: [
-    "Is size a factor in this rule?",
-    "Would color make a difference here?",
-    "Could the rule involve time-related aspects?",
-  ],
-};
-
-const getLLMName = (id: string) => {
-  const names: { [key: string]: string } = {
-    gpt4: "GPT-4",
-    claude: "Claude",
-    llama: "LLaMA",
-    palm: "PaLM",
-  };
-  return names[id] || id;
-};
+import { BookOpen, Play, GitCompare, ArrowRight, Github } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
-  const [isConversationStarted, setIsConversationStarted] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentParticipants, setCurrentParticipants] = useState<string[]>([]);
-  const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
-  const [turnCount, setTurnCount] = useState(0);
-  const [score, setScore] = useState(0);
-
-  const simulateResponse = async (sender: string) => {
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    const responses = MOCK_RESPONSES[sender];
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: Date.now().toString(),
-        content: randomResponse,
-        sender: getLLMName(sender),
-      },
-    ]);
-    setIsLoading(false);
-    setTurnCount((prev) => prev + 1);
-    setScore((prev) => prev + Math.random() * 20); // Simulated score increase
-    
-    setCurrentSpeakerIndex((prevIndex) => (prevIndex + 1) % 2);
-  };
-
-  useEffect(() => {
-    if (isConversationStarted && !isLoading && currentParticipants.length === 2) {
-      const timeoutId = setTimeout(() => {
-        simulateResponse(currentParticipants[currentSpeakerIndex]);
-      }, 2000);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [isConversationStarted, isLoading, messages, currentParticipants, currentSpeakerIndex]);
-
-  const handleStart = async (topic: string, participants: string[]) => {
-    setCurrentParticipants(participants);
-    setIsConversationStarted(true);
-    setCurrentSpeakerIndex(0);
-    setTurnCount(0);
-    setScore(0);
-    setMessages([
-      {
-        id: Date.now().toString(),
-        content: `Let's play a guess-the-rule game about: ${topic}`,
-        sender: getLLMName(participants[0]),
-      },
-    ]);
-  };
-
-  const handleReset = () => {
-    setIsConversationStarted(false);
-    setMessages([]);
-    setCurrentParticipants([]);
-    setCurrentSpeakerIndex(0);
-    setTurnCount(0);
-    setScore(0);
-  };
-
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8 animate-fade-in-slow">
-          <h1 className="text-4xl font-bold mb-4">Guess the Rule Game</h1>
-          <p className="text-muted-foreground">
-            Test LLM agents with interactive rule-guessing challenges
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm border-b z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <Link to="/" className="text-xl font-bold text-primary">
+                LLM Benchmark
+              </Link>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link to="/" className="text-sm font-medium hover:text-primary">
+                Home
+              </Link>
+              <Link to="/docs" className="text-sm font-medium hover:text-primary">
+                Docs
+              </Link>
+              <Link to="/play" className="text-sm font-medium hover:text-primary">
+                Play Game
+              </Link>
+              <Link
+                to="/compare"
+                className="text-sm font-medium hover:text-primary"
+              >
+                Compare LLMs
+              </Link>
+            </div>
+          </div>
         </div>
+      </nav>
 
-        {isConversationStarted && (
-          <div className="mb-6 grid grid-cols-3 gap-4">
-            <Card className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-primary" />
-                <span className="font-medium">Messages</span>
-              </div>
-              <span className="text-lg font-bold">{messages.length}</span>
-            </Card>
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl font-bold tracking-tight animate-fade-in">
+            Test Your Models with{" "}
+            <span className="text-primary">LLM Agent Benchmarking</span>
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground animate-fade-in">
+            Evaluate and explore your LLMs with interactive, guess-the-rule games
+          </p>
+          <div className="mt-10 flex justify-center gap-4 animate-fade-in">
+            <Button asChild size="lg" className="gap-2">
+              <Link to="/play">
+                Get Started <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="gap-2">
+              <a
+                href="https://github.com/yourusername/your-repo"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="w-4 h-4" />
+                View on GitHub
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
 
-            <Card className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <List className="w-5 h-5 text-primary" />
-                <span className="font-medium">Turns</span>
-              </div>
-              <span className="text-lg font-bold">{turnCount}</span>
-            </Card>
-
-            <Card className="p-4">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">Score</span>
-                  <span className="text-sm text-muted-foreground">{Math.round(score)}%</span>
+      {/* Quick Start Guide */}
+      <section className="py-16 px-4 bg-white/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Quick Start Guide</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="border-none shadow-lg bg-white/70 backdrop-blur-sm animate-fade-in">
+              <CardContent className="pt-6">
+                <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                  <Play className="w-6 h-6 text-primary" />
                 </div>
-                <Progress value={score} className="h-2" />
-              </div>
+                <h3 className="text-xl font-semibold mb-2">1. Choose a game</h3>
+                <p className="text-muted-foreground">
+                  Select from our collection of guess-the-rule games designed to test
+                  different aspects of LLM capabilities.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-none shadow-lg bg-white/70 backdrop-blur-sm animate-fade-in [animation-delay:150ms]">
+              <CardContent className="pt-6">
+                <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                  <GitCompare className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  2. Play or Pick LLMs
+                </h3>
+                <p className="text-muted-foreground">
+                  Either play the game yourself or select LLMs to observe their
+                  problem-solving approaches.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-none shadow-lg bg-white/70 backdrop-blur-sm animate-fade-in [animation-delay:300ms]">
+              <CardContent className="pt-6">
+                <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                  <BookOpen className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">3. Analyze results</h3>
+                <p className="text-muted-foreground">
+                  Review performance metrics and compare different approaches to
+                  understand LLM capabilities.
+                </p>
+              </CardContent>
             </Card>
           </div>
-        )}
+        </div>
+      </section>
 
-        {!isConversationStarted ? (
-          <ConversationSetup onStart={handleStart} />
-        ) : (
-          <ConversationDisplay
-            messages={messages}
-            isLoading={isLoading}
-            onReset={handleReset}
-          />
-        )}
-      </div>
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t bg-white/50">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+          <div className="text-sm text-muted-foreground">
+            © 2024 LLM Benchmark. All rights reserved.
+          </div>
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <a
+              href="/privacy"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/contact"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              Contact Us
+            </a>
+            <a
+              href="https://github.com/yourusername/your-repo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

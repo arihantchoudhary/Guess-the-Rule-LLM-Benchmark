@@ -47,11 +47,11 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
   };
 
   return (
-    <div className="animate-fade-in-slow space-y-6 w-full max-w-md mx-auto p-6 glass-panel">
+    <div className="animate-fade-in-slow space-y-6 w-full max-w-md mx-auto p-6 glass-panel hover:shadow-lg transition-shadow duration-300">
       <div className="space-y-2">
         <label className="text-sm font-medium">Domain</label>
         <Select value={domain} onValueChange={setDomain}>
-          <SelectTrigger className="bg-white bg-opacity-50">
+          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all">
             <SelectValue placeholder="Select domain" />
           </SelectTrigger>
           <SelectContent>
@@ -67,7 +67,7 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
       <div className="space-y-2">
         <label className="text-sm font-medium">Difficulty</label>
         <Select value={difficulty} onValueChange={setDifficulty}>
-          <SelectTrigger className="bg-white bg-opacity-50">
+          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all">
             <SelectValue placeholder="Select difficulty" />
           </SelectTrigger>
           <SelectContent>
@@ -86,7 +86,7 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
       <div className="space-y-2">
         <label className="text-sm font-medium">Select Player</label>
         <Select value={selectedPlayer} onValueChange={setSelectedPlayer}>
-          <SelectTrigger className="bg-white bg-opacity-50">
+          <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all">
             <SelectValue placeholder="Choose who will play" />
           </SelectTrigger>
           <SelectContent>
@@ -113,11 +113,14 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
             Dynamic Dataset
           </label>
           <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Info className="w-4 h-4 text-muted-foreground" />
+            <Tooltip delayDuration={300}>
+              <TooltipTrigger asChild>
+                <Info className="w-4 h-4 text-muted-foreground cursor-help transition-colors hover:text-primary" />
               </TooltipTrigger>
-              <TooltipContent className="max-w-xs">
+              <TooltipContent 
+                side="right"
+                className="max-w-xs bg-white/90 backdrop-blur-sm"
+              >
                 <p>Static datasets are predefined and pre-vetted by us. Dynamic datasets will be generated on the fly by our LLM, powered by OpenAI's GPT models, based on the game rule.</p>
               </TooltipContent>
             </Tooltip>
@@ -128,7 +131,7 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
       <Button 
         onClick={handleStart}
         disabled={!domain || !difficulty || !selectedPlayer}
-        className="w-full transition-all hover:scale-[1.02] active:scale-[0.98]"
+        className="w-full transition-all hover:scale-[1.02] active:scale-[0.98] bg-primary/90 hover:bg-primary"
       >
         Start Game
       </Button>

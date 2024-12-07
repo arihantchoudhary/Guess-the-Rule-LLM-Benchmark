@@ -41,10 +41,10 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-bold tracking-tight animate-fade-in">
             Test Your Models with{" "}
-            <span className="text-primary">LLM Agent Benchmarking</span>
+            <span className="text-primary">Guess-The-Rule Games</span>
           </h1>
           <p className="mt-6 text-xl text-muted-foreground animate-fade-in">
-            Evaluate and explore your LLMs with interactive, guess-the-rule games
+            Evaluate and explore your LLMs with interactive games such as Picnic!
           </p>
           <div className="mt-10 flex justify-center gap-4 animate-fade-in">
             <Button asChild size="lg" className="gap-2">

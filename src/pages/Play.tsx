@@ -54,9 +54,7 @@ const Play = () => {
     ]);
     
     if (player !== "user") {
-      // Start AI gameplay simulation
       setIsLoading(true);
-      // TODO: Implement AI gameplay logic
       setTimeout(() => setIsLoading(false), 1000);
     }
   };
@@ -77,7 +75,7 @@ const Play = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-purple-50 via-white to-blue-50">
+    <div className="p-6 bg-gradient-to-br from-purple-50 via-white to-blue-50">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
           Guess the Rule Game

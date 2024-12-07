@@ -5,37 +5,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm border-b z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link to="/" className="text-xl font-bold text-primary">
-                Guess The Rule Bench
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link to="/" className="text-sm font-medium hover:text-primary">
-                Home
-              </Link>
-              <Link to="/docs" className="text-sm font-medium hover:text-primary">
-                Docs
-              </Link>
-              <Link to="/play" className="text-sm font-medium hover:text-primary">
-                Play Game
-              </Link>
-              <Link
-                to="/compare"
-                className="text-sm font-medium hover:text-primary"
-              >
-                Compare LLMs
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+    <div>
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -87,7 +57,7 @@ const Index = () => {
             <Card className="border-none shadow-lg bg-white/70 backdrop-blur-sm animate-fade-in [animation-delay:150ms]">
               <CardContent className="pt-6">
                 <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
-                  <GitCompare className="w-6 h-6 text-primary" />
+                  <Play className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
                   2. Play or Pick LLMs
@@ -114,37 +84,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t bg-white/50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-muted-foreground">
-            © 2024 Guess The Rule Bench. All rights reserved.
-          </div>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <a
-              href="/privacy"
-              className="text-sm text-muted-foreground hover:text-primary"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="/contact"
-              className="text-sm text-muted-foreground hover:text-primary"
-            >
-              Contact Us
-            </a>
-            <a
-              href="https://github.com/yourusername/your-repo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-primary"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -74,7 +74,7 @@ export const ConversationDisplay = ({
         <GameStatsPanel startTime={gameDetails.startTime} turnsTaken={gameDetails.turnsTaken} />
       </div>
 
-      <div className="min-h-[400px] max-h-[600px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300 bg-white/30 backdrop-blur-md border border-white/20">
+      <div className="h-[500px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300 bg-gray-100/80 backdrop-blur-md border border-white/20">
         {localMessages.map((message, index) => (
           <ChatMessage
             key={message.id}

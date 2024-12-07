@@ -39,7 +39,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold tracking-tight animate-fade-in">
+          <h1 className="text-5xl font-bold tracking-tight animate-fade-in whitespace-nowrap">
             Test Your Models with{" "}
             <span className="text-primary">Guess-The-Rule Games</span>
           </h1>

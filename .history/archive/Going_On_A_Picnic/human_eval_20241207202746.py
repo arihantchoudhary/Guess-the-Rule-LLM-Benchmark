@@ -221,3 +221,4 @@ if __name__ == "__main__":
     # ]
     rule_type = 'attribute_based'
     play_game(rule_type)
+    # play_game(rule_type)

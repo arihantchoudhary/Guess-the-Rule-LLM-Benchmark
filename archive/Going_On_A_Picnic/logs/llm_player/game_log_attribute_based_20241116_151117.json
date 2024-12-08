@@ -1,0 +1,145 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Only items that are compound words can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 8,
+    "rule_guessed": true,
+    "conversation": [
+        {
+            "role": "system",
+            "content": "\nYou are the game master for \"Going on a Picnic.\" The secret rule is: Only items that are compound words can be brought to the picnic.\n\nWhen the player asks if they can bring an item, respond with:\n\n- \"Yes, you can bring [item].\" if the item satisfies the secret rule.\n- \"No, you cannot bring [item].\" if the item does not satisfy the secret rule.\n\nIf the player asks for more examples, or requests another example, respond with:\n\n- Provide another example of an item that can be brought to the picnic according to the secret rule.\n- Do not repeat any examples you have already provided.\n\nIf the player attempts to guess the rule, respond with:\n\n- \"Correct! The rule is Only items that are compound words can be brought to the picnic..\" if they guess correctly.\n- \"Incorrect. Please try again.\" if they guess incorrectly.\n\nDo not reveal the secret rule unless the player guesses it correctly. The rule should be counted as correct if the player guesses anything semantically similar to the rule or something reasonably similar.\n\nKeep your responses concise and do not provide additional hints unless specified.\n"
+        },
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"basketball\" and \"tablecloth\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring an apple to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring an apple to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring an apple."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring an apple."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a football to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a football to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a football."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a football."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a laptop to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a laptop to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a laptop."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a laptop."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a toothbrush to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a toothbrush to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a toothbrush."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a toothbrush."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a raincoat to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a raincoat to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a raincoat."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a raincoat."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a swimsuit to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a swimsuit to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a swimsuit."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a swimsuit."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a bookshelf to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a bookshelf to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a bookshelf."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a bookshelf."
+        },
+        {
+            "role": "user",
+            "content": "Is the rule that only items that are compound words can be brought to the picnic?"
+        },
+        {
+            "role": "user",
+            "content": "Is the rule that only items that are compound words can be brought to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are compound words can be brought to the picnic."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are compound words can be brought to the picnic."
+        }
+    ]
+}

@@ -220,4 +220,7 @@ if __name__ == "__main__":
     #     'semantic'
     # ]
     rule_type = 'attribute_based'
-    play_game(rule_type)
+    max_turns = 6
+    log_dir = os.path.join(script_dir, 'logs/llm_player')
+    automated_player_game(rule_type, max_turns, log_dir)
+    # play_game(rule_type)

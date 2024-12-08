@@ -1,0 +1,42 @@
+[
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with ghost stories or legends can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are mentioned or used in famous works of literature can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that have been used or symbolized in popular science fiction movies can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are associated with famous historical events can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are commonly related to or symbolized in well-known fairy tales can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with classic board games can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with well-known works of abstract art can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with famous landmarks around the world can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular astronomical phenomena can be brought to the picnic."
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with renowned global culinary dishes can be brought to the picnic."
+    }
+]

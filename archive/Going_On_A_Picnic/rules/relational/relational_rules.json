@@ -1,0 +1,42 @@
+[
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are typically found together in a classic song or nursery rhyme."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both used in the same famous historical event."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both mentioned in the same scientific law or theory."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both significant elements in the same piece of classic literature."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both appear in the title of a well-known movie or TV series, but one item must be a character or creature and the other must be a location or object."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both key ingredients in the same traditional cultural recipe."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both feature in the same commonly known proverb or idiom."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both symbolic representations found in the same well-known piece of visual art (paintings, sculptures, etc.)."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are the first and last words in the same line of a universally recognized anthem or pledge."
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both integral parts of the same physical or athletic activity, but one must be equipment or gear, and the other must be a specific move or technique."
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "attempt": 1,
+        "player_message": "(initial examples provided)",
+        "game_master_reply": "To start, here are some examples of items you can bring: \"Moon rock\" and \"Declaration of Independence parchment\".",
+        "timestamp": "2024-11-06T18:28:43.703355"
+    },
+    {
+        "attempt": 1,
+        "player_message": "can i get 3 more examples",
+        "game_master_reply": "Sure, here are three more examples: \"A piece of the Berlin Wall\", \"A replica of the Titanic\", and \"A model of the Wright Brothers' airplane\".",
+        "timestamp": "2024-11-06T18:29:11.466271"
+    },
+    {
+        "attempt": 2,
+        "player_message": "is the rule something related to a part of a famous object?",
+        "game_master_reply": "Incorrect. Please try again.",
+        "timestamp": "2024-11-06T18:29:57.822639"
+    }
+]

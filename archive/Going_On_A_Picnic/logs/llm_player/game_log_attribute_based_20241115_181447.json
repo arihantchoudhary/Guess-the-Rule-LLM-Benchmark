@@ -1,0 +1,49 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Everything except cucumbers.",
+    "max_turns_allowed": 2,
+    "turns_taken": 2,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "system",
+            "content": "\nYou are the game master for \"Going on a Picnic.\" The secret rule is: Everything except cucumbers.\n\nWhen the player asks if they can bring an item, respond with:\n\n- \"Yes, you can bring [item].\" if the item satisfies the secret rule.\n- \"No, you cannot bring [item].\" if the item does not satisfy the secret rule.\n\nIf the player asks for more examples, or requests another example, respond with:\n\n- Provide another example of an item that can be brought to the picnic according to the secret rule.\n- Do not repeat any examples you have already provided.\n\nIf the player attempts to guess the rule, respond with:\n\n- \"Correct! The rule is Everything except cucumbers..\" if they guess correctly.\n- \"Incorrect. Please try again.\" if they guess incorrectly.\n\nDo not reveal the secret rule unless the player guesses it correctly. The rule should be counted as correct if the player guesses anything semantically similar to the rule or something reasonably similar.\n\nKeep your responses concise and do not provide additional hints unless specified.\n"
+        },
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sandwiches\" and \"strawberries\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a watermelon?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a watermelon?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a watermelon."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a watermelon."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and responses, I would guess that the rule is: \"You can bring anything.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and responses, I would guess that the rule is: \"You can bring anything.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

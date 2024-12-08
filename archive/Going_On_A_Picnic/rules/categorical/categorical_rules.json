@@ -1,0 +1,42 @@
+[
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Beatles song can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a nursery rhyme can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are referenced in famous paintings can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Shakespearean play can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned in an Oscar-winning movie script can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been represented on a national flag can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in renowned science fiction novels can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been referenced in a Nobel Prize-winning piece of literature can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in famous architectural landmarks can be brought to the picnic."
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in classic board games can be brought to the picnic."
+    }
+]

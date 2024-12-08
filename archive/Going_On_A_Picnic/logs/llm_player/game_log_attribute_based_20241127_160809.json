@@ -1,0 +1,61 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Only items that are associated with a famous event in history can be brought to the picnic.",
+    "max_turns_allowed": 6,
+    "turns_taken": 6,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"moon rock\" and \"Boston Tea Party tea\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring an \"Apollo 11 astronaut suit\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring an Apollo 11 astronaut suit."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a \"Declaration of Independence parchment\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a Declaration of Independence parchment."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a \"dinosaur fossil\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a dinosaur fossil."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a \"moon landing flag\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a moon landing flag."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring the \"Liberty Bell\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the Liberty Bell."
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can only bring items that are historically significant or related to significant events in American history."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

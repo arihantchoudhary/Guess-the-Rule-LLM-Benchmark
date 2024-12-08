@@ -1,0 +1,93 @@
+{
+    "rule_type": "test_custom",
+    "secret_rule": "Only Chs09d-4cddf and nothing else.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": true,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Chs09d-4cddf\" and \"Chs09d-4cddf\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Ahs12g-5efgh\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Ahs12g-5efgh\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs10e-5ddee\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Chs10e-5ddee\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs09d-4cddf1\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Chs09d-4cddf1\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs09d-4cddf0\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Chs09d-4cddf0\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs09d-4cddf\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Chs09d-4cddf\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs09d-4cddg\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Chs09d-4cddg\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs08c-3bbbc\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Chs08c-3bbbc\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs09d-4ccde\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Chs09d-4ccde\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"Chs09d-4ccdd\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Chs09d-4ccdd\"."
+        },
+        {
+            "role": "user",
+            "content": "The secret rule seems to be that the item must always be \"Chs09d-4cddf\" or \"Chs09d-4ccdd\". Any deviation from these exact strings is not accepted. This includes changes in the sequence, number, or addition of characters."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only Chs09d-4cddf and nothing else."
+        }
+    ]
+}

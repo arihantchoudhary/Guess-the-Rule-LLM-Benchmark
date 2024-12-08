@@ -1,0 +1,177 @@
+{
+    "rule_type": "logical",
+    "secret_rule": "The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": true,
+    "conversation": [
+        {
+            "role": "system",
+            "content": "\nYou are the game master for \"Going on a Picnic.\" The secret rule is: The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm.\n\nWhen the player asks if they can bring an item, respond with:\n\n- \"Yes, you can bring [item].\" if the item satisfies the secret rule.\n- \"No, you cannot bring [item].\" if the item does not satisfy the secret rule.\n\nIf the player asks for more examples, or requests another example, respond with:\n\n- Provide another example of an item that can be brought to the picnic according to the secret rule.\n- Do not repeat any examples you have already provided.\n\nIf the player attempts to guess the rule, respond with:\n\n- \"Correct! The rule is The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm..\" if they guess correctly.\n- \"Incorrect. Please try again.\" if they guess incorrectly.\n\nDo not reveal the secret rule unless the player guesses it correctly. The rule should be counted as correct if the player guesses anything semantically similar to the rule or something reasonably similar.\n\nKeep your responses concise and do not provide additional hints unless specified.\n"
+        },
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sandwiches\" and \"desserts\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a hotdog?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a hotdog?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a hotdog."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a hotdog."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring lemonade?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring lemonade?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring lemonade."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring lemonade."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring pasta?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring pasta?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring pasta."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring pasta."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring coffee?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring coffee?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring coffee."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring coffee."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring ice cream?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring ice cream?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring ice cream."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring ice cream."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring fruit salad?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring fruit salad?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring fruit salad."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring fruit salad."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring cookies?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring cookies?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring cookies."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring cookies."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring apple pie?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring apple pie?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring apple pie."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring apple pie."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a soda?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a soda?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a soda."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a soda."
+        },
+        {
+            "role": "user",
+            "content": "The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm."
+        },
+        {
+            "role": "user",
+            "content": "The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm."
+        }
+    ]
+}

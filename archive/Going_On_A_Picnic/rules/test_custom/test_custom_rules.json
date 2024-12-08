@@ -1,0 +1,6 @@
+[
+    {
+        "rule_type": "test_custom",
+        "rule": "Only words that contain the string Chris Dodla in it."
+    }
+]

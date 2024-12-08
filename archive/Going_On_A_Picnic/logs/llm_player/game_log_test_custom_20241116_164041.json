@@ -1,0 +1,61 @@
+{
+    "rule_type": "test_custom",
+    "secret_rule": "Only things that start with Za.",
+    "max_turns_allowed": 6,
+    "turns_taken": 6,
+    "rule_guessed": true,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Zucchini\" and \"Zamboni\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a Zebra to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a Zebra."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a Zipper to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a Zipper."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a Zoo to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a Zoo."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a Zephyr to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a Zephyr."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a Zircon to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a Zircon."
+        },
+        {
+            "role": "user",
+            "content": "The rule appears to be that you can only bring items to the picnic that are inanimate objects starting with the letter 'Z'."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only things that start with Za."
+        }
+    ]
+}

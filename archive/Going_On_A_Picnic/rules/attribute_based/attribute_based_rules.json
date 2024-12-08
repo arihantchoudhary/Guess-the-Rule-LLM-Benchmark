@@ -1,0 +1,42 @@
+[
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are compound words can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have their vowels in alphabetical order can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are homophones of another English word can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are anagrams of a plant or animal species can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are palindromes can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are named after a person or place can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are associated with a famous event in history can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be typed using only the top row of a QWERTY keyboard can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are synonyms of a word in a Beatles song title can be brought to the picnic."
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be represented in emoji form can be brought to the picnic."
+    }
+]

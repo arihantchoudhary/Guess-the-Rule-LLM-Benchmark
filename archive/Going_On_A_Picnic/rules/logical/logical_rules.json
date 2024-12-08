@@ -1,0 +1,42 @@
+[
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if it starts with a vowel, contains an odd number of letters, and its last letter is not the same as the first."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a compound word, its first and last letters are consonants, and its total number of letters is a prime number."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name contains a double vowel, ends in a 'y', and is part of the food group when split into individual words."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a palindrome, contains more than one word, and its individual words start and end with the same letter."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a common noun, has no repeated letters, includes at least one 'silent' letter in its English spelling, and has a positive connotation."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name contains both the letters 'p' and 'n', the ratio of consonants to vowels in its name is greater than 1, and it is either a type of beverage or an item used for entertainment at a traditional picnic."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a homophone or homonym, contains no vowels repeated consecutively, and its first letter is the same as the first letter of a type of weather. Additionally, the item should not be a living entity and should have originated from a culture that is not primarily English-speaking."
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an anagram of a type of flower, it has a greater number of vowels than consonants, its last letter is a consonant, and it is generally used or consumed outdoors. The item should also have a name that, when split into individual words, each word starts with a letter found in the word 'picnic.'"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun, its first and last letters are the same and not a vowel, its total number of letters is divisible by 3, and it represents an object that would be found in a typical backyard. Additionally, the item's name cannot include the letter 's' and must rhyme with a color word."
+    }
+]

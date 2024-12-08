@@ -106,7 +106,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
 
         return game
 
-    def make_system_message(self, positive_examples, negative_examples):
+    def make_init_system_message(self, positive_examples, negative_examples):
         positives_string = ', '.join(positive_examples)
         negatives_string = ', '.join(negative_examples)
         return (
@@ -123,6 +123,14 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             f"What would you like to do?"
         )
 
+    def make_more_examples_system_message(self, positive_examples, negative_examples):
+        positives_string = ', '.join(positive_examples)
+        negatives_string = ', '.join(negative_examples)
+        return (
+            f"I can bring: {positives_string}\n"
+            f"I cannot bring: {negatives_string}\n\n"
+            f"What would you like to do?"
+        )
 
     def create_game_instance(self):
         assert not self.uuid, 'Cannot create a new game with an already generated UUID'
@@ -154,7 +162,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             'turns_taken': self.turns,
             'status': self.status,
             'total_examples_available': self.total_examples_available,
-            'system_message': self.make_system_message(positives, negatives),
+            'system_message': self.make_init_system_message(positives, negatives),
             'positive_examples': positives,
             'negative_examples': negatives
         }
@@ -166,8 +174,15 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
         return {
             'game_uuid': str(self.uuid),
             'positive_examples': positives,
-            'negative_examples': negatives
+            'negative_examples': negatives,
+            'system_message': self.make_more_examples_system_message(positives, negatives)
         }
+
+    def make_validate_guess_system_message(self, guess_result):
+        if guess_result is True:
+            return 'You guessed correctly. Check your performance stats in the panel above. Thanks for playing!'
+        else:
+            return 'Incorrect guess. What would you like to do next?'
 
     def generate_examples(self, n, is_init=False):
         assert self.status == 'ongoing', f'Cannot provide more examples after the game is finished.'
@@ -205,7 +220,8 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
         self.save_game()  # Save the game after validating the guess
         return {
             'game_uuid': str(self.uuid),
-            'guess_result': result
+            'guess_result': result,
+            'system_message': self.make_validate_guess_system_message(result),
         }
 
     def check_guess(self, guess):

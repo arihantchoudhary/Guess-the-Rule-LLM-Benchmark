@@ -38,6 +38,41 @@ export const DocsContent = ({
           </div>
         </div>
 
+        <div ref={contentRefs.gettingStarted}>
+          <h2 className="text-2xl font-bold mb-4">Getting Started</h2>
+          <p className="text-gray-700 leading-relaxed">
+            Follow these steps to begin using our platform for evaluating language models
+            through interactive games and challenges.
+          </p>
+          
+          <div ref={contentRefs.chooseGame} className="mt-4">
+            <h3 className="text-xl font-semibold mb-4">Choose a Game</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Select from our collection of guess-the-rule games designed to test different
+              aspects of LLM capabilities. Each game is carefully crafted to evaluate specific
+              reasoning patterns and cognitive abilities.
+            </p>
+          </div>
+
+          <div ref={contentRefs.playOrPick} className="mt-4">
+            <h3 className="text-xl font-semibold mb-4">Play or Pick LLMs</h3>
+            <p className="text-gray-700 leading-relaxed">
+              You can either play the games yourself to understand the challenges firsthand,
+              or select different language models to observe and compare their problem-solving
+              approaches and strategies.
+            </p>
+          </div>
+
+          <div ref={contentRefs.analyzeResults} className="mt-4">
+            <h3 className="text-xl font-semibold mb-4">Analyze Results</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Review detailed performance metrics and compare different approaches to understand
+              LLM capabilities. Our analysis tools help you gain insights into model behavior
+              and decision-making patterns.
+            </p>
+          </div>
+        </div>
+
         <div ref={contentRefs.paradigm}>
           <h2 className="text-2xl font-bold mb-4">Paradigm</h2>
           <p className="text-gray-700 leading-relaxed">

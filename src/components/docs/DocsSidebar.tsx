@@ -96,6 +96,39 @@ export const DocsSidebar = ({
           >
             Experiment Results
           </div>
+
+          <Collapsible>
+            <CollapsibleTrigger 
+              onClick={() => toggleSection('gettingStarted')}
+              className="font-semibold text-lg mb-2 w-full text-left hover:text-primary transition-colors duration-200"
+            >
+              Getting Started
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              {openSections['gettingStarted'] && (
+                <>
+                  <div 
+                    className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
+                    onClick={() => scrollToSection(contentRefs.chooseGame, 'chooseGame')}
+                  >
+                    Choose a Game
+                  </div>
+                  <div 
+                    className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
+                    onClick={() => scrollToSection(contentRefs.playOrPick, 'playOrPick')}
+                  >
+                    Play or Pick LLMs
+                  </div>
+                  <div 
+                    className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
+                    onClick={() => scrollToSection(contentRefs.analyzeResults, 'analyzeResults')}
+                  >
+                    Analyze Results
+                  </div>
+                </>
+              )}
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       </ScrollArea>
     </div>

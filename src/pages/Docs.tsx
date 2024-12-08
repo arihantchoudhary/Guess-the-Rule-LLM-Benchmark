@@ -1,8 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { DocsSidebar } from "@/components/docs/DocsSidebar";
 import { DocsContent } from "@/components/docs/DocsContent";
 
 const Docs = () => {
+  const [searchParams] = useSearchParams();
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [helpful, setHelpful] = useState<boolean | null>(null);
@@ -10,6 +12,10 @@ const Docs = () => {
   const contentRefs = {
     overview: useRef<HTMLDivElement>(null),
     datasetSize: useRef<HTMLDivElement>(null),
+    gettingStarted: useRef<HTMLDivElement>(null),
+    chooseGame: useRef<HTMLDivElement>(null),
+    playOrPick: useRef<HTMLDivElement>(null),
+    analyzeResults: useRef<HTMLDivElement>(null),
     paradigm: useRef<HTMLDivElement>(null),
     staticDataset: useRef<HTMLDivElement>(null),
     picnicGame: useRef<HTMLDivElement>(null),
@@ -18,6 +24,18 @@ const Docs = () => {
     mathSequence: useRef<HTMLDivElement>(null),
     results: useRef<HTMLDivElement>(null),
   };
+
+  useEffect(() => {
+    const section = searchParams.get('section');
+    if (section && contentRefs[section]) {
+      scrollToSection(contentRefs[section], section);
+      
+      // Open parent section if needed
+      if (section === 'chooseGame' || section === 'playOrPick' || section === 'analyzeResults') {
+        setOpenSections(prev => ({ ...prev, gettingStarted: true }));
+      }
+    }
+  }, [searchParams]);
 
   const toggleSection = (section: string) => {
     setOpenSections(prev => ({

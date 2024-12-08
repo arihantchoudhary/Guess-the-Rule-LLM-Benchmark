@@ -1,6 +1,8 @@
 import { ConversationSetup } from "@/components/ConversationSetup";
 import { ConversationDisplay } from "@/components/ConversationDisplay";
 import { useState } from "react";
+import { startGame, getExamples, validateGuess } from "@/lib/api";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Message {
   id: string;
@@ -15,9 +17,11 @@ interface GameDetails {
   startTime: Date;
   status: "ongoing" | "won" | "lost";
   turnsTaken: number;
+  gameId: string;
 }
 
 const Play = () => {
+  const { toast } = useToast();
   const [isConversationStarted, setIsConversationStarted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,33 +33,56 @@ const Play = () => {
     datasetType: "",
     startTime: new Date(),
     status: "ongoing",
-    turnsTaken: 0
+    turnsTaken: 0,
+    gameId: ""
   });
 
-  const handleStart = (domain: string, difficulty: string, player: string, isDynamic: boolean) => {
-    setIsConversationStarted(true);
-    setCurrentPlayer(player);
-    setIsUserPlaying(player === "user");
-    setGameDetails({
-      domain,
-      difficulty,
-      datasetType: isDynamic ? "Dynamic" : "Static",
-      startTime: new Date(),
-      status: "ongoing",
-      turnsTaken: 0
-    });
-    
-    setMessages([
-      {
-        id: Date.now().toString(),
-        content: `Welcome to the Guess the Rule game! Domain: ${domain}, Difficulty: ${difficulty}`,
-        sender: "system",
-      },
-    ]);
-    
-    if (player !== "user") {
+  const handleStart = async (
+    domain: string, 
+    difficulty: string, 
+    player: string, 
+    initialExamples: number, 
+    isDynamic: boolean
+  ) => {
+    try {
       setIsLoading(true);
-      setTimeout(() => setIsLoading(false), 1000);
+      const response = await startGame({
+        domain,
+        difficulty,
+        player,
+        num_init_examples: initialExamples.toString(),
+        game_gen_type: isDynamic ? "dynamic" : "static"
+      });
+
+      setIsConversationStarted(true);
+      setCurrentPlayer(player);
+      setIsUserPlaying(player === "user");
+      
+      setGameDetails({
+        domain,
+        difficulty,
+        datasetType: isDynamic ? "Dynamic" : "Static",
+        startTime: new Date(response.start_time),
+        status: response.status as "ongoing" | "won" | "lost",
+        turnsTaken: response.turns_taken,
+        gameId: response.game_uuid
+      });
+
+      setMessages([
+        {
+          id: Date.now().toString(),
+          content: response.system_mesage,
+          sender: "system",
+        },
+      ]);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to start the game. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -70,8 +97,53 @@ const Play = () => {
       datasetType: "",
       startTime: new Date(),
       status: "ongoing",
-      turnsTaken: 0
+      turnsTaken: 0,
+      gameId: ""
     });
+  };
+
+  const handleMessage = async (message: string) => {
+    try {
+      setIsLoading(true);
+      let response;
+
+      // Check if the message is requesting examples
+      const examplesMatch = message.match(/^More (\d+) examples?$/);
+      
+      if (examplesMatch) {
+        const numExamples = parseInt(examplesMatch[1]);
+        response = await getExamples(gameDetails.gameId, numExamples);
+      } else {
+        response = await validateGuess(gameDetails.gameId, message);
+      }
+
+      setMessages(prev => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          content: message,
+          sender: "user"
+        },
+        {
+          id: (Date.now() + 1).toString(),
+          content: response.system_mesage,
+          sender: "system"
+        }
+      ]);
+
+      setGameDetails(prev => ({
+        ...prev,
+        turnsTaken: prev.turnsTaken + 1
+      }));
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to process your message. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -89,6 +161,7 @@ const Play = () => {
             onReset={handleReset}
             isUserPlaying={isUserPlaying}
             gameDetails={gameDetails}
+            onSendMessage={handleMessage}
           />
         )}
       </div>

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Copy, RotateCcw } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
 import { GameDetailsPanel } from "./game/GameDetailsPanel";
 import { GameStatsPanel } from "./game/GameStatsPanel";
 import { ChatMessage } from "./game/ChatMessage";
@@ -20,6 +19,7 @@ interface GameDetails {
   startTime: Date;
   status: "ongoing" | "won" | "lost";
   turnsTaken: number;
+  gameId: string;
 }
 
 interface ConversationDisplayProps {
@@ -28,6 +28,7 @@ interface ConversationDisplayProps {
   onReset: () => void;
   isUserPlaying: boolean;
   gameDetails: GameDetails;
+  onSendMessage: (message: string) => void;
 }
 
 export const ConversationDisplay = ({ 
@@ -35,13 +36,13 @@ export const ConversationDisplay = ({
   isLoading, 
   onReset,
   isUserPlaying,
-  gameDetails
+  gameDetails,
+  onSendMessage
 }: ConversationDisplayProps) => {
   const { toast } = useToast();
-  const [localMessages, setLocalMessages] = useState<Message[]>(messages);
 
   const copyConversation = () => {
-    const text = localMessages
+    const text = messages
       .map((msg) => `${msg.sender}: ${msg.content}`)
       .join("\n\n");
     navigator.clipboard.writeText(text);
@@ -49,22 +50,6 @@ export const ConversationDisplay = ({
       description: "Conversation copied to clipboard",
       duration: 2000,
     });
-  };
-
-  const handleSendMessage = (message: string) => {
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: message,
-      sender: "user"
-    };
-    
-    const systemMessage: Message = {
-      id: (Date.now() + 1).toString(),
-      content: "I understand your guess. Let me evaluate that...",
-      sender: "system"
-    };
-    
-    setLocalMessages(prev => [...prev, userMessage, systemMessage]);
   };
 
   return (
@@ -75,7 +60,7 @@ export const ConversationDisplay = ({
       </div>
 
       <div className="h-[500px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300 bg-gray-100/80 backdrop-blur-md border border-white/20">
-        {localMessages.map((message, index) => (
+        {messages.map((message, index) => (
           <ChatMessage
             key={message.id}
             content={message.content}
@@ -95,7 +80,7 @@ export const ConversationDisplay = ({
       </div>
 
       {isUserPlaying && (
-        <ChatInput onSendMessage={handleSendMessage} />
+        <ChatInput onSendMessage={onSendMessage} />
       )}
 
       <div className="flex justify-between gap-4">

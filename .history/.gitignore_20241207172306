@@ -6,5 +6,3 @@ experiment_*
 saved_games*
 *.pyc
 backend.egg-info
-**/keys.json
-**/temp_key.json

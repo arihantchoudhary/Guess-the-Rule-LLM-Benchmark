@@ -1,0 +1,61 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Only items that are associated with a famous event in history can be brought to the picnic.",
+    "max_turns_allowed": 6,
+    "turns_taken": 6,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"moon rock\" and \"Declaration of Independence\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a \"dinosaur fossil\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a dinosaur fossil."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring the \"Eiffel Tower\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring the Eiffel Tower."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring the \"Mona Lisa\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring the Mona Lisa."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring the \"Constitution of the United States\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the Constitution of the United States."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring the \"Liberty Bell\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the Liberty Bell."
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can only bring items that are related to American history or space exploration."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -28,8 +28,8 @@ You are the game master for "Going on a Picnic." The secret rule is: {secret_rul
 
 When the player asks if they can bring an item, respond with:
 
-- "Yes, you can bring [item]." if the item satisfies the secret rule.
-- "No, you cannot bring [item]." if the item does not satisfy the secret rule.
+- "Yes, you can bring [guess]." if their guess satisfies the secret rule.
+- "No, you cannot bring [guess]." if their guess does not satisfy the secret rule.
 
 If the player asks for more examples, or requests another example, respond with:
 
@@ -41,25 +41,29 @@ If the player attempts to guess the rule, respond with:
 - "Correct! The rule is {secret_rule}." if they guess correctly.
 - "Incorrect. Please try again." if they guess incorrectly.
 
-Do not reveal the secret rule unless the player guesses it correctly. The rule should be counted as correct if the player guesses anything semantically similar to the rule or something reasonably similar.
+Do not reveal the secret rule unless the player guesses it correctly. Rule guessing should be evaluated rigidly. Please use your judgment. If the rule guess is phrased differently, only count it as correct if the player's guess is semantically identical.
 
 Keep your responses concise and do not provide additional hints unless specified.
 """
     return prompt
 
 def game_master_response(player_message, conversation, provided_examples):
-    # Append the player's message to the conversation
-    conversation.append({"role": "user", "content": player_message})
+    # Create a deep copy of the conversation to avoid modifying the original
+    current_conversation = conversation.copy()
+    
+    # Append the player's message to our local copy
+    current_conversation.append({"role": "user", "content": player_message})
 
     # Get the response from the game master (GPT-4)
     response = client.chat.completions.create(
-        model="gpt-4",
-        messages=conversation,
+        model="gpt-4o-mini",
+        messages=current_conversation,
         temperature=0
     )
     reply = response.choices[0].message.content.strip()
 
-    # Append the assistant's reply to the conversation
+    # Append the assistant's reply to the original conversation
+    conversation.append({"role": "user", "content": player_message})
     conversation.append({"role": "assistant", "content": reply})
 
     # If the game master provides a new example, add it to the provided_examples set
@@ -89,7 +93,7 @@ Format:
 [item1], [item2], ..., [item{num_examples}]
 """
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7
     )
@@ -215,20 +219,25 @@ def automated_player_game(rule_type, max_turns=20, output_directory=None):
     # Generate the game master's initial prompt with the secret rule
     game_master_prompt = generate_game_master_prompt(secret_rule)
 
-    # Initialize the conversation history for both LLMs
-    conversation = [{"role": "system", "content": game_master_prompt}]
+    # Initialize conversations
+    game_master_conversation = [{"role": "system", "content": game_master_prompt}]
+    player_visible_history = []  # Only store what the player should see
+
     provided_examples = set()
 
     # Generate initial examples for the player
     examples = generate_examples(secret_rule, num_examples=2)
     examples_text = ' and '.join(f'"{item}"' for item in examples)
     initial_message = f"To start, here are some examples of items you can bring: {examples_text}."
-    conversation.append({"role": "assistant", "content": initial_message})
-
+    
+    # Add initial message to conversations
+    game_master_conversation.append({"role": "assistant", "content": initial_message})
+    player_visible_history.append({"role": "assistant", "content": initial_message})
+    
     # Display the initial message from the game master
-    print("Game Master:", initial_message, "\n")
+    print("\nGame Master:", initial_message, "\n")
 
-    # Initialize the player LLM as GPT-4
+    # Initialize the player LLM
     player = OpenAI(api_key=OPENAI_KEY)
 
     attempts = 0
@@ -237,33 +246,37 @@ def automated_player_game(rule_type, max_turns=20, output_directory=None):
 
     # Simulate the player's turn loop with dynamic prompts
     while not game_over and attempts < max_turns:
-        # Check if this is the final turn
+        # Format the conversation history for the player
+        conversation_history = "\n".join([
+            f"{'Game Master' if msg['role'] == 'assistant' else 'Player'}: {msg['content']}"
+            for msg in player_visible_history
+        ])
+
         if attempts == max_turns - 1:
-            # Let the player know it’s the last turn
             player_prompt = f"""
 You are a player in a game called "Going on a Picnic." This is your final turn, so you must make your best guess about the secret rule.
 Based on the game master's responses, try to guess the rule as accurately as possible.
 
 The game master has provided examples: {examples_text}.
 
-So far, this is the conversation:
-
-{conversation}
+Here's the conversation history:
+{conversation_history}
 
 Please make your best guess about the rule as this is your last opportunity.
             """
         else:
-            # Normal prompt if not the final turn
             player_prompt = f"""
 You are a player in a game called "Going on a Picnic." You are trying to guess the secret rule by asking if certain items can be brought to the picnic. 
 The game master has given examples of items that fit the rule: {examples_text}.
 
-You can ask if you can bring different items, make guesses about the rule based on prior responses, and adapt based on the game master's answers. 
-So far, this is the conversation:
+Here's the conversation history:
+{conversation_history}
 
-{conversation}
+Based on this history, either:
+1. Ask about a new item that hasn't been mentioned before
+2. Try to guess the rule if you think you understand it
 
-Ask about a new item or try to guess the rule based on what you’ve learned.
+Be strategic and avoid repeating previous guesses or items.
             """
 
         # Get the player LLM's response
@@ -274,12 +287,14 @@ Ask about a new item or try to guess the rule based on what you’ve learned.
         )
         player_message = response.choices[0].message.content.strip()
         
-        # Append player's guess to the conversation
-        conversation.append({"role": "user", "content": player_message})
+        # Add player's message to player history
+        player_visible_history.append({"role": "user", "content": player_message})
 
         # Game master responds to the player's guess
-        reply = game_master_response(player_message, conversation, provided_examples)
-        conversation.append({"role": "assistant", "content": reply})
+        reply = game_master_response(player_message, game_master_conversation, provided_examples)
+
+        # Add game master's reply to player history
+        player_visible_history.append({"role": "assistant", "content": reply})
 
         # Display each turn in the console
         print(f"Attempt {attempts + 1}: Player: {player_message}")
@@ -304,20 +319,18 @@ Ask about a new item or try to guess the rule based on what you’ve learned.
         "max_turns_allowed": max_turns,
         "turns_taken": attempts,
         "rule_guessed": rule_guessed,
-        "conversation": conversation
+        "conversation": player_visible_history
     }
 
-    # Define the output directory, using a default if not provided
+    # Save logs
     if output_directory is None:
         output_directory = os.path.join(script_dir, 'logs')
     os.makedirs(output_directory, exist_ok=True)
 
-    # Define a unique filename based on the timestamp
     timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     log_filename = f"game_log_{rule_type}_{timestamp}.json"
     log_path = os.path.join(output_directory, log_filename)
 
-    # Save the metrics and conversation to a JSON file
     with open(log_path, 'w') as f:
         json.dump(metrics, f, indent=4)
 
@@ -331,8 +344,8 @@ if __name__ == "__main__":
     #     'relational',
     #     'semantic'
     # ]
-    rule_type = 'logical'
-    max_turns = 10
+    rule_type = 'attribute_based'
+    max_turns = 6
     log_dir = os.path.join(script_dir, 'logs/llm_player')
     automated_player_game(rule_type, max_turns, log_dir)
     # play_game(rule_type)

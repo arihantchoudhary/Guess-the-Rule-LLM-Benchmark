@@ -6,6 +6,7 @@ import random
 import datetime
 import re
 from openai import OpenAI
+import anthropic
 
 # --------------------------
 # Configuration & Setup
@@ -19,11 +20,41 @@ keys_path = os.path.join(script_dir, 'keys.json')
 with open(keys_path, 'r') as f:
     keys = json.load(f)
 OPENAI_KEY = keys['OPENAI_API_KEY']
-client = OpenAI(api_key=OPENAI_KEY)
+openai_client = OpenAI(api_key=OPENAI_KEY)
+
+ANTHROPIC_API_KEY = keys['ANTHROPIC_API_KEY']
+anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 # --------------------------
 # Helper Functions
 # --------------------------
+
+# Function to get LLM model response
+def get_llm_model_response(platform, model, message_history):
+    if platform == 'openai':
+        response = openai_client.chat.completions.create(
+            model=model,
+            messages=message_history
+        )
+        return response.choices[0].message.content.strip().lower()
+    elif platform == 'anthropic':
+        system_prompt = ''
+        user_prompts = []
+        for m in message_history:
+            if not system_prompt and m['role'] == 'system':
+                system_prompt += m['content']
+            elif m['role'] == 'user':
+                user_prompts.append(m)
+
+        response = anthropic_client.messages.create(
+            max_tokens=1024,
+            system=system_prompt,
+            messages=user_prompts,
+            model=model,
+        )
+        return response.content[0].text.strip().lower()
+    else:
+        assert False, f'Unknown platform {platform} given'
 
 def load_secret_rule(rule_type, level_difficulty, directory):
     """
@@ -79,7 +110,7 @@ def game_master_response(player_message, conversation, provided_examples):
     current_conversation = conversation.copy()
     current_conversation.append({"role": "user", "content": player_message})
 
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
         model="gpt-4o",  # Use the appropriate model name
         messages=current_conversation,
         temperature=0
@@ -119,7 +150,7 @@ Format:
 
 [item1], [item2], ..., [item{num_examples}]
 """
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7
@@ -148,7 +179,7 @@ Format exactly:
 
 Then explain reasoning after the JSON block.
 """
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": validation_prompt}],
         temperature=0

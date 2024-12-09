@@ -16,12 +16,12 @@ export interface StartGameResponse {
   status: string;
   start_time: string;
   turns_taken: number;
-  system_mesage: string;
+  system_message: string;
 }
 
 export interface GuessResponse {
   game_uuid: string;
-  system_mesage: string;
+  system_message: string;
 }
 
 export const startGame = async (payload: StartGamePayload): Promise<StartGameResponse> => {

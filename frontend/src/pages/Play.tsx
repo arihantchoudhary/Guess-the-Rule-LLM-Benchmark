@@ -4,6 +4,8 @@ import { useState } from "react";
 import { startGame, getExamples, validateGuess } from "@/lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
+console.log('Hello, world!');
+
 interface Message {
   id: string;
   content: string;
@@ -45,6 +47,7 @@ const Play = () => {
     isDynamic: boolean
   ) => {
     try {
+      console.log("Starting game with params:", { domain, difficulty, player, initialExamples, isDynamic });
       setIsLoading(true);
       const response = await startGame({
         domain,
@@ -53,6 +56,8 @@ const Play = () => {
         num_init_examples: initialExamples.toString(),
         game_gen_type: isDynamic ? "dynamic" : "static"
       });
+
+      console.log("Game start response:", response);
 
       setIsConversationStarted(true);
       setCurrentPlayer(player);
@@ -68,14 +73,17 @@ const Play = () => {
         gameId: response.game_uuid
       });
 
-      setMessages([
-        {
-          id: Date.now().toString(),
-          content: response.system_mesage,
-          sender: "system",
-        },
-      ]);
+      const initialMessage: Message = {
+        id: Date.now().toString(),
+        content: response.system_message,
+        sender: "system",
+      };
+
+      console.log("Setting initial message:", initialMessage);
+      setMessages([initialMessage]);
+
     } catch (error) {
+      console.error("Error starting game:", error);
       toast({
         variant: "destructive",
         title: "Error",
@@ -87,6 +95,7 @@ const Play = () => {
   };
 
   const handleReset = () => {
+    console.log("Resetting game state");
     setIsConversationStarted(false);
     setMessages([]);
     setCurrentPlayer("");
@@ -104,38 +113,49 @@ const Play = () => {
 
   const handleMessage = async (message: string) => {
     try {
+      console.log("Handling message:", message);
       setIsLoading(true);
-      let response;
 
+      // Add user message to chat
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        content: message,
+        sender: "user"
+      };
+      console.log("Adding user message:", userMessage);
+      setMessages(prev => [...prev, userMessage]);
+
+      let response;
       // Check if the message is requesting examples
       const examplesMatch = message.match(/^More (\d+) examples?$/);
       
       if (examplesMatch) {
         const numExamples = parseInt(examplesMatch[1]);
+        console.log("Requesting examples:", numExamples);
         response = await getExamples(gameDetails.gameId, numExamples);
       } else {
+        console.log("Validating guess:", message);
         response = await validateGuess(gameDetails.gameId, message);
       }
 
-      setMessages(prev => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          content: message,
-          sender: "user"
-        },
-        {
-          id: (Date.now() + 1).toString(),
-          content: response.system_mesage,
-          sender: "system"
-        }
-      ]);
+      console.log("Backend response:", response);
+
+      // Add system response to chat
+      const systemMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: response.system_message,
+        sender: "system"
+      };
+      console.log("Adding system message:", systemMessage);
+      setMessages(prev => [...prev, systemMessage]);
 
       setGameDetails(prev => ({
         ...prev,
         turnsTaken: prev.turnsTaken + 1
       }));
+
     } catch (error) {
+      console.error("Error handling message:", error);
       toast({
         variant: "destructive",
         title: "Error",

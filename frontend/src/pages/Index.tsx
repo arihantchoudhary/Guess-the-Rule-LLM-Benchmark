@@ -19,7 +19,7 @@ const Index = () => {
           <div className="mt-10 flex justify-center gap-4 animate-fade-in">
             <Button asChild size="lg" className="gap-2">
               <Link to="/play">
-                Get Started <ArrowRight className="w-4 h-4" />
+                Try The Demo <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">

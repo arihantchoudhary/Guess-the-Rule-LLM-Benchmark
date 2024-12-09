@@ -80,7 +80,7 @@ def game_master_response(player_message, conversation, provided_examples):
     current_conversation.append({"role": "user", "content": player_message})
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",  # Use the appropriate model name
+        model="gpt-4o",  # Use the appropriate model name
         messages=current_conversation,
         temperature=0
     )
@@ -120,7 +120,7 @@ Format:
 [item1], [item2], ..., [item{num_examples}]
 """
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7
     )
@@ -149,7 +149,7 @@ Format exactly:
 Then explain reasoning after the JSON block.
 """
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[{"role": "user", "content": validation_prompt}],
         temperature=0
     )
@@ -305,7 +305,7 @@ Be strategic and avoid repeating previous guesses.
 
         # Player (LLM) responds
         response = player.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": player_prompt}],
             temperature=0.7
         )

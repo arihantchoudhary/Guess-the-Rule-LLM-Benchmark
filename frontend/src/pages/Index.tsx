@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Play, GitCompare, ArrowRight, Github } from "lucide-react";
+import { BookOpen, Play, ArrowRight, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
@@ -16,10 +16,15 @@ const Index = () => {
           <p className="mt-6 text-xl text-muted-foreground animate-fade-in">
             Evaluate and explore your LLMs with interactive games such as Picnic!
           </p>
-          <div className="mt-10 flex justify-center gap-4 animate-fade-in">
+          <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fade-in">
             <Button asChild size="lg" className="gap-2">
               <Link to="/play">
                 Try The Demo <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="gap-2">
+              <Link to="/docs">
+                Get Started <BookOpen className="w-4 h-4" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">

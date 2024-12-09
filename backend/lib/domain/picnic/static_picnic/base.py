@@ -327,7 +327,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
         Respond with 'yes' if they are equivalent or similar, otherwise respond with 'no'.
         '''
 
-    def make_validate_guess_system_message(self, game_history):
+    def make_game_history_system_message(self):
         if self.status == 'ongoing':
             positives_string = ', '.join(list(self.history['positives']))
             negatives_string = ', '.join(list(self.history['negatives']))
@@ -351,7 +351,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             return f'Game is over. You {self.status}. The rule was {self.rule}.\nCheck your stats in the top panel.'
 
     def get_game_summary(self, include_rule=False):
-        system_message = self.make_validate_guess_system_message()
+        system_message = self.make_game_history_system_message()
         
         response = {
             'game_uuid': str(self.uuid),

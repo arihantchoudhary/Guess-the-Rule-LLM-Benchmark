@@ -47,3 +47,14 @@ export const validateGuessService = async (gameId: string, guess: string): Promi
   
   return handleApiError(response);
 };
+
+export const loadGameService = async (gameId: string): Promise<StartGameResponse> => {
+  const response = await fetch(`${API_BASE_URL}/game/${gameId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  
+  return handleApiError(response);
+};

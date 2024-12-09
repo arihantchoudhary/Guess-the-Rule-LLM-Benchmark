@@ -1,0 +1,53 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Only items that have been featured in a riddle from folklore or literature can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"apple\" and \"honey\"."
+        },
+        {
+            "role": "user",
+            "content": "Yes, you can bring a pear."
+        },
+        {
+            "role": "user",
+            "content": "Yes, you can bring a banana."
+        },
+        {
+            "role": "user",
+            "content": "Yes, you can bring a peach."
+        },
+        {
+            "role": "user",
+            "content": "Yes, you can bring sugar."
+        },
+        {
+            "role": "user",
+            "content": "Yes, you can bring a watermelon."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a hot dog?"
+        },
+        {
+            "role": "user",
+            "content": "No, you cannot bring a raspberry."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring maple syrup?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a pineapple?"
+        },
+        {
+            "role": "user",
+            "content": "The rule for the game \"Going on a Picnic\" seems to be that you can only bring items that are sweet or used as sweeteners."
+        }
+    ]
+}

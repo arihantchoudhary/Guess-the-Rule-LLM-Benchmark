@@ -402,7 +402,7 @@ if __name__ == "__main__":
     # rule_type could be one of: 'attribute_based', 'categorical', 'logical', 'relational', 'semantic'
     # level_difficulty could be one of: 'L1', 'L2', 'L3'
 
-    rule_type = 'attribute_based'  # Example rule type
+    rule_type = 'logical'  # Example rule type
     level_difficulty = 'L1'        # Example level difficulty
     max_turns = 10
     log_dir = os.path.join(script_dir, 'logs', 'llm_player')

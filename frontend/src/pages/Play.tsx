@@ -1,8 +1,9 @@
 import { ConversationSetup } from "@/components/ConversationSetup";
 import { ConversationDisplay } from "@/components/ConversationDisplay";
 import { useState } from "react";
-import { startGame, getExamples, validateGuess } from "@/lib/api";
 import { useToast } from "@/components/ui/use-toast";
+import { startGameService, getExamplesService, validateGuessService } from "@/services/gameService";
+import { StartGamePayload } from "@/lib/api";
 
 interface Message {
   id: string;
@@ -45,17 +46,16 @@ const Play = () => {
     isDynamic: boolean
   ) => {
     try {
-      console.log("Starting game with params:", { domain, difficulty, player, initialExamples, isDynamic });
       setIsLoading(true);
-      const response = await startGame({
+      const payload: StartGamePayload = {
         domain,
         difficulty,
         player,
         num_init_examples: initialExamples.toString(),
         game_gen_type: isDynamic ? "dynamic" : "static"
-      });
+      };
 
-      console.log("Game start response:", response);
+      const response = await startGameService(payload);
 
       setIsConversationStarted(true);
       setCurrentPlayer(player);
@@ -77,15 +77,14 @@ const Play = () => {
         sender: "system",
       };
 
-      console.log("Setting initial message:", initialMessage);
       setMessages([initialMessage]);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error starting game:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to start the game. Please try again.",
+        description: error.message,
       });
     } finally {
       setIsLoading(false);
@@ -93,7 +92,6 @@ const Play = () => {
   };
 
   const handleReset = () => {
-    console.log("Resetting game state");
     setIsConversationStarted(false);
     setMessages([]);
     setCurrentPlayer("");
@@ -110,54 +108,63 @@ const Play = () => {
   };
 
   const handleMessage = async (message: string) => {
+    if (gameDetails.status !== "ongoing") {
+      toast({
+        title: "Game Over",
+        description: "This game has ended. Please start a new game to continue playing.",
+      });
+      return;
+    }
+
     try {
-      console.log("Handling message:", message);
       setIsLoading(true);
 
-      // Add user message to chat
       const userMessage: Message = {
         id: Date.now().toString(),
         content: message,
         sender: "user"
       };
-      console.log("Adding user message:", userMessage);
       setMessages(prev => [...prev, userMessage]);
 
       let response;
-      // Check if the message is requesting examples
       const examplesMatch = message.match(/^More (\d+) examples?$/);
       
       if (examplesMatch) {
         const numExamples = parseInt(examplesMatch[1]);
-        console.log("Requesting examples:", numExamples);
-        response = await getExamples(gameDetails.gameId, numExamples);
+        response = await getExamplesService(gameDetails.gameId, numExamples);
       } else {
-        console.log("Validating guess:", message);
-        response = await validateGuess(gameDetails.gameId, message);
+        response = await validateGuessService(gameDetails.gameId, message);
       }
 
-      console.log("Backend response:", response);
-
-      // Add system response to chat
       const systemMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: response.system_message,
         sender: "system"
       };
-      console.log("Adding system message:", systemMessage);
       setMessages(prev => [...prev, systemMessage]);
 
-      setGameDetails(prev => ({
-        ...prev,
-        turnsTaken: prev.turnsTaken + 1
-      }));
+      if (response.status) {
+        setGameDetails(prev => ({
+          ...prev,
+          status: response.status as "ongoing" | "won" | "lost",
+          turnsTaken: prev.turnsTaken + 1
+        }));
+      }
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error handling message:", error);
+      
+      const systemErrorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: error.message,
+        sender: "system"
+      };
+      setMessages(prev => [...prev, systemErrorMessage]);
+      
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to process your message. Please try again.",
+        description: error.message,
       });
     } finally {
       setIsLoading(false);
@@ -177,7 +184,7 @@ const Play = () => {
             messages={messages}
             isLoading={isLoading}
             onReset={handleReset}
-            isUserPlaying={isUserPlaying}
+            isUserPlaying={isUserPlaying && gameDetails.status === "ongoing"}
             gameDetails={gameDetails}
             onSendMessage={handleMessage}
           />

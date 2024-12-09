@@ -297,10 +297,11 @@ Here's the conversation history:
 {conversation_history}
 
 Based on this history, either:
-1. Ask about a new item that hasn't been mentioned before
-2. Try to guess the rule if you think you understand it
+1. Make a new guess that hasn't been mentioned before.
+2. Ask the game master for more examples if you've been getting a lot of incorrect guesses or are still confused/unsure about the rule.
+3. Try to guess the rule if you think you got it.
 
-Be strategic and avoid repeating previous guesses or items.
+Be strategic and avoid repeating previous guesses.
 """
 
         # Player (LLM) responds

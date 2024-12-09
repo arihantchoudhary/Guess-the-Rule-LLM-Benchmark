@@ -1,0 +1,54 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a kitchen can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"spatula\" and \"cutting board\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a frying pan?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a knife?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a whisk?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a rolling pin?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a grater?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a peeler?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a wooden spoon?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a meat tenderizer?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a mixing bowl?"
+        },
+        {
+            "role": "user",
+            "content": "The rule is that you can only bring kitchen utensils or tools."
+        }
+    ]
+}

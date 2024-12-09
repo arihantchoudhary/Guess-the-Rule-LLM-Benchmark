@@ -6,4 +6,5 @@ experiment_*
 saved_games*
 *.pyc
 backend.egg-info
-Guess-the-Rule-LLM-Benchmark/archive/Going_On_A_Picnic/keys.json
+*keys.json*
+.history

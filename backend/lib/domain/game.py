@@ -4,11 +4,13 @@ import json
 
 from lib.domain.base import validate_domain
 from lib.domain.picnic.static_picnic.base import StaticGoingOnAPicnic
+from lib.domain.picnic.function_picnic.base import LexicalFunctionGame
 from lib.domain.common import GAMES_SAVE_DIR
 
 def select_natural_language_game():
     natural_language_games = [
-        StaticGoingOnAPicnic
+        StaticGoingOnAPicnic,
+        LexicalFunctionGame
     ]
     return random.choice(natural_language_games)
 

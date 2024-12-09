@@ -6,8 +6,10 @@ import nltk
 import sys
 import uuid
 import __main__ as main
-# from lib.domain.base import GuessTheRuleGame
-# from lib.domain.common import GAMES_SAVE_DIR
+import time
+import json
+from lib.domain.base import GuessTheRuleGame
+from lib.domain.common import GAMES_SAVE_DIR
 
 # Set your OpenAI API key (or any other LLM provider's key)
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
@@ -201,8 +203,123 @@ class GuessingGame:
             raise Exception
         return ans_last == 'YES'
 
-# class LexicalFunctionGame(GuessTheRuleGame):
+class LexicalFunctionGame(GuessTheRuleGame):
 
+    def create_game_instance(self):
+        assert not self.uuid, 'Cannot create a new game with an already generated UUID'
+        self.uuid = uuid.uuid4()
+        self.game_class_name = self.__class__.__name__
+        random.setstate(self.uuid.int)
+        self._game = GuessingGame(random.getstate(), domain=None, difficulty=None, init_examples=None, use_llm=True)
+        self.rule = self._game.rule_code
+
+        self.judge_model = 'gpt-4o-mini'
+        self.judge_prompt = read_promptstring('validate_sysprompt.txt')
+
+        self.start_time = time.time()
+        self.win_time = None
+        self.total_game_time = None
+        self.turns = 0
+        self.history = {'positives': set(), 'negatives': set()}
+        self.total_examples_available = 0
+        self.total_pos_examples_shown = 0
+        self.total_neg_examples_shown = 0
+        self.win = False
+
+        positives, negatives = self.generate_examples(self.num_init_examples, is_init=True)
+        self.save_game()  # Save the game after creation
+        return {
+            'game_uuid': str(self.uuid),
+            'domain': self.domain,
+            'difficulty': self.difficulty,
+            'game_gen_type': self.game_gen_type,
+            'start_time': time.ctime(int(self.start_time)),
+            'total_examples_available': self.total_examples_available,
+            'positive_examples': positives,
+            'negative_examples': negatives
+        }
+    
+    def save_game(self):
+        # Create a serializable copy of the instance's __dict__
+        state = self.__dict__.copy()
+
+        # Convert sets to lists for JSON serialization
+        state['history']['positives'] = list(state['history']['positives'])
+        state['history']['negatives'] = list(state['history']['negatives'])
+
+        state['uuid'] = str(self.uuid)
+
+        # Convert any time-related objects to timestamps
+        state['start_time'] = self.start_time
+        state['win_time'] = self.win_time
+
+        # Build the file path using the save directory
+        filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
+        temp_filename = filename + '.tmp'
+
+        try:
+            with open(temp_filename, 'w') as f:
+                json.dump(state, f, indent=4)
+            # Atomically replace the old file
+            os.replace(temp_filename, filename)
+        except Exception as e:
+            if os.path.exists(temp_filename):
+                os.remove(temp_filename)
+            print(f"Error saving game state: {e}")
+            raise
+    
+    def load_game(self=None, uuid_str=None):
+        assert (self and self.uuid) or uuid_str, f'Could not find a uuid to load the game.'
+        uuid_to_load = (self and self.uuid) or uuid_str
+        filename = os.path.join(GAMES_SAVE_DIR, f"{uuid_to_load}.json")
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"No saved game found with UUID: {uuid_to_load}")
+
+        try:
+            with open(filename, 'r') as f:
+                state = json.load(f)
+        except Exception as e:
+            print(f"Error loading game state: {e}")
+            raise
+
+        # Create a new instance of the class
+        game = LexicalFunctionGame(uuid=state['uuid'])
+        # Update the instance's __dict__ with the loaded state
+        game.__dict__.update(state)
+
+        # Convert lists back to sets
+        game.history['positives'] = set(game.history['positives'])
+        game.history['negatives'] = set(game.history['negatives'])
+
+        # Convert UUID string back to UUID object
+        game.uuid = uuid.UUID(game.uuid)
+
+        return game
+    
+    def get_more_examples(self, n=5):
+        #TODO: are we supposed to serialize examples?/every game
+        exs = []
+        for _ in range(n):
+            exs.append(self._game.generate_example())
+        positives = [ex for ex in exs if ex[1]]
+        negatives = [ex for ex in exs if not ex[1]]
+
+        self.history["positives"].update(positives)
+        self.history["negatives"].update(negatives)
+        self.total_pos_examples_shown += len(positives)
+        self.total_neg_examples_shown += len(negatives)
+
+        return positives, negatives
+    
+    def validate_guess(self, guess):
+        assert not self.win, f'Cannot validate guess after the game is finished.'
+        is_correct = self._game.validate_guess(guess)
+        print(f"Judge model {self.judge_model} response: {is_correct}")
+        if is_correct:
+            self.win = True
+            self.win_time = time.time()
+            self.total_game_time = self.win_time - self.start_time
+        return is_correct
 
 # client level API (serverside responses to client requests)
 game_dct = {}
@@ -230,45 +347,42 @@ def request_guess_validation(game_id, guess):
     game = game_dct[game_id]
     return game.validate_guess(guess)
 
+# def main():
+#     init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
 
-# Main loop to generate and display a set of rules, and store them
+#     print('Lexical style rules (string manipulation)')
+#     print('5 random game instances (hardcoded rule fns)')
+#     for i in range(5):
+#         print(f'Game {i}')
+#         random.seed(42 + i)
+#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns)
+#         print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
+#         for _ in range(10):
+#             random_word, is_rule_true = game.generate_example()
+#             print(random_word, is_rule_true)
+#     print('5 LLM-generated rules (standard English corpus)')
+#     for i in range(5):
+#         print(f'Game {i}')
+#         random.seed(42 + i)
+#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
+#             use_llm=True)
+#         print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
+#         for _ in range(10):
+#             random_word, is_rule_true = game.generate_example()
+#             print(random_word, is_rule_true)
 
-def main():
-    init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
-
-    print('Lexical style rules (string manipulation)')
-    print('5 random game instances (hardcoded rule fns)')
-    for i in range(5):
-        print(f'Game {i}')
-        random.seed(42 + i)
-        game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns)
-        print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
-        for _ in range(10):
-            random_word, is_rule_true = game.generate_example()
-            print(random_word, is_rule_true)
-    print('5 LLM-generated rules (standard English corpus)')
-    for i in range(5):
-        print(f'Game {i}')
-        random.seed(42 + i)
-        game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
-            use_llm=True)
-        print(f'DEBUG: secret rule is: {game.rule_fn.__name__}')
-        for _ in range(10):
-            random_word, is_rule_true = game.generate_example()
-            print(random_word, is_rule_true)
-
-if __name__ == "__main__":
-    if sys.flags.interactive:
-        print('Interactive mode')
-        print('Help (Function Signatures):')
-        print('------------------------------')
-        print('request_game_instance(domain=None, difficulty=None, init_examples=None, use_llm=False)')
-        print('request_more_examples(game_id)')
-        print('request_guess_validation(game_id, guess)')
-        init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
-        print('------------------------------')
-        game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
-            use_llm=True)
-        pass
-    else:
-        main()
+# if __name__ == "__main__":
+#     if sys.flags.interactive:
+#         print('Interactive mode')
+#         print('Help (Function Signatures):')
+#         print('------------------------------')
+#         print('request_game_instance(domain=None, difficulty=None, init_examples=None, use_llm=False)')
+#         print('request_more_examples(game_id)')
+#         print('request_guess_validation(game_id, guess)')
+#         init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
+#         print('------------------------------')
+#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
+#             use_llm=True)
+#         pass
+#     else:
+#         main()

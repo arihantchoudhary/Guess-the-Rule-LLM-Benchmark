@@ -302,7 +302,7 @@
     {
         "rule_type": "attribute_based",
         "rule": "Only items that are made entirely of recyclable materials can be brought to the picnic.",
-        "level": "L3"
+        "level": "L1"
     },
     {
         "rule_type": "attribute_based",

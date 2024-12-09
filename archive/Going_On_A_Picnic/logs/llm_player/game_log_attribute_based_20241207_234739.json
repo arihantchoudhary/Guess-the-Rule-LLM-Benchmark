@@ -1,0 +1,61 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Only items that can be typed using only the top row of a QWERTY keyboard can be brought to the picnic.",
+    "max_turns_allowed": 6,
+    "turns_taken": 6,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"peanut\" and \"cake\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a sandwich?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a sandwich."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a donut?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a donut."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a pie?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a pie."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a cookie?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a cookie."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a muffin?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a muffin."
+        },
+        {
+            "role": "user",
+            "content": "The rule is that you can only bring items that have five letters."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

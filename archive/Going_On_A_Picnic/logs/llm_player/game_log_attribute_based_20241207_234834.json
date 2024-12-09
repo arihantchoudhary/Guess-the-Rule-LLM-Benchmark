@@ -1,0 +1,93 @@
+{
+    "rule_type": "attribute_based",
+    "secret_rule": "Only items that can be typed using only the top row of a QWERTY keyboard can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"cake\" and \"kite\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a coffee to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring coffee."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a cat to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a cat."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a kite to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a kite."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a bike to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a bike."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a rake to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a rake."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a snake to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a snake."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a lake to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a lake."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a stake to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a stake."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a plate to the picnic?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a plate."
+        },
+        {
+            "role": "user",
+            "content": "The rule is that you can only bring items to the picnic that have a single syllable and contain the letter 'k'."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

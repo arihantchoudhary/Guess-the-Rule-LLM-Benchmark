@@ -1,42 +1,352 @@
 [
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if it starts with a vowel, contains an odd number of letters, and its last letter is not the same as the first."
+        "rule": "The item can be brought to the picnic only if it starts with a vowel, contains an odd number of letters, and its last letter is not the same as the first.",
+        "level": "L2"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name is a compound word, its first and last letters are consonants, and its total number of letters is a prime number."
+        "rule": "The item can be brought to the picnic only if its name is a compound word, its first and last letters are consonants, and its total number of letters is a prime number.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name contains a double vowel, ends in a 'y', and is part of the food group when split into individual words."
+        "rule": "The item can be brought to the picnic only if its name contains a double vowel, ends in a 'y', and is part of the food group when split into individual words.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name is a palindrome, contains more than one word, and its individual words start and end with the same letter."
+        "rule": "The item can be brought to the picnic only if its name is a palindrome, contains more than one word, and its individual words start and end with the same letter.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm."
+        "rule": "The item can be brought to the picnic only if its name contains at least two syllables, has an even number of letters, each of its words starts with a different letter, and it is traditionally consumed between the hours of 12pm and 5pm.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name is a common noun, has no repeated letters, includes at least one 'silent' letter in its English spelling, and has a positive connotation."
+        "rule": "The item can be brought to the picnic only if its name is a common noun, has no repeated letters, includes at least one 'silent' letter in its English spelling, and has a positive connotation.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name contains both the letters 'p' and 'n', the ratio of consonants to vowels in its name is greater than 1, and it is either a type of beverage or an item used for entertainment at a traditional picnic."
+        "rule": "The item can be brought to the picnic only if its name contains both the letters 'p' and 'n', the ratio of consonants to vowels in its name is greater than 1, and it is either a type of beverage or an item used for entertainment at a traditional picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name is a homophone or homonym, contains no vowels repeated consecutively, and its first letter is the same as the first letter of a type of weather. Additionally, the item should not be a living entity and should have originated from a culture that is not primarily English-speaking."
+        "rule": "The item can be brought to the picnic only if its name is a homophone or homonym, contains no vowels repeated consecutively, and its first letter is the same as the first letter of a type of weather. Additionally, the item should not be a living entity and should have originated from a culture that is not primarily English-speaking.",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name is an anagram of a type of flower, it has a greater number of vowels than consonants, its last letter is a consonant, and it is generally used or consumed outdoors. The item should also have a name that, when split into individual words, each word starts with a letter found in the word 'picnic.'"
+        "rule": "The item can be brought to the picnic only if its name is an anagram of a type of flower, it has a greater number of vowels than consonants, its last letter is a consonant, and it is generally used or consumed outdoors. The item should also have a name that, when split into individual words, each word starts with a letter found in the word 'picnic.'",
+        "level": "L3"
     },
     {
         "rule_type": "logical",
-        "rule": "The item can be brought to the picnic only if its name is a single-word noun, its first and last letters are the same and not a vowel, its total number of letters is divisible by 3, and it represents an object that would be found in a typical backyard. Additionally, the item's name cannot include the letter 's' and must rhyme with a color word."
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun, its first and last letters are the same and not a vowel, its total number of letters is divisible by 3, and it represents an object that would be found in a typical backyard. Additionally, the item's name cannot include the letter 's' and must rhyme with a color word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a synonym of a seasonal term, its letters when rearranged can form the name of a city in the world, it is a singular noun, and the ratio of vowels to consonants in its name is exactly 2:3. Additionally, the item must be something that can either be worn or carried, and its last letter should be the same as the first letter of a day of the week.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an antonym of a negative emotion, contains an equal number of vowels and consonants, its first and last letter must be a letter from the term 'springtime', and it is a noun that represents something visually pleasing. Additionally, the item's name cannot contain the letter 'z' and should also rhyme with a common term used in poetry or song lyrics. The item must also be associated with a celebration or festive occasion.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a hyphenated word, its first and last letters are vowels, and its total number of letters, excluding the hyphen, is a perfect square. The item's name must not contain any letters 'q', 'x', or 'z', and its vowels must be evenly distributed in the name. Additionally, the item must belong to the category of objects typically found in a park, and it must not be edible or capable of producing sound.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an acronym, its total number of letters is equal to the number of vowels in its name times three, and it represents an object that is typically associated with outdoor activities. The first letter of the item's name must be found in the second half of the alphabet, and the item itself should be something that is not traditionally associated with picnics. The item should also be able to fit into a standard size picnic basket.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word verb in present tense, it contains no more than one occurrence of any individual letter, and is an action that can be performed by a human. The total number of letters in the name must be greater than 5 but less than 10, and the last letter of the word must fall in the second half of the alphabet. The item's name should also share at least two common letters with the word 'picnic', but must not start or end with the same letter as 'picnic'. Additionally, the action that the item represents must not be inherently destructive or harmful.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a common adjective, its total number of letters is divisible by 5, and the first letter is a consonant. The name of the item must have a vowel as its middle letter and end with a 't'. The item should represent a characteristic or quality that is generally perceived as positive or desirable. Additionally, the name of the item should not contain any double letters and must start with a letter found in the word 'summer'. The item should also be something abstract, not physically tangible.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an idiom or phrase, contains the letter 'u' at least twice, and its total number of words is an even number. The first letter of the item's name must be a consonant and the last letter must be a vowel. Additionally, the item should be something that can be visually represented but is not physically tangible, and it must evoke a sense of nostalgia or sentimentality. The item's name should also include at least one word that is a homophone of a body part.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an alliteration, the total number of letters in its name is a Fibonacci number, and its first letter is a vowel. The item's name should not contain the letter 'e', and it should be a type of dessert or accessory commonly used at a picnic. Additionally, the item should not be directly related to any specific culture or tradition, and its name should rhyme with a type of wild animal.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an onomatopoeia, its first and last letter are both vowels, and contains at least two 'double letters.' Additionally, the item should be associated with a common picnic activity or component. The name of the item when translated into Morse code should contain equal number of dots and dashes. The item must also be something that is light enough to be carried by a child and does not need electricity or batteries to function.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a foreign loanword in English, the total number of letters is an odd prime number, and its first letter is a consonant. The name of the item must contain at least one 'silent' letter in its English spelling and it should evoke a sense of relaxation or leisure. The item itself should be something that is commonly associated with summertime but not directly related to food or drink. Additionally, the last letter of the name should not be the same as the last letter of any seasonal term. The item must not be a living entity and should have a pleasant smell or taste.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an abstract concept, its first letter is in the second half of the alphabet, and its last letter is a vowel. The item's name must contain an even number of letters, but no letter should repeat more than twice. Additionally, the name of the item should be able to form the name of a month when its letters are rearranged, and the month should be a time of year typically associated with outdoor activities. The item should also signify a positive or joyous emotion, and its name should rhyme with a common 4-letter word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a colloquial term, contains at least three different vowels, and its first letter is a consonant that falls in the first half of the alphabet. The total number of letters in the name must be a multiple of 4, and the name of the item must contain at least one letter from each of the words 'joy', 'fun', and 'sun'. Additionally, the item must represent an outdoor leisure activity commonly associated with picnics, and should not require any additional tools or equipment to use or enjoy. The last letter of the item's name must not be 'n' or 's', and the item should be something that can be shared by at least two people.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a two-word phrase, where each word begins with a vowel, and the total number of letters, excluding the space, is divisible by 4. Furthermore, the item's name should contain at least one 'silent' letter, and its last letter must not be a vowel. The item must be a type of outdoor game or fun activity that doesn't require electricity or any kind of fuel to function. Additionally, the name of the item, when its individual words are combined without any spaces, should be an anagram of a type of bird. The item should not be exclusively associated with any specific culture, and should be safe for a child to use under adult supervision.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word verb in past tense, its total number of letters is a prime number, and its last letter is not a vowel. The first letter of the item's name must be a consonant that falls in the first half of the alphabet, and the item itself should represent an action generally associated with outdoor relaxation. The item's name should not contain the letters 'x' or 'z', and should rhyme with a type of picnic food. Additionally, the name of the item when written in reverse should be a valid English word, and the item must not be harmful or associated with negative actions.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term from a popular board game, contains an even number of vowels, and its first letter is not the same as its last letter. The total number of letters, when divided by the number of vowels, should result in a whole number, and the name of the item should not contain any 'double letters.' Furthermore, the item itself should represent something that can be interactively used by multiple people, and should not require batteries or electricity to function. The item must be a tangible object, and its name should include at least one letter from each of the words 'fun', 'play', and 'laugh'. The item should not be associated with negative actions or outcomes, and its name should not rhyme with any day of the week. Additionally, the item's name, when read in reverse, should not form a valid English word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a verb in gerund form (ending in 'ing'), contains an equal number of consonants and vowels, and its first letter is a consonant found in the word 'celebrate'. The total number of letters in the name must be divisible by 5, and the name of the item should not contain any 'silent' letters. Additionally, the item should represent an action that can be performed in a team, and its name should include at least two letters from the word 'outdoors'. The item must not be harmful or dangerous, and its last letter should be the same as the first letter of a type of musical instrument. Furthermore, the name of the item when written backwards should not form a valid English word, and the item should be associated with a joyous or celebratory occasion.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a proper noun, contains an even number of vowels and consonants, and its first and last letters are prime numbers in the English Alphabet (i.e. 'B', 'C', 'E', 'G', 'K', 'M', 'Q'). The item's name must not contain any punctuation or special characters and its total number of letters is a cube number. Additionally, the item must be a tangible object, is useful for outdoor activities but should not be a type of food, drink, or a living entity. The item should also be known to promote social interaction and fun, and its name should share at least one common letter with the word 'happy'. The item's name, when spelled backward, should not form a valid English word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word adjective, its total number of letters is a prime number, and it describes a characteristic associated with summer or sunny weather. Furthermore, the item's name should not contain any 'double letters,' and its first letter must be a consonant found in the word 'sunshine'. The item's name should not end with a vowel, and must include at least one letter from each of the words 'warm', 'bright', and 'cheerful'. Additionally, the item's name, when spelled backwards, should not form a valid English word, and the item must represent a positive or desirable quality that is abstract and not physically tangible.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun, its total number of letters is an even number, and its first letter is a consonant. The item's name should contain more vowels than consonants, and it must represent an object associated with relaxation. Additionally, the name of the item should not contain any repeated letters and must start with a letter found in the word 'relaxation'. The item itself should not be consumable and should ideally be something that can be used by multiple people. Lastly, the name of the item, when spelled backward, must form another valid English word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a palindrome, its total number of letters is a multiple of 7, and its first letter is a consonant. Additionally, the item's name must contain at least three vowels, and it must represent a type of recreational equipment commonly found at parks. The item must not be consumable or living, and its name should not contain any 'double letters.' Moreover, the item's name, when the letters are rearranged, should not form the name of a season. Lastly, the name of the item should include at least one letter from the word 'enjoyment,' and the item should be associated with outdoor fun or leisure activities.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word adverb, the total number of letters is a multiple of 4, and its first letter is a consonant. The item's name should contain more consonants than vowels, and it must describe an action typically performed outdoors during a picnic. Additionally, the name of the item should not contain any 'silent' letters and must start with a letter found in the word 'activity'. The item itself should not be tangible and should ideally be something that is associated with positive interactions or experiences. Lastly, the name of the item, when spelled backward, must not form another valid English word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a coined term, its total number of letters is a Fibonacci number, and its first and last letters are both vowels. Additionally, the item's name should contain an equal number of vowels and consonants, and it must represent a digital or modern recreational object commonly used during outdoor activities. The item must not be consumable or living, and its name should not include any 'silent' letters. Moreover, the name of the item should include at least one 'double consonant', and the item should evoke a sense of intrigue or novelty. Lastly, the name of the item, when spelled backward, should not form a valid English word, and the item should be something that is associated with a futuristic or advanced technology concept.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term used in a children's game, its total number of letters is divisible by 5, and its first letter is a vowel. The name of the item should contain an equal number of vowels and consonants, and its last letter must be the same as the first letter of a type of fruit. Additionally, the item must not be a living entity, and it should be something that promotes physical activity or movement. Lastly, the name of the item, when written in reverse, should be a valid but unrelated English word.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term related to meteorology, contains the letter 'w' and an even number of vowels, and its first letter is the same as the first letter of the word 'cloud.' Additionally, the item's name, when spelled backward, should be a valid but unrelated English word. The item itself should not be tangible, but rather represent a weather condition that is conducive for a picnic. Furthermore, the name of the item should rhyme with a word related to outdoor activities. Finally, the total number of letters in the item's name should be a multiple of 3, and the last letter of the item's name must not be 'y' or 'e'.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an ambigram (a word that reads the same or a different word when upside down), contains an equal number of vowels and consonants, and its first and last letter are both prime numbers in the English Alphabet (i.e. 'B', 'C', 'E', 'G', 'K', 'M', 'Q'). The item must not be a consumable or living entity, its total number of letters is a multiple of 6, and its name should evoke a sense of joy or pleasure. The item's name, when pronounced, should have an equal number of stressed and unstressed syllables. Additionally, the last letter of the name should not be the same as the last letter of any seasonal term, and it should be something that can be used in a group activity.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term or phrase related to photography, contains an odd number of vowels, and its first and last letters are both consonants. Furthermore, the item's name, when spelled backward, should not form a valid English word. The total number of letters in the name should be divisible by 3, and the item itself must be a tangible object associated with capturing or displaying images. The item's name should not contain the letters 'z' or 'q', and the item should not require electricity or batteries to function. Additionally, the name of the item should rhyme with a type of fruit and must be a single word noun. Finally, the name of the item, when split into individual letters, should form the first name of a renowned figure in the field of photography.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word verb in future tense, contains an equal number of vowels and consonants, and its first and last letters are both found in the word 'future'. The total number of letters in the name should be a square number, and the name of the item must not contain any 'double letters.' Furthermore, the item should represent a positive action or behavior that is typically associated with social interactions or team activities during a picnic. The item itself must be intangible, an action that can be performed by a group of people, and the name of the item, when spelled backward, should not form a valid English word. The name of the item, when written in Morse code, should contain an equal number of dots and dashes. Finally, the first letter of the item's name should be the same as the first letter of a type of physical exercise, promoting a healthy lifestyle.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a neologism (a newly coined term), contains more consonants than vowels, and its first and last letters are both found in the word 'innovation'. The total number of letters in the name should be a multiple of 4, and the name of the item must not contain any 'silent' letters. Furthermore, the item should represent a new trend or modern concept in outdoor leisure activities or picnic culture. The item itself must be tangible, safe to use in a picnic environment, and have a name that, when spelled backward, forms a valid but unrelated English word. The name of the item, when written in Morse code, should contain more dashes than dots. Finally, the first letter of the item's name should be the same as the first letter of a type of recreational sport, promoting a physically active lifestyle.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is an onomatopoeia, its total number of letters is a prime number, and its first and last letters are not vowels. The name of the item must not contain the letters 's' or 'z', and it should represent a sound typically associated with outdoor activities or nature. The item must not be a living entity, and its name should include at least one letter from each of the words 'fun', 'laugh', and 'joy'. Additionally, the name of the item, when spelled backward, should not form a valid English word, and the item should evoke a sense of amusement or entertainment. Finally, the item must be something that is light enough to be carried by a child and does not need electricity or batteries to function.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a Latin-origin word, contains exactly two vowels and its last letter is a consonant. The item must represent a visual element of a typical picnic scenario and its name must not exceed seven letters. Furthermore, the item's name, when spelled backward, should form a valid but unrelated English word, and the first letter of the name must be the same as the first letter of a type of fruit or vegetable. Finally, the total numeric value of the letters in the item's name (A=1, B=2, etc.) should be divisible by 3, signifying the triadic essence of a picnic - food, nature, and company.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a portmanteau, its total number of letters is a multiple of 4, and its first letter is a vowel. Furthermore, the item's name, when spelled backward, should not form a valid English word. The item must be a tangible object associated with comfort or relaxation during a picnic. The item's name should contain an equal number of vowels and consonants, and the last letter of the name must be a letter found in the word 'harmony.' Finally, the item must be something that is often used for leisure activities and should not be exclusively associated with any specific culture.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a bi-lingual term used in both English and Spanish, has a total number of letters that is divisible by 3, and starts with a consonant. Moreover, the name of the item should not contain any 'double letters,' and the item itself should be a type of musical instrument commonly used in outdoor activities. The item's name should rhyme with a type of fruit and the last letter of the name must be the same as the last letter of the word 'music.' Additionally, the name of the item, when spelled backward, should not form a valid English word, and the item should be something that promotes a cheerful and festive atmosphere.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term from a fairy tale, contains an equal number of vowels and consonants, and its first letter is a consonant. Furthermore, the item's name, when spelled backward, should not form a valid English word. The total number of letters in the name must be divisible by 3, and the name of the item should contain at least one 'silent' letter. Additionally, the item must be a tangible object, is used for creating joy or laughter, and its last letter should not be 'y' or 'e'. The item's name, when pronounced, should have at least three syllables. Finally, the name of the item must be a homophone of a term related to nature.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term derived from a sport, contains both the letters 't' and 'p', and its first letter is not a vowel. The total number of letters in the name should be a multiple of 2, and the item must represent an object or action commonly associated with outdoor sports or activities. The item's name should not contain any 'double letters,' and must include at least one letter from each of the words 'game', 'sport', and 'fun'. Additionally, the name of the item, when spelled backward, should not form a valid English word, and the item should evoke a sense of competition or teamwork. The item must be something that can be used or performed by at least two people, and should not require any kind of fuel or electricity to function. Finally, the first letter of the item's name should be the same as the first letter of a type of physical movement, promoting a physically active lifestyle.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a homograph (a word spelled the same as another but has a different meaning), its total number of letters is a multiple of 4, and its first and last letters are consonants. The item's name should contain at least three vowels, and it must represent an object or concept related to outdoor leisure activities. The item should be a noun and must not be a type of food, drink, or living entity. Lastly, the name of the item, when translated into Morse code, should contain an equal number of dots and dashes, and the total numeric value of the letters in the name (A=1, B=2, etc.) should be a prime number.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term used in navigation, contains more consonants than vowels, and its first letter is a consonant. Furthermore, the item's name, when spelled backward, should not form a valid English word. The total number of letters in the name must be divisible by 5, and the item itself must be a tangible object associated with direction or orientation during a picnic. The item's name should include at least one letter from each of the words 'map', 'compass', and 'guide'. Finally, the name of the item, when its letters are rearranged, should form the name of a city in the world, and the item should be something that promotes exploration and discovery.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word abstract noun, its total number of letters is a multiple of 6, and its first and last letters are both found in the word 'harmony'. Furthermore, the name of the item should include at least one letter from each of the words 'peace', 'joy', and 'serenity'. The item itself must be intangible, representing a positive emotion or state of mind that is commonly associated with outdoor gatherings. The item's name should not contain any 'double letters,' and when spelled backward, it should form a different but valid English word. Additionally, the name of the item, when its letters are rearranged, must form the name of a country in the world, and the item should evoke a sense of unity or togetherness. Finally, the total numeric value of the letters in the item's name (A=1, B=2, etc.) should be a prime number, signifying its uniqueness and importance.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a derived adjective, its total number of letters is a multiple of 5, and its first letter is a vowel. The item's name should contain more consonants than vowels and must describe a quality associated with scenic beauty. Additionally, the name of the item must not contain the letters 'x' or 'z' and must start with a letter found in the word 'environment'. The item itself should be intangible, representing an appreciable quality of nature. Finally, the name of the item, when spelled backward, must not form another valid English word, and the name, when each of its letters is converted to its numeric value in the alphabet and added up, must yield a prime number.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a type of dance, its total number of letters is an odd number, and its first and last letters are vowels. Furthermore, the item's name, when spelled backward, should form a valid but unrelated English word. The item itself should be associated with joy and celebration, and its name should not contain any 'double letters.' Additionally, the name of the item, when its individual letters are rearranged, should form the name of a color. The item must be something that can be performed by a group of people and does not require any additional equipment or props. Finally, the name of the item must include at least one letter from each of the words 'music', 'rhythm', and 'movement'.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a term related to a physical exercise, its total number of letters is a perfect square, and its first letter is a consonant. Furthermore, the name of the item should not contain the letters 'x' or 'q', and should represent an action that can be performed by two or more people. The item itself must be intangible, promoting an active lifestyle. Finally, the name of the item, when spelled backward, should not form a valid English word, and the name, when pronounced, should have an equal number of syllables as the number of vowels in it.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name starts with a vowel and has an even number of letters.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a one-word noun and starts with a consonant.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name starts with a consonant and ends with a vowel.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that contains the letter 'a' and ends with the letter 's'.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'P'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'T'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun and ends with a vowel.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'S'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'L'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'C'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'M'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'B'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'H'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'D'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that contains the letter 'e'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'G'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'F'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'R'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'W'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'J'.",
+        "level": "L1"
     }
 ]

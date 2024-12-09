@@ -1,42 +1,352 @@
 [
     {
         "rule_type": "categorical",
-        "rule": "Only items that are mentioned in a Beatles song can be brought to the picnic."
+        "rule": "Only items that are mentioned in a Beatles song can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that are mentioned in a nursery rhyme can be brought to the picnic."
+        "rule": "Only items that are mentioned in a nursery rhyme can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that are referenced in famous paintings can be brought to the picnic."
+        "rule": "Only items that are referenced in famous paintings can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that are mentioned in a Shakespearean play can be brought to the picnic."
+        "rule": "Only items that are mentioned in a Shakespearean play can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that have been mentioned in an Oscar-winning movie script can be brought to the picnic."
+        "rule": "Only items that have been mentioned in an Oscar-winning movie script can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that have been represented on a national flag can be brought to the picnic."
+        "rule": "Only items that have been represented on a national flag can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that are mentioned in renowned science fiction novels can be brought to the picnic."
+        "rule": "Only items that are mentioned in renowned science fiction novels can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that have been referenced in a Nobel Prize-winning piece of literature can be brought to the picnic."
+        "rule": "Only items that have been referenced in a Nobel Prize-winning piece of literature can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that are mentioned in famous architectural landmarks can be brought to the picnic."
+        "rule": "Only items that are mentioned in famous architectural landmarks can be brought to the picnic.",
+        "level": "L3"
     },
     {
         "rule_type": "categorical",
-        "rule": "Only items that are mentioned or referenced in classic board games can be brought to the picnic."
+        "rule": "Only items that are mentioned or referenced in classic board games can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in world-renowned TED Talks can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in famous magic tricks or illusions can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or referenced in renowned Mythologies from around the world can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or referenced in a Pulitzer Prize-winning newspaper article can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Beatles song can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in a Grammy-winning song's lyrics can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in a critically acclaimed graphic novel can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or represented in popular video game lore can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or referenced in the dialogues of celebrated Broadway musicals can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or referenced in a globally recognized Haiku can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the biographies of renowned mathematicians can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or symbolized in famous escape room puzzles can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been referenced or mentioned in the dialogue of classic sitcoms can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are referenced or depicted in the folklore of indigenous cultures around the world can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the dialogues of an Academy Award-winning animated feature can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been referenced or mentioned in an original riddle can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or featured in famous explorers' journals and logs can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in popular coding languages' documentation can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in the inventors' patents can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the lyrics of a Billboard No.1 hit from the 1980s can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or referenced in the inscriptions of UNESCO World Heritage Sites can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in a scientific theory or law can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in popular coffee-related idioms or phrases can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been referenced or mentioned in a renowned etiquette guide can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the original scripts of iconic radio dramas can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in a well-known astronomical constellation's mythology can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the signature recipes of famous chefs can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the lyrics of a country's national anthem can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or symbolized in globally recognized martial arts' philosophies and teachings can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the theories and discoveries of famous astronomers can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in famous last words of historical figures can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in famous stand-up comedy routines can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in renowned conspiracy theories can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in famous ballet performances' narratives can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are referenced in or related to the periodic table of elements can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that have been mentioned or referenced in the lore of ancient cartography and maps can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in well-known riddles can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in renowned psychological experiments and theories can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or represented in famous satellite images or aerial photographs can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in a world record recognized by Guinness World Records can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in popular fairy tales can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in a standard yoga practice can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in the lyrics of a Top 40 pop song from the current year can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in professional photography can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in the lyrics of a Rolling Stones song can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in renowned comic strips can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or referenced in popular children's books can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in popular superhero comic books can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Dr. Seuss book can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Harry Potter book can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in Disney animated movies can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in a Marvel Cinematic Universe movie can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in popular science documentaries can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in a Pixar animated movie can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are featured in a James Bond film can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in famous fairy tales can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Dr. Martin Luther King Jr. speech can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a Stephen King novel can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a famous pop culture catchphrase can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a popular nursery rhyme can be brought to the picnic.",
+        "level": "L3"
     }
 ]

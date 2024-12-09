@@ -164,29 +164,18 @@ Then explain reasoning after the JSON block.
     except json.JSONDecodeError:
         return [False]*len(examples)
 
-def validate_game_master_decision(secret_rule, item, gm_response):
+def get_validated_examples(secret_rule, num_examples=2, max_retries=3):
     """
-    Validate the game master's yes/no decision against the secret rule.
-    If GM says "Yes" but item does not fit the rule, or "No" but item does fit, return False.
-    Otherwise, return True.
+    Generate and validate examples until all are valid or max_retries are exceeded.
+    Raises ValueError if unable to get all valid examples.
     """
-    lowered = gm_response.lower()
-    if "yes, you can bring" in lowered:
-        # The GM claims the item fits the rule
-        validations = validate_examples(secret_rule, [item])
-        if not validations[0]:
-            return False
-        return True
-    elif "no, you cannot bring" in lowered:
-        # The GM claims the item does not fit the rule
-        validations = validate_examples(secret_rule, [item])
-        if validations[0]:
-            # Item actually fits the rule, mismatch
-            return False
-        return True
-    else:
-        # Not a direct yes/no decision, so no validation needed here.
-        return True
+    for _ in range(max_retries):
+        candidates = generate_examples(secret_rule, num_examples)
+        validations = validate_examples(secret_rule, candidates)
+        if all(validations):
+            return candidates
+    # If we reach here, we failed to produce all valid examples.
+    raise ValueError("Could not generate strictly valid examples after several attempts.")
 
 def save_log(log, rule_type):
     """
@@ -207,9 +196,9 @@ def save_log(log, rule_type):
 def automated_player_game(rule_type, max_turns=20, output_directory=None):
     """
     Simulates the game with an automated player (LLM) trying to guess the rule.
-    Tries up to 5 times to generate valid examples. If after 5 attempts no valid examples
-    are found, uses the last generated set anyway. Also validates the game master's decisions,
-    correcting any inconsistencies before presenting them to the player.
+    This version tries up to 5 times to generate valid examples. If it fails
+    to produce all valid examples after 5 attempts, it uses the last generated
+    examples anyway.
     """
     # Load the secret rule for the game
     rules_directory = os.path.join(script_dir, 'rules', rule_type)
@@ -229,14 +218,18 @@ def automated_player_game(rule_type, max_turns=20, output_directory=None):
         candidates = generate_examples(secret_rule, num_examples=2)
         validations = validate_examples(secret_rule, candidates)
         if all(validations):
+            # If all examples are valid, use them
             examples = candidates
             break
         else:
+            # Not all valid; store these candidates for potential fallback
             examples = candidates
             attempts += 1
 
-    # If after 5 attempts we still don't have fully validated examples, use last generated anyway
+    # If after 5 attempts we still don't have fully validated examples,
+    # just use the last generated candidates anyway.
     if examples is None:
+        # Extremely unlikely fallback if no examples were ever generated
         examples = ["example_item_1", "example_item_2"]
 
     examples_text = ' and '.join(f'"{item}"' for item in examples)
@@ -303,38 +296,9 @@ Be strategic and avoid repeating previous guesses or items.
 
         # Send to game master
         reply = game_master_response(player_message, game_master_conversation, provided_examples)
+        player_visible_history.append({"role": "assistant", "content": reply})
 
-        # Validate the game master's yes/no decision if applicable
-        yes_no_pattern = r"(Yes, you can bring|No, you cannot bring)\s+(.*?)[\.\!]"
-        match = re.search(yes_no_pattern, reply, re.IGNORECASE)
-        if match:
-            decision_phrase = match.group(1).lower()
-            item_guess = match.group(2).strip('"\'')
-            is_valid_decision = validate_game_master_decision(secret_rule, item_guess, reply)
-            if not is_valid_decision:
-                # Correct the decision
-                validations = validate_examples(secret_rule, [item_guess])
-                correct_fits_rule = validations[0]
-
-                if "yes, you can bring" in decision_phrase:
-                    # GM said yes but should say no
-                    corrected_reply = f"No, you cannot bring {item_guess}."
-                else:
-                    # GM said no but should say yes
-                    corrected_reply = f"Yes, you can bring {item_guess}."
-
-                # Correct the conversation entries
-                # The last two appended to game_master_conversation are the user's message and GM's faulty reply.
-                # We just replace the GM reply in the conversation:
-                game_master_conversation[-1]["content"] = corrected_reply
-
-                # Also replace the last message in player_visible_history:
-                player_visible_history[-1]["content"] = corrected_reply
-
-                # Update reply variable so the code below uses the corrected version
-                reply = corrected_reply
-
-        # Now reply is correct and consistent
+        # Print the turn
         print(f"Attempt {attempts + 1}: Player: {player_message}")
         print(f"Game Master: {reply}\n")
 

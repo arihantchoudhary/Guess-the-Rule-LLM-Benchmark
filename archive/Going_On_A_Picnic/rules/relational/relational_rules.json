@@ -1,42 +1,352 @@
 [
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are typically found together in a classic song or nursery rhyme."
+        "rule": "Pairs of items can be brought to the picnic if they are typically found together in a classic song or nursery rhyme.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are both used in the same famous historical event."
+        "rule": "Pairs of items can be brought to the picnic if they are both used in the same famous historical event.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are both mentioned in the same scientific law or theory."
+        "rule": "Pairs of items can be brought to the picnic if they are both mentioned in the same scientific law or theory.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are both significant elements in the same piece of classic literature."
+        "rule": "Pairs of items can be brought to the picnic if they are both significant elements in the same piece of classic literature.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they both appear in the title of a well-known movie or TV series, but one item must be a character or creature and the other must be a location or object."
+        "rule": "Pairs of items can be brought to the picnic if they both appear in the title of a well-known movie or TV series, but one item must be a character or creature and the other must be a location or object.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are both key ingredients in the same traditional cultural recipe."
+        "rule": "Pairs of items can be brought to the picnic if they are both key ingredients in the same traditional cultural recipe.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they both feature in the same commonly known proverb or idiom."
+        "rule": "Pairs of items can be brought to the picnic if they both feature in the same commonly known proverb or idiom.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are both symbolic representations found in the same well-known piece of visual art (paintings, sculptures, etc.)."
+        "rule": "Pairs of items can be brought to the picnic if they are both symbolic representations found in the same well-known piece of visual art (paintings, sculptures, etc.).",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are the first and last words in the same line of a universally recognized anthem or pledge."
+        "rule": "Pairs of items can be brought to the picnic if they are the first and last words in the same line of a universally recognized anthem or pledge.",
+        "level": "L3"
     },
     {
         "rule_type": "relational",
-        "rule": "Pairs of items can be brought to the picnic if they are both integral parts of the same physical or athletic activity, but one must be equipment or gear, and the other must be a specific move or technique."
+        "rule": "Pairs of items can be brought to the picnic if they are both integral parts of the same physical or athletic activity, but one must be equipment or gear, and the other must be a specific move or technique.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both exist in the same constellation as identified in astronomy, one being a star or celestial body and the other being the mythology or legend associated with the constellation.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both objects found within the same well-known video game level or map, with one being a collectible or power-up and the other being an environmental feature or landmark.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both are mentioned in the lyrics of the same Grammy award-winning song, with one being an emotional state or feeling and the other being an action or event that triggers it.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both words in the same cryptic crossword clue, one being the definition part and the other being the cryptic part.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both are components of the same iconic architectural structure, with one being a structural element (like pillar, dome, window) and the other being a material used in its construction (like marble, wood, iron).",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same computer programming language, one being a keyword or syntax and the other being a concept or feature unique to that language.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same epic fantasy universe, with one being a named character and the other being a significant magical artifact or weapon from that universe.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both present in the same well-known conspiracy theory, one being a supposed 'secret organization' or figure and the other being a related event or symbol frequently mentioned in the theory.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same ancient mythology, with one being a god or goddess and the other being a mythical creature or a sacred object from that mythology.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both integral parts of the same scientific breakthrough or invention, one being the scientific principle or discovery it's based on and the other being an essential component or piece of equipment used in the invention.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both included in the lyrics of a Billboard Hot 100 number-one single, with one being a form of transportation and the other being a destination or landmark mentioned in the song.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both key characters in the same mystery novel, with one being the detective or investigator and the other being the primary suspect or victim.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both key elements in a famous magic trick or illusion, with one being the trick's name or magician who popularized it and the other being a specific tool or technique used in performing the trick.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same common metaphor or analogy in philosophy, with one being a philosophical concept or thinker and the other being an object or situation used to represent or illustrate it.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same globally recognized dance style or cultural dance, with one being a specific dance move or step, and the other being a traditional costume or accessory worn during the dance.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both components of the same iconic spacecraft or aircraft, with one being a specific part or system of the vehicle (like engine, cockpit, thrusters) and the other being a mission or event the vehicle is most known for.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both terms used in the same board game, with one being a game piece or action card and the other being a specific rule or strategy associated with that piece or card.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both members of the same animal family, with one being the name of a specific animal species and the other being a distinctive characteristic or behavior associated with that species.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same mathematical equation or theorem, with one being a constant or variable and the other being a mathematical operation or principle used in the equation.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same notable geographical discovery or exploration, with one being a prominent explorer or geographical feature named after them, and the other being a major event or milestone associated with the exploration.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same classical music composition, with one being a specific instrument featured in the piece and the other being a notable segment or movement within that composition.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same stanza of a famous poet's poem, with one being a natural element (like sun, moon, river) and the other being a human emotion or condition depicted or evoked by it.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both related to the same famous superhero, with one being a distinctive superpower or ability that the superhero possesses, and the other being a notorious villain or archenemy from the superhero's universe.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same acclaimed fashion designer's collection, one being a specific type of clothing or accessory, and the other being a distinctive pattern or fabric unique to that collection.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same award-winning Broadway musical, with one being a notable character from the show and the other being a signature song performed by that character.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same type of natural ecosystem (e.g. forest, desert, ocean), with one being a native plant species and the other being a corresponding animal species that heavily relies on it for survival or reproduction in that ecosystem.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same iconic advertising campaign, with one being a memorable slogan or jingle, and the other being the brand or product that was being advertised.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both feature in the same award-winning photography or photojournalism shot, with one being a key subject or theme in the image, and the other being a notable element of the photograph's composition or technique.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same Nobel Prize-winning scientific discovery or work, with one being the name of the Nobel laureate and the other being the significant concept, phenomenon, or invention they are recognized for.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same renowned operatic performance, with one being a principal character from the opera, and the other being a specific aria or musical phrase that the character is famous for singing.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same geological period or era, with one being a type of fossil or mineral that is characteristically found from that period, and the other being a significant climatic event or mass extinction that marked the end or beginning of that period.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same monumental archeological discovery, with one being a specific artifact or remnant unearthed, and the other being the archeologist or the site associated with the discovery.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same iconic fashion trend of a particular decade, with one being a signature clothing item or accessory defining that trend, and the other being a notable public figure or celebrity who popularized it during that decade.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same iconic comic strip, with one being a well-known character from the strip and the other being a recurring theme or punchline associated with that character.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same groundbreaking spacecraft mission, with one being a piece of technology or equipment that was crucial to the mission and the other being a significant discovery or achievement made during that mission.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same unique traditional ceremony or festival from any culture around the world, with one being a specific symbolic object or food used in the ceremony, and the other being a particular action or ritual performed during the festival.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both components of the same historical or popular dance style, one being a specific dance step or move and the other being a piece of music or rhythm associated with that dance.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both names of astronomical objects (like planets, stars, galaxies, asteroids), but one must be named after a mythological figure and the other must be named after a scientist who contributed significantly to the field of astronomy.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same significant event in a popular graphic novel or comic book series, with one being a primary character involved in the event and the other being a unique object or place pivotal to the event's unfolding.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same significant event in a popular Anime series, with one being a leading character who played a key role in the event and the other being a specific power move or transformation that this character used during this event.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same popular cartoon series, with one being a main character and the other being a recurring catchphrase or iconic object associated with that character.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same classic children's fairy tale, with one being a main character and the other being a key object or location within the story.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same popular children's book, with one being a main character and the other being a memorable quote associated with that character.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same famous cartoon series, with one being a main character and the other being a distinctive item or prop that the character is always seen with.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same popular holiday, with one being a traditional food or beverage consumed during the holiday and the other being a specific custom or activity performed during the holiday celebration.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same national flag, with one being a color and the other being a symbol or design feature on the flag.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same famous cartoon series, with one being a primary antagonist and the other being their signature catchphrase or characteristic behavior.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both associated with the same traditional holiday, with one being a typical decoration used during the holiday and the other being a traditional food or drink consumed during that holiday.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same classical ballet performance, with one being a named character and the other being a significant dance routine or step from that performance.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both parts of the same basic human anatomy, with one being a specific organ and the other being a function or process it performs.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same genre of music, with one being a renowned artist or band and the other being one of their iconic songs.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both featured in the same popular children's nursery rhyme, with one being a character and the other being an item mentioned or used by that character.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same chapter of a famous children's book, with one being a character and the other being an object or location mentioned in the same chapter.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same zodiac sign, with one being a typical characteristic or personality trait of that zodiac sign and the other being a symbol or element associated with it.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same famous band or music group, with one being the name of a band member and the other being the title of one of their hit songs.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of the same famous duo or partnership in popular culture, with one being the name of one half of the duo and the other being the name of the other half.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both mentioned in the same famous quote, with one being the speaker of the quote and the other being a significant object or concept mentioned in the quote.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same classic board game, with one being a game piece and the other being a specific location or square on the game board.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both mentioned in the same iconic historical speech, with one being the speaker and the other being a significant word or phrase used in the speech.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both types of the same category of musical instrument, with one being a specific instrument and the other being a specific part or accessory of that instrument.",
+        "level": "L3"
     }
 ]

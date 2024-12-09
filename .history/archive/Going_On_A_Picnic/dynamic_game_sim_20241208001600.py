@@ -208,8 +208,7 @@ def automated_player_game(rule_type, max_turns=20, output_directory=None):
     """
     Simulates the game with an automated player (LLM) trying to guess the rule.
     Tries up to 5 times to generate valid examples. If after 5 attempts no valid examples
-    are found, uses the last generated set anyway. Also validates the game master's decisions,
-    correcting any inconsistencies before presenting them to the player.
+    are found, uses the last generated set anyway. Also validates the game master's decisions.
     """
     # Load the secret rule for the game
     rules_directory = os.path.join(script_dir, 'rules', rule_type)
@@ -308,33 +307,14 @@ Be strategic and avoid repeating previous guesses or items.
         yes_no_pattern = r"(Yes, you can bring|No, you cannot bring)\s+(.*?)[\.\!]"
         match = re.search(yes_no_pattern, reply, re.IGNORECASE)
         if match:
-            decision_phrase = match.group(1).lower()
             item_guess = match.group(2).strip('"\'')
             is_valid_decision = validate_game_master_decision(secret_rule, item_guess, reply)
             if not is_valid_decision:
-                # Correct the decision
-                validations = validate_examples(secret_rule, [item_guess])
-                correct_fits_rule = validations[0]
+                print(f"[WARNING] The game master made an inconsistent decision regarding '{item_guess}'.")
 
-                if "yes, you can bring" in decision_phrase:
-                    # GM said yes but should say no
-                    corrected_reply = f"No, you cannot bring {item_guess}."
-                else:
-                    # GM said no but should say yes
-                    corrected_reply = f"Yes, you can bring {item_guess}."
+        player_visible_history.append({"role": "assistant", "content": reply})
 
-                # Correct the conversation entries
-                # The last two appended to game_master_conversation are the user's message and GM's faulty reply.
-                # We just replace the GM reply in the conversation:
-                game_master_conversation[-1]["content"] = corrected_reply
-
-                # Also replace the last message in player_visible_history:
-                player_visible_history[-1]["content"] = corrected_reply
-
-                # Update reply variable so the code below uses the corrected version
-                reply = corrected_reply
-
-        # Now reply is correct and consistent
+        # Print the turn
         print(f"Attempt {attempts + 1}: Player: {player_message}")
         print(f"Game Master: {reply}\n")
 

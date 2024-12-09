@@ -266,7 +266,6 @@ def automated_player_game(rule_type, level_difficulty, max_turns=20, output_dire
     game_over = False
     rule_guessed = False
     log = []
-    failed_attempts = 0  # Counter for failed attempts
 
     # Game loop
     while not game_over and attempts < max_turns:
@@ -306,7 +305,7 @@ Be strategic and avoid repeating previous guesses.
 
         # Player (LLM) responds
         response = player.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": player_prompt}],
             temperature=0.7
         )
@@ -317,9 +316,6 @@ Be strategic and avoid repeating previous guesses.
 
         # Send to game master
         reply = game_master_response(player_message, game_master_conversation, provided_examples)
-
-        # Append game master's reply to player_visible_history as 'assistant' role
-        player_visible_history.append({"role": "assistant", "content": reply})
 
         # Validate the game master's yes/no decision if applicable
         yes_no_pattern = r"(Yes, you can bring|No, you cannot bring)\s+(.*?)[\.\!]"
@@ -374,15 +370,6 @@ Be strategic and avoid repeating previous guesses.
             print(f"The secret rule was: {secret_rule}")
             game_over = True
 
-        # Update failed_attempts counter
-        if "Incorrect" in reply and "please try again" in reply.lower():
-            failed_attempts += 1
-        elif "No, you cannot bring" in reply or "Yes, you can bring" in reply:
-            failed_attempts += 1
-        else:
-            # Reset failed_attempts if the reply is something else
-            failed_attempts = 0
-
         attempts += 1
 
     # Save metrics
@@ -415,7 +402,7 @@ if __name__ == "__main__":
     # rule_type could be one of: 'attribute_based', 'categorical', 'logical', 'relational', 'semantic'
     # level_difficulty could be one of: 'L1', 'L2', 'L3'
 
-    rule_type = 'semantic'  # Example rule type
+    rule_type = 'logical'  # Example rule type
     level_difficulty = 'L1'        # Example level difficulty
     max_turns = 10
     log_dir = os.path.join(script_dir, 'logs', 'llm_player')

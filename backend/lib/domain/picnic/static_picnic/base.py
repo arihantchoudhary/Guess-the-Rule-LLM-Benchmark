@@ -61,7 +61,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
 
         # Convert any time-related objects to timestamps
         state['start_time'] = self.start_time
-        state['win_time'] = self.win_time
+        state['game_end_time'] = self.game_end_time
 
         # Build the file path using the save directory
         filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
@@ -106,6 +106,32 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
 
         return game
 
+    def make_init_system_message(self, positive_examples, negative_examples):
+        positives_string = ', '.join(positive_examples)
+        negatives_string = ', '.join(negative_examples)
+        return (
+            f"Let's play the game 'going on a picnic'.\n"
+            f"I will give you some examples in each turn and you have to guess the underlying rule of the game. The rule will be common for all the examples.\n"
+            f"Your score will be based on the number of turns taken, number of examples seen, and overall time elapsed playing the game. The highest score will be for the fewest turns taken, fewest examples seen, and shortest game played.\n"
+            f"The rule you will guess should only encompass the positive examples. The negative examples are only for additional guidance and they do not form the underlying rule itself.\n"
+            f"To play the game you can only do one of the following actions in a turn:\n"
+            f"1. type 'more N' to request N more examples for that rule.\n"
+            f"2. type the rule if you think you've guessed it. The format must be 'Items from the category/categories <category>'.\n"
+            f"3. type 'give up' if you want to end the game and see the rule.\n\n"
+            f"I can bring: {positives_string}\n"
+            f"I cannot bring: {negatives_string}\n\n"
+            f"What would you like to do?"
+        )
+
+    def make_more_examples_system_message(self, positive_examples, negative_examples):
+        positives_string = ', '.join(positive_examples)
+        negatives_string = ', '.join(negative_examples)
+        return (
+            f"I can bring: {positives_string}\n"
+            f"I cannot bring: {negatives_string}\n\n"
+            f"What would you like to do?"
+        )
+
     def create_game_instance(self):
         assert not self.uuid, 'Cannot create a new game with an already generated UUID'
         self.uuid = uuid.uuid4()
@@ -116,14 +142,14 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
         self.judge_prompt = self.get_judge_prompt()
 
         self.start_time = time.time()
-        self.win_time = None
+        self.game_end_time = None
         self.total_game_time = None
         self.turns = 0
         self.history = {'positives': set(), 'negatives': set()}
         self.total_examples_available = 0
         self.total_pos_examples_shown = 0
         self.total_neg_examples_shown = 0
-        self.win = False
+        self.status = 'ongoing'
 
         positives, negatives = self.generate_examples(self.num_init_examples, is_init=True)
         self.save_game()  # Save the game after creation
@@ -133,23 +159,33 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             'difficulty': self.difficulty,
             'game_gen_type': self.game_gen_type,
             'start_time': time.ctime(int(self.start_time)),
+            'turns_taken': self.turns,
+            'status': self.status,
             'total_examples_available': self.total_examples_available,
+            'system_message': self.make_init_system_message(positives, negatives),
             'positive_examples': positives,
             'negative_examples': negatives
         }
 
     def get_more_examples(self, n, is_init=False):
-        assert not self.win, f'Cannot provide more examples after the game is finished.'
+        assert self.status == 'ongoing', f'Cannot provide more examples after the game is finished.'
         positives, negatives = self.generate_examples(n, is_init)
         self.save_game()  # Save the game after getting more examples
         return {
             'game_uuid': str(self.uuid),
             'positive_examples': positives,
-            'negative_examples': negatives
+            'negative_examples': negatives,
+            'system_message': self.make_more_examples_system_message(positives, negatives)
         }
 
+    def make_validate_guess_system_message(self, guess_result):
+        if guess_result is True:
+            return 'You guessed correctly. Check your performance stats in the panel above. Thanks for playing!'
+        else:
+            return 'Incorrect guess. What would you like to do next?'
+
     def generate_examples(self, n, is_init=False):
-        assert not self.win, f'Cannot provide more examples after the game is finished.'
+        assert self.status == 'ongoing', f'Cannot provide more examples after the game is finished.'
         self.turns += 1
         rule_tags = self.rule["categories"] if "categories" in self.rule else [self.rule["category"]]
         available_positives = [
@@ -179,16 +215,17 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
         return positives, negatives
 
     def validate_guess(self, guess):
-        assert not self.win, f'Cannot validate guess after the game is finished.'
+        assert self.status == 'ongoing', f'Cannot validate guess after the game is finished.'
         result = self.check_guess(guess)
         self.save_game()  # Save the game after validating the guess
         return {
             'game_uuid': str(self.uuid),
-            'guess_result': result
+            'guess_result': result,
+            'system_message': self.make_validate_guess_system_message(result),
         }
 
     def check_guess(self, guess):
-        assert not self.win, f'Cannot validate guess after the game is finished.'
+        assert self.status == 'ongoing', f'Cannot validate guess after the game is finished.'
         # Enhanced prompt to consider synonyms and semantic similarity
         self.turns += 1
         prompt = self.judge_prompt.format(guess=guess, rule=self.rule['rule'], positive_examples=list(self.history['positives']))
@@ -205,9 +242,9 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             answer = response.choices[0].message.content.strip().lower()
             print(f"Judge model {self.judge_model} response: {answer}")
             if answer == "yes":
-                self.win = True
-                self.win_time = time.time()
-                self.total_game_time = self.win_time - self.start_time
+                self.status = 'won'
+                self.game_end_time = time.time()
+                self.total_game_time = self.game_end_time - self.start_time
                 return True
             else:
                 return False
@@ -265,7 +302,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             'difficulty': self.difficulty,
             'game_gen_type': self.game_gen_type,
             'start_time': time.ctime(int(self.start_time)),
-            'win_time': time.ctime(int(self.win_time)) if self.win_time else None,
+            'game_end_time': time.ctime(int(self.game_end_time)) if self.game_end_time else None,
             'total_game_time': self.total_game_time if self.total_game_time else time.time() - self.start_time,
             'turns_taken': self.turns,
             'game_history': {
@@ -275,7 +312,7 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             'total_examples_available': self.total_examples_available,
             'total_pos_examples_shown': self.total_pos_examples_shown,
             'total_neg_examples_shown': self.total_neg_examples_shown,
-            'win_state': self.win
+            'status': self.status
         }
         if include_rule:
             response['rule'] = self.rule

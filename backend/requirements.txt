@@ -1,5 +1,5 @@
 # Core Backend Dependencies
--e ./backend
+-e .
 fastapi==0.95.2            # FastAPI for building the backend
 pydantic==1.10.9           # Data validation and settings (used by FastAPI)
 openai==1.56.0             # OpenAI API client

@@ -327,7 +327,32 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
         Respond with 'yes' if they are equivalent or similar, otherwise respond with 'no'.
         '''
 
+    def make_game_history_system_message(self):
+        if self.status == 'ongoing':
+            positives_string = ', '.join(list(self.history['positives']))
+            negatives_string = ', '.join(list(self.history['negatives']))
+            msg = (
+                f"Welcome back to the game 'going on a picnic'.\n\n"
+                f"I will give you some examples in each turn and you have to guess the underlying rule of the game. The rule will be common for all the examples.\n"
+                f"Your score will be based on the number of turns taken, number of examples seen, and overall time elapsed playing the game. The highest score will be for the fewest turns taken, fewest examples seen, and shortest game played.\n"
+                f"The rule you will guess should only encompass the positive examples. The negative examples are only for additional guidance and they do not form the underlying rule itself.\n"
+                f"To play the game you can only do one of the following actions in a turn:\n"
+                f"1. type 'more N' to request N more examples for that rule.\n"
+                f"2. type the rule if you think you've guessed it. The format must be 'Items from the category/categories <category>'.\n"
+                f"3. type 'give up' if you want to end the game and see the rule.\n\n"
+                f"I can bring: {positives_string}\n"
+                f"I cannot bring: {negatives_string}\n\n"
+                f"What would you like to do?"
+            )
+            if self.total_examples_available - self.total_pos_examples_shown <= 0:
+                msg += '\n(This is the last turn because there are no more examples available)'
+            return msg
+        else:
+            return f'Game is over. You {self.status}. The rule was {self.rule}.\nCheck your stats in the top panel.'
+
     def get_game_summary(self, include_rule=False):
+        system_message = self.make_game_history_system_message()
+        
         response = {
             'game_uuid': str(self.uuid),
             'game_class_name': self.__class__.__name__,
@@ -345,9 +370,10 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
             'total_examples_available': self.total_examples_available,
             'total_pos_examples_shown': self.total_pos_examples_shown,
             'total_neg_examples_shown': self.total_neg_examples_shown,
-            'status': self.status
+            'status': self.status,
+            'system_message': system_message
         }
-        if include_rule:
+        if include_rule or self.status in ['won', 'lost']:
             response['rule'] = self.rule
 
         return response

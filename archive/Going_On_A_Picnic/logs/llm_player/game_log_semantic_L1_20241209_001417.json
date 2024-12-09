@@ -4,39 +4,16 @@
     "secret_rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
     "max_turns_allowed": 10,
     "turns_taken": 10,
-    "rule_guessed": false,
+    "rule_guessed": true,
+    "duration": 26.634647,
     "conversation": [
         {
             "role": "assistant",
-            "content": "To start, here are some examples of items you can bring: \"Beach towel\" and \"sunscreen\"."
+            "content": "To start, here are some examples of items you can bring: \"beach towel\" and \"sunscreen\"."
         },
         {
             "role": "user",
-            "content": "Can I bring a swimsuit?"
-        },
-        {
-            "role": "assistant",
-            "content": "Yes, you can bring a swimsuit."
-        },
-        {
-            "role": "user",
-            "content": "Player: Can I bring a surfboard?"
-        },
-        {
-            "role": "assistant",
-            "content": "Yes, you can bring a surfboard."
-        },
-        {
-            "role": "user",
-            "content": "Player: Can I bring a picnic basket?"
-        },
-        {
-            "role": "assistant",
-            "content": "No, you cannot bring a picnic basket."
-        },
-        {
-            "role": "user",
-            "content": "Player: Can I bring sunglasses?"
+            "content": "Can I bring a sunglasses?"
         },
         {
             "role": "assistant",
@@ -44,11 +21,11 @@
         },
         {
             "role": "user",
-            "content": "Player: Can I bring a beach umbrella?"
+            "content": "Player: Can I bring a swimsuit?"
         },
         {
             "role": "assistant",
-            "content": "Yes, you can bring a beach umbrella."
+            "content": "Yes, you can bring a swimsuit."
         },
         {
             "role": "user",
@@ -60,19 +37,27 @@
         },
         {
             "role": "user",
-            "content": "Player: Can I bring a pair of flip-flops?"
+            "content": "Player: Can I bring a picnic basket?"
         },
         {
             "role": "assistant",
-            "content": "Yes, you can bring a pair of flip-flops."
+            "content": "No, you cannot bring a picnic basket."
         },
         {
             "role": "user",
-            "content": "Player: Can I bring a cooler?"
+            "content": "Player: Can I bring a surfboard?"
         },
         {
             "role": "assistant",
-            "content": "Yes, you can bring a cooler."
+            "content": "Yes, you can bring a surfboard."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a beach umbrella?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach umbrella."
         },
         {
             "role": "user",
@@ -84,11 +69,27 @@
         },
         {
             "role": "user",
-            "content": "The rule seems to be that you can bring items typically associated with a beach day, but not items related to food or eating."
+            "content": "Player: Can I bring a cooler?"
         },
         {
             "role": "assistant",
-            "content": "Incorrect. Please try again."
+            "content": "Yes, you can bring a cooler."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a beach chair?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach chair."
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can bring items that are typically used or seen at a beach."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically associated with a traditional beach day can be brought to the picnic."
         }
     ]
 }

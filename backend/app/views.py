@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import logging
 
 from lib.models import CreateGame, ValidateGuess
@@ -10,28 +11,28 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
 app = FastAPI()
 
-# Allow requests from localhost:8080 (your frontend URL)
+# CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change to your frontend URL
+    allow_origins=["*"],  # Specific origins
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods like POST, GET, DELETE, OPTIONS
-    allow_headers=["*"],  # Allow all headers like Content-Type, Authorization, etc.
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 # Logging Middleware
 @app.middleware("http")
-def log_request(request: Request, call_next):
+async def log_request(request: Request, call_next):
     logging.info(f"Request URL: {request.method} {request.url}")
-
+    headers = dict(request.headers)
+    logging.info(f"Headers: {headers}")
     query_params = dict(request.query_params)
     if query_params:
         logging.info(f"Query Parameters: {query_params}")
-
-    return call_next(request)
+    response = await call_next(request)
+    return response
 
 @app.post("/guess-the-rule/game")
-@app.options("/guess-the-rule/game")
 def create_game(payload: CreateGame):
     """Create a new game instance."""
     try:
@@ -48,7 +49,7 @@ def create_game(payload: CreateGame):
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/guess-the-rule/game/{game_id}")
-def validate_guess(game_id: str, include_rule=False):
+def get_game_summary(game_id: str, include_rule=False):
     """Get the summary of a game."""
     try:
         cls = get_existing_game(game_id)
@@ -58,7 +59,6 @@ def validate_guess(game_id: str, include_rule=False):
         return res
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-
 
 @app.get("/guess-the-rule/game/{game_id}/examples")
 def get_more_examples(game_id: str, n_examples: int):
@@ -73,7 +73,7 @@ def get_more_examples(game_id: str, n_examples: int):
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/guess-the-rule/game/validate_guess")
-def validate_guess(payload: ValidateGuess):
+def validate_user_guess(payload: ValidateGuess):
     """Validate a guess against the game instance."""
     try:
         cls = get_existing_game(payload.game_id)

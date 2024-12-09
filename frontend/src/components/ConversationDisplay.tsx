@@ -59,7 +59,7 @@ export const ConversationDisplay = ({
         <GameStatsPanel startTime={gameDetails.startTime} turnsTaken={gameDetails.turnsTaken} />
       </div>
 
-      <div className="h-[500px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300 bg-gray-100/80 backdrop-blur-md border border-white/20">
+      <div className="h-[500px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300">
         {messages.map((message, index) => (
           <ChatMessage
             key={message.id}
@@ -69,7 +69,7 @@ export const ConversationDisplay = ({
           />
         ))}
         {isLoading && (
-          <div className="message-bubble mr-auto">
+          <div className="message-bubble mr-auto" data-sender="system">
             <div className="loading-dots">
               <div></div>
               <div></div>

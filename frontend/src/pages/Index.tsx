@@ -24,7 +24,7 @@ const Index = () => {
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">
               <a
-                href="https://github.com/yourusername/your-repo"
+                href="https://github.com/m1chae11u/Guess-the-Rule-LLM-Benchmark"
                 target="_blank"
                 rel="noopener noreferrer"
               >

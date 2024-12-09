@@ -348,5 +348,55 @@
         "rule_type": "relational",
         "rule": "Pairs of items can be brought to the picnic if they are both types of the same category of musical instrument, with one being a specific instrument and the other being a specific part or accessory of that instrument.",
         "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both fruits, but one must be a citrus fruit and the other must be a berry.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both types of the same category of vehicles, with one being a land vehicle and the other being a water vehicle.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both types of the same category of sports, with one being a team sport and the other being an individual sport.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both types of the same category of food, with one being a vegetable and the other being a fruit.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both animals, but one must be a land animal and the other must be a sea animal.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same color category, with one being a fruit or vegetable and the other being a famous fictional character known for that color.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they both belong to the same fairy tale, with one being a main character and the other being a significant event in the tale.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same room of a typical house, with one being a piece of furniture and the other being an accessory or decor item typically found in that room.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both part of a complete breakfast meal, with one being a food item and the other being a drink typically consumed during breakfast.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "relational",
+        "rule": "Pairs of items can be brought to the picnic if they are both found in the same children's song, with one being a character and the other being a key action they perform in the song.",
+        "level": "L3"
     }
 ]

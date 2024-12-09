@@ -348,5 +348,55 @@
         "rule_type": "categorical",
         "rule": "Only items that are mentioned in a popular nursery rhyme can be brought to the picnic.",
         "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned or depicted in Dr. Seuss's children's books can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are mentioned in a classic fairy tale can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in a traditional beach vacation can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in baking a cake can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in a typical school classroom can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are found in a typical home garden can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are commonly found in a supermarket can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are seen in a zoo can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in a typical birthday party can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "categorical",
+        "rule": "Only items that are used in a typical camping trip can be brought to the picnic.",
+        "level": "L2"
     }
 ]

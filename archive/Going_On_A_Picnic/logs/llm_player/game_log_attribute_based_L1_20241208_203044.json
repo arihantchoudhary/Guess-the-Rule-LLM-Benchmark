@@ -1,0 +1,54 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that start with the letter 'F' can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"fruits\" and \"forks\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring vegetables?"
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a picnic blanket?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring plates?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a knife?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a spoon?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a napkin?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a cup?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a salad bowl?"
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a bread basket?"
+        },
+        {
+            "role": "user",
+            "content": "The rule appears to be that you can bring items that are used for eating or are edible themselves."
+        }
+    ]
+}

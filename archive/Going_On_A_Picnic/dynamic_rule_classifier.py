@@ -22,7 +22,7 @@ def get_prompt_template(rule):
 You are an expert in analyzing "Guess the Rule Games." 
 Your task is to classify a given rule into one of three complexity levels based on how abstract and conceptually challenging it is:
 
-- L1: The rule is straightforward and concrete, requiring little to no abstraction. Anyone can quickly understand and apply it.
+- L1: The rule is straightforward, concrete, simple. Most can quickly understand it.
 - L2: The rule is moderately abstract or involves some logical reasoning or pattern recognition that isn't immediately obvious. It may require a moment of thought or some reasoning steps to fully grasp.
 - L3: The rule is highly abstract, conceptually difficult, or relies on complex, non-trivial reasoning patterns. It may involve multiple layers of logic, external knowledge, or intricate patterns that are challenging to understand.
 

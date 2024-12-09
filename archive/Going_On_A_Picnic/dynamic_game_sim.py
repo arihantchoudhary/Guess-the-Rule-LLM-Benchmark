@@ -25,15 +25,22 @@ client = OpenAI(api_key=OPENAI_KEY)
 # Helper Functions
 # --------------------------
 
-def load_secret_rule(rule_type, directory):
+def load_secret_rule(rule_type, level_difficulty, directory):
     """
     Load a secret rule from a JSON file containing a list of rules.
-    The function picks a random rule from the provided rules.
+    Filters rules based on rule_type and level_difficulty, then picks a random rule.
     """
     filename = os.path.join(directory, f"{rule_type}_rules.json")
     with open(filename, 'r') as f:
         rules = json.load(f)
-    secret_rule = random.choice(rules)
+    
+    # Filter rules based on level_difficulty
+    filtered_rules = [rule for rule in rules if rule.get('level') == level_difficulty]
+    
+    if not filtered_rules:
+        raise ValueError(f"No rules found for rule_type '{rule_type}' with level '{level_difficulty}'.")
+    
+    secret_rule = random.choice(filtered_rules)
     return secret_rule['rule']
 
 def generate_game_master_prompt(secret_rule):
@@ -42,7 +49,7 @@ def generate_game_master_prompt(secret_rule):
     This defines how the game master should behave.
     """
     prompt = f"""
-You are the game master for "Going on a Picnic." The secret rule is: {secret_rule}
+You are the game master for "Guess the Rule Games." The secret rule is: {secret_rule}
 
 When the player asks if they can bring an item, respond with:
 
@@ -50,7 +57,7 @@ When the player asks if they can bring an item, respond with:
 - "No, you cannot bring [guess]." if their guess does not satisfy the secret rule.
 
 If the player asks for more examples, or requests another example, respond with:
-- Provide another example of an item that can be brought to the picnic according to the secret rule.
+- Provide another example of an item that can be brought to the game according to the secret rule.
 - Do not repeat any examples you have already provided.
 
 If the player attempts to guess the rule, respond with:
@@ -99,7 +106,7 @@ def generate_examples(secret_rule, num_examples=2):
     The LLM is asked to provide items in a comma-separated list without explanation.
     """
     prompt = f"""
-You are an assistant helping to generate examples for a game called "Going on a Picnic."
+You are an assistant helping to generate examples for a game called "Guess the Rule Games."
 
 The secret rule is: {secret_rule}
 
@@ -188,7 +195,7 @@ def validate_game_master_decision(secret_rule, item, gm_response):
         # Not a direct yes/no decision, so no validation needed here.
         return True
 
-def save_log(log, rule_type):
+def save_log(log, rule_type, level_difficulty):
     """
     Save the game log to a JSON file.
     """
@@ -196,7 +203,7 @@ def save_log(log, rule_type):
     os.makedirs(logs_directory, exist_ok=True)
 
     timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    log_filename = f"log_{rule_type}_{timestamp}.json"
+    log_filename = f"log_{rule_type}_{level_difficulty}_{timestamp}.json"
     log_path = os.path.join(logs_directory, log_filename)
 
     with open(log_path, 'w') as f:
@@ -204,16 +211,22 @@ def save_log(log, rule_type):
 
     print(f"Game log saved to {log_path}")
 
-def automated_player_game(rule_type, max_turns=20, output_directory=None):
+def automated_player_game(rule_type, level_difficulty, max_turns=20, output_directory=None):
     """
     Simulates the game with an automated player (LLM) trying to guess the rule.
     Tries up to 5 times to generate valid examples. If after 5 attempts no valid examples
     are found, uses the last generated set anyway. Also validates the game master's decisions,
     correcting any inconsistencies before presenting them to the player.
+    
+    Parameters:
+    - rule_type: str, one of ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
+    - level_difficulty: str, one of ['L1', 'L2', 'L3']
+    - max_turns: int, maximum number of turns in the game
+    - output_directory: str, directory to save the game log
     """
     # Load the secret rule for the game
     rules_directory = os.path.join(script_dir, 'rules', rule_type)
-    secret_rule = load_secret_rule(rule_type, rules_directory)
+    secret_rule = load_secret_rule(rule_type, level_difficulty, rules_directory)
 
     # Generate the game master's initial prompt
     game_master_prompt = generate_game_master_prompt(secret_rule)
@@ -265,7 +278,7 @@ def automated_player_game(rule_type, max_turns=20, output_directory=None):
 
         if attempts == max_turns - 1:
             player_prompt = f"""
-You are a player in a game called "Going on a Picnic." This is your final turn, so you must make your best guess about the secret rule.
+You are a player in a game called "Guess the Rule Games." This is your final turn, so you must make your best guess about the secret rule.
 Based on the game master's responses, try to guess the rule as accurately as possible.
 
 The game master has provided examples: {examples_text}.
@@ -277,7 +290,7 @@ Please make your best guess about the rule as this is your last opportunity.
 """
         else:
             player_prompt = f"""
-You are a player in a game called "Going on a Picnic." You are trying to guess the secret rule by asking if certain items can be brought to the picnic.
+You are a player in a game called "Guess the Rule Games." You are trying to guess the secret rule by asking if certain items can be brought to the game.
 The game master has given examples of items that fit the rule: {examples_text}.
 
 Here's the conversation history:
@@ -362,6 +375,7 @@ Be strategic and avoid repeating previous guesses or items.
     # Save metrics
     metrics = {
         "rule_type": rule_type,
+        "level_difficulty": level_difficulty,
         "secret_rule": secret_rule,
         "max_turns_allowed": max_turns,
         "turns_taken": attempts,
@@ -375,7 +389,7 @@ Be strategic and avoid repeating previous guesses or items.
     os.makedirs(output_directory, exist_ok=True)
 
     timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    log_filename = f"game_log_{rule_type}_{timestamp}.json"
+    log_filename = f"game_log_{rule_type}_{level_difficulty}_{timestamp}.json"
     log_path = os.path.join(output_directory, log_filename)
 
     with open(log_path, 'w') as f:
@@ -386,7 +400,11 @@ Be strategic and avoid repeating previous guesses or items.
 if __name__ == "__main__":
     # Example usage:
     # rule_type could be one of: 'attribute_based', 'categorical', 'logical', 'relational', 'semantic'
-    rule_type = 'attribute_based'
+    # level_difficulty could be one of: 'L1', 'L2', 'L3'
+
+    rule_type = 'attribute_based'  # Example rule type
+    level_difficulty = 'L1'        # Example level difficulty
     max_turns = 10
-    log_dir = os.path.join(script_dir, 'logs/llm_player')
-    automated_player_game(rule_type, max_turns, log_dir)
+    log_dir = os.path.join(script_dir, 'logs', 'llm_player')
+
+    automated_player_game(rule_type, level_difficulty, max_turns, log_dir)

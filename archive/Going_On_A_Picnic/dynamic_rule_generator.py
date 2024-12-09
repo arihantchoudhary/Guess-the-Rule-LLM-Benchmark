@@ -19,7 +19,7 @@ client = OpenAI(api_key=OPENAI_KEY)
 
 def get_llm_response(prompt, sysprompt="You are a creative and diverse assistant."):
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": sysprompt},
             {"role": "user", "content": prompt}
@@ -140,8 +140,8 @@ if __name__ == "__main__":
     semantic_dir = os.path.join(rules_base_dir, 'semantic')
 
     # Generate rules
-    generate_rules("attribute_based", 20, directory=attribute_based_dir)
-    generate_rules("categorical", 20, directory=categorical_dir)
-    generate_rules("relational", 20, directory=relational_dir)
-    generate_rules("logical", 20, directory=logical_dir)
-    generate_rules("semantic", 20, directory=semantic_dir)
+    generate_rules("attribute_based", 10, directory=attribute_based_dir)
+    generate_rules("categorical", 10, directory=categorical_dir)
+    generate_rules("relational", 10, directory=relational_dir)
+    generate_rules("logical", 10, directory=logical_dir)
+    generate_rules("semantic", 10, directory=semantic_dir)

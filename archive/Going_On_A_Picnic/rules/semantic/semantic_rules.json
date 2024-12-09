@@ -348,5 +348,55 @@
         "rule_type": "semantic",
         "rule": "Only items that are typically associated with classic fairy tale villains can be brought to the picnic.",
         "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular children's playground games can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular fruits and vegetables can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular children's educational TV shows can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with famous children's nursery rhymes can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with classic children's bedtime stories can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular children's cartoons can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular children's birthday parties can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with farm animals can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with popular children's zoo visits can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "semantic",
+        "rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
+        "level": "L1"
     }
 ]

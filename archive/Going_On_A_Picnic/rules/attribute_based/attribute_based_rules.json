@@ -348,5 +348,55 @@
         "rule_type": "attribute_based",
         "rule": "Only items that are typically found in a library can be brought to the picnic.",
         "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically used in a magic show can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a toolbox can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically used in a board game can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a bathroom can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a child's lunchbox can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically used in a circus can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a playground can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a children's toy box can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a supermarket can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a bedroom can be brought to the picnic.",
+        "level": "L1"
     }
 ]

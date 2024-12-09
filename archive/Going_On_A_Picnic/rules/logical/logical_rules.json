@@ -348,5 +348,55 @@
         "rule_type": "logical",
         "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'J'.",
         "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'N'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun and contains the letter 'k'.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'Z'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'V'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun and ends with the letter 'd'.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun and starts with the letter 'Y'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'Q'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'U'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun and starts with the letter 'E'.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "logical",
+        "rule": "The item can be brought to the picnic only if its name is a single-word noun and ends with the letter 't'.",
+        "level": "L2"
     }
 ]

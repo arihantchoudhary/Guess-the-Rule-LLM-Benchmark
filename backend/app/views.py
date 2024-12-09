@@ -13,7 +13,7 @@ app = FastAPI()
 # Allow requests from localhost:8080 (your frontend URL)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],  # Change to your frontend URL
+    allow_origins=["*"],  # Change to your frontend URL
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods like POST, GET, DELETE, OPTIONS
     allow_headers=["*"],  # Allow all headers like Content-Type, Authorization, etc.
@@ -55,6 +55,7 @@ def validate_guess(game_id: str, include_rule=False):
         restored_game = cls.load_game()
         res = restored_game.get_game_summary(include_rule=include_rule)
         logging.info(f"Response: {res}")
+        return res
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -67,6 +68,7 @@ def get_more_examples(game_id: str, n_examples: int):
         restored_game = cls.load_game()
         res = restored_game.get_more_examples(n_examples)
         logging.info(f"Response: {res}")
+        return res
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -78,5 +80,6 @@ def validate_guess(payload: ValidateGuess):
         restored_game = cls.load_game()
         res = restored_game.validate_guess(payload.guess)
         logging.info(f"Response: {res}")
+        return res
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

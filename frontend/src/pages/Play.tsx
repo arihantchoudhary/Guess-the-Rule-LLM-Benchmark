@@ -4,8 +4,6 @@ import { useState } from "react";
 import { startGame, getExamples, validateGuess } from "@/lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
-console.log('Hello, world!');
-
 interface Message {
   id: string;
   content: string;

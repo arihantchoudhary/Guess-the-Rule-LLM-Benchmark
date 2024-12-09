@@ -24,7 +24,6 @@ openai_client = OpenAI(api_key=OPENAI_KEY)
 
 ANTHROPIC_API_KEY = keys['ANTHROPIC_API_KEY']
 anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-
 # --------------------------
 # Helper Functions
 # --------------------------
@@ -455,9 +454,28 @@ if __name__ == "__main__":
     # rule_type could be one of: 'attribute_based', 'categorical', 'logical', 'relational', 'semantic'
     # level_difficulty could be one of: 'L1', 'L2', 'L3'
 
-    rule_type = 'semantic'  # Example rule type
-    level_difficulty = 'L1'        # Example level difficulty
-    max_turns = 10
-    log_dir = os.path.join(script_dir, 'logs', 'llm_player')
+    # rule_type = 'semantic'  # Example rule type
+    # level_difficulty = 'L1'        # Example level difficulty
+    # max_turns = 10
 
-    automated_player_game(rule_type, level_difficulty, max_turns, log_dir)
+    # ---
+    log_dir = os.path.join(script_dir, 'logs', 'llm_player')
+    valid_difficulties = ['L1', 'L2', 'L3']
+    valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
+    max_turns = [1, 3, 5, 7, 10, 15]
+    llm_models = {
+        'openai': [
+                'gpt-4o-mini',
+                'gpt-4o',
+        ], # good, fast and cheap
+        'anthropic': [
+            'claude-3-haiku-20240307',
+            'claude-3-5-haiku-latest'
+        ]
+    }
+    for platform in list(llm_models.keys()):
+        for model in llm_models[platform]:
+            for curr_level_difficulty in valid_difficulties:
+                for curr_max_turns in max_turns:
+                    for curr_rule_type in valid_rule_types:
+                        automated_player_game(curr_rule_type, curr_level_difficulty, curr_max_turns, log_dir) # EDIT THIS TO INCLUDE platform and model parameters

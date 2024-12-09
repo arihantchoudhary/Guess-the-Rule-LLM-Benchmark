@@ -1,0 +1,25 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'W'.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 4.09,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Watermelon\" and \"Wagon\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples \"Watermelon\" and \"Wagon,\" a plausible rule could be that the items brought must begin with the letter \"W\". Therefore, my best guess for the rule is that the items you can bring must start with the letter \"W\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

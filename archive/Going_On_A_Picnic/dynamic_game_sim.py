@@ -5,6 +5,7 @@ import json
 import random
 import datetime
 import re
+import time
 from openai import OpenAI
 import anthropic
 
@@ -15,7 +16,7 @@ import anthropic
 # Get the script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Load the API key from 'keys.json'
+# Load the API keys from 'keys.json'
 keys_path = os.path.join(script_dir, 'keys.json')
 with open(keys_path, 'r') as f:
     keys = json.load(f)
@@ -24,36 +25,47 @@ openai_client = OpenAI(api_key=OPENAI_KEY)
 
 ANTHROPIC_API_KEY = keys['ANTHROPIC_API_KEY']
 anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
 # --------------------------
 # Helper Functions
 # --------------------------
 
-# Function to get LLM model response
 def get_llm_model_response(platform, model, message_history):
+    """
+    A modular function to get responses from different LLM platforms.
+
+    Parameters:
+    - platform: str, either 'openai' or 'anthropic'
+    - model: str, the model name to use
+    - message_history: list of dicts, the conversation history
+
+    Returns:
+    - str, the LLM's response
+    """
     if platform == 'openai':
         response = openai_client.chat.completions.create(
             model=model,
             messages=message_history
         )
-        return response.choices[0].message.content.strip().lower()
+        return response.choices[0].message.content.strip()
     elif platform == 'anthropic':
         system_prompt = ''
         user_prompts = []
         for m in message_history:
-            if not system_prompt and m['role'] == 'system':
-                system_prompt += m['content']
+            if m['role'] == 'system':
+                system_prompt += m['content'] + '\n'
             elif m['role'] == 'user':
-                user_prompts.append(m)
+                user_prompts.append(m['content'])
 
-        response = anthropic_client.messages.create(
-            max_tokens=1024,
-            system=system_prompt,
-            messages=user_prompts,
+        response = anthropic_client.completions.create(
             model=model,
+            prompt=system_prompt + "\n".join(user_prompts),
+            stop_sequences=["\n"],
+            max_tokens_to_sample=1024
         )
-        return response.content[0].text.strip().lower()
+        return response.completion.strip()
     else:
-        assert False, f'Unknown platform {platform} given'
+        raise ValueError(f"Unknown platform '{platform}' provided.")
 
 def load_secret_rule(rule_type, level_difficulty, directory):
     """
@@ -101,35 +113,31 @@ Keep your responses concise and do not provide additional hints unless specified
 """
     return prompt
 
-def game_master_response(player_message, conversation, provided_examples):
+def game_master_response(platform, model, player_message, conversation, provided_examples):
     """
     Send the player's message to the game master LLM and get the response.
     Update the conversation and track provided examples if applicable.
     """
-    current_conversation = conversation.copy()
-    current_conversation.append({"role": "user", "content": player_message})
-
-    response = openai_client.chat.completions.create(
-        model="gpt-4o",  # Use the appropriate model name
-        messages=current_conversation,
-        temperature=0
-    )
-    reply = response.choices[0].message.content.strip()
-
+    # Append the player's message to the conversation
     conversation.append({"role": "user", "content": player_message})
+
+    # Get the game master's response using the modular LLM function
+    reply = get_llm_model_response(platform, model, conversation)
+
+    # Append the game master's reply to the conversation
     conversation.append({"role": "assistant", "content": reply})
 
     # If the game master provides a new example in response to a request for examples
     if "you can bring" in reply.lower() and ("example" in player_message.lower() or "another example" in player_message.lower()):
         # Extract the item from the reply
-        match = re.search(r'you can bring\s+(.*?)[\.\!]', reply, re.IGNORECASE)
+        match = re.search(r'you can bring\s+["\']?(.*?)["\']?[.\!]', reply, re.IGNORECASE)
         if match:
             new_example = match.group(1).strip('"\'')
             provided_examples.add(new_example)
 
     return reply
 
-def generate_examples(secret_rule, num_examples=2):
+def generate_examples(platform, model, secret_rule, num_examples=2):
     """
     Generate candidate examples that satisfy the secret rule.
     The LLM is asked to provide items in a comma-separated list without explanation.
@@ -149,16 +157,16 @@ Format:
 
 [item1], [item2], ..., [item{num_examples}]
 """
-    response = openai_client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7
-    )
-    examples_text = response.choices[0].message.content.strip().strip('"\'')
+    # Initialize the conversation history with a system prompt if needed
+    message_history = [{"role": "user", "content": prompt}]
+    examples_text = get_llm_model_response(platform, model, message_history)
+
+    # Clean and parse the examples
+    examples_text = examples_text.strip().strip('"\'')
     examples = [item.strip() for item in examples_text.split(',') if item.strip()]
     return examples
 
-def validate_examples(secret_rule, examples):
+def validate_examples(platform, model, secret_rule, examples):
     """
     Validate the given examples against the secret rule.
     Returns a list of booleans for each example.
@@ -178,29 +186,25 @@ Format exactly:
 
 Then explain reasoning after the JSON block.
 """
-    response = openai_client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": validation_prompt}],
-        temperature=0
-    )
-    reply = response.choices[0].message.content.strip()
+    message_history = [{"role": "user", "content": validation_prompt}]
+    reply = get_llm_model_response(platform, model, message_history)
 
     # Extract JSON from the reply
     json_match = re.search(r'\{.*?\}', reply, re.DOTALL)
     if not json_match:
-        return [False]*len(examples)
+        return [False] * len(examples)
 
     json_str = json_match.group(0)
     try:
         data = json.loads(json_str)
         validations = data.get("validations", [])
         if len(validations) != len(examples):
-            return [False]*len(examples)
+            return [False] * len(examples)
         return validations
     except json.JSONDecodeError:
-        return [False]*len(examples)
+        return [False] * len(examples)
 
-def validate_game_master_decision(secret_rule, item, gm_response):
+def validate_game_master_decision(platform, model, secret_rule, item, gm_response):
     """
     Validate the game master's yes/no decision against the secret rule.
     If GM says "Yes" but item does not fit the rule, or "No" but item does fit, return False.
@@ -209,13 +213,13 @@ def validate_game_master_decision(secret_rule, item, gm_response):
     lowered = gm_response.lower()
     if "yes, you can bring" in lowered:
         # The GM claims the item fits the rule
-        validations = validate_examples(secret_rule, [item])
+        validations = validate_examples(platform, model, secret_rule, [item])
         if not validations[0]:
             return False
         return True
     elif "no, you cannot bring" in lowered:
         # The GM claims the item does not fit the rule
-        validations = validate_examples(secret_rule, [item])
+        validations = validate_examples(platform, model, secret_rule, [item])
         if validations[0]:
             # Item actually fits the rule, mismatch
             return False
@@ -224,23 +228,23 @@ def validate_game_master_decision(secret_rule, item, gm_response):
         # Not a direct yes/no decision, so no validation needed here.
         return True
 
-def save_log(log, rule_type, level_difficulty):
+def save_log(metrics, rule_type, level_difficulty, platform, model, output_directory):
     """
     Save the game log to a JSON file.
     """
-    logs_directory = os.path.join(script_dir, 'logs')
+    logs_directory = os.path.join(script_dir, output_directory)
     os.makedirs(logs_directory, exist_ok=True)
 
     timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    log_filename = f"log_{rule_type}_{level_difficulty}_{timestamp}.json"
+    log_filename = f"log_{platform}_{model}_{rule_type}_{level_difficulty}_{timestamp}.json"
     log_path = os.path.join(logs_directory, log_filename)
 
     with open(log_path, 'w') as f:
-        json.dump(log, f, indent=4)
+        json.dump(metrics, f, indent=4)
 
-    print(f"Game log saved to {log_path}")
+    print(f"Game log and metrics saved to {log_path}")
 
-def automated_player_game(rule_type, level_difficulty, max_turns=20, output_directory=None):
+def automated_player_game(rule_type, level_difficulty, max_turns=20, platform='openai', model='gpt-4o-mini', output_directory='logs/llm_player'):
     """
     Simulates the game with an automated player (LLM) trying to guess the rule.
     Tries up to 5 times to generate valid examples. If after 5 attempts no valid examples
@@ -251,69 +255,65 @@ def automated_player_game(rule_type, level_difficulty, max_turns=20, output_dire
     - rule_type: str, one of ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
     - level_difficulty: str, one of ['L1', 'L2', 'L3']
     - max_turns: int, maximum number of turns in the game
+    - platform: str, either 'openai' or 'anthropic'
+    - model: str, model name (e.g., 'gpt-4o', 'claude-3-haiku')
     - output_directory: str, directory to save the game log
     """
-    import datetime  # Ensure datetime is imported
-    
     # Record the start time
-    start_time = datetime.datetime.now()
+    start_time = time.time()
     
-    try:
-        # Load the secret rule for the game
-        rules_directory = os.path.join(script_dir, 'rules', rule_type)
-        secret_rule = load_secret_rule(rule_type, level_difficulty, rules_directory)
-
-        # Generate the game master's initial prompt
-        game_master_prompt = generate_game_master_prompt(secret_rule)
-        game_master_conversation = [{"role": "system", "content": game_master_prompt}]
-        player_visible_history = []
-
-        provided_examples = set()
-
-        # Attempt to generate and validate examples up to 5 times
-        attempts = 0
-        examples = None
-        while attempts < 5:
-            candidates = generate_examples(secret_rule, num_examples=2)
-            validations = validate_examples(secret_rule, candidates)
-            if all(validations):
-                examples = candidates
-                break
-            else:
-                examples = candidates
-                attempts += 1
-
-        # If after 5 attempts we still don't have fully validated examples, use last generated anyway
-        if examples is None:
-            examples = ["example_item_1", "example_item_2"]
-
-        examples_text = ' and '.join(f'"{item}"' for item in examples)
-        initial_message = f"To start, here are some examples of items you can bring: {examples_text}."
-
-        game_master_conversation.append({"role": "assistant", "content": initial_message})
-        player_visible_history.append({"role": "assistant", "content": initial_message})
-
-        print("\nGame Master:", initial_message, "\n")
-
-        # Initialize the automated player (LLM)
-        player = OpenAI(api_key=OPENAI_KEY)
-
-        attempts = 0
-        game_over = False
-        rule_guessed = False
-        log = []
-        failed_attempts = 0  # Counter for failed attempts
-
-        # Game loop
-        while not game_over and attempts < max_turns:
-            # Create a prompt for the player
-            conversation_history = "\n".join([
-                f"{'Game Master' if msg['role'] == 'assistant' else 'Player'}: {msg['content']}"
-                for msg in player_visible_history
-            ])
-
-            if attempts == max_turns - 1:
-                player_prompt = f"""
+    # Initialize the conversation history with the game master's system prompt
+    secret_rule = load_secret_rule(rule_type, level_difficulty, os.path.join(script_dir, 'rules', rule_type))
+    game_master_prompt = generate_game_master_prompt(secret_rule)
+    game_master_conversation = [{"role": "system", "content": game_master_prompt}]
+    player_visible_history = []
+    
+    provided_examples = set()
+    
+    # Attempt to generate and validate examples up to 5 times
+    attempts = 0
+    examples = None
+    while attempts < 5:
+        candidates = generate_examples(platform, model, secret_rule, num_examples=2)
+        validations = validate_examples(platform, model, secret_rule, candidates)
+        if all(validations):
+            examples = candidates
+            break
+        else:
+            examples = candidates
+            attempts += 1
+    
+    # If after 5 attempts we still don't have fully validated examples, use last generated anyway
+    if examples is None or not examples:
+        examples = ["example_item_1", "example_item_2"]
+    
+    examples_text = ' and '.join(f'"{item}"' for item in examples)
+    initial_message = f"To start, here are some examples of items you can bring: {examples_text}."
+    
+    # Append the initial message to the game master's conversation and player history
+    game_master_conversation.append({"role": "assistant", "content": initial_message})
+    player_visible_history.append({"role": "assistant", "content": initial_message})
+    
+    print("\nGame Master:", initial_message, "\n")
+    
+    # Initialize logging
+    log = []
+    
+    attempts = 0
+    game_over = False
+    rule_guessed = False
+    failed_attempts = 0  # Counter for failed attempts
+    
+    # Game loop
+    while not game_over and attempts < max_turns:
+        # Create a prompt for the player
+        conversation_history = "\n".join([
+            f"{'Game Master' if msg['role'] == 'assistant' else 'Player'}: {msg['content']}"
+            for msg in player_visible_history
+        ])
+    
+        if attempts == max_turns - 1:
+            player_prompt = f"""
 You are a player in a game called "Guess the Rule Games." This is your final turn, so you must make your best guess about the secret rule.
 Based on the game master's responses, try to guess the rule as accurately as possible.
 
@@ -324,8 +324,8 @@ Here's the conversation history:
 
 Please make your best guess about the rule as this is your last opportunity.
 """
-            else:
-                player_prompt = f"""
+        else:
+            player_prompt = f"""
 You are a player in a game called "Guess the Rule Games." You are trying to guess the secret rule by asking if certain items can be brought to the game.
 The game master has given examples of items that fit the rule: {examples_text}.
 
@@ -339,115 +339,74 @@ Based on this history, either:
 
 Be strategic and avoid repeating previous guesses.
 """
-
-            # Player (LLM) responds
-            response = player.chat.completions.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": player_prompt}],
-                temperature=0.7
-            )
-            player_message = response.choices[0].message.content.strip()
-
-            # Add player's message to visible history
-            player_visible_history.append({"role": "user", "content": player_message})
-
-            # Send to game master
-            reply = game_master_response(player_message, game_master_conversation, provided_examples)
-
-            # Append game master's reply to player_visible_history as 'assistant' role
-            player_visible_history.append({"role": "assistant", "content": reply})
-
-            # Validate the game master's yes/no decision if applicable
-            yes_no_pattern = r"(Yes, you can bring|No, you cannot bring)\s+(.*?)[\.\!]"
-            match = re.search(yes_no_pattern, reply, re.IGNORECASE)
-            if match:
-                decision_phrase = match.group(1).lower()
-                item_guess = match.group(2).strip('"\'')
-                is_valid_decision = validate_game_master_decision(secret_rule, item_guess, reply)
-                if not is_valid_decision:
-                    # Correct the decision
-                    validations = validate_examples(secret_rule, [item_guess])
-                    correct_fits_rule = validations[0]
-
-                    if "yes, you can bring" in decision_phrase:
-                        # GM said yes but should say no
-                        corrected_reply = f"No, you cannot bring {item_guess}."
-                    else:
-                        # GM said no but should say yes
-                        corrected_reply = f"Yes, you can bring {item_guess}."
-
-                    # Correct the conversation entries
-                    # The last two appended to game_master_conversation are the user's message and GM's faulty reply.
-                    # We just replace the GM reply in the conversation:
-                    game_master_conversation[-1]["content"] = corrected_reply
-
-                    # Also replace the last message in player_visible_history:
-                    player_visible_history[-1]["content"] = corrected_reply
-
-                    # Update reply variable so the code below uses the corrected version
-                    reply = corrected_reply
-
-            # Now reply is correct and consistent
-            print(f"Attempt {attempts + 1}: Player: {player_message}")
-            print(f"Game Master: {reply}\n")
-
-            # Log the turn
-            log_entry = {
-                'attempt': attempts + 1,
-                'player_message': player_message,
-                'game_master_reply': reply,
-                'timestamp': datetime.datetime.now().isoformat()
-            }
-            log.append(log_entry)
-
-            # Check for correct guess
-            if "Correct! The rule is" in reply:
-                print(f"Rule guessed correctly in {attempts + 1} attempts!")
-                game_over = True
-                rule_guessed = True
-            elif attempts + 1 >= max_turns:
-                print("Game over: Maximum attempts reached.")
-                print(f"The secret rule was: {secret_rule}")
-                game_over = True
-
-            # Update failed_attempts counter
-            if "Incorrect" in reply and "please try again" in reply.lower():
-                failed_attempts += 1
-            elif "No, you cannot bring" in reply or "Yes, you can bring" in reply:
-                failed_attempts += 1
-            else:
-                # Reset failed_attempts if the reply is something else
-                failed_attempts = 0
-
-            attempts += 1
-
-    finally:
-        end_time = datetime.datetime.now()
-        duration = (end_time - start_time).total_seconds()
-        metrics = {
-            "rule_type": rule_type,
-            "level_difficulty": level_difficulty,
-            "secret_rule": secret_rule,
-            "max_turns_allowed": max_turns,
-            "turns_taken": attempts,
-            "rule_guessed": rule_guessed,
-            "duration (s)": duration,  
-            "conversation": player_visible_history
+    
+        # Player (LLM) responds
+        player_message = get_llm_model_response(platform, model, [{"role": "user", "content": player_prompt}]).strip()
+    
+        # Add player's message to visible history
+        player_visible_history.append({"role": "user", "content": player_message})
+    
+        # Send to game master and get the reply
+        reply = game_master_response(platform, model, player_message, game_master_conversation, provided_examples)
+    
+        # Append game master's reply to player_visible_history as 'assistant' role
+        player_visible_history.append({"role": "assistant", "content": reply})
+    
+        # Now reply is correct and consistent
+        print(f"Attempt {attempts + 1}: Player: {player_message}")
+        print(f"Game Master: {reply}\n")
+    
+        # Log the turn
+        log_entry = {
+            'attempt': attempts + 1,
+            'player_message': player_message,
+            'game_master_reply': reply,
+            'timestamp': datetime.datetime.now().isoformat()
         }
-        log.append({"final_metrics": metrics})
-
-        if output_directory is None:
-            output_directory = os.path.join(script_dir, 'logs')
-        os.makedirs(output_directory, exist_ok=True)
-
-        timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        log_filename = f"game_log_{rule_type}_{level_difficulty}_{timestamp}.json"
-        log_path = os.path.join(output_directory, log_filename)
-
-        with open(log_path, 'w') as f:
-            json.dump(metrics, f, indent=4)
-
-        print(f"Game log and metrics saved to {log_path}")
+        log.append(log_entry)
+    
+        # Check for correct guess
+        if "Correct! The rule is" in reply:
+            print(f"Rule guessed correctly in {attempts + 1} attempts!")
+            game_over = True
+            rule_guessed = True
+        elif attempts + 1 >= max_turns:
+            print("Game over: Maximum attempts reached.")
+            print(f"The secret rule was: {secret_rule}")
+            game_over = True
+    
+        # Update failed_attempts counter
+        if "Incorrect" in reply and "please try again" in reply.lower():
+            failed_attempts += 1
+        elif "No, you cannot bring" in reply or "Yes, you can bring" in reply:
+            failed_attempts += 1
+        else:
+            # Reset failed_attempts if the reply is something else
+            failed_attempts = 0
+    
+        attempts += 1
+    
+    # Record the end time
+    end_time = time.time()
+    duration = round(end_time - start_time, 2)  # Duration in seconds, rounded to 2 decimal places
+    
+    # Save metrics
+    metrics = {
+        "rule_type": rule_type,
+        "level_difficulty": level_difficulty,
+        "secret_rule": secret_rule,
+        "max_turns_allowed": max_turns,
+        "turns_taken": attempts,
+        "rule_guessed": rule_guessed,
+        "duration_seconds": duration,  # Added duration metric
+        "platform": platform,
+        "model": model,
+        "conversation": player_visible_history
+    }
+    log.append({"final_metrics": metrics})
+    
+    # Save the log
+    save_log(metrics, rule_type, level_difficulty, platform, model, output_directory)
 
 if __name__ == "__main__":
     # Example usage:
@@ -459,23 +418,37 @@ if __name__ == "__main__":
     # max_turns = 10
 
     # ---
-    log_dir = os.path.join(script_dir, 'logs', 'llm_player')
-    valid_difficulties = ['L1', 'L2', 'L3']
-    valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
-    max_turns = [1, 3, 5, 7, 10, 15]
     llm_models = {
         'openai': [
-                'gpt-4o-mini',
-                'gpt-4o',
-        ], # good, fast and cheap
+            'gpt-4o',
+            'gpt-4o-mini',
+        ],  # OpenAI models
         'anthropic': [
-            'claude-3-haiku-20240307',
-            'claude-3-5-haiku-latest'
-        ]
+            'claude-3-haiku',
+            'claude-3.5-haiku'
+        ]  # Anthropic models
     }
-    for platform in list(llm_models.keys()):
-        for model in llm_models[platform]:
-            for curr_level_difficulty in valid_difficulties:
-                for curr_max_turns in max_turns:
-                    for curr_rule_type in valid_rule_types:
-                        automated_player_game(curr_rule_type, curr_level_difficulty, curr_max_turns, log_dir) # EDIT THIS TO INCLUDE platform and model parameters
+    
+    # Define other parameters
+    valid_difficulties = ['L1', 'L2', 'L3']
+    valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
+    max_turns_list = [1, 3, 5, 7, 10, 15]
+    
+    # Define the output directory
+    output_dir = 'logs/llm_player'
+    
+    # Iterate over all combinations of platform, model, level, turns, and rule_type
+    for platform, models in llm_models.items():
+        for model in models:
+            for level_difficulty in valid_difficulties:
+                for max_turns in max_turns_list:
+                    for rule_type in valid_rule_types:
+                        print(f"Starting game with Platform: {platform}, Model: {model}, Rule Type: {rule_type}, Difficulty: {level_difficulty}, Max Turns: {max_turns}")
+                        automated_player_game(
+                            rule_type=rule_type,
+                            level_difficulty=level_difficulty,
+                            max_turns=max_turns,
+                            platform=platform,
+                            model=model,
+                            output_directory=output_dir
+                        )

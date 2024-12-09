@@ -7,4 +7,4 @@ saved_games*
 *.pyc
 backend.egg-info
 *keys.json
-.history
+*.history

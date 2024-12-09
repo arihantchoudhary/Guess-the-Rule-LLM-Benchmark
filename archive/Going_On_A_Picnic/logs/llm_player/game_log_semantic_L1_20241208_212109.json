@@ -1,0 +1,94 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Beach towel\" and \"sunscreen\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring a swimsuit?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a swimsuit."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a surfboard?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a surfboard."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a picnic basket?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a picnic basket."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring sunglasses?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring sunglasses."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a beach umbrella?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach umbrella."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a beach ball?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach ball."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a pair of flip-flops?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a pair of flip-flops."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a cooler?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a cooler."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a kite?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a kite."
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can bring items typically associated with a beach day, but not items related to food or eating."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

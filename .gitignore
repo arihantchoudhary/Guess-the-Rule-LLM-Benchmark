@@ -10,3 +10,4 @@ backend.egg-info
 .history
 
 node_modules/
+/node_modules/

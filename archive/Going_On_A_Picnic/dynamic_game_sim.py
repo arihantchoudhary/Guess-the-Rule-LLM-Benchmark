@@ -80,7 +80,7 @@ def load_secret_rule(rule_type, level_difficulty, directory):
     filtered_rules = [rule for rule in rules if rule.get('level') == level_difficulty]
     
     if not filtered_rules:
-        raise ValueError(f"No rules found for rule_type '{rule_type}' with level '{level_difficulty}'.")
+        raise ValueError(f"No rules found for rule_type {rule_type} of level {level_difficulty}.")
     
     secret_rule = random.choice(filtered_rules)
     return secret_rule['rule']

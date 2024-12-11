@@ -140,8 +140,8 @@ if __name__ == "__main__":
     semantic_dir = os.path.join(rules_base_dir, 'semantic')
 
     # Generate rules
-    generate_rules("attribute_based", 10, directory=attribute_based_dir)
-    generate_rules("categorical", 10, directory=categorical_dir)
+    # generate_rules("attribute_based", 10, directory=attribute_based_dir)
+    # generate_rules("categorical", 10, directory=categorical_dir)
     generate_rules("relational", 10, directory=relational_dir)
-    generate_rules("logical", 10, directory=logical_dir)
-    generate_rules("semantic", 10, directory=semantic_dir)
+    # generate_rules("logical", 10, directory=logical_dir)
+    # generate_rules("semantic", 10, directory=semantic_dir)

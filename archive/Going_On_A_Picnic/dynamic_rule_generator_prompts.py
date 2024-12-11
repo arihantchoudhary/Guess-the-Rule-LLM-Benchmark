@@ -165,20 +165,18 @@ def L1_generate_relational_rule_prompt(existing_rules=None):
         existing_rules_text = f"You have already created the following rules and should not repeat them:\n{existing_rules_text}\n"
 
     prompt = f"""
-You are the game master for "Guess the Rule Games." {existing_rules_text}Your task is to create a **simple relational rule** not in the list above that determines which pairs of items can be brought to the game.
+You are the game master for "Guess the Rule Games." {existing_rules_text}Your task is to create a **very simple and obvious relational rule** not in the list above that determines which pairs of items can be brought to the game.
 
-- The rule should be based on a straightforward relationship between pairs of items (e.g., items that are the same color, items that share the same starting letter).
-- Use common and easily understandable relationships.
-- Make sure the rule is something even children could guess correctly.
-- Avoid complex or abstract relationships.
-- Ensure the rule is easy to understand and apply.
+- The rule must be based on a widely recognizable, straightforward, and easy-to-guess relationship between pairs of items.
+- The relationship should be something a complete beginner can understand immediately, without any special knowledge.
+- Choose the simplest, most familiar relationship possible (for example, items that share the same first letter, or items that are both round).
+- Avoid any complexity or nuance beyond the most basic relationship.
 - Clearly state the rule.
-
-Do not include any examples or additional text.
+- Do not include examples or any extra text beyond the rule itself.
 
 Format:
 
-Rule: [Your simple relational rule]
+Rule: [Your extremely simple relational rule]
 """
     return prompt
 

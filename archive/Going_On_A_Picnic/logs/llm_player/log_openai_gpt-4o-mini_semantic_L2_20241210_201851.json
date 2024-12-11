@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with celebrated Olympic sports can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 6.55,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"javelin\" and \"swimming goggles\"."
+        },
+        {
+            "role": "user",
+            "content": "I will ask the game master for more examples since I'm still unsure about the rule: \n\n\"Can you give me more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Sure! You can bring \"basketball\" to the picnic."
+        },
+        {
+            "role": "user",
+            "content": "I think I need more clarity on the rule before making a guess, so I'll ask the game master for additional examples. \n\n\"Can you give me more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Of course! You can bring \"gymnastics mat\" to the picnic."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"javelin,\" \"swimming goggles,\" \"basketball,\" and \"gymnastics mat,\" the secret rule seems to be that the items are all related to sports or physical activities. They are items commonly used in sports or physical training. \n\nTherefore, my best guess for the rule is: **The items are all sports equipment or accessories used in athletic activities.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

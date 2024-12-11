@@ -1,0 +1,25 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L3",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both found in the same popular children's book, with one being a main character and the other being a memorable quote associated with that character.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 25.05,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Harry Potter\" and \"\"It does not do to dwell on dreams and forget to live.\"  \nWinnie the Pooh\" and \"\"You're braver than you believe\" and \"stronger than you seem\" and \"and smarter than you think.\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples, the rule appears to involve items that are well-known works of literature or media (i.e., \"Harry Potter\" and \"Winnie the Pooh\") paired with significant quotes or phrases from those works. \n\nThe secret rule may be that the items consist of a title of a literary or media work followed by a notable quote or line from that work. \n\nMy guess for the secret rule is: \"The items must consist of a well-known title from literature or media followed by a significant quote or line from that title.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

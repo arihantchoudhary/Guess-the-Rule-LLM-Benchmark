@@ -1,0 +1,73 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with famous marine life species can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 10.16,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"octopus salad\" and \"shrimp cocktail\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the existing examples. How about: \"calamari\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring calamari."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. How about: \"crab cakes\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring crab cakes."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the existing examples and previous correct guesses. How about: \"tuna tartare\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring tuna tartare."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and previous correct guesses, it seems that the rule involves seafood dishes or preparations, particularly those that may be served as appetizers or in a fashionable context.\n\nI'll make a new guess: \"ceviche.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring ceviche."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the established pattern of seafood dishes. How about: \"oysters on the half shell\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring oysters on the half shell."
+        },
+        {
+            "role": "user",
+            "content": "Based on the established pattern of seafood dishes and the context we've developed, I'll make a new guess: \"smoked salmon.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring smoked salmon."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the progression of correct guesses, my final guess for the secret rule is that the items allowed are seafood dishes or preparations that are typically served as appetizers."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

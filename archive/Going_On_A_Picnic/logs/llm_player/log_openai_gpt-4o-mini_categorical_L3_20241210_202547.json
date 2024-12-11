@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are mentioned or represented in popular video game lore can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 13.0,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Health Potion\" and \"Master Sword\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples to clarify the rule since I have only two examples and I'm not yet confident in my guesses. \n\n\"Game Master, could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Sure! You can bring a \"Sonic Ring.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Game Master, can I bring a 'Healing Spell' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring 'Healing Spell.'"
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the Game Master (\"Health Potion,\" \"Master Sword,\" and \"Sonic Ring\"), it seems that the rule may pertain to items that are commonly associated with video games, specifically those that have a functional purpose within gameplay mechanisms, such as restoring health or providing special abilities. The fact that \"Healing Spell\" was rejected suggests that the rule likely excludes spells or abilities and focuses solely on tangible items.\n\nMy guess for the rule is: The items must be physical consumable or equippable items from video games that serve a specific utility (like healing or enhancing abilities), rather than magical spells or abilities."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

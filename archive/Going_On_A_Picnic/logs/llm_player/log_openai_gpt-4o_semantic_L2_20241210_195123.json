@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with classic children's bedtime stories can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 6.35,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Stuffed teddy bear\" and \"storybook\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"coloring book\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a coloring book."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"fluffy pillow\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a fluffy pillow."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master, the rule seems to be that you can bring items to the game that are composed of two words, with the first word having two syllables and the second word having one syllable. \n\n- \"Stuffed teddy bear\": \"Stuffed\" (two syllables) + \"bear\" (one syllable)\n- \"Storybook\": \"Story\" (two syllables) + \"book\" (one syllable)\n- \"Fluffy pillow\": \"Fluffy\" (two syllables) + \"pillow\" (one syllable)\n\nGiven these observations, my best guess is that the rule is you can bring items described by two-word phrases where the first word has two syllables."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

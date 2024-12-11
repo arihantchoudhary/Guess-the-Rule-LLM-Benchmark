@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a grocery store can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 8.31,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"bread\" and \"milk\"."
+        },
+        {
+            "role": "user",
+            "content": "Guess: Can I bring \"cheese\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring cheese."
+        },
+        {
+            "role": "user",
+            "content": "Guess: Can I bring \"butter\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring butter."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided\u2014\"bread,\" \"milk,\" \"cheese,\" and \"butter\"\u2014and the game master's responses, it seems like the rule could be that you can only bring dairy or dairy-related items to the game. However, since bread is also allowed, which isn't dairy-related, the rule might be broader.\n\nOne possible rule could be: You can bring staple food items or items commonly found in a standard kitchen/pantry. These are basic food essentials that you would typically have on hand.\n\nThis is my best guess for the rule."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -29,18 +29,10 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 # --------------------------
 # Helper Functions
 # --------------------------
-
 def get_llm_model_response(platform, model, message_history):
     """
     A modular function to get responses from different LLM platforms.
-
-    Parameters:
-    - platform: str, either 'openai' or 'anthropic'
-    - model: str, the model name to use
-    - message_history: list of dicts, the conversation history
-
-    Returns:
-    - str, the LLM's response
+    Properly formats prompts for Anthropic models.
     """
     if platform == 'openai':
         response = openai_client.chat.completions.create(
@@ -48,22 +40,29 @@ def get_llm_model_response(platform, model, message_history):
             messages=message_history
         )
         return response.choices[0].message.content.strip()
+
     elif platform == 'anthropic':
+        # Use the Messages API rather than the Completions API
         system_prompt = ''
         user_prompts = []
         for m in message_history:
-            if m['role'] == 'system':
-                system_prompt += m['content'] + '\n'
+            if not system_prompt and m['role'] == 'system':
+                system_prompt += m['content']
             elif m['role'] == 'user':
-                user_prompts.append(m['content'])
+                user_prompts.append(m)
+            # If there are assistant messages, you may need to include them as well,
+            # depending on your desired behavior. For now, we follow your friend's snippet.
 
-        response = anthropic_client.completions.create(
+        response = anthropic_client.messages.create(
+            max_tokens=1024,
+            system=system_prompt,
+            messages=user_prompts,
             model=model,
-            prompt=system_prompt + "\n".join(user_prompts),
-            stop_sequences=["\n"],
-            max_tokens_to_sample=1024
         )
-        return response.completion.strip()
+        # Adjust the way we access the response depending on the actual structure.
+        # Your friend’s code suggests this format:
+        return response.content[0].text.strip().lower()
+
     else:
         raise ValueError(f"Unknown platform '{platform}' provided.")
 
@@ -418,14 +417,20 @@ if __name__ == "__main__":
     # max_turns = 10
 
     # ---
+    # llm_models = {
+    #     'openai': [
+    #         'gpt-4o',
+    #         'gpt-4o-mini',
+    #     ],  # OpenAI models
+    #     'anthropic': [
+    #         'claude-3-haiku',
+    #         'claude-3.5-haiku'
+    #     ]  # Anthropic models
+    # }
     llm_models = {
-        'openai': [
-            'gpt-4o',
-            'gpt-4o-mini',
-        ],  # OpenAI models
         'anthropic': [
-            'claude-3-haiku',
-            'claude-3.5-haiku'
+            'claude-3-haiku-20240307',
+            'claude-3-5-haiku-latest'
         ]  # Anthropic models
     }
     

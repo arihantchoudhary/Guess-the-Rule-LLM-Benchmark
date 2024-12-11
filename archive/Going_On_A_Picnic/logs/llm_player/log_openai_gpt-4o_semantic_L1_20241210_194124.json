@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": true,
+    "duration_seconds": 3.08,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Beach towel\" and \"sunscreen\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"Beach towel\" and \"sunscreen,\" a possible rule could be that the items are things commonly associated with the beach or beach activities. Therefore, the rule might be: \"Items that are typically used or needed at the beach.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are typically associated with a traditional beach day can be brought to the picnic."
+        }
+    ]
+}

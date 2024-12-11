@@ -1,0 +1,25 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are mentioned in a Beatles song can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 5.61,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Strawberry\" and \"Octopus\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples given\u2014\"Strawberry\" and \"Octopus\"\u2014a possible rule could be that the items must contain the letter \"o.\" Both \"Strawberry\" and \"Octopus\" have the letter \"o\" in them, which may be the common characteristic that the rule is based on."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

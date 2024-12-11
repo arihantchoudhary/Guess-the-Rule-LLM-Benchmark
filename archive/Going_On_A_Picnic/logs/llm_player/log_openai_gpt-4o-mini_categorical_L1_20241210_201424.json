@@ -1,0 +1,97 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are used in a typical school classroom can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 12.65,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"pencil\" and \"notebook\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"whiteboard\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a whiteboard."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"binder\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a binder."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"clipboard\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a clipboard."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"folder\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a folder."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"graph paper\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring graph paper."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"sticky notes\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring sticky notes."
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to make a new guess. Can I bring a \"highlighter\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a highlighter."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"ruler\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a ruler."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"markers\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring markers."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples given (\"pencil,\" \"notebook\") and the responses from the game master, it seems that the secret rule pertains to items that are generally used for writing, note-taking, or organization in an educational or office setting. All the items mentioned (whiteboard, binder, clipboard, folder, graph paper, sticky notes, highlighter, ruler, markers) fall into this category.\n\nMy best guess for the rule is: \"You can bring any item that is typically used for writing, note-taking, or organizing in an educational or office environment.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

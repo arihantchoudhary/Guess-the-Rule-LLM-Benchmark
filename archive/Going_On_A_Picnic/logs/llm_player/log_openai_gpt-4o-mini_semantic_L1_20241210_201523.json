@@ -1,0 +1,97 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 13.3,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"beach towel\" and \"sunscreen\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a guess. Can I bring a \"swim suit\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a swimsuit."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring a \"beach ball\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach ball."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a guess. Can I bring \"flip-flops\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring flip-flops."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"cooler\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a cooler."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"beach chair\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach chair."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"snorkel\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a snorkel."
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to better understand the rule. Can you please provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring a \"beach umbrella.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"sandwich\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a sandwich."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"beach ball?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach ball. (Note: You've previously guessed this item.)"
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples and the game's responses, it seems that the rule pertains to items commonly associated with a trip to the beach or activities that typically take place at the beach. The items you've been allowed to guess, such as \"beach towel,\" \"sunscreen,\" \"swimsuit,\" \"beach ball,\" \"flip-flops,\" \"beach chair,\" and \"snorkel,\" are all commonly used at the beach or in beach-related activities. \n\nHowever, items like \"cooler\" and \"sandwich,\" which are not specifically geared towards beach activities in the same way, were not allowed. \n\nTherefore, my best guess is that the secret rule is: **You can bring items that are typically used at the beach or are related to beach activities.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

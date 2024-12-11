@@ -29,10 +29,48 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 # --------------------------
 # Helper Functions
 # --------------------------
+# def get_llm_model_response(platform, model, message_history):
+#     """
+#     A modular function to get responses from different LLM platforms.
+#     Properly formats prompts for Anthropic models.
+#     """
+#     if platform == 'openai':
+#         response = openai_client.chat.completions.create(
+#             model=model,
+#             messages=message_history
+#         )
+#         return response.choices[0].message.content.strip()
+
+#     elif platform == 'anthropic':
+#         # Use the Messages API rather than the Completions API
+#         system_prompt = ''
+#         user_prompts = []
+#         for m in message_history:
+#             if not system_prompt and m['role'] == 'system':
+#                 system_prompt += m['content']
+#             elif m['role'] == 'user':
+#                 user_prompts.append(m)
+#             # If there are assistant messages, you may need to include them as well,
+#             # depending on your desired behavior. For now, we follow your friend's snippet.
+
+#         response = anthropic_client.messages.create(
+#             max_tokens=1024,
+#             system=system_prompt,
+#             messages=user_prompts,
+#             model=model,
+#         )
+#         # Adjust the way we access the response depending on the actual structure.
+#         # Your friend’s code suggests this format:
+#         return response.content[0].text.strip().lower()
+
+#     else:
+#         raise ValueError(f"Unknown platform '{platform}' provided.")
+
 def get_llm_model_response(platform, model, message_history):
     """
     A modular function to get responses from different LLM platforms.
-    Properly formats prompts for Anthropic models.
+    Ensures that Anthropic models receive a similar conversation format 
+    as OpenAI models, preserving system, user, and assistant turns.
     """
     if platform == 'openai':
         response = openai_client.chat.completions.create(
@@ -42,26 +80,33 @@ def get_llm_model_response(platform, model, message_history):
         return response.choices[0].message.content.strip()
 
     elif platform == 'anthropic':
-        # Use the Messages API rather than the Completions API
-        system_prompt = ''
-        user_prompts = []
+        # Separate out the first system message (if any) and convert roles for Anthropic
+        system_prompt = ""
+        anthro_messages = []
         for m in message_history:
-            if not system_prompt and m['role'] == 'system':
-                system_prompt += m['content']
+            if m['role'] == 'system' and not system_prompt:
+                # The first system message becomes the system prompt
+                system_prompt = m['content']
+            elif m['role'] == 'system' and system_prompt:
+                # If additional system messages appear, you may choose to append them to system_prompt
+                # For consistency, just append them:
+                system_prompt += "\n" + m['content']
             elif m['role'] == 'user':
-                user_prompts.append(m)
-            # If there are assistant messages, you may need to include them as well,
-            # depending on your desired behavior. For now, we follow your friend's snippet.
+                # Convert user role to human for Anthropic
+                anthro_messages.append({"role": "human", "content": m['content']})
+            elif m['role'] == 'assistant':
+                # Assistant role remains assistant
+                anthro_messages.append({"role": "assistant", "content": m['content']})
 
         response = anthropic_client.messages.create(
-            max_tokens=1024,
-            system=system_prompt,
-            messages=user_prompts,
             model=model,
+            system=system_prompt,
+            messages=anthro_messages,
+            max_tokens=1024
         )
-        # Adjust the way we access the response depending on the actual structure.
-        # Your friend’s code suggests this format:
-        return response.content[0].text.strip().lower()
+
+        # According to Anthropic's Messages API, the main completion is typically in `response.completion.content`
+        return response.completion.content.strip()
 
     else:
         raise ValueError(f"Unknown platform '{platform}' provided.")
@@ -121,7 +166,9 @@ def game_master_response(platform, model, player_message, conversation, provided
     conversation.append({"role": "user", "content": player_message})
 
     # Get the game master's response using the modular LLM function
-    reply = get_llm_model_response(platform, model, conversation)
+    reply = get_llm_model_response(platform, model, conversation) 
+    #reply = get_llm_model_response('openai', 'gpt-4o', conversation)
+
 
     # Append the game master's reply to the conversation
     conversation.append({"role": "assistant", "content": reply})
@@ -422,10 +469,10 @@ if __name__ == "__main__":
     #         'gpt-4o',
     #         'gpt-4o-mini',
     #     ],  # OpenAI models
-    #     'anthropic': [
-    #         'claude-3-haiku',
-    #         'claude-3.5-haiku'
-    #     ]  # Anthropic models
+        #   'anthropic': [
+        #     'claude-3-haiku-20240307',
+        #     'claude-3-5-haiku-latest'
+        # ]  # Anthropic models
     # }
     llm_models = {
         'anthropic': [
@@ -436,7 +483,9 @@ if __name__ == "__main__":
     
     # Define other parameters
     valid_difficulties = ['L1', 'L2', 'L3']
-    valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
+    # valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
+    valid_rule_types = ['attribute_based']
+
     max_turns_list = [1, 3, 5, 7, 10, 15]
     
     # Define the output directory

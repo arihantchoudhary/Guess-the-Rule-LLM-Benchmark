@@ -51,7 +51,6 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 #             elif m['role'] == 'user':
 #                 user_prompts.append(m)
 #             # If there are assistant messages, you may need to include them as well,
-#             # depending on your desired behavior. For now, we follow your friend's snippet.
 
 #         response = anthropic_client.messages.create(
 #             max_tokens=1024,
@@ -67,11 +66,6 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 #         raise ValueError(f"Unknown platform '{platform}' provided.")
 
 def get_llm_model_response(platform, model, message_history):
-    """
-    A modular function to get responses from different LLM platforms.
-    Ensures that Anthropic models receive a similar conversation format 
-    as OpenAI models, preserving system, user, and assistant turns.
-    """
     if platform == 'openai':
         response = openai_client.chat.completions.create(
             model=model,
@@ -80,21 +74,16 @@ def get_llm_model_response(platform, model, message_history):
         return response.choices[0].message.content.strip()
 
     elif platform == 'anthropic':
-        # Prepare system prompt and messages for Anthropic
         system_prompt = ""
         anthro_messages = []
         for m in message_history:
             if m['role'] == 'system' and not system_prompt:
-                # The first system message becomes the system prompt
                 system_prompt = m['content']
             elif m['role'] == 'system' and system_prompt:
-                # Append additional system messages if present
                 system_prompt += "\n" + m['content']
             elif m['role'] == 'user':
-                # Keep the 'user' role as is (no longer 'human')
                 anthro_messages.append({"role": "user", "content": m['content']})
             elif m['role'] == 'assistant':
-                # Assistant role remains assistant
                 anthro_messages.append({"role": "assistant", "content": m['content']})
 
         response = anthropic_client.messages.create(
@@ -104,8 +93,13 @@ def get_llm_model_response(platform, model, message_history):
             max_tokens=1024
         )
 
-        # The Anthropic Messages API returns the completion in response.completion.content
-        return response.completion.content.strip()
+        assistant_text = ""
+        # Now access attributes instead of indexing
+        for block in response.content:
+            if block.type == 'text':
+                assistant_text += block.text
+
+        return assistant_text.strip()
 
     else:
         raise ValueError(f"Unknown platform '{platform}' provided.")

@@ -1,0 +1,57 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are found in a typical home garden can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": true,
+    "duration_seconds": 25.09,
+    "platform": "anthropic",
+    "model": "claude-3-haiku-20240307",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"tomatoes\" and \"lettuce\"."
+        },
+        {
+            "role": "user",
+            "content": "Okay, let's try this:\n\nGame Master, can I bring \"carrots\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring carrots."
+        },
+        {
+            "role": "user",
+            "content": "Okay, let's try this:\n\nGame Master, can I bring \"apples\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring apples."
+        },
+        {
+            "role": "user",
+            "content": "Hmm, based on the examples given so far, it seems like the rule might be related to vegetables or plant-based foods. Let me try a new guess that hasn't been mentioned before:\n\nGame Master, can I bring \"broccoli\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring broccoli."
+        },
+        {
+            "role": "user",
+            "content": "Okay, let's try this:\n\nGame Master, can I bring \"spinach\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring spinach."
+        },
+        {
+            "role": "user",
+            "content": "Okay, based on the examples and the game master's responses, I believe the secret rule is:\n\nThe items you can bring to the game are limited to edible plant-based foods, specifically vegetables and leafy greens.\n\nThe game master has allowed you to bring tomatoes, lettuce, carrots, broccoli, and spinach, all of which are vegetables or leafy greens. However, the game master has not allowed you to bring apples, which are a fruit.\n\nTherefore, my best guess for the secret rule is that the items you can bring to the game are limited to edible plant-based foods, specifically vegetables and leafy greens."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are found in a typical home garden can be brought to the picnic."
+        }
+    ]
+}

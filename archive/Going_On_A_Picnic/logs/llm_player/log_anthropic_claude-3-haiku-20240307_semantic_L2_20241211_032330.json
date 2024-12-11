@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with well-known weather phenomena can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": true,
+    "duration_seconds": 3.65,
+    "platform": "anthropic",
+    "model": "claude-3-haiku-20240307",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"umbrella\" and \"sunscreen\"."
+        },
+        {
+            "role": "user",
+            "content": "Okay, based on the examples provided by the Game Master (\"umbrella\" and \"sunscreen\"), I will make my best guess about the secret rule.\n\nI believe the secret rule is:\n\nThe objects that are allowed in the game are items that are used for sun/weather protection.\n\nThe examples provided, \"umbrella\" and \"sunscreen\", are both items that people use to protect themselves from the sun or weather conditions.\n\nTherefore, my final guess for the secret rule in this \"Guess the Rule\" game is that the allowed items are those that are used for sun or weather protection."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically associated with well-known weather phenomena can be brought to the picnic. Your guess of \"The objects that are allowed in the game are items that are used for sun/weather protection\" is semantically identical to the secret rule. Well done!"
+        }
+    ]
+}

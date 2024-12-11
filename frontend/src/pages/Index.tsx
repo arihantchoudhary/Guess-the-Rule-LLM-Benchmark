@@ -56,6 +56,9 @@ const Index = () => {
                   Select from our collection of guess-the-rule games designed to test
                   different aspects of LLM capabilities.
                 </p>
+                <Link to="/docs?section=chooseGame" className="mt-4 inline-block text-primary hover:underline">
+                  Learn more →
+                </Link>
               </CardContent>
             </Card>
 
@@ -71,6 +74,9 @@ const Index = () => {
                   Either play the game yourself or select LLMs to observe their
                   problem-solving approaches.
                 </p>
+                <Link to="/docs?section=playOrPick" className="mt-4 inline-block text-primary hover:underline">
+                  Learn more →
+                </Link>
               </CardContent>
             </Card>
 
@@ -84,6 +90,9 @@ const Index = () => {
                   Review performance metrics and compare different approaches to
                   understand LLM capabilities.
                 </p>
+                <Link to="/docs?section=analyzeResults" className="mt-4 inline-block text-primary hover:underline">
+                  Learn more →
+                </Link>
               </CardContent>
             </Card>
           </div>

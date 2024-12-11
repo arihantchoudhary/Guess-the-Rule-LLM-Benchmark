@@ -43,7 +43,7 @@ export const Layout = ({ children }: LayoutProps) => {
             © 2024 Guess The Rule Bench. All rights reserved.
           </div>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a
+            {/* <a
               href="/privacy"
               className="text-sm text-muted-foreground hover:text-primary"
             >
@@ -56,13 +56,13 @@ export const Layout = ({ children }: LayoutProps) => {
               Contact Us
             </a>
             <a
-              href="https://github.com/yourusername/your-repo"
+              href="https://github.com/m1chae11u/Guess-the-Rule-LLM-Benchmark"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary"
             >
               GitHub
-            </a>
+            </a> */}
           </div>
         </div>
       </footer>

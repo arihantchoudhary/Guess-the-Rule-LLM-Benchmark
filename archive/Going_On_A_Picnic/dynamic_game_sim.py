@@ -8,6 +8,7 @@ import re
 import time
 from openai import OpenAI
 import anthropic
+from retry import retry
 
 # --------------------------
 # Configuration & Setup
@@ -65,6 +66,7 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 #     else:
 #         raise ValueError(f"Unknown platform '{platform}' provided.")
 
+@retry(tries=3, delay=1, exceptions=(anthropic.InternalServerError,))
 def get_llm_model_response(platform, model, message_history):
     if platform == 'openai':
         response = openai_client.chat.completions.create(
@@ -94,7 +96,6 @@ def get_llm_model_response(platform, model, message_history):
         )
 
         assistant_text = ""
-        # Now access attributes instead of indexing
         for block in response.content:
             if block.type == 'text':
                 assistant_text += block.text
@@ -380,7 +381,13 @@ Be strategic and avoid repeating previous guesses.
 """
     
         # Player (LLM) responds
-        player_message = get_llm_model_response(platform, model, [{"role": "user", "content": player_prompt}]).strip()
+        try:
+            player_message = get_llm_model_response(platform, model, [{"role": "user", "content": player_prompt}]).strip()
+        except anthropic.InternalServerError as e:
+            # If after 3 retries it still fails, handle the error here without stopping the loop
+            print(f"An error occurred with model {model} on platform {platform}: {e}")
+            # You can choose to continue to the next iteration or do something else
+            player_message = "No valid response due to repeated internal server errors."
     
         # Add player's message to visible history
         player_visible_history.append({"role": "user", "content": player_message})

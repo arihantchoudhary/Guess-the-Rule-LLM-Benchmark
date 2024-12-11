@@ -80,7 +80,7 @@ def get_llm_model_response(platform, model, message_history):
         return response.choices[0].message.content.strip()
 
     elif platform == 'anthropic':
-        # Separate out the first system message (if any) and convert roles for Anthropic
+        # Prepare system prompt and messages for Anthropic
         system_prompt = ""
         anthro_messages = []
         for m in message_history:
@@ -88,12 +88,11 @@ def get_llm_model_response(platform, model, message_history):
                 # The first system message becomes the system prompt
                 system_prompt = m['content']
             elif m['role'] == 'system' and system_prompt:
-                # If additional system messages appear, you may choose to append them to system_prompt
-                # For consistency, just append them:
+                # Append additional system messages if present
                 system_prompt += "\n" + m['content']
             elif m['role'] == 'user':
-                # Convert user role to human for Anthropic
-                anthro_messages.append({"role": "human", "content": m['content']})
+                # Keep the 'user' role as is (no longer 'human')
+                anthro_messages.append({"role": "user", "content": m['content']})
             elif m['role'] == 'assistant':
                 # Assistant role remains assistant
                 anthro_messages.append({"role": "assistant", "content": m['content']})
@@ -105,7 +104,7 @@ def get_llm_model_response(platform, model, message_history):
             max_tokens=1024
         )
 
-        # According to Anthropic's Messages API, the main completion is typically in `response.completion.content`
+        # The Anthropic Messages API returns the completion in response.completion.content
         return response.completion.content.strip()
 
     else:
@@ -483,8 +482,7 @@ if __name__ == "__main__":
     
     # Define other parameters
     valid_difficulties = ['L1', 'L2', 'L3']
-    # valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
-    valid_rule_types = ['attribute_based']
+    valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
 
     max_turns_list = [1, 3, 5, 7, 10, 15]
     

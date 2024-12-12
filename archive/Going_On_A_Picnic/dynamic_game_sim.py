@@ -160,9 +160,7 @@ def game_master_response(platform, model, player_message, conversation, provided
     conversation.append({"role": "user", "content": player_message})
 
     # Get the game master's response using the modular LLM function
-    reply = get_llm_model_response(platform, model, conversation) 
-    #reply = get_llm_model_response('openai', 'gpt-4o', conversation)
-
+    reply = get_llm_model_response('openai', 'gpt-4o', conversation)
 
     # Append the game master's reply to the conversation
     conversation.append({"role": "assistant", "content": reply})
@@ -464,21 +462,23 @@ if __name__ == "__main__":
     # max_turns = 10
 
     # ---
+
     # llm_models = {
     #     'openai': [
     #         'gpt-4o',
     #         'gpt-4o-mini',
-    #     ],  # OpenAI models
-        #   'anthropic': [
-        #     'claude-3-haiku-20240307',
-        #     'claude-3-5-haiku-latest'
-        # ]  # Anthropic models
+    #     ],
+    #     'anthropic': [
+    #         'claude-3-haiku-20240307',
+    #         'claude-3-5-haiku-latest'
+    #     ]
     # }
+    
     llm_models = {
         'anthropic': [
             'claude-3-haiku-20240307',
             'claude-3-5-haiku-latest'
-        ]  # Anthropic models
+        ]
     }
     
     # Define other parameters

@@ -1,0 +1,57 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L2",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both found in the same room of a typical house, with one being a piece of furniture and the other being an accessory or decor item typically found in that room.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 26.15,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sofa\" and \"throw pillow  \ndining table\" and \"chandelier\"."
+        },
+        {
+            "role": "user",
+            "content": "Let's try making a new guess based on the examples provided. I propose: \"armchair\" and \"floor lamp\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"armchair\" and \"floor lamp\"."
+        },
+        {
+            "role": "user",
+            "content": "Let's make a new guess based on the previous examples and responses. How about: \"coffee table\" and \"pendant light\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"coffee table\" and \"pendant light\"."
+        },
+        {
+            "role": "user",
+            "content": "Let's make a new guess based on the previous examples and responses. How about: \"bookshelf\" and \"wall sconce\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"bookshelf\" and \"wall sconce\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and responses given, the rule seems to involve pairs of items where the first item is a piece of furniture and the second item is a type of lighting. I'll make a new guess following this pattern:\n\nPlayer: Let's make a new guess based on the previous examples and responses. How about: \"desk\" and \"table lamp\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"desk\" and \"table lamp\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and responses provided, the rule appears to involve pairs of items such that:\n\n1. The first item is a piece of furniture.\n2. The second item is a type of lighting fixture or lighting-related accessory.\n\nThus, the rule is that each pair must consist of one furniture item and one lighting item."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

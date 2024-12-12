@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are used in a typical school classroom can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 7.48,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"pencil\" and \"chalk\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to bring \"crayon\" to the game. Can I?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring crayon."
+        },
+        {
+            "role": "user",
+            "content": "I would like to bring \"marker\" to the game. Can I?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring marker."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"pencil,\" \"chalk,\" \"crayon,\" and \"marker,\" the rule likely involves items that can be used for writing or drawing, typically involving art supplies or stationary that leave a mark or make an impression. Therefore, my best guess for the rule is: \"You can bring items that are used for writing or drawing and are typically found in art supplies or stationery.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

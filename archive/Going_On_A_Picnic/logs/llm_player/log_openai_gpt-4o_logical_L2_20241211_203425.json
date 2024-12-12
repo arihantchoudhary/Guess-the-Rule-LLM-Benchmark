@@ -1,0 +1,41 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L2",
+    "secret_rule": "The item can be brought to the picnic only if its name starts with a vowel and has an even number of letters.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 7.48,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"umbrella\" and \"envelope\"."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring an \"unicorn\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring unicorn."
+        },
+        {
+            "role": "user",
+            "content": "I'll try to make an educated guess based on the examples given. The items \"umbrella\" and \"envelope\" both start with a vowel. Here's my new guess: Can I bring an \"apple\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring apple."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"umbrella\" and \"envelope\" and the fact that \"unicorn\" and \"apple\" are not allowed, it seems like the rule is not about items starting with vowels. Instead, it could be related to the structure of the words themselves. Both \"umbrella\" and \"envelope\" contain both an \"e\" and an \"l.\" This could be a clue.\n\nGiven this, my best guess for the rule is: Can I bring items that contain both the letter \"e\" and the letter \"l\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

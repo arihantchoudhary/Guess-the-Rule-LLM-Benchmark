@@ -1,0 +1,57 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are used in a typical school classroom can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 8.82,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"pencil\" and \"notebook\"."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019ll ask the game master for more examples to get a clearer understanding of the rule. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Certainly! You can bring an \"eraser\" and a \"ruler\"."
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Can I bring a 'marker' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a marker."
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Can I bring a 'highlighter' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a highlighter."
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Can I bring a 'binder' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a binder."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the responses from the game master, my guess for the secret rule is that you can bring any item that is commonly used for writing, drawing, or organizing papers in a school or office setting. This includes items like writing instruments (pencil, marker, highlighter), paper products (notebook, binder), and drawing tools (eraser, ruler)."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

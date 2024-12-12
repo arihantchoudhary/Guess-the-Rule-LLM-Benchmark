@@ -1,0 +1,57 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that have a scientific name in Latin can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 12.96,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Malus domestica\" and \"Fragaria \u00d7 ananassa\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring \"Rubus idaeus\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Rubus idaeus.\""
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring \"Citrus \u00d7 limon\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Citrus \u00d7 limon.\""
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring \"Vitis vinifera\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Vitis vinifera.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: I will make a new guess. Can I bring \"Pyrus communis\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Pyrus communis.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the items you've guessed, the rule appears to be that you can bring any plant or species name of cultivated fruit-bearing plants, specifically those in the botanical nomenclature following the format of \"Genus species\" or \"Genus \u00d7 species\". All the examples provided, including \"Malus domestica\", \"Fragaria \u00d7 ananassa\", \"Rubus idaeus\", \"Citrus \u00d7 limon\", \"Vitis vinifera\", and \"Pyrus communis\", fit this category as they all refer to specific cultivated fruits. \n\nTherefore, my guess is that the rule is: **You can bring the scientific names of cultivated fruit plants.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

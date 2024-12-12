@@ -486,18 +486,25 @@ if __name__ == "__main__":
     #     ]
     # }
     
+    # llm_models = {
+    #     'anthropic': [
+    #         'claude-3-haiku-20240307',
+    #         'claude-3-5-haiku-latest'
+    #     ]
+    # }
     llm_models = {
         'anthropic': [
-            'claude-3-haiku-20240307',
-            'claude-3-5-haiku-latest'
+            'claude-3-haiku-20240307'
         ]
     }
 
     # Define other parameters
-    valid_difficulties = ['L1', 'L2', 'L3']
+    # valid_difficulties = ['L1', 'L2', 'L3']
+    valid_difficulties = ['L3']
     valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
 
-    max_turns_list = [1, 3, 5, 7, 10, 15]
+    # max_turns_list = [1, 3, 5, 7, 10, 15]
+    max_turns_list = [15]
     
     # Define the output directory
     output_dir = 'logs/llm_player'

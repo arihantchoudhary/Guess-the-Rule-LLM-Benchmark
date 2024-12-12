@@ -10,6 +10,16 @@ import anthropic
 from retry import retry
 import logging
 
+logging.basicConfig(
+    level=logging.INFO,  
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  
+    handlers=[
+        logging.StreamHandler() 
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
 from lib.domain.base import GuessTheRuleGame
 from lib.domain.common import GAMES_SAVE_DIR
 
@@ -18,6 +28,88 @@ assert OPENAI_API_KEY, 'OPENAI_API_KEY not found. Please configure it as an env 
 openai_client = OpenAI()
 
 class DynamicGoingOnAPicnic(GuessTheRuleGame):
+
+    def make_game_history_system_message(self):
+        if self.status == 'ongoing':
+            current_conversation = "\n".join([
+                f"{msg['role'].capitalize()}: {msg['content']}"
+                for msg in self.history["conversation"]
+            ])
+
+            msg = (
+                f"Welcome back to the game 'Going on a Picnic'.\n\n"
+                f"Here is the conversation from before:\n"
+                f"{current_conversation}\n\n"
+                f"What would you like to do next?"
+            )
+            return msg
+        else:
+            return (
+                f"Game is over. You {self.status}. The rule was \"{self.rule}\".\n"
+                f"Check your stats in the top panel."
+            )
+        
+    def get_game_summary(self, include_rule=False):
+        system_message = self.make_game_history_system_message()
+        
+        response = {
+            'game_uuid': str(self.uuid),
+            'game_class_name': self.__class__.__name__,
+            'domain': self.domain,
+            'difficulty': self.difficulty,
+            'game_gen_type': self.game_gen_type,
+            'start_time': time.ctime(int(self.start_time)),
+            'game_end_time': time.ctime(int(self.game_end_time)) if self.game_end_time else None,
+            'total_game_time': self.total_game_time if self.total_game_time else time.time() - self.start_time,
+            'turns_taken': self.turns,
+            'game_history': {
+                'positives': list(self.history['positives']),
+                'negatives': list(self.history['negatives'])
+            },
+            'total_examples_available': self.total_examples_available,
+            'total_pos_examples_shown': self.total_pos_examples_shown,
+            'total_neg_examples_shown': self.total_neg_examples_shown,
+            'status': self.status,
+            'system_message': system_message
+        }
+        if include_rule or self.status in ['won', 'lost']:
+            response['rule'] = self.rule
+
+        return response
+    
+    def create_game_instance(self):
+        assert not self.uuid, 'Cannot create a new game with an already generated UUID'
+        self.uuid = uuid.uuid4()
+        self.game_class_name = self.__class__.__name__
+        self.rule_type = random.choice(['attribute_based', 'categorical', 'logical', 'relational', 'semantic'])
+        self.rule = self.load_secret_rule(self.rule_type)
+
+        self.judge_model = 'gpt-4o'
+
+        self.start_time = time.time()
+        self.game_end_time = None
+        self.total_game_time = None
+        self.turns = 0
+        self.history = {"conversation": []}
+        self.status = 'ongoing'
+
+        generated_examples = self.generate_examples()
+        system_message = self.make_init_system_message(generated_examples)
+        self.add_to_conversation("assistant", system_message)
+        
+        self.save_game()
+        return {
+            'game_uuid': str(self.uuid), # FE IN
+            'domain': self.domain, # FE IN
+            'difficulty': self.difficulty, # FE IN
+            'game_gen_type': self.game_gen_type, # FE IN
+            'start_time': time.ctime(int(self.start_time)), # FE IN
+            'turns_taken': self.turns, # FE IN
+            'status': self.status, # FE IN
+            'system_message': system_message, # FE IN
+        }
+
+    # finished / implemented below
 
     def load_game(self, uuid_str=None):
         assert self.uuid or uuid_str, f'Could not find a uuid to load the game.'
@@ -33,48 +125,38 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             print(f"Error loading game state: {e}")
             raise
 
-        # Create a new instance of the class
         game = DynamicGoingOnAPicnic(uuid=state['uuid'])
-        # Update the instance's __dict__ with the loaded state
         game.__dict__.update(state)
-
-        # Convert lists back to sets
-        # game.history['positives'] = set(game.history['positives'])
-        # game.history['negatives'] = set(game.history['negatives'])
-        # this section is copied from ali's code. your game doesn't have this, what you do need is to be able to recover the history (this in your case would be done through )
-
-        # Convert UUID string back to UUID object
         game.uuid = uuid.UUID(game.uuid)
 
         return game
+    
+    def save_game(self):
+        state = self.__dict__.copy()
 
-    def create_game_instance(self):
-        assert not self.uuid, 'Cannot create a new game with an already generated UUID'
-        self.uuid = uuid.uuid4()
-        self.game_class_name = self.__class__.__name__
-        self.rule_type = random.choice(['attribute_based', 'categorical', 'logical', 'relational', 'semantic'])
-        self.rule = self.load_secret_rule(self.rule_type)
+        state['uuid'] = str(self.uuid)
+        state['start_time'] = self.start_time
+        state['game_end_time'] = self.game_end_time
 
-        self.judge_model = 'gpt-4o'
+        filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
+        temp_filename = filename + '.tmp'
 
-        self.start_time = time.time()
-        self.game_end_time = None
-        self.total_game_time = None
-        self.status = 'ongoing'
+        try:
+            with open(temp_filename, 'w') as f:
+                json.dump(state, f, indent=4)
+            # Atomically replace the old file
+            os.replace(temp_filename, filename)
+        except Exception as e:
+            if os.path.exists(temp_filename):
+                os.remove(temp_filename)
+            print(f"Error saving game state: {e}")
+            raise
 
-        generated_examples = self.generate_examples()
-        system_message = self.make_init_system_message(generated_examples)
-        
-        return {
-            'game_uuid': str(self.uuid), # FE
-            'domain': self.domain, # FE
-            'difficulty': self.difficulty, # FE
-            'game_gen_type': self.game_gen_type, # FE
-            'start_time': time.ctime(int(self.start_time)), # FE
-            'turns_taken': self.turns, # FE
-            'status': self.status, # FE
-            'system_message': system_message, # FE, need to return the message that gets displayed to the user
-        }
+    def add_to_conversation(self, role, content):
+        self.history["conversation"].append({
+            "role": role,
+            "content": content
+        })
 
     def get_more_examples(self, n):
         if self.status != 'ongoing':
@@ -85,31 +167,156 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             }
         generated_examples = self.generate_examples(n)
         system_message = self.make_more_examples_system_message(generated_examples)
-        
+        self.add_to_conversation("assistant", system_message)
+
         self.save_game()
         return {
             'game_uuid': str(self.uuid),
             'status': self.status,
             'system_message': system_message
         }
-
-    def validate_guess(self):
-        raise NotImplementedError('Method not implemented for this game')
     
+    def validate_guess(self, guess):
+        if self.status != 'ongoing':
+            return {
+                'game_uuid': str(self.uuid),
+                'status': self.status,
+                'guess_result': False,
+                'system_message': 'Cannot validate guess after the game is finished.'
+            }
+        result = self.check_guess(guess)
+        system_message = self.make_validate_guess_system_message(result)
+        self.add_to_conversation("assistant", system_message)
+        
+        self.save_game()
+        return {
+            'game_uuid': str(self.uuid),
+            'status': self.status,
+            'guess_result': result,
+            'system_message': system_message,
+        }
+
+    def make_validate_guess_system_message(self, guess_result):
+        if guess_result is True:
+            game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
+            return game_master_msg
+        elif "Yes" in guess_result:
+            return guess_result
+        else:
+            game_master_msg = "Incorrect guess. What would you like to do next?"
+            return game_master_msg
+
+    def check_guess(self, guess):
+        self.turns += 1
+        self.add_to_conversation("user", guess)
+
+        is_guess_rule = self.is_rule_guess(guess)
+        if is_guess_rule == "actual":
+            result = self.check_rule_guess(guess)
+            if result == "yes":
+                self.status = 'won'
+                self.game_end_time = time.time()
+                self.total_game_time = self.game_end_time - self.start_time
+                return True
+        elif is_guess_rule == "example":
+            result = self.check_example_guess(guess)
+            if "Yes" in result:
+                return result
+        elif is_guess_rule == "give up":
+            self.status = 'lost'
+            self.game_end_time = time.time()
+            self.total_game_time = self.game_end_time - self.start_time
+        return False
+    
+    def check_rule_guess(self, rule_guess):
+        sys_prompt = (
+            f"You are an expert at identifying semantic equivalency in natural language. "
+            f"Your task is to evaluate whether a proposed rule guess semantically matches a predefined rule. "
+            f"Consider variations in phrasing, synonyms, or minor rewording as valid matches, but disregard guesses that significantly deviate "
+            f"from the intended meaning. Provide a precise and accurate evaluation."
+        )
+
+        prompt = (
+            f"The predefined rule is: \"{self.rule}\".\n"
+            f"The player's rule guess is: \"{rule_guess}\".\n\n"
+            f"Determine if the player's guess semantically matches the predefined rule. "
+            f"Respond with either \"yes\" if the guess matches, or \"no\" if it does not match. "
+            f"Do not provide any additional explanation or commentary.\n\n"
+            f"Format:\n"
+            f"[your final answer: yes or no]"
+        )
+
+        messages=[
+                    {"role": "system", "content": sys_prompt},
+                    {"role": "user", "content": prompt}
+                ]
+        
+        max_retries = 3
+        for attempt in range(max_retries):
+            response = self.get_llm_model_response(messages).strip().lower()
+            
+            if "yes" in response:
+                return "yes"
+            elif "no" in response:
+                return "no"
+            else:
+                self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+        raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
+
+    def check_example_guess(self, example_guess):
+        sys_prompt = (
+            f"You are an expert at evaluating whether specific examples satisfy a given rule. "
+            f"Your task is to determine if the provided example strictly adheres to the predefined rule. "
+            f"Use precise logic to evaluate the example, and consider only the information given in the predefined rule. "
+            f"Provide an accurate evaluation without additional explanation or commentary."
+        )
+
+        prompt = (
+            f"The predefined rule is: \"{self.rule}\".\n"
+            f"The player's example guess is: \"{example_guess}\".\n\n"
+            f"Determine if the player's example satisfies the predefined rule. "
+            f"Respond with either \"yes\" if the example fits the rule, or \"no\" if it does not fit the rule. "
+            f"Do not provide any additional explanation or commentary.\n\n"
+            f"Format:\n"
+            f"[your final answer: yes or no]"
+        )
+
+        messages = [
+            {"role": "system", "content": sys_prompt},
+            {"role": "user", "content": prompt}
+        ]
+        
+        max_retries = 3
+        for attempt in range(max_retries):
+            response = self.get_llm_model_response(messages).strip().lower()
+            
+            if "yes" in response:
+                return f"Yes, you can bring {example_guess} to the picnic!"
+            elif "no" in response:
+                return f"No, you cannot bring {example_guess} to the picnic."
+            else:
+                self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+        raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
+
     def is_rule_guess(self, user_input):
         prompt = (
             f"You are currently playing a Guess The Rule Game. It is a game where there is a game master and players. "
             f"In order to win the game, players must correctly figure out the underlying rule of the game.\n\n"
             f"The players can make guesses to the game master.\n"
-            f"The players can give the game master two different kinds of guesses:\n"
-            f"    1. giving an example (or examples) fit the rule\n"
-            f"    2. giving their guess of the actual rule.\n\n"
+            f"The players can give the game master three different kinds of guesses:\n"
+            f"    1. Giving an example (or examples) that fit the rule\n"
+            f"    2. Giving their guess of the actual rule\n"
+            f"    3. Indicating that they want to 'give up' by explicitly stating so\n\n"
             f"Take a look at the player's guess: \"{user_input}\".\n\n"
-            f"Your task is to classify if the player's guess is an example or a guess of the rule itself.\n\n"
-            f"Please respond with either \"example\" for an example guess (or guesses), or \"actual\" for a guess of the actual rule.\n"
+            f"Your task is to classify if the player's guess is:\n"
+            f"    - \"example\" for an example guess (or guesses),\n"
+            f"    - \"actual\" for a guess of the actual rule, or\n"
+            f"    - \"give up\" if the player indicates they want to give up.\n\n"
             f"Do not provide any additional explanation or text.\n\n"
             f"Format:\n\n"
-            f"[your final answer]"
+            f"[your final answer: example, actual, or give up]"
         )
         
         message_history = [{"role": "user", "content": prompt}]
@@ -119,14 +326,16 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             response = self.get_llm_model_response(message_history).strip().lower()
 
             if "actual" in response:
-                return True
+                return "actual"
             elif "example" in response:
-                return False
+                return "example"
+            elif "give up" in response:
+                return "give up"
             else:
                 retry_count += 1
+                self.logger.warning(f"Unexpected response from model: {response}. Retrying... ({retry_count}/{max_retries})")
+        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
-    
-    # finished / implemented below
 
     def make_more_examples_system_message(generated_examples):
         return (
@@ -139,6 +348,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         )
     
     def generate_examples(self, num_examples=2):
+        self.turns += 1
         prompt = (
             f"You are an assistant helping to generate examples for a game called \"Guess the Rule Games.\"\n\n"
             f"The secret rule is: {self.rule}\n\n"

@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a bakery can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 17.6,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Croissant\" and \"baguette\"."
+        },
+        {
+            "role": "user",
+            "content": "Given the examples of \"Croissant\" and \"baguette\", I'm noticing these are both French bread/pastry items.\n\nMy strategic first guess will be: \"Eclair\" - another French pastry/bread item.\n\nI'll ask: \"Can I bring an eclair to the game?\"\n\nThis guess follows the pattern of French food while being different from the previous examples. If the game master confirms it, it will help me better understand the potential rule."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring an eclair."
+        },
+        {
+            "role": "user",
+            "content": "Great! The confirmation of \"eclair\" further supports my hypothesis about the rule potentially being related to French pastries/breads. \n\nTo test this theory further, I'll make a strategic guess that is slightly different: \n\n\"Can I bring a macaron to the game?\"\n\nA macaron is another classic French pastry, but distinctly different from the previous bread/pastry examples. This will help me narrow down whether the rule is specifically about French pastries, or if there might be another underlying characteristic."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a macaron."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and confirmations, here's my analysis and final rule guess:\n\nRule Hypothesis: The rule seems to be about \"French Food Items\"\n\nSupporting Evidence:\n- \"Croissant\" (French pastry)\n- \"Baguette\" (French bread)\n- \"Eclair\" (French pastry)\n- \"Macaron\" (French pastry)\n\nAll items are distinctly French in origin, representing different types of French cuisine (breads and pastries). The consistent thread appears to be their French cultural connection.\n\nMy Final Rule Guess: The rule is that you can bring any French food item to the game.\n\nI'm confident this captures the pattern demonstrated in the examples, as each item shared the clear characteristic of being a traditional French food."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

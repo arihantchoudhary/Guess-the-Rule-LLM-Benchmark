@@ -1,0 +1,115 @@
+def is_vowel_start(word):
+    return word[0] in 'aeiou'
+pass
+
+generated_fn = is_vowel_start
+def is_even_length(word):
+    return len(word) % 2 == 0
+    pass
+
+generated_fn = is_even_length
+def is_palindrome(word):
+    return word == word[::-1]
+    pass
+
+generated_fn = is_palindrome
+def is_consonant_end(word):
+    return word[-1] not in 'aeiou'
+    pass
+
+generated_fn = is_consonant_end
+def is_contains_digit(word):
+    return any(char.isdigit() for char in word)
+    pass
+
+generated_fn = is_contains_digit
+def is_all_lowercase(word):
+    return word.islower()
+    pass
+
+generated_fn = is_all_lowercase
+def is_plural(word):
+    return word.endswith('s')
+    pass
+
+generated_fn = is_plural
+def is_even_sum_ascii(word):
+    return sum(ord(char) for char in word) % 2 == 0
+    pass
+
+generated_fn = is_even_sum_ascii
+def is_contains_vowel(word):
+    return any(char in 'aeiou' for char in word)
+    pass
+
+generated_fn = is_contains_vowel
+def is_length_greater_than_five(word):
+    return len(word) > 5
+    pass
+
+generated_fn = is_length_greater_than_five
+def is_ends_with_y(word):
+    return word.endswith('y')
+    pass
+
+generated_fn = is_ends_with_y
+def is_reverse_alphabetical(word):
+    return word == ''.join(sorted(word, reverse=True))
+    pass
+
+generated_fn = is_reverse_alphabetical
+def is_starts_with_consonant(word):
+    return word[0] not in 'aeiou'
+    pass
+
+generated_fn = is_starts_with_consonant
+def is_odd_number_of_vowels(word):
+    return sum(1 for char in word if char in 'aeiou') % 2 != 0
+    pass
+
+generated_fn = is_odd_number_of_vowels
+def is_five_or_more_characters(word):
+    return len(word) >= 5
+    pass
+
+generated_fn = is_five_or_more_characters
+def is_alternating_vowels_consonants(word):
+    return all(char in 'aeiou' if i % 2 == 0 else char not in 'aeiou' for i, char in enumerate(word))
+    pass
+
+generated_fn = is_alternating_vowels_consonants
+def is_odd_length(word):
+    return len(word) % 2 != 0
+    pass
+
+generated_fn = is_odd_length
+def is_contains_special_char(word):
+    return any(not char.isalnum() for char in word)
+    pass
+
+generated_fn = is_contains_special_char
+def is_palindrome_length_odd(word):
+    return len(word) % 2 != 0 and word == word[::-1]
+    pass
+
+generated_fn = is_palindrome_length_odd
+def is_contains_double_letters(word):
+    return any(word[i] == word[i+1] for i in range(len(word) - 1))
+    pass
+
+generated_fn = is_contains_double_letters
+def is_six_or_more_vowels(word):
+    return sum(1 for char in word if char in 'aeiou') >= 6
+    pass
+
+generated_fn = is_six_or_more_vowels
+def is_word_has_even_ascii_sum(word):
+    return sum(ord(char) for char in word) % 2 == 0
+    pass
+
+generated_fn = is_word_has_even_ascii_sum
+def is_ends_with_vowel(word):
+    return word[-1] in 'aeiou'
+    pass
+
+generated_fn = is_ends_with_vowel

@@ -34,6 +34,15 @@ def log_request(request: Request, call_next):
 @app.options("/guess-the-rule/game")
 def create_game(payload: CreateGame):
     """Create a new game instance."""
+    # cls = select_new_game(payload.domain)
+    # res = cls(
+    #     domain=payload.domain,
+    #     difficulty=payload.difficulty,
+    #     num_init_examples=payload.num_init_examples,
+    #     game_gen_type=payload.game_gen_type
+    # ).create_game_instance()
+    # logging.info(f"Response: {res}")
+    # return res
     try:
         cls = select_new_game(payload.domain)
         res = cls(
@@ -62,11 +71,18 @@ def validate_guess(game_id: str, include_rule=False):
 @app.get("/guess-the-rule/game/{game_id}/examples")
 def get_more_examples(game_id: str, n_examples: int):
     """Get more examples from the game."""
+    # cls = get_existing_game(game_id)
+    # restored_game = cls.load_game()
+    # # breakpoint()
+    # res = restored_game.get_more_examples(n_examples)
+    # logging.info(f"Response: {res}")
+    # return
     try:
         cls = get_existing_game(game_id)
         restored_game = cls.load_game()
         res = restored_game.get_more_examples(n_examples)
         logging.info(f"Response: {res}")
+        return res
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -78,5 +94,6 @@ def validate_guess(payload: ValidateGuess):
         restored_game = cls.load_game()
         res = restored_game.validate_guess(payload.guess)
         logging.info(f"Response: {res}")
+        return res
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

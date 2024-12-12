@@ -71,7 +71,7 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 #     else:
 #         raise ValueError(f"Unknown platform '{platform}' provided.")
 
-@retry(tries=3, delay=1, exceptions=(anthropic.InternalServerError, openai.InternalServerError))
+@retry(tries=5, delay=1, exceptions=(anthropic.InternalServerError, openai.InternalServerError))
 def get_llm_model_response(platform, model, message_history):
     if platform == 'openai':
         try:
@@ -475,17 +475,24 @@ if __name__ == "__main__":
 
     # ---
 
+    # llm_models = {
+    #     'openai': [
+    #         'gpt-4o',
+    #         'gpt-4o-mini',
+    #     ],
+    #     'anthropic': [
+    #         'claude-3-haiku-20240307',
+    #         'claude-3-5-haiku-latest'
+    #     ]
+    # }
+    
     llm_models = {
-        'openai': [
-            'gpt-4o',
-            'gpt-4o-mini',
-        ],
         'anthropic': [
             'claude-3-haiku-20240307',
             'claude-3-5-haiku-latest'
         ]
     }
-    
+
     # Define other parameters
     valid_difficulties = ['L1', 'L2', 'L3']
     valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']

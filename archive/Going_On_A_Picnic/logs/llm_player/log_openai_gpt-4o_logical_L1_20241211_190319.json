@@ -1,0 +1,41 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'H'.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 27.79,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Hat\" and \"Honey\"."
+        },
+        {
+            "role": "user",
+            "content": "I guess you can also bring \"Ham\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Ham."
+        },
+        {
+            "role": "user",
+            "content": "I guess you can also bring \"House\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring House."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided\u2014\"Hat,\" \"Honey,\" \"Ham,\" and \"House\"\u2014it seems like the rule for the game might be that you can bring items whose names start with the letter \"H.\" Therefore, my best guess for the rule is that you can bring things that begin with the letter \"H.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

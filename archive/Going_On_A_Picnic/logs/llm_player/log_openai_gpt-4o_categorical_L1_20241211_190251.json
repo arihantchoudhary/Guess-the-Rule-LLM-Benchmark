@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are used in a typical school classroom can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 35.61,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"pencil\" and \"notebook\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring a \"textbook\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a textbook."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring a \"journal\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a journal."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"pencil,\" \"notebook,\" \"textbook,\" and \"journal\"), the rule seems to involve items typically associated with writing or note-taking. A reasonable guess for the rule is: \"The items you can bring to the game are related to writing or note-taking.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

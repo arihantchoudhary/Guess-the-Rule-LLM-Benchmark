@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a school classroom can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": true,
+    "duration_seconds": 8.77,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Chalkboard\" and \"textbooks\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"notebooks\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring notebooks."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"whiteboard markers\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring whiteboard markers."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"Chalkboard,\" \"textbooks,\" \"notebooks,\" and \"whiteboard markers\"), a plausible rule could be that you can bring items related to a classroom or teaching environment. These items are typically found in or used in a classroom setting."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically found in a school classroom can be brought to the picnic."
+        }
+    ]
+}

@@ -463,18 +463,11 @@ if __name__ == "__main__":
 
     # ---
 
-    # llm_models = {
-    #     'openai': [
-    #         'gpt-4o',
-    #         'gpt-4o-mini',
-    #     ],
-    #     'anthropic': [
-    #         'claude-3-haiku-20240307',
-    #         'claude-3-5-haiku-latest'
-    #     ]
-    # }
-    
     llm_models = {
+        'openai': [
+            'gpt-4o',
+            'gpt-4o-mini',
+        ],
         'anthropic': [
             'claude-3-haiku-20240307',
             'claude-3-5-haiku-latest'

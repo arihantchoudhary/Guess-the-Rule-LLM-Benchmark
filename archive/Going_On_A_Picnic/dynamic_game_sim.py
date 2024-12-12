@@ -7,8 +7,13 @@ import datetime
 import re
 import time
 from openai import OpenAI
+import openai
 import anthropic
 from retry import retry
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # --------------------------
 # Configuration & Setup
@@ -66,42 +71,49 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 #     else:
 #         raise ValueError(f"Unknown platform '{platform}' provided.")
 
-@retry(tries=3, delay=1, exceptions=(anthropic.InternalServerError,))
+@retry(tries=3, delay=1, exceptions=(anthropic.InternalServerError, openai.InternalServerError))
 def get_llm_model_response(platform, model, message_history):
     if platform == 'openai':
-        response = openai_client.chat.completions.create(
-            model=model,
-            messages=message_history
-        )
-        return response.choices[0].message.content.strip()
-
+        try:
+            response = openai_client.chat.completions.create(
+                model=model,
+                messages=message_history
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            logger.error(f"OpenAI encountered an error: {e}")
+            raise
+        
     elif platform == 'anthropic':
-        system_prompt = ""
-        anthro_messages = []
-        for m in message_history:
-            if m['role'] == 'system' and not system_prompt:
-                system_prompt = m['content']
-            elif m['role'] == 'system' and system_prompt:
-                system_prompt += "\n" + m['content']
-            elif m['role'] == 'user':
-                anthro_messages.append({"role": "user", "content": m['content']})
-            elif m['role'] == 'assistant':
-                anthro_messages.append({"role": "assistant", "content": m['content']})
+        try:
+            system_prompt = ""
+            anthro_messages = []
+            for m in message_history:
+                if m['role'] == 'system' and not system_prompt:
+                    system_prompt = m['content']
+                elif m['role'] == 'system' and system_prompt:
+                    system_prompt += "\n" + m['content']
+                elif m['role'] == 'user':
+                    anthro_messages.append({"role": "user", "content": m['content']})
+                elif m['role'] == 'assistant':
+                    anthro_messages.append({"role": "assistant", "content": m['content']})
 
-        response = anthropic_client.messages.create(
-            model=model,
-            system=system_prompt,
-            messages=anthro_messages,
-            max_tokens=1024
-        )
+            response = anthropic_client.messages.create(
+                model=model,
+                system=system_prompt,
+                messages=anthro_messages,
+                max_tokens=1024
+            )
 
-        assistant_text = ""
-        for block in response.content:
-            if block.type == 'text':
-                assistant_text += block.text
+            assistant_text = ""
+            for block in response.content:
+                if block.type == 'text':
+                    assistant_text += block.text
 
-        return assistant_text.strip()
-
+            return assistant_text.strip()
+        except Exception as e:
+            logger.error(f"Anthropic encountered an error: {e}")
+            raise
     else:
         raise ValueError(f"Unknown platform '{platform}' provided.")
 

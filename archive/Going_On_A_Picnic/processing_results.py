@@ -6,11 +6,11 @@ import csv
 
 # Directory containing your JSON log files
 script_dir = os.path.dirname(os.path.abspath(__file__))
-log_directory = os.path.join(script_dir, 'logs/model_v_itself')
+log_directory = os.path.join(script_dir, 'logs/model_v_gpt4o_Master')
 actual_log_directory = os.path.join(script_dir, 'logs')
 
 # Output CSV file path
-output_csv = os.path.join(actual_log_directory, "model_v_itself_final_results.csv")
+output_csv = os.path.join(actual_log_directory, "model_v_gpt4o_Master_final_results.csv")
 
 # Collect all JSON files in the directory
 json_files = [f for f in os.listdir(log_directory) if f.endswith(".json")]

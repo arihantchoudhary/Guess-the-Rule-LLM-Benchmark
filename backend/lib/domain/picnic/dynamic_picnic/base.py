@@ -333,9 +333,10 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
-    def make_more_examples_system_message(generated_examples):
+    def make_more_examples_system_message(self, generated_examples):
+        generated_examples_str = ', '.join(generated_examples)
         return (
-            f"You can bring: {generated_examples}.\n\n"
+            f"You can bring: {generated_examples_str}.\n\n"
             f"Now given this information, do one of the following:\n"
             f"1. Make a new guess that hasn't been mentioned before.\n"
             f"2. Request more examples.\n"

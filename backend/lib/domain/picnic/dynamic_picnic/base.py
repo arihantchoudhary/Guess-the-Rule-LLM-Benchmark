@@ -195,11 +195,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         }
 
     def make_validate_guess_system_message(self, guess_result):
-        if guess_result is True:
+        if guess_result is True or (type(guess_result) is str and "Yes" in guess_result):
             game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
             return game_master_msg
-        elif "Yes" in guess_result:
-            return guess_result
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
             return game_master_msg

@@ -36,7 +36,7 @@ async def log_request(request: Request, call_next):
 def create_game(payload: CreateGame):
     """Create a new game instance."""
     try:
-        cls = select_new_game(payload.domain)
+        cls = select_new_game(payload.domain, payload.game_gen_type)
         res = cls(
             domain=payload.domain,
             difficulty=payload.difficulty,

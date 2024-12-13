@@ -109,8 +109,6 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'system_message': system_message, # FE IN
         }
 
-    # finished / implemented below
-
     def load_game(self, uuid_str=None):
         assert self.uuid or uuid_str, f'Could not find a uuid to load the game.'
         uuid_to_load = self.uuid or uuid_str

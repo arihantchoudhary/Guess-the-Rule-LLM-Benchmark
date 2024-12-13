@@ -16,7 +16,7 @@ def select_natural_language_game(game_gen_type):
     else:
         return random.choice ([
             DynamicGoingOnAPicnic,
-            LexicalFunctionGame
+            # LexicalFunctionGame
         ])
 
 def select_new_game(domain, game_gen_type):

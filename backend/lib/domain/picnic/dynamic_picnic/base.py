@@ -82,7 +82,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         self.uuid = uuid.uuid4()
         self.game_class_name = self.__class__.__name__
         self.rule_type = random.choice(['attribute_based', 'categorical', 'logical', 'relational', 'semantic'])
-        self.rule = self.load_secret_rule(self.rule_type)
+        self.rule = self.load_secret_rule()
 
         self.judge_model = 'gpt-4o'
 
@@ -377,7 +377,8 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         except Exception as e:
             raise
         
-    def make_init_system_message(generated_examples):
+    def make_init_system_message(self, generated_examples):
+        generated_examples_str = ', '.join(generated_examples)
         return (
             f"Let's play the game 'going on a picnic'.\n\n"
             f"I will give you some examples in each turn and you have to guess the underlying rule of the game. "
@@ -385,7 +386,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             f"Your score will be based on the number of turns taken, number of examples seen, "
             f"and overall time elapsed playing the game. The highest score will be for the fewest turns taken, "
             f"fewest examples seen, and shortest game played.\n\n"
-            f"The game master has given examples of items that fit the rule: generated_examples.\n\n"
+            f"The game master has given examples of items that fit the rule: {generated_examples_str}.\n\n"
             f"Now given this information, do one of the following:\n"
             f"1. Make a new guess that hasn't been mentioned before.\n"
             f"2. Request more examples.\n"
@@ -393,21 +394,21 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             f"What would you like to do?"
         )
     
-    def load_secret_rule(rule_type, self):
+    def load_secret_rule(self):
         """
         Load a secret rule from a JSON file containing a list of rules.
         Filters rules based on rule_type and level_difficulty, then picks a random rule.
         """
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        rules_directory = os.path.join(script_dir, 'rules', rule_type)
-        filename = os.path.join(rules_directory, f"{rule_type}_rules.json")
+        rules_directory = os.path.join(script_dir, 'rules', self.rule_type)
+        filename = os.path.join(rules_directory, f"{self.rule_type}_rules.json")
         with open(filename, 'r') as f:
             rules = json.load(f)
         
         filtered_rules = [rule for rule in rules if rule.get('level') == self.difficulty]
         
         if not filtered_rules:
-            raise ValueError(f"No rules found for rule_type {rule_type} of level {self.difficulty}.")
+            raise ValueError(f"No rules found for rule_type {self.rule_type} of level {self.difficulty}.")
         
         secret_rule = random.choice(filtered_rules)
         return secret_rule['rule']

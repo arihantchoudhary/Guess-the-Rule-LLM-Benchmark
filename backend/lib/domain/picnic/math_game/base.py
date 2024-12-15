@@ -35,7 +35,7 @@ class MathBase:
                 validate_agent_type='gpt-4o-mini'):
         self.uuid = uuid
         self.difficulty = difficulty
-        self.gen_sys_prompt = self.load_prompt('promptstrings/gen_sys_prompt.txt')
+        self.gen_sys_prompt = self.load_prompt('promptstrings/gen_sys_prompt_easy.txt')
         self.validate_sys_prompt = self.load_prompt('promptstrings/validate_sys_prompt.txt')
         L1_examples_math_str = self.load_prompt('promptstrings/L1_examples_math_str.txt')
         L1_examples_math_fns = self.load_prompt('promptstrings/L1_examples_math_fns.txt')

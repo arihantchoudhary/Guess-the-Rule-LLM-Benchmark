@@ -1,8 +1,5 @@
-The sequence increments the current value by 2 for even indices and by 1 for odd indices.
-The sequence halves the current value for indices divisible by 3, increments it by 1 for indices with a remainder of 1 modulo 3, and doubles it plus 1 for indices with a remainder of 2 modulo 3.
-The sequence doubles the current value when the index is even and subtracts 3 from the current value when the index is odd.
-The sequence adds 5 to the current value for indices divisible by 3, subtracts 2 for indices with a remainder of 1 modulo 3, and triples the current value for indices with a remainder of 2 modulo 3.
-Adds 4 to the current value for even indices and multiplies the current value by 3 for odd indices.
-Subtracts 1 from the current value for indices divisible by 3, doubles the current value for indices with a remainder of 1 modulo 3, and adds 6 for indices with a remainder of 2 modulo 3.
-Halves the current value for even indices and adds 7 for odd indices
-Multiplies the current value by 2 and subtracts 1 for indices divisible by 3, adds 10 for indices with a remainder of 1 modulo 3, and divides the current value by 3 for indices with a remainder of 2 modulo 3.
+Multiply the current value by 2 and add 1 at each step.
+Multiply the current value by 3 and subtract 4 at each step.
+Add 10 to the current value and then double the result at each step.
+Halve the current value (rounded down) and add 5 at each step.
+Multiply the current value by 4 and subtract 6 at each step.

@@ -31,7 +31,7 @@ OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 openai = OpenAI(api_key=OPENAI_KEY)
 ANTHROPIC_KEY = os.getenv("CLAUDE_API_KEY")
 claude = Anthropic(api_key=ANTHROPIC_KEY)
-claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-haiku':'claude-3-5-haiku-20241022'}
+claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-haiku':'claude-3-5-haiku-latest'}
 
 
 """Get different responses from different models"""

@@ -1,42 +1,56 @@
 def generate_next(current_value, index):
     if index % 2 == 0:
-        next_value = current_value + index ** 2
+        next_value = current_value + 2
     elif index % 2 == 1:
-        next_value = current_value + int(index / 2)
+        next_value = current_value + 1
 
 def generate_next(current, index):
     if index % 3 == 0:
-        next_value = current_value + index ** 2 + index
+        next_value = int(current_value / 2)
     elif index % 3 == 1:
-        next_value = current_value - index
+        next_value = current_value + 1
     else:
-        next_value = current_value + index
+        next_value = current * 2 + 1
 
 
 def generate_next(current_value, index):
     if index % 2 == 0:
-        next_value = current_value + index ** 3
+        next_value = current_value * 2
     else:
-        next_value = current_value + 2 * index ** 2 - index
+        next_value = current_value - 3
 
 def generate_next(current_value, index):
     if index % 3 == 0:
-        next_value = current_value - index ** 2 + 3 * index
+        next_value = current_value + 5
     elif index % 3 == 1:
-        next_value = current_value + index ** 3
+        next_value = current_value - 2
     else:
-        next_value = current_value + 2 * index + 5
+        next_value = current_value * 3
 
 def generate_next(current_value, index):
     if index % 2 == 0:
-        next_value = current_value + index ** 2 + index ** 3
+        next_value = current_value + 4
     else:
-        next_value = current_value - index + 3 * index ** 2
+        next_value = current_value * 3
 
 def generate_next(current_value, index):
     if index % 3 == 0:
-        next_value = current_value + index ** 2 - index ** 3
+        next_value = current_value - 1
     elif index % 3 == 1:
-        next_value = current_value + 2 * index ** 2 + 5 * index
+        next_value = current_value * 2
     else:
-        next_value = current_value - 3 * index ** 3 + index
+        next_value = current_value + 6
+
+def generate_next(current_value, index):
+    if index % 2 == 0:
+        next_value = current_value // 2
+    else:
+        next_value = current_value + 7
+
+def generate_next(current_value, index):
+    if index % 3 == 0:
+        next_value = current_value * 2 - 1
+    elif index % 3 == 1:
+        next_value = current_value + 10
+    else:
+        next_value = current_value // 3

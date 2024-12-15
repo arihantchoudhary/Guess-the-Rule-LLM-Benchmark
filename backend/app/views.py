@@ -41,6 +41,7 @@ def create_game(payload: CreateGame):
     """Create a new game instance."""
     try:
         cls = select_new_game(payload.domain, payload.game_gen_type)
+        print(cls)
         res = cls(
             domain=payload.domain,
             difficulty=payload.difficulty,

@@ -5,6 +5,7 @@ import json
 from lib.domain.base import validate_domain, validate_game_gen_type
 from lib.domain.picnic.static_picnic.base import StaticGoingOnAPicnic
 from lib.domain.picnic.function_picnic.base import LexicalFunctionGame
+from lib.domain.picnic.math_game.base import MathGuessTheRuleGame
 from lib.domain.picnic.dynamic_picnic.base import DynamicGoingOnAPicnic
 from lib.domain.common import GAMES_SAVE_DIR
 
@@ -19,12 +20,22 @@ def select_natural_language_game(game_gen_type):
             # LexicalFunctionGame
         ])
 
+def select_math_game(game_gen_type):
+    if game_gen_type == 'static':
+        pass
+    else:
+        return random.choice ([
+            MathGuessTheRuleGame
+        ])
+
 def select_new_game(domain, game_gen_type):
     validate_domain(domain)
     validate_game_gen_type(game_gen_type)
 
     if domain == 'natural_language':
         return select_natural_language_game(game_gen_type)
+    if domain == 'math':
+        return select_math_game(game_gen_type)
 
 
 def get_existing_game(uuid):

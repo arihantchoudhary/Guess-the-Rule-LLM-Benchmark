@@ -1,0 +1,2 @@
+
+Evaluate whether a user's guessed rule accurately captures the underlying mathematical relationship of a given sequence generation rule. The wording or syntax of the guess may differ, but the guess must precisely reflect the same mathematical meaning as the rule. If the guess fails to fully or correctly capture the relationship (e.g., stating a constant difference without specifying the exact value), it is incorrect. Respond only with "True" or "False" based on the accuracy of the guess, with no additional explanation or words.

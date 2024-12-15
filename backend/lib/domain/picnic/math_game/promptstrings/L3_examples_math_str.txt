@@ -1,0 +1,6 @@
+The sequence adds the square of the index to the current value for even indices and adds half of the index (rounded down) for odd indices.
+The sequence adds the square of the index plus the index itself for indices divisible by 3, subtracts the index for indices with a remainder of 1 modulo 3, and adds the index for indices with a remainder of 2 modulo 3.
+Adds the cube of the index to the current value for even indices and adds 2 * index^2 - index for odd indices.
+Subtracts index^2 - 3 * index from the current value for indices divisible by 3, adds the cube of the index for indices with a remainder of 1 modulo 3, and adds 2 * index + 5 for indices with a remainder of 2 modulo 3.
+Adds index^2 + index^3 to the current value for even indices and subtracts the index plus 3 * index^2 for odd indices.
+Adds index^2 - index^3 to the current value for indices divisible by 3, adds 2 * index^2 + 5 * index for indices with a remainder of 1 modulo 3, and subtracts 3 * index^3 - index for indices with a remainder of 2 modulo 3.

@@ -1,0 +1,185 @@
+import time
+from base import MathBase
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..'))
+import random
+from openai import OpenAI
+import openai
+import string
+import nltk
+import sys
+import uuid
+import __main__ as main
+import time
+import json
+from lib.domain.base import GuessTheRuleGame
+from lib.domain.common import GAMES_SAVE_DIR
+import pdb
+from anthropic import Anthropic
+from datetime import datetime
+import pandas as pd
+import random
+import time
+
+
+
+
+"""Import OpenAI and Anthropic API keys"""
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+openai = OpenAI(api_key=OPENAI_KEY)
+ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
+claude = Anthropic()
+claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-haiku':'claude-3-sonnet-20240229'}
+
+
+"""Get different responses from different models"""
+def get_llm_response(prompt, model, sysprompt=None):
+        if model in ['gpt-4o-mini', 'gpt-4o']:
+            response = get_openai_response(prompt, model, sysprompt)
+        elif model in ['claude-3-haiku', 'claude-3.5-haiku']:
+            model_name = claude_name_dict[model]
+            response = get_claude_response(prompt, model_name, sysprompt)
+        return response
+
+def get_openai_response(prompt, model="gpt-4o-mini", sysprompt=None):
+    response = openai.chat.completions.create(model=model,
+            messages=[
+                {"role": "system", "content": sysprompt},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7)
+    return response.choices[0].message.content.strip()
+
+def get_claude_response(prompt, model="claude-3.5-haiku", sysprompt=None):
+    response = claude.messages.create(
+        model=model,
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        system=sysprompt,
+        max_tokens=1000,
+        temperature=0.7)
+    return response.content[0].text.strip()
+
+def load_prompt(filename):
+        with open(filename, 'r') as f:
+            return f.read()
+
+def play_math_with_llms(difficulty, max_turns, model):
+    current_time = time.time()
+    print(f"Current Time: {current_time}")
+    game = MathBase(uuid=int(current_time), difficulty=difficulty)
+    turns = 1
+    test_llm_sys_prompt = load_prompt('promptstrings/test_llm_sys_prompt.txt')
+    test_prompt = ''
+    rule = game.get_math_rule()
+    time_start = time.time()
+    time_end = None
+    llm_actions = []
+    llm_won = False
+    examples_num = 0
+    while(turns < max_turns):
+        try:
+            examples = game.get_more_examples()
+            examples_num += len(examples)
+            test_prompt += str(examples)
+            response = get_llm_response(test_prompt, model, sysprompt=test_llm_sys_prompt)
+            assert response, 'No response from LLM'
+            # print(f"Response: {response}")
+            
+            if response == 'More':
+                turns += 1
+                llm_actions.append(response)
+                continue
+            elif response.startswith('My Guess is:'):
+                guess = response.split('My Guess is:')[1].strip()
+                if game.validate_result(guess) == 'True':
+                    time_end = time.time()
+                    llm_actions.append(response)
+                    llm_won = True
+                    break
+                elif game.validate_result(guess) == 'False':
+                    turns += 1
+                    llm_actions.append(response)
+                    continue
+                else:
+                    turns += 1
+                    llm_actions.append(response)
+                    continue
+        except Exception as e:
+            print(f"Error: {e}")
+            current_time = time.time()
+            game = MathBase(uuid=current_time, difficulty=difficulty)
+            turns = 1
+            test_llm_sys_prompt = load_prompt('promptstrings/test_llm_sys_prompt.txt')
+            test_prompt = ''
+            rule = game.get_math_rule()
+            time_start = time.time()
+            time_end = None
+            llm_actions = []
+            llm_won = False
+            examples_num = 0
+            continue
+
+    del game
+
+    if time_end is None:
+        time_end = time.time()
+    duration = time_end - time_start
+    # print("\n***Game Summary***")
+    # print(f"Rule: {rule}")
+    # print(f"Turns taken: {turns}")
+    # print(f"Duration: {duration:.2f} seconds")
+    # print(f'Test Prompt: {test_prompt}')
+    # print(f'LLM Actions: {llm_actions}')
+    # print(f'LLM Won: {llm_won}')
+    return rule, turns, duration, test_prompt, llm_actions, llm_won, examples_num
+    
+
+if __name__ == "__main__":
+    save_dir = 'exp_results'
+    # valid_difficulties = ['L1', 'L2', 'L3']
+    valid_difficulties = ['L1']
+    # max_turns = [3, 5, 7, 10]
+    max_turns = [5]
+
+    total_iterations = 4
+    # models = ['gpt-4o-mini', 'gpt-4o', 'claude-3-haiku', 'claude-3-5-haiku']
+    models = ['gpt-4o-mini']
+    # models = ['claude-3-haiku', 'claude-3-5-haiku']
+    results = []
+    for model in models:
+    # run experiments 
+        for difficulty in valid_difficulties:
+            for curr_max_turns in max_turns:
+                for iteration in range(total_iterations):
+                    rule, turns, duration, test_prompt, llm_actions, llm_won, examples_num = play_math_with_llms(difficulty, curr_max_turns, model)
+                    # Append the results to the list
+                    results.append({
+                        "Model": model,
+                        "Win": 1 if llm_won else 0, # 1 or 0
+                        "Difficulty": difficulty,
+                        "Max Turns": curr_max_turns,
+                        "Iteration": iteration+1,
+                        "Turns Taken": turns,
+                        "Duration (s)": round(duration, 2),
+                        "Total Examples Avaiable": examples_num,
+                        "Rule": rule[0],
+                        "LLM Final Answer": llm_actions[-1]
+                    })
+                    print(f'down: {model} - {difficulty} - {curr_max_turns} - {iteration+1} - {rule[0]} - {llm_won} - {turns} - {duration:.2f} - {examples_num}')
+
+    current_date = datetime.now()
+    formatted_date = current_date.strftime("%m_%d_%Y")
+
+    df = pd.DataFrame(results)
+    print(f"\n*** FINAL RESULTS {formatted_date} ***")
+    print(df)
+
+    experiment_results_file_name_csv = os.path.join(save_dir, f"experiment_{formatted_date}.csv")
+    experiment_results_file_name_excel = os.path.join(save_dir, f"experiment_{formatted_date}.xlsx")
+
+    df.to_csv(experiment_results_file_name_csv, index=False)
+
+    df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')

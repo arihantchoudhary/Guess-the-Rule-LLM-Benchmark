@@ -1,6 +1,7 @@
 import os
 import random
 from openai import OpenAI
+import openai
 import string
 import nltk
 import sys

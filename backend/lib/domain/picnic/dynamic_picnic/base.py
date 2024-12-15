@@ -277,11 +277,14 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             f"The player's example guess is: \"{example_guess}\".\n\n"
             "Determine if the player's example satisfies the predefined rule. "
             "Respond with only one of the following formats exactly:\n\n"
-            "1. Correct! You can bring <say the player's example guess>\n"
-            "2. Incorrect. You cannot bring <say the player's example guess>\n\n"
+            "   Correct! You can bring <player's example guess>\n"
+            "   Incorrect. You cannot bring <player's example guess>\n\n"
             "Do not provide any additional explanation or commentary.\n\n"
+            "For example:"
+            "   Player example guess: Can I bring a potato?"
+            "   Example final answer: Incorrect. You cannot bring a potato.\n\n"
             "Format:\n"
-            "[your final answer: 1 or 2 with the corresponding message]"
+            "[your final answer: \"Correct!\" or \"Incorrect.\" and the corresponding message]"
         )
 
         messages = [
@@ -293,7 +296,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         for attempt in range(max_retries):
             response = self.get_llm_model_response(messages).strip()
             
-            if "1." in response or "2." in response:
+            if "correct" in response.lower() or "incorrect" in response.lower():
                 return response
             else:
                 logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")

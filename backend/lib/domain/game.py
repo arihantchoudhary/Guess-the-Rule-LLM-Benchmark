@@ -49,3 +49,6 @@ def get_existing_game(uuid):
 
     if game_class_name == 'DynamicGoingOnAPicnic':
         return DynamicGoingOnAPicnic(uuid=uuid)
+    
+    if game_class_name == 'MathGuessTheRuleGame':
+        return MathGuessTheRuleGame(uuid=uuid)

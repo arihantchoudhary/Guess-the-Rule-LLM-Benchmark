@@ -7,7 +7,13 @@ import datetime
 import re
 import time
 from openai import OpenAI
+import openai
 import anthropic
+from retry import retry
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # --------------------------
 # Configuration & Setup
@@ -29,41 +35,85 @@ anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 # --------------------------
 # Helper Functions
 # --------------------------
+# def get_llm_model_response(platform, model, message_history):
+#     """
+#     A modular function to get responses from different LLM platforms.
+#     Properly formats prompts for Anthropic models.
+#     """
+#     if platform == 'openai':
+#         response = openai_client.chat.completions.create(
+#             model=model,
+#             messages=message_history
+#         )
+#         return response.choices[0].message.content.strip()
 
+#     elif platform == 'anthropic':
+#         # Use the Messages API rather than the Completions API
+#         system_prompt = ''
+#         user_prompts = []
+#         for m in message_history:
+#             if not system_prompt and m['role'] == 'system':
+#                 system_prompt += m['content']
+#             elif m['role'] == 'user':
+#                 user_prompts.append(m)
+#             # If there are assistant messages, you may need to include them as well,
+
+#         response = anthropic_client.messages.create(
+#             max_tokens=1024,
+#             system=system_prompt,
+#             messages=user_prompts,
+#             model=model,
+#         )
+#         # Adjust the way we access the response depending on the actual structure.
+#         # Your friend’s code suggests this format:
+#         return response.content[0].text.strip().lower()
+
+#     else:
+#         raise ValueError(f"Unknown platform '{platform}' provided.")
+
+@retry(tries=5, delay=1, exceptions=(anthropic.InternalServerError, openai.InternalServerError))
 def get_llm_model_response(platform, model, message_history):
-    """
-    A modular function to get responses from different LLM platforms.
-
-    Parameters:
-    - platform: str, either 'openai' or 'anthropic'
-    - model: str, the model name to use
-    - message_history: list of dicts, the conversation history
-
-    Returns:
-    - str, the LLM's response
-    """
     if platform == 'openai':
-        response = openai_client.chat.completions.create(
-            model=model,
-            messages=message_history
-        )
-        return response.choices[0].message.content.strip()
+        try:
+            response = openai_client.chat.completions.create(
+                model=model,
+                messages=message_history
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            logger.error(f"OpenAI encountered an error: {e}")
+            raise
+        
     elif platform == 'anthropic':
-        system_prompt = ''
-        user_prompts = []
-        for m in message_history:
-            if m['role'] == 'system':
-                system_prompt += m['content'] + '\n'
-            elif m['role'] == 'user':
-                user_prompts.append(m['content'])
+        try:
+            system_prompt = ""
+            anthro_messages = []
+            for m in message_history:
+                if m['role'] == 'system' and not system_prompt:
+                    system_prompt = m['content']
+                elif m['role'] == 'system' and system_prompt:
+                    system_prompt += "\n" + m['content']
+                elif m['role'] == 'user':
+                    anthro_messages.append({"role": "user", "content": m['content']})
+                elif m['role'] == 'assistant':
+                    anthro_messages.append({"role": "assistant", "content": m['content']})
 
-        response = anthropic_client.completions.create(
-            model=model,
-            prompt=system_prompt + "\n".join(user_prompts),
-            stop_sequences=["\n"],
-            max_tokens_to_sample=1024
-        )
-        return response.completion.strip()
+            response = anthropic_client.messages.create(
+                model=model,
+                system=system_prompt,
+                messages=anthro_messages,
+                max_tokens=1024
+            )
+
+            assistant_text = ""
+            for block in response.content:
+                if block.type == 'text':
+                    assistant_text += block.text
+
+            return assistant_text.strip()
+        except Exception as e:
+            logger.error(f"Anthropic encountered an error: {e}")
+            raise
     else:
         raise ValueError(f"Unknown platform '{platform}' provided.")
 
@@ -122,7 +172,7 @@ def game_master_response(platform, model, player_message, conversation, provided
     conversation.append({"role": "user", "content": player_message})
 
     # Get the game master's response using the modular LLM function
-    reply = get_llm_model_response(platform, model, conversation)
+    reply = get_llm_model_response('openai', 'gpt-4o', conversation)
 
     # Append the game master's reply to the conversation
     conversation.append({"role": "assistant", "content": reply})
@@ -341,7 +391,13 @@ Be strategic and avoid repeating previous guesses.
 """
     
         # Player (LLM) responds
-        player_message = get_llm_model_response(platform, model, [{"role": "user", "content": player_prompt}]).strip()
+        try:
+            player_message = get_llm_model_response(platform, model, [{"role": "user", "content": player_prompt}]).strip()
+        except anthropic.InternalServerError as e:
+            # If after 3 retries it still fails, handle the error here without stopping the loop
+            print(f"An error occurred with model {model} on platform {platform}: {e}")
+            # You can choose to continue to the next iteration or do something else
+            player_message = "No valid response due to repeated internal server errors."
     
         # Add player's message to visible history
         player_visible_history.append({"role": "user", "content": player_message})
@@ -418,20 +474,27 @@ if __name__ == "__main__":
     # max_turns = 10
 
     # ---
+
+    # llm_models = {
+    #     'openai': [
+    #         'gpt-4o',
+    #         'gpt-4o-mini',
+    #     ],
+    #     'anthropic': [
+    #         'claude-3-haiku-20240307',
+    #         'claude-3-5-haiku-latest'
+    #     ]
+    # }
     llm_models = {
-        'openai': [
-            'gpt-4o',
-            'gpt-4o-mini',
-        ],  # OpenAI models
         'anthropic': [
-            'claude-3-haiku',
-            'claude-3.5-haiku'
-        ]  # Anthropic models
+            'claude-3-5-haiku-latest'
+        ]
     }
-    
+
     # Define other parameters
     valid_difficulties = ['L1', 'L2', 'L3']
     valid_rule_types = ['attribute_based', 'categorical', 'logical', 'relational', 'semantic']
+
     max_turns_list = [1, 3, 5, 7, 10, 15]
     
     # Define the output directory

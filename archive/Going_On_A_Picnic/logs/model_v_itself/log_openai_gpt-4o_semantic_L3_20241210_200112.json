@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with famous music compositions or instruments can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 5.68,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Beethoven symphony sheet music\" and \"Stradivarius violin\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master if I can bring \"Bach concerto manuscript\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Bach concerto manuscript.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master if I can bring \"Mozart opera score\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Mozart opera score.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the approval of items brought to the game, the secret rule seems to involve items related to classical music that involve written music or historical musical instruments. Specifically, these items are either famous works or manuscripts by renowned composers or prestigious musical instruments. Therefore, the rule might be: \"You can bring items that are either original or historic compositions by renowned classical composers or historically significant musical instruments.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

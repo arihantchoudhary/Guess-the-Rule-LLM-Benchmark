@@ -7,6 +7,8 @@ python-dotenv==1.0.0       # To load environment variables from .env files
 uvicorn==0.23.2            # ASGI server for running FastAPI apps
 sqlalchemy==2.0.20         # SQLAlchemy ORM for database interactions
 nltk==3.8.1                # Natural Language Toolkit
+anthropic==0.3.0           # Anthropic API client
+retry==0.9.2               # Retry library for robust error handling
 
 # Testing Dependencies
 pytest==7.3.1              # Testing framework

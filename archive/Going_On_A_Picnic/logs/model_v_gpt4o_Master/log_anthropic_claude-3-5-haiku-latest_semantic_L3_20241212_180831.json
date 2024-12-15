@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with influential social media trends or viral challenges can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 9.31,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"TikTok dance prop\" and \"ALS Ice Bucket Challenge bucket\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the single example provided, I don't have enough information to confidently deduce the specific rule. The examples seem quite different (a TikTok dance prop and an ALS Ice Bucket Challenge bucket), which makes it challenging to identify a clear pattern.\n\nHowever, I notice both are related to viral internet/social media trends or challenges. So my best initial guess might be: \"An item associated with a viral internet/social media phenomenon or challenge\"\n\nBut I would really need more context or additional examples to feel more certain about the rule. Could you provide more information or examples to help me narrow down my understanding?"
+        },
+        {
+            "role": "assistant",
+            "content": "Another example of an item you can bring is: \"Mannequin Challenge participant outfit.\""
+        }
+    ]
+}

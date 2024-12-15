@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a kitchen can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": true,
+    "duration_seconds": 27.08,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"knife\" and \"spatula\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a guess based on the existing examples. I think a \"whisk\" might fit the rule. Can I bring a whisk to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a whisk."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the items provided and the previous confirmation. Can I bring a \"potato peeler\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a potato peeler."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"knife\" and \"spatula\") and the confirmations for \"whisk\" and \"potato peeler,\" it seems that the rule pertains to kitchen utensils or tools that are commonly used for food preparation or cooking. Therefore, my best guess about the secret rule is that any item that is a kitchen tool or utensil is acceptable."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically found in a kitchen can be brought to the picnic."
+        }
+    ]
+}

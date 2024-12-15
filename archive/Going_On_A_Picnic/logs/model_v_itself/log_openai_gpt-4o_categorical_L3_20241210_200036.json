@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are mentioned or referenced in the lyrics of a Billboard No.1 hit from the 1980s can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 5.47,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Flashlight\" and \"red dress\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring a \"blue jacket\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"blue jacket.\""
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring a \"green lantern\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"green lantern.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master (\"Flashlight\" and \"red dress\"), and considering the rejection of \"blue jacket\" and \"green lantern,\" it seems that the game's rule might be based on the color red, as both \u201cFlashlight\u201d and \u201cred dress\u201d might share a common attribute related to light or the specific color (red in this case).\n\nMy best guess is that the secret rule is: \"You can only bring items that emit light or contain the color red.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

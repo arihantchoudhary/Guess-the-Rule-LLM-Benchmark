@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that have their name included in a UNESCO World Heritage Site can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 9.57,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Great Wall of China\" and \"Colosseum\"."
+        },
+        {
+            "role": "user",
+            "content": "I will ask the game master for more examples since I'm still unsure about the rule. \n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Sure! You can also bring \"Taj Mahal\" and \"Statue of Liberty.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Is 'Eiffel Tower' an item that can be brought to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Eiffel Tower.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master \u2014 \"Great Wall of China,\" \"Colosseum,\" \"Taj Mahal,\" \"Statue of Liberty,\" and \"Eiffel Tower\" \u2014 it seems that the secret rule is that the items you can bring are all famous landmarks or historical monuments. \n\nTherefore, my guess is that the rule is: **The items you can bring are famous landmarks or monuments.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

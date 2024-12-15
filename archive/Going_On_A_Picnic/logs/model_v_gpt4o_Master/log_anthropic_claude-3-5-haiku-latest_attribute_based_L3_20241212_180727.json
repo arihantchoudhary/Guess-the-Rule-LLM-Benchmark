@@ -1,0 +1,25 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that can be formed by the chemical symbols from the Periodic Table of Elements can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 6.46,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"HeN\" and \"CaT\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the very limited information provided, I see two example inputs: \"HeN\" and \"CaT\".\n\nMy initial observation is that these inputs seem to have a mixed capitalization pattern. Specifically:\n- First letter is uppercase\n- Middle letter is lowercase\n- Last letter is uppercase\n\nSo my current hypothesis for the rule would be: Words/inputs must follow a capitalization pattern of: First letter uppercase, middle letter lowercase, last letter uppercase.\n\nHowever, with only two examples, I cannot be completely certain of this rule. More examples would help confirm or refine the hypothesis."
+        },
+        {
+            "role": "assistant",
+            "content": "Here's another example: \"CoN\"."
+        }
+    ]
+}

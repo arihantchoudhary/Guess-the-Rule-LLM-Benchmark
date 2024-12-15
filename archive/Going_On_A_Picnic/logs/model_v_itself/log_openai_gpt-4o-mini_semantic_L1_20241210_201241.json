@@ -1,0 +1,57 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 10.07,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"beach towel\" and \"sunscreen\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring a \"flip-flop\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring flip-flops."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring a \"beach umbrella\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach umbrella."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring a \"beach ball\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach ball."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring a \"snorkel\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a snorkel."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided and the successful guesses, my best guess for the secret rule is that the items must be associated with activities typically done at the beach or for beach-related fun."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

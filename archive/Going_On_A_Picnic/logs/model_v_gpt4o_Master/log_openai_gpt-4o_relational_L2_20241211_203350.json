@@ -1,0 +1,25 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L2",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both part of a complete breakfast meal, with one being a food item and the other being a drink typically consumed during breakfast.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 18.56,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"pancakes\" and \"orange juice  \nbacon\" and \"coffee\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master\u2014\"pancakes\" and \"orange juice\" and \"bacon\" and \"coffee\"\u2014the potential secret rule seems to be that the items you can bring are common breakfast foods or drinks. This is my best guess for the rule."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with famous children's animated movies can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 11.32,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Magic carpet\" and \"Talking snowman\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the limited information provided, I'm going to make a guess about the rule:\n\nI believe the rule might be: \"Things that are magical or fantastical that typically do not exist in reality\"\n\nMy reasoning:\n- A magic carpet is not a normal carpet, but a magical object that can fly\n- A talking snowman is not a normal snowman, but a magical creature that can speak\n- Both examples involve supernatural or impossible elements\n- Both transform ordinary objects/beings into something extraordinary through magical properties\n\nThis feels like my most confident interpretation given the single example pair, though I acknowledge more context would help refine the rule with greater certainty."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again.\n\nWould you like to bring an item to the picnic? Feel free to suggest something, and I'll let you know if it can be brought."
+        }
+    ]
+}

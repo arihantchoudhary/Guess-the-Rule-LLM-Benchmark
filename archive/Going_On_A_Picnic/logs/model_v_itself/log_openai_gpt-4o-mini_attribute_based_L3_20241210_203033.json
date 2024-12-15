@@ -1,0 +1,97 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that have been depicted in a painting housed in the Louvre can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 20.74,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Mona Lisa\" and \"Venus de Milo\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"The Thinker\" by Auguste Rodin?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"The Thinker\"."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \"The Starry Night\" by Vincent van Gogh?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"The Starry Night.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to clarify the rule. Could you please provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"Liberty Leading the People\" by Eug\u00e8ne Delacroix."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"The Birth of Venus\" by Sandro Botticelli?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"The Birth of Venus.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to clarify the rule. Could you please provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"The Coronation of Napoleon\" by Jacques-Louis David."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"The Last Supper\" by Leonardo da Vinci?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"The Last Supper.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to clarify the rule. Could you please provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"The Lacemaker\" by Johannes Vermeer."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"The Girl with a Pearl Earring\" by Johannes Vermeer?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"The Girl with a Pearl Earring.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to clarify the rule. Could you please provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"The Wedding at Cana\" by Paolo Veronese."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples and the responses from the game master, I would guess that the rule pertains to famous paintings that are known for being in or related to a specific artistic movement, particularly those linked to historical or significant events. \n\nSpecifically, it seems the rule only allows a selection of famous paintings from the Western art canon, particularly those that depict historical, mythological, or religious subjects in a manner associated with renowned artists. The paintings mentioned (like \"Mona Lisa,\" \"Liberty Leading the People,\" and \"The Coronation of Napoleon\") fit this description, while those excluded (like \"The Thinker\" or \"The Girl with a Pearl Earring\") represent either sculptures or different themes that do not align with the proposed focus.\n\nTherefore, my guess for the rule is: \"The items allowed are famous Western paintings representing significant historical, mythological, or religious themes from renowned artists of the European tradition, while sculptures or non-Western representations are not allowed.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

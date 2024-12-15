@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are mentioned in a Dr. Martin Luther King Jr. speech can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 5.83,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"dream\" and \"justice\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll try to guess an item that can be brought to the game. Can I bring \"freedom\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"freedom\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"peace\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"peace\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"dream,\" \"justice,\" \"freedom,\" and \"peace,\" it seems the rule might be related to abstract concepts or ideals. All of these words are intangible, positive concepts often associated with values or virtues. Therefore, my best guess for the rule is: \"You can bring abstract nouns that represent positive human values or virtues.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'J'.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 2.45,
+    "platform": "anthropic",
+    "model": "claude-3-haiku-20240307",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"jam\" and \"jelly.\"."
+        },
+        {
+            "role": "user",
+            "content": "okay, based on the examples provided by the game master - \"jam\" and \"jelly\" - i will make my best guess about the secret rule.\n\ngiven that both examples start with the letter \"j\", my guess is that the secret rule is:\n\nthe items must start with the letter \"j\"."
+        },
+        {
+            "role": "assistant",
+            "content": "incorrect. please try again."
+        }
+    ]
+}

@@ -10,3 +10,4 @@ backend.egg-info
 .history
 
 **/exp_results/
+*.csv

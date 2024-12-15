@@ -159,15 +159,15 @@ class StaticGoingOnAPicnic(GuessTheRuleGame):
 
         self.save_game()  # Save the game after creation
         return {
-            'game_uuid': str(self.uuid),
-            'domain': self.domain,
-            'difficulty': self.difficulty,
-            'game_gen_type': self.game_gen_type,
-            'start_time': time.ctime(int(self.start_time)),
-            'turns_taken': self.turns,
-            'status': self.status,
-            'total_examples_available': self.total_examples_available,
-            'system_message': self.make_init_system_message(positives, negatives),
+            'game_uuid': str(self.uuid), # FE
+            'domain': self.domain, # FE
+            'difficulty': self.difficulty, # FE
+            'game_gen_type': self.game_gen_type, # FE
+            'start_time': time.ctime(int(self.start_time)), # FE
+            'turns_taken': self.turns, # FE
+            'status': self.status, # FE
+            'total_examples_available': self.total_examples_available, 
+            'system_message': self.make_init_system_message(positives, negatives), # FE, need to return the message that gets displayed to the user
             'positive_examples': positives,
             'negative_examples': negatives
         }

@@ -1,0 +1,73 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'F'.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 38.75,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Fruit\" and \"Frisbee\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples to clarify the rule since \"Fruit\" and \"Frisbee\" don't seem to have an immediately apparent connection. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Sure! You can also bring \"Feather\" and \"Flute\"."
+        },
+        {
+            "role": "user",
+            "content": "I will ask the game master for additional examples since the connection between the items is still unclear to me.\n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Of course! You can bring \"Fork\" and \"Flag\"."
+        },
+        {
+            "role": "user",
+            "content": "I will ask the game master for more examples since the connection between the items is still unclear to me.\n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Certainly! You can bring \"Fan\" and \"Fence\"."
+        },
+        {
+            "role": "user",
+            "content": "Given the items provided so far\u2014\"Fruit,\" \"Frisbee,\" \"Feather,\" \"Flute,\" \"Fork,\" \"Flag,\" \"Fan,\" and \"Fence\"\u2014it seems they may share a common starting letter, \"F.\" \n\nTo validate this hypothesis, I\u2019ll make a strategic guess.\n\n\"Is 'Fish' something I can bring to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Fish\"."
+        },
+        {
+            "role": "user",
+            "content": "Given the current understanding that the items all start with the letter \"F,\" I'll make a new guess that hasn't been mentioned yet.\n\n\"Is 'Football' something I can bring to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Football\"."
+        },
+        {
+            "role": "user",
+            "content": "Since it seems clear that the rule relates to items starting with the letter \"F,\" I'll try a new guess that fits this pattern.\n\n\"Is 'Flower' something I can bring to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Flower\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master and the consistent pattern established throughout our conversation, my guess is that the secret rule is: \"Items must start with the letter 'F'.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

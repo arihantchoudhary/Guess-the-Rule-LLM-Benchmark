@@ -1,0 +1,25 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L2",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun and ends with the letter 'd'.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 4.25,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Bed\" and \"Shield\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples \"Bed\" and \"Shield,\" a possible rule could be that the items you can bring must contain the letter 'e.' Both \"Bed\" and \"Shield\" have the letter 'e' in them. Given the constraints of typical rules in these types of games and the limited data, this seems like a plausible rule."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

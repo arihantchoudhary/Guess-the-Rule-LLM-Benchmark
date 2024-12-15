@@ -1,0 +1,25 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L2",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both found in the same room of a typical house, with one being a piece of furniture and the other being an accessory or decor item typically found in that room.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 23.13,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sofa\" and \"throw pillow  \ndining table\" and \"centerpiece\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master, it appears that the rule involves items commonly found in a living space or dining area, specifically those that are used for comfort or decoration. \n\nThe first example, \"sofa\" and \"throw pillow,\" includes items found in a living room, while the second example, \"dining table\" and \"centerpiece,\" pertains to items in a dining area. \n\nThus, my best guess about the rule is: the items must be furniture or decor items typically found in residential living spaces, with a focus on those that enhance comfort or aesthetics in a home setting."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

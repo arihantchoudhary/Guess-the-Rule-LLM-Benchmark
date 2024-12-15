@@ -1,0 +1,25 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'Z'.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": true,
+    "duration_seconds": 7.4,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Zebra\" and \"Zucchini\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the limited information provided, my initial guess is that the secret rule involves words that start with the letter \"Z\". Both given examples - \"Zebra\" and \"Zucchini\" - begin with the same letter, which suggests a rule related to words starting with Z.\n\nHowever, I want to acknowledge that with only two examples, this is a tentative guess. To be fully confident, I would typically want more context or additional examples to validate the rule."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'Z'.\n\nWould you like to try bringing an item to the picnic?"
+        }
+    ]
+}

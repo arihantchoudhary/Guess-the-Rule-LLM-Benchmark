@@ -1,0 +1,73 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with famous architectural movements or styles can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": true,
+    "duration_seconds": 13.61,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Gothic cathedral model\" and \"Bauhaus-style picnic blanket\"."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019ll try to guess another item to see if it fits the rule. What about a \"Baroque-style chandelier\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Baroque-style chandelier.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. How about a \"Renaissance sculpture\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Renaissance sculpture.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess to see if it fits the rule. How about a \"Modernist coffee table\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Modernist coffee table.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess to see if it fits the rule. How about a \"Victorian-style armchair\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Victorian-style armchair.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess to see if it fits the rule. How about a \"Neoclassical column\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Neoclassical column.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess to try and see if it fits the rule. How about a \"Art Deco mirror\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring an \"Art Deco mirror.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided and the successful guesses, the secret rule appears to be that the items must be associated with distinct architectural or design styles throughout history. Each item represents a specific style, ranging from Gothic and Baroque to Bauhaus and Art Deco.\n\nTherefore, my guess for the rule is: The items must be objects that are designed in specific historical architectural or design styles."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically associated with famous architectural movements or styles can be brought to the picnic."
+        }
+    ]
+}

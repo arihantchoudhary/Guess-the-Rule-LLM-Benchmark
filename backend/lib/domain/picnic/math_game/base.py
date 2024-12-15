@@ -34,6 +34,8 @@ class MathBase:
                 gen_agent_type='gpt-4o-mini',
                 validate_agent_type='gpt-4o-mini'):
         self.uuid = uuid
+        self.domain = 'math'
+        self.game_gen_type = 'dynamic'
         self.difficulty = difficulty
         self.gen_sys_prompt = self.load_prompt('promptstrings/gen_sys_prompt_easy.txt')
         self.validate_sys_prompt = self.load_prompt('promptstrings/validate_sys_prompt.txt')
@@ -91,7 +93,9 @@ class MathBase:
     
     """ Load tools"""
     def load_prompt(self, filename):
-        with open(filename, 'r') as f:
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        filepath = os.path.join(current_dir, filename)
+        with open(filepath, 'r') as f:
             return f.read()
         
     """" Get rule details"""
@@ -158,79 +162,208 @@ class MathBase:
         validate_result = self.get_llm_response(user_prompt, self.validate_agent_type, self.validate_sys_prompt)
         return validate_result
     
-
-    """ Save Game"""
-    def save_game(self, GAMES_SAVE_DIR='./saved_games'):
-        os.makedirs(GAMES_SAVE_DIR, exist_ok=True)
-        print(f"Saved game data to {GAMES_SAVE_DIR}")
-        game_data = {
-            'uuid': self.uuid,
-            'difficulty': self.difficulty,
-            'rule_str': self.rule_str,
-            'rule_code': self.rule_code
-        }
-        game_file = os.path.join(GAMES_SAVE_DIR, f'{self.uuid}.json')
-        with open(game_file, 'w') as f:
-            json.dump(game_data, f)
-        return game_file
     
 
 
 class MathGuessTheRuleGame(GuessTheRuleGame):  
-
-    def load_game(self, uuid, GAMES_SAVE_DIR='./saved_games'):
-        game_file = os.path.join(GAMES_SAVE_DIR, f'{uuid}.json')
-        if not os.path.exists(game_file):
-            raise FileNotFoundError(f"No game file found for UUID {uuid} at {game_file}")
-
-        with open(game_file, 'r') as f:
-            game_data = json.load(f)
-
-        return MathBase(
-            uuid=game_data['uuid'],
-            difficulty=game_data['difficulty'],
-            rule_str=game_data['rule_str'],
-            rule_code=game_data['rule_code']
-        )
+    def __init__(self, uuid=None, domain=None, difficulty=None, num_init_examples=None, game_gen_type=None, rule=None, rule_code=None):
+        super().__init__(uuid, domain, difficulty, num_init_examples, game_gen_type)
+        self.rule_str = None
+        self.rule_code = None
+    
+    def add_to_conversation(self, role, content):
+        self.history["conversation"].append({
+            "role": role,
+            "content": content
+        })
+    
+    def get_game_summary(self, include_rule=False):
+        system_message = self.make_game_history_system_message()
         
+        response = {
+            'game_uuid': str(self.uuid),
+            'game_class_name': self.__class__.__name__,
+            'domain': self.domain,
+            'difficulty': self.difficulty,
+            'game_gen_type': self.game_gen_type,
+            'start_time': time.ctime(int(self.start_time)),
+            'game_end_time': time.ctime(int(self.game_end_time)) if self.game_end_time else None,
+            'total_game_time': self.total_game_time if self.total_game_time else time.time() - self.start_time,
+            'turns_taken': self.turns,
+            'game_history': {
+                'positives': list(self.history['positives']),
+                'negatives': list(self.history['negatives'])
+            },
+            'total_examples_available': self.total_examples_available,
+            'total_pos_examples_shown': self.total_pos_examples_shown,
+            'total_neg_examples_shown': self.total_neg_examples_shown,
+            'status': self.status,
+            'system_message': system_message
+        }
+        if include_rule or self.status in ['won', 'lost']:
+            response['rule'] = self.rule
 
-    def create_game_instance(self, difficulty, return_json=False):
+        return response
+    
+    def make_init_system_message(self, generated_examples):
+        generated_examples_str = ', '.join(str(generated_examples))
+        return (
+            f"Let's play the game 'Find Principle Behind Math Sequence'.\n\n"
+            f"I will give you some examples in each turn and you have to guess the underlying rule of the math sequence. "
+            f"The rule will be common for all the examples.\n"
+            f"Your score will be based on the number of turns taken, number of examples seen, "
+            f"and overall time elapsed playing the game. The highest score will be for the fewest turns taken, "
+            f"fewest examples seen, and shortest game played.\n\n"
+            f"The game master has given examples of items that fit the rule: {generated_examples_str}.\n\n"
+            f"Now given this information, do one of the following:\n"
+            f"1. Make a new guess that hasn't been mentioned before.\n"
+            f"2. Request more examples.\n"
+            f"3. Type the rule if you think you've guessed it.\n\n"
+            f"What would you like to do?"
+        )
+
+    def create_game_instance(self):
         """
         Create a new game instance by generating multiple examples.
         """
         assert not self.uuid, 'Cannot create a new game with an already generated UUID'
         self.game_class_name = self.__class__.__name__
+        import uuid
         uuid = uuid.uuid4()
-        math_base = MathBase(uuid, difficulty)
-        if return_json:
+        self.uuid = uuid
+        self.math_base = MathBase(uuid, self.difficulty)
+        self.rule_str = self.math_base.rule_str
+        self.rule_code = self.math_base.rule_code
+        
+        self.judge_model = 'gpt-4o-mini'
+        
+        self.start_time = time.time() 
+        self.game_end_time = None
+        self.total_game_time = None
+        self.turns = 0
+        self.status = 'ongoing'
+        self.history = {"conversation": []}
+        self.game_gen_type = 'dynamic'
+
+
+
+        generated_examples = self.math_base.get_more_examples()
+        system_message = self.make_init_system_message(generated_examples)
+        self.add_to_conversation("assistant", system_message)
+        self.system_prompt = self.math_base.gen_sys_prompt
+        
+        self.save_game()
+        return {
+            'game_uuid': str(self.uuid), # FE IN
+            'domain': self.domain, # FE IN
+            'difficulty': self.difficulty, # FE IN
+            'game_gen_type': self.game_gen_type, # FE IN
+            'start_time': time.ctime(int(self.start_time)), # FE IN
+            'turns_taken': self.turns, # FE IN
+            'status': self.status, # FE IN
+            'system_message': self.system_prompt, # FE IN
+        }
+    
+    def load_game(self, uuid_str=None):
+        assert self.uuid or uuid_str, f'Could not find a uuid to load the game.'
+        uuid_to_load = self.uuid or uuid_str
+        filename = os.path.join(GAMES_SAVE_DIR, f'{uuid_to_load}.json')
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"No game file found for UUID {uuid} at {filename}")
+
+        try:
+            with open(filename, 'r') as f:
+                state = json.load(f)
+        except Exception as e:
+            print(f"Error loading game state: {e}")
+            raise
+        
+        game = MathGuessTheRuleGame(uuid=state['uuid'], 
+                        difficulty=state['difficulty'], 
+                        rule=state['rule_str'], 
+                        rule_code=state['rule_code']
+                        )
+        game.__dict__.update(state)
+        game.uuid = uuid.UUID(game.uuid)
+
+        self.math_base = game
+
+        return game
+    
+
+    def save_game(self):
+        state = self.__dict__.copy()
+        state.pop('math_base', None)
+
+
+        state['uuid'] = str(self.uuid)
+        state['start_time'] = self.start_time
+        state['game_end_time'] = self.game_end_time
+
+        print(f'state type: {type(state)}')
+
+        filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
+        temp_filename = filename + '.tmp'
+
+        try:
+            with open(temp_filename, 'w') as f:
+                json.dump(state, f, indent=4)
+            # Atomically replace the old file
+            os.replace(temp_filename, filename)
+        except Exception as e:
+            if os.path.exists(temp_filename):
+                os.remove(temp_filename)
+            print(f"Error saving game state: {e}")
+            raise
+
+    def get_more_examples(self, n):
+        if self.status != 'ongoing':
             return {
-                'uuid': math_base.uuid,
-                'difficulty': math_base.difficulty,
-                'rule_str': math_base.rule_str,
-                'rule_code': math_base.rule_code
+                'game_uuid': str(self.uuid),
+                'status': self.status,
+                'system_message': 'Cannot provide more examples after the game is finished.'
             }
-        else:
-            return math_base
+        generated_examples = self.generate_examples(n)
+        system_message = self.make_more_examples_system_message(generated_examples)
+        self.add_to_conversation("assistant", system_message)
 
-    def get_more_examples(self, math_base_instance):
-        """
-        Generate additional examples for the current rule.
-        """
-        # Use MathBase to generate more examples
-        return math_base_instance.generate_multi_sequence()
+        self.save_game()
+        return {
+            'game_uuid': str(self.uuid),
+            'status': self.status,
+            'system_message': system_message
+        }
 
-    def validate_guess(self, math_base_instance, guess):
+    def validate_guess(self, guess):
         """
         Validate the user's guess against the rule.
         """
-        # Use MathBase to validate the user's guess
-        if math_base_instance.validate_result(guess) == 'True':
-            return True
-        elif math_base_instance.validate_result(guess) == 'False':
-            return False
+        if self.status != 'ongoing':
+            return {
+                'game_uuid': str(self.uuid),
+                'status': self.status,
+                'guess_result': False,
+                'system_message': 'Cannot validate guess after the game is finished.'
+            }
+        result = self.math_base.validate_result(guess)
+        system_message = self.make_validate_guess_system_message(result)
+        self.add_to_conversation("assistant", system_message)
+        
+        self.save_game()
+        return {
+            'game_uuid': str(self.uuid),
+            'status': self.status,
+            'guess_result': result,
+            'system_message': system_message,
+        }
+    
+    def make_validate_guess_system_message(self, guess_result):
+        if guess_result == 'True' or (type(guess_result) is str and "Yes" in guess_result):
+            game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
+            return game_master_msg
         else:
-            print('Value Error: validate result is not True or False')
-            return False
+            game_master_msg = "Incorrect guess. What would you like to do next?"
+            return game_master_msg
 
     
 

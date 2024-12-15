@@ -22,7 +22,9 @@ def select_natural_language_game(game_gen_type):
 
 def select_math_game(game_gen_type):
     if game_gen_type == 'static':
-        pass
+        return random.choice ([
+            MathGuessTheRuleGame
+        ])
     else:
         return random.choice ([
             MathGuessTheRuleGame
@@ -49,3 +51,6 @@ def get_existing_game(uuid):
 
     if game_class_name == 'DynamicGoingOnAPicnic':
         return DynamicGoingOnAPicnic(uuid=uuid)
+    
+    if game_class_name == 'MathGuessTheRuleGame':
+        return MathGuessTheRuleGame(uuid=uuid)

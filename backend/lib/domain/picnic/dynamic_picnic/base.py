@@ -202,7 +202,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             return f"You gave up, the correct rule was: {self.rule}"
         elif isinstance(guess_result, str):
             game_master_msg = f'Correct! you can bring {guess} to the picnic.'
-            return
+            return game_master_msg
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
             return game_master_msg

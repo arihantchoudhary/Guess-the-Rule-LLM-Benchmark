@@ -197,6 +197,23 @@ class GuessingGame:
 
 class LexicalFunctionGame(GuessTheRuleGame):
 
+    def make_init_system_message(self, positive_examples, negative_examples):
+        positives_string = ', '.join(positive_examples)
+        negatives_string = ', '.join(negative_examples)
+        return (
+            f"Let's play the game 'going on a picnic'.\n\n"
+            f"I will give you some examples in each turn and you have to guess the underlying rule of the game. The rule will be common for all the examples.\n"
+            f"Your score will be based on the number of turns taken, number of examples seen, and overall time elapsed playing the game. The highest score will be for the fewest turns taken, fewest examples seen, and shortest game played.\n"
+            f"The rule you will guess should only encompass the positive examples. The negative examples are only for additional guidance and they do not form the underlying rule itself.\n"
+            f"To play the game you can only do one of the following actions in a turn:\n"
+            f"1. type 'more N' to request N more examples for that rule.\n"
+            f"2. type the rule if you think you've guessed it. The format must be 'Items from the category/categories <category>'.\n"
+            f"3. type 'give up' if you want to end the game and see the rule.\n\n"
+            f"I can bring: {positives_string}\n"
+            f"I cannot bring: {negatives_string}\n\n"
+            f"What would you like to do?"
+        )
+
     def create_game_instance(self):
         assert not self.uuid, 'Cannot create a new game with an already generated UUID'
         self.uuid = uuid.uuid4()
@@ -209,7 +226,7 @@ class LexicalFunctionGame(GuessTheRuleGame):
         self.judge_prompt = read_promptstring('validate_sysprompt.txt')
 
         self.start_time = time.time()
-        self.win_time = None
+        self.game_end_time = None
         self.total_game_time = None
         self.turns = 0
         self.history = {'positives': set(), 'negatives': set()}
@@ -221,13 +238,17 @@ class LexicalFunctionGame(GuessTheRuleGame):
 
         positives, negatives = self.generate_examples(self.num_init_examples)
         self.save_game()  # Save the game after creation
+        system_message = self.make_init_system_message(positives, negatives)
         return {
             'game_uuid': str(self.uuid),
             'domain': self.domain,
             'difficulty': self.difficulty,
             'game_gen_type': self.game_gen_type,
             'start_time': time.ctime(int(self.start_time)),
+            'turns_taken': self.turns,
+            'status': self.status,
             'total_examples_available': self.total_examples_available,
+            'system_message': system_message,
             'positive_examples': positives,
             'negative_examples': negatives
         }
@@ -324,15 +345,95 @@ class LexicalFunctionGame(GuessTheRuleGame):
             'system_message': self.make_more_examples_system_message(positives, negatives)
         }
     
+    def make_validate_guess_system_message(self, guess_result):
+        if guess_result is True:
+            return 'You guessed correctly. Check your performance stats in the panel above. Thanks for playing!'
+        elif self.status == 'lost':
+            return 'Incorrect guess. Game over!'
+        else:
+            return 'Incorrect guess. What would you like to do next?'
+
     def validate_guess(self, guess):
         assert not self.win, f'Cannot validate guess after the game is finished.'
+        if self.status != 'ongoing':
+            return {
+                'game_uuid': str(self.uuid),
+                'status': self.status,
+                'guess_result': False,
+                'system_message': 'Cannot validate guess after the game is finished.'
+            }        
         is_correct = self._game.validate_guess(guess)
+
+        # if self.total_examples_available - self.total_pos_examples_shown <= 0:
+        #     self.status = 'lost'
+        #     self.game_end_time = time.time()
+        #     self.total_game_time = self.game_end_time - self.start_time
+        
+        self.save_game()
+
         print(f"Judge model {self.judge_model} response: {is_correct}")
         if is_correct:
             self.win = True
-            self.win_time = time.time()
-            self.total_game_time = self.win_time - self.start_time
-        return is_correct
+            self.game_end_time = time.time()
+            self.total_game_time = self.game_end_time - self.start_time
+
+        return {
+            'game_uuid': str(self.uuid),
+            'status': self.status,
+            'guess_result': is_correct,
+            'system_message': self.make_validate_guess_system_message(is_correct),
+        }
+    
+    def make_game_history_system_message(self):
+        if self.status == 'ongoing':
+            positives_string = ', '.join(list(self.history['positives']))
+            negatives_string = ', '.join(list(self.history['negatives']))
+            msg = (
+                f"Welcome back to the game 'going on a picnic'.\n\n"
+                f"I will give you some examples in each turn and you have to guess the underlying rule of the game. The rule will be common for all the examples.\n"
+                f"Your score will be based on the number of turns taken, number of examples seen, and overall time elapsed playing the game. The highest score will be for the fewest turns taken, fewest examples seen, and shortest game played.\n"
+                f"The rule you will guess should only encompass the positive examples. The negative examples are only for additional guidance and they do not form the underlying rule itself.\n"
+                f"To play the game you can only do one of the following actions in a turn:\n"
+                f"1. type 'more N' to request N more examples for that rule.\n"
+                f"2. type the rule if you think you've guessed it. The format must be 'Items from the category/categories <category>'.\n"
+                f"3. type 'give up' if you want to end the game and see the rule.\n\n"
+                f"I can bring: {positives_string}\n"
+                f"I cannot bring: {negatives_string}\n\n"
+                f"What would you like to do?"
+            )
+            if self.total_examples_available - self.total_pos_examples_shown <= 0:
+                msg += '\n(This is the last turn because there are no more examples available)'
+            return msg
+        else:
+            return f'Game is over. You {self.status}. The rule was {self.rule}.\nCheck your stats in the top panel.'
+
+    def get_game_summary(self, include_rule=False):
+        system_message = self.make_game_history_system_message()
+        
+        response = {
+            'game_uuid': str(self.uuid),
+            'game_class_name': self.__class__.__name__,
+            'domain': self.domain,
+            'difficulty': self.difficulty,
+            'game_gen_type': self.game_gen_type,
+            'start_time': time.ctime(int(self.start_time)),
+            'game_end_time': time.ctime(int(self.game_end_time)) if self.game_end_time else None,
+            'total_game_time': self.total_game_time if self.total_game_time else time.time() - self.start_time,
+            'turns_taken': self.turns,
+            'game_history': {
+                'positives': list(self.history['positives']),
+                'negatives': list(self.history['negatives'])
+            },
+            'total_examples_available': self.total_examples_available,
+            'total_pos_examples_shown': self.total_pos_examples_shown,
+            'total_neg_examples_shown': self.total_neg_examples_shown,
+            'status': self.status,
+            'system_message': system_message
+        }
+        if include_rule or self.status in ['won', 'lost']:
+            response['rule'] = self.rule
+
+        return response    
 
 # # client level API (serverside responses to client requests)
 # game_dct = {}
@@ -429,6 +530,15 @@ def get_llm_model_response(platform, model, message_history):
 def simulate_llm_guess(game, examples, platform, model):
     prompt = (
         f"You are playing a game called 'Going on a Picnic'. Your goal is to guess the rule behind a set of examples.\n"
+        f"The rule is string-manipulation based, and does not consider the meaning of the words; only attributes like"
+        f"length, number of vowels, etc.\n"
+        f"It can be expressed in simple Python code, although you are not required to output code--it is enough to just explain the rule in plain English.\n"
+        f"Example game:I can bring: slaw, moly\n I cannot bring: veronal, unwhite, ennomic\n"
+        f"The answer would be 'even length and no repeat letters'.\n"
+        f"Example game:I can bring: aciform, onsweep, again, analgia\n"
+        f"I cannot bring: roleo, medimn, bunnell, lapacho, skinful"
+        f"The answer would be 'odd length and start with vowel'\n\n"
+        f"Now let's play:"
         f"Examples of items I can bring: {', '.join(examples[0])}\n"
         f"Examples of items I cannot bring: {', '.join(examples[1])}\n"
         f"Based on these examples, what do you think is the rule for items that can be brought on the picnic?\n"
@@ -467,7 +577,8 @@ if __name__ == "__main__":
 
     # Test parameters
     difficulties = ['L1']
-    max_turns_options = [1, 3, 5, 7]
+    # max_turns_options = [1, 3, 5, 7]
+    max_turns_options = [3]
     iterations = 5
     results = []
 
@@ -485,12 +596,14 @@ if __name__ == "__main__":
                             use_llm=True
                         )
                         
-                        pos, neg = make_example_pair(game)
-                        pos_exs, neg_exs = [pos], [neg]
+                        pos_exs, neg_exs = [], []
+                        for _ in range(5):
+                            pos, neg = make_example_pair(game)
+                            pos_exs, neg_exs = pos_exs+[pos], neg_exs+[neg]
 
                         # Game loop
                         turns_taken = 0
-                        examples_shown = 2
+                        examples_shown = 10
                         win = False
                         
                         while turns_taken < max_turns:

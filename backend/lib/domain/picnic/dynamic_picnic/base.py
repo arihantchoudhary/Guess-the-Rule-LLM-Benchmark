@@ -195,9 +195,11 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         }
 
     def make_validate_guess_system_message(self, guess_result):
-        if guess_result is True or (type(guess_result) is str and "Yes" in guess_result):
+        if guess_result is True:
             game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
             return game_master_msg
+        elif guess_result == "give up":
+            return f"You gave up, the correct rule was: {self.rule}"
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
             return game_master_msg
@@ -222,6 +224,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             self.status = 'lost'
             self.game_end_time = time.time()
             self.total_game_time = self.game_end_time - self.start_time
+            return "give up"
         return False
     
     def check_rule_guess(self, rule_guess):

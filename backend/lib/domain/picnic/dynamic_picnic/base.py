@@ -70,7 +70,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'total_pos_examples_shown': self.total_pos_examples_shown,
             'total_neg_examples_shown': self.total_neg_examples_shown,
             'status': self.status,
-            'system_message': system_message
+            'system_message': system_message,
+            'generated_examples': list(self.generated_examples) if hasattr(self, 'generated_examples') else [],
+            'player_guesses': list(self.player_guesses) if hasattr(self, 'player_guesses') else []
         }
         if include_rule or self.status in ['won', 'lost']:
             response['rule'] = self.rule
@@ -93,8 +95,13 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         self.history = {"conversation": []}
         self.status = 'ongoing'
 
-        generated_examples = self.generate_examples()
-        system_message = self.make_init_system_message(generated_examples)
+        self.generated_examples = set()
+        self.player_guesses = set()
+
+        genned_examples = self.generate_examples()
+        self.generated_examples.update(example.lower() for example in genned_examples)
+        
+        system_message = self.make_init_system_message(genned_examples)
         self.add_to_conversation("assistant", system_message)
         
         self.save_game()
@@ -127,6 +134,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         game.__dict__.update(state)
         game.uuid = uuid.UUID(game.uuid)
 
+        game.generated_examples = set(example.lower() for example in state.get('generated_examples', []))
+        game.player_guesses = set(guess.lower() for guess in state.get('player_guesses', []))
+
         return game
     
     def save_game(self):
@@ -135,6 +145,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         state['uuid'] = str(self.uuid)
         state['start_time'] = self.start_time
         state['game_end_time'] = self.game_end_time
+
+        state['generated_examples'] = list(self.generated_examples)
+        state['player_guesses'] = list(self.player_guesses)
 
         filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
         temp_filename = filename + '.tmp'
@@ -164,6 +177,8 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 'system_message': 'Cannot provide more examples after the game is finished.'
             }
         generated_examples = self.generate_examples(n)
+        self.generated_examples.update(example.lower() for example in generated_examples)
+
         system_message = self.make_more_examples_system_message(generated_examples)
         self.add_to_conversation("assistant", system_message)
 
@@ -183,7 +198,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 'system_message': 'Cannot validate guess after the game is finished.'
             }
         result = self.check_guess(guess)
-        system_message = self.make_validate_guess_system_message(result)
+        system_message = self.make_validate_guess_system_message(result, guess)
         self.add_to_conversation("assistant", system_message)
         
         self.save_game()
@@ -191,13 +206,17 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'game_uuid': str(self.uuid),
             'status': self.status,
             'guess_result': result,
-            'system_message': system_message,
+            'system_message': system_message
         }
 
-    def make_validate_guess_system_message(self, guess_result):
-        if guess_result is True or (type(guess_result) is str and "Yes" in guess_result):
-            game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
+    def make_validate_guess_system_message(self, guess_result, guess):
+        if guess_result is True:
+            game_master_msg = f'You guessed the rule correctly! The rule was: {self.rule} \n\nCheck your performance stats in the panel above. Thanks for playing!'
             return game_master_msg
+        elif guess_result == "give up":
+            return f"You gave up, the correct rule was: {self.rule}"
+        elif isinstance(guess_result, str):
+            return guess_result
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
             return game_master_msg
@@ -215,13 +234,14 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 self.total_game_time = self.game_end_time - self.start_time
                 return True
         elif is_guess_rule == "example":
+            self.player_guesses.add(guess.strip().lower())
             result = self.check_example_guess(guess)
-            if "Yes" in result:
-                return result
+            return result
         elif is_guess_rule == "give up":
             self.status = 'lost'
             self.game_end_time = time.time()
             self.total_game_time = self.game_end_time - self.start_time
+            return "give up"
         return False
     
     def check_rule_guess(self, rule_guess):
@@ -256,26 +276,31 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             elif "no" in response:
                 return "no"
             else:
-                self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
-        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+                logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+        logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
     def check_example_guess(self, example_guess):
         sys_prompt = (
-            f"You are an expert at evaluating whether specific examples satisfy a given rule. "
-            f"Your task is to determine if the provided example strictly adheres to the predefined rule. "
-            f"Use precise logic to evaluate the example, and consider only the information given in the predefined rule. "
-            f"Provide an accurate evaluation without additional explanation or commentary."
+            "You are an expert at evaluating whether specific examples satisfy a given rule. "
+            "Your task is to determine if the provided example strictly adheres to the predefined rule. "
+            "Use precise logic to evaluate the example, and consider only the information given in the predefined rule. "
+            "Provide an accurate evaluation without additional explanation or commentary."
         )
 
         prompt = (
             f"The predefined rule is: \"{self.rule}\".\n"
             f"The player's example guess is: \"{example_guess}\".\n\n"
-            f"Determine if the player's example satisfies the predefined rule. "
-            f"Respond with either \"yes\" if the example fits the rule, or \"no\" if it does not fit the rule. "
-            f"Do not provide any additional explanation or commentary.\n\n"
-            f"Format:\n"
-            f"[your final answer: yes or no]"
+            "Determine if the player's example satisfies the predefined rule. "
+            "Respond with only one of the following formats exactly:\n\n"
+            "   Correct! You can bring <player's example guess>\n"
+            "   Incorrect. You cannot bring <player's example guess>\n\n"
+            "Do not provide any additional explanation or commentary.\n\n"
+            "For example:"
+            "   Player example guess: Can I bring a potato?"
+            "   Example final answer: Incorrect. You cannot bring a potato.\n\n"
+            "Format:\n"
+            "[your final answer: \"Correct!\" or \"Incorrect.\" and the corresponding message]"
         )
 
         messages = [
@@ -285,15 +310,14 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         
         max_retries = 3
         for attempt in range(max_retries):
-            response = self.get_llm_model_response(messages).strip().lower()
+            response = self.get_llm_model_response(messages).strip()
             
-            if "yes" in response:
-                return f"Yes, you can bring {example_guess} to the picnic!"
-            elif "no" in response:
-                return f"No, you cannot bring {example_guess} to the picnic."
+            if "correct" in response.lower() or "incorrect" in response.lower():
+                return response
             else:
-                self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
-        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+                logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+        
+        logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
     def is_rule_guess(self, user_input):
@@ -329,8 +353,8 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 return "give up"
             else:
                 retry_count += 1
-                self.logger.warning(f"Unexpected response from model: {response}. Retrying... ({retry_count}/{max_retries})")
-        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+                logger.warning(f"Unexpected response from model: {response}. Retrying... ({retry_count}/{max_retries})")
+        logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
     def make_more_examples_system_message(self, generated_examples):
@@ -346,12 +370,19 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
     
     def generate_examples(self, num_examples=2):
         self.turns += 1
+
+        existing_generated = ', '.join(self.generated_examples) if self.generated_examples else 'none'
+        existing_guesses = ', '.join(self.player_guesses) if self.player_guesses else 'none'
+
         prompt = (
-            f"You are an assistant helping to generate examples for a game called \"Guess the Rule Games.\"\n\n"
+            f"You are an assistant helping to generate examples for a game called \"Guess the Rule Games.\".\n\n"
             f"The secret rule is: {self.rule}\n\n"
-            f"Your task is to provide {num_examples} examples of items that satisfy the secret rule.\n\n"
+            f"Here are the examples that have already been provided by the game master: {existing_generated}.\n"
+            f"Here are the examples that the player has already guessed: {existing_guesses}.\n\n"
+            f"Your task is to provide {num_examples} new and unique examples of items that satisfy the secret rule.\n\n"
             f"- Only provide the items in a simple, comma-separated list.\n"
             f"- Do not mention the secret rule.\n"
+            f"- Do not repeat any examples already provided by the game master or guessed by the player.\n"
             f"- Do not provide any additional explanation or text.\n\n"
             f"Format:\n\n"
             f"[item1], [item2], ..., [item{num_examples}]"

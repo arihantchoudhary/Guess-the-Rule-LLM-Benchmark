@@ -21,6 +21,7 @@ from datetime import datetime
 import pandas as pd
 import random
 import time
+import uuid
 
 
 
@@ -28,9 +29,9 @@ import time
 """Import OpenAI and Anthropic API keys"""
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 openai = OpenAI(api_key=OPENAI_KEY)
-ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
-claude = Anthropic()
-claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-haiku':'claude-3-sonnet-20240229'}
+ANTHROPIC_KEY = os.getenv("CLAUDE_API_KEY")
+claude = Anthropic(api_key=ANTHROPIC_KEY)
+claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-haiku':'claude-3-5-haiku-20241022'}
 
 
 """Get different responses from different models"""
@@ -66,14 +67,12 @@ def load_prompt(filename):
         with open(filename, 'r') as f:
             return f.read()
 
-def play_math_with_llms(difficulty, max_turns, model):
-    current_time = time.time()
-    print(f"Current Time: {current_time}")
-    game = MathBase(uuid=int(current_time), difficulty=difficulty)
+def play_math_with_llms(difficulty, max_turns, model, uuid):
+    game = MathBase(uuid=uuid, difficulty=difficulty)
     turns = 1
     test_llm_sys_prompt = load_prompt('promptstrings/test_llm_sys_prompt.txt')
     test_prompt = ''
-    rule = game.get_math_rule()
+    rule = game.rule_str
     time_start = time.time()
     time_end = None
     llm_actions = []
@@ -95,11 +94,15 @@ def play_math_with_llms(difficulty, max_turns, model):
             elif response.startswith('My Guess is:'):
                 guess = response.split('My Guess is:')[1].strip()
                 if game.validate_result(guess) == 'True':
+                    # print(f"LLM Guessed Correctly: {guess}")
+                    # print(f'{game.rule_str}')
                     time_end = time.time()
                     llm_actions.append(response)
                     llm_won = True
                     break
                 elif game.validate_result(guess) == 'False':
+                    # print(f"LLM Guessed Incorrectly: {guess}")
+                    # print(f'{game.rule_str}')
                     turns += 1
                     llm_actions.append(response)
                     continue
@@ -109,12 +112,11 @@ def play_math_with_llms(difficulty, max_turns, model):
                     continue
         except Exception as e:
             print(f"Error: {e}")
-            current_time = time.time()
-            game = MathBase(uuid=current_time, difficulty=difficulty)
+            game = MathBase(uuid=uuid, difficulty=difficulty)
             turns = 1
             test_llm_sys_prompt = load_prompt('promptstrings/test_llm_sys_prompt.txt')
             test_prompt = ''
-            rule = game.get_math_rule()
+            rule = game.rule_str
             time_start = time.time()
             time_end = None
             llm_actions = []
@@ -140,21 +142,24 @@ def play_math_with_llms(difficulty, max_turns, model):
 if __name__ == "__main__":
     save_dir = 'exp_results'
     # valid_difficulties = ['L1', 'L2', 'L3']
-    valid_difficulties = ['L1']
+    valid_difficulties = ['L2']
     # max_turns = [3, 5, 7, 10]
-    max_turns = [5]
+    max_turn_dict = {'L1': 10, 'L2': 15, 'L3': 20}
 
-    total_iterations = 4
-    # models = ['gpt-4o-mini', 'gpt-4o', 'claude-3-haiku', 'claude-3-5-haiku']
+    total_iterations = 5
+    # models = ['gpt-4o-mini', 'gpt-4o', 'claude-3-haiku', 'claude-3.5-haiku']
+    # models = ['claude-3.5-haiku']
     models = ['gpt-4o-mini']
-    # models = ['claude-3-haiku', 'claude-3-5-haiku']
+
     results = []
     for model in models:
     # run experiments 
         for difficulty in valid_difficulties:
+            max_turns = [max_turn_dict[difficulty]]
             for curr_max_turns in max_turns:
                 for iteration in range(total_iterations):
-                    rule, turns, duration, test_prompt, llm_actions, llm_won, examples_num = play_math_with_llms(difficulty, curr_max_turns, model)
+                    current_uuid = str(uuid.uuid4())
+                    rule, turns, duration, test_prompt, llm_actions, llm_won, examples_num = play_math_with_llms(difficulty, curr_max_turns, model, current_uuid)
                     # Append the results to the list
                     results.append({
                         "Model": model,
@@ -165,10 +170,10 @@ if __name__ == "__main__":
                         "Turns Taken": turns,
                         "Duration (s)": round(duration, 2),
                         "Total Examples Avaiable": examples_num,
-                        "Rule": rule[0],
+                        "Rule": rule,
                         "LLM Final Answer": llm_actions[-1]
                     })
-                    print(f'down: {model} - {difficulty} - {curr_max_turns} - {iteration+1} - {rule[0]} - {llm_won} - {turns} - {duration:.2f} - {examples_num}')
+                    print(f'down: {model} - {difficulty} - {curr_max_turns} - {iteration+1} - {rule} - {llm_won} - {turns} - {duration:.2f} - {examples_num}')
 
     current_date = datetime.now()
     formatted_date = current_date.strftime("%m_%d_%Y")
@@ -180,6 +185,18 @@ if __name__ == "__main__":
     experiment_results_file_name_csv = os.path.join(save_dir, f"experiment_{formatted_date}.csv")
     experiment_results_file_name_excel = os.path.join(save_dir, f"experiment_{formatted_date}.xlsx")
 
-    df.to_csv(experiment_results_file_name_csv, index=False)
+    # to csv file
+    if os.path.exists(experiment_results_file_name_csv):
+        existing_df = pd.read_csv(experiment_results_file_name_csv)
+        updated_df = pd.concat([existing_df, df], ignore_index=True)
+        updated_df.to_csv(experiment_results_file_name_csv, index=False)
+    else:
+        df.to_csv(experiment_results_file_name_csv, index=False)
 
-    df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')
+    # to excel file
+    if os.path.exists(experiment_results_file_name_excel):
+        existing_df = pd.read_excel(experiment_results_file_name_excel, engine='openpyxl')
+        updated_df = pd.concat([existing_df, df], ignore_index=True)
+        updated_df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')
+    else:
+        df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')

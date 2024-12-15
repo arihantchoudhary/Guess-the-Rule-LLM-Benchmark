@@ -1,7 +1,9 @@
-The sequence adds 2 to the current value at each step.
-The sequence multiplies the current value by 2 at each step.
-The sequence subtracts 3 from the current value at each step.
 The sequence adds 5 to the current value at each step.
 The sequence halves the current value (rounded down) at each step.
 The sequence triples the current value at each step.
 The sequence subtracts 7 from the current value at each step.
+Multiply the current value by 2 and add 1 at each step.
+Multiply the current value by 3 and subtract 4 at each step.
+Add 10 to the current value and then double the result at each step.
+Halve the current value (rounded down) and add 5 at each step.
+Multiply the current value by 4 and subtract 6 at each step.

@@ -20,7 +20,7 @@ OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 openai = OpenAI(api_key=OPENAI_KEY)
 
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
-claude = Anthropic(api_key=ANTHROPIC_KEY)
+claude = Anthropic()
 
 claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-haiku':'claude-3-sonnet-20240229'}
 
@@ -236,46 +236,17 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
 
 def demo_play(difficulty, admin=False):
     game = MathBase(uuid=0, difficulty=difficulty)
-    welcome_message = "Welcome to the Math Function Game! In this game, you will be given a sequence of numbers and you have to guess the function that generates the sequence. Let's get started!"
-    print(welcome_message)
-    flag = True
-    while(True):
-        examples = game.get_more_examples()
-        if admin and flag==True:
-            print(f"Rule Str is {game.rule_str}")
-            print(f"Rule code is {game.rule_code}")
-            flag = False
-
-        print(examples)
-        guess = input("Please guess the rule: ")
-        if guess == 'exit':
-            break
-        elif guess == 'more':
-            print("Okay, Here are more examples:")
-            examples = game.get_more_examples()
-            print(examples)
-        else:
-            result = game.validate_result(guess)
-            print(f'result from validation: {result}')
-            if result=='True':
-                print("You are correct!")
-            elif result=='False':
-                print("You are wrong!")
-            else:
-                print(f"Error: validate result is not True or False. Result: {result}")
-            cont = input("Do you want to continue? (y/n)")
-            if cont == 'n':
-                break
-    print("Thanks for playing!")
+    print(f"Rule Str is {game.rule_str}")
+    print(f"Rule code is {game.rule_code}")
 
 
 
 if __name__ == "__main__":
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
+    demo_play(difficulty='L1', admin=True)
+    demo_play(difficulty='L1', admin=True)
+    demo_play(difficulty='L1', admin=True)
+    demo_play(difficulty='L1', admin=True)
+    demo_play(difficulty='L1', admin=True)
+    demo_play(difficulty='L1', admin=True)
 
     

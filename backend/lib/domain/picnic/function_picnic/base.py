@@ -43,7 +43,7 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 # juno : for testing purposes
-if not GOOGLE_API_KEY and os.path.exists('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_claude'):
+if not ANTHROPIC_API_KEY and os.path.exists('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_claude'):
     with open('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_claude', 'r') as f:
         ANTHROPIC_API_KEY = f.read().strip()
         anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
@@ -68,7 +68,10 @@ def get_std_corpus():
 
 def read_promptstring(filename):
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(current_dir, 'promptstrings', filename), 'r') as f:
+    pth = os.path.join(current_dir, 'promptstrings', filename)
+    if not os.path.exists(pth):
+        return 'Empty file\n'
+    with open(pth, 'r') as f:
         promptstring = f.read()
     return promptstring
 
@@ -93,10 +96,6 @@ class GuessingGame:
     def generate_rule_chatgpt(self):
         random.setstate(self.rngstate)  # unused
         prompt = "Generate a rule based on the following criteria:\n"
-        if self.domain:
-            prompt += f"Domain: {self.domain}\n"
-        if self.difficulty:
-            prompt += f"Difficulty: {self.difficulty}\n"
         if self.init_examples:
             prompt += f"Examples: {self.init_examples}\n\n"
         # don't repeat
@@ -107,6 +106,16 @@ class GuessingGame:
         prompt += "Generated code:"
 
         sysprompt = read_promptstring('sysprompt.txt')
+        sysprompt += '\n'
+        if self.difficulty == 'L1':
+            sysprompt += 'Your function should be very simple. You are encouraged to use simple attributes, '
+            sysprompt += 'like the length of the word, or the first letter.\n'
+            sysprompt += 'You should try to make sure your function does not use multiple lines.\n'
+            sysprompt += 'You should make sure not to use the "and" operator to chain together complex rules.\n'
+            sysprompt += 'If you can\'t think of a good, simple example, it is okay to repeat one of the previous GOOD examples.'
+        if self.difficulty == 'L3':
+            sysprompt += 'Your function should be very creative and original (while still splitting words fairly evenly).\n'
+            sysprompt += 'You are encouraged to use keywords like "and" and "not" to string together a complex rule.'
         ans = get_llm_response(prompt=prompt, sysprompt=sysprompt)
         ans_strip = ''
         for line in ans.splitlines():
@@ -122,10 +131,11 @@ class GuessingGame:
             if 'generated_fn' in local_namespace:
                 generated_fn = local_namespace['generated_fn']
             else:
-                raise Exception('problem assigning "generated_fn"') 
+                print('problem assigning "generated_fn"')
+                return self.generate_rule_chatgpt()
         except SyntaxError as e:
             print("Syntax Error in Generated Code:", e)
-            return
+            return self.generate_rule_chatgpt()
         # test if it's a reasonable rule (sometimes true/false)
         exs = [self.wordgen_fn() for _ in range(50)]
         exs = [generated_fn(ex) for ex in exs]
@@ -531,19 +541,31 @@ def get_llm_model_response(platform, model, message_history):
 def simulate_llm_guess(game, examples, platform, model):
     prompt = (
         f"You are playing a game called 'Going on a Picnic'. Your goal is to guess the rule behind a set of examples.\n"
-        f"The rule is string-manipulation based, and does not consider the meaning of the words; only attributes like"
+        f"The rule is string-manipulation based, and does NOT consider the meaning/category of the words; only attributes like"
         f"length, number of vowels, etc.\n"
         f"It can be expressed in simple Python code, although you are not required to output code--it is enough to just explain the rule in plain English.\n"
-        f"Example game:I can bring: slaw, moly\n I cannot bring: veronal, unwhite, ennomic\n"
-        f"The answer would be 'even length and no repeat letters'.\n"
-        f"Example game:I can bring: aciform, onsweep, again, analgia\n"
+        f"Here are some previously played games with words and answers, so you can learn how to play:\n<BEGIN TUTORIAL>\n"
+    ) + (
+        f"Game 1: I can bring: slaw, moly\n I cannot bring veronal, unwhite, ennomic\n"
+        f"Answer: would be 'even length'\n"
+        f"Game 2: I can bring: aciform, onsweep, again, analgia\n"
+        f"I cannot bring: roleos, medimn, bunnell, lapacho, skinful"
+        f"Answer: 'start with vowel'\n\n"    
+    ) + (
+        f"Game 3: I can bring: slaw, moly\n I cannot bring: letter, veronal, unwhite, ennomic\n"
+        f"Answer: 'even length and no repeat letters'.\n"
+        f"Game 4:I can bring: aciform, onsweep, again, analgia\n"
         f"I cannot bring: roleo, medimn, bunnell, lapacho, skinful"
-        f"The answer would be 'odd length and start with vowel'\n\n"
-        f"Now let's play:"
-        f"Examples of items I can bring: {', '.join(examples[0])}\n"
-        f"Examples of items I cannot bring: {', '.join(examples[1])}\n"
-        f"Based on these examples, what do you think is the rule for items that can be brought on the picnic?\n"
-        f"Your answer should be in the format: 'Items from the category/categories <category>'"
+        f"Answer: 'odd length and start with vowel'\n\n"
+    ) if game.difficulty in ['L2', 'L3'] else "" + (
+        f"<END TUTORIAL>\n\nNow you know how to play. You will now play a new game with a different rule than the examples.\n"
+        f"The above examples were only to teach you the rules, and they do not count for our new game.\n"
+        f"Do not discuss the example games above.\n"
+        f"Do not ask for clarification or ask questions. Simply answer what I am about to ask."
+        f"NEW GAME:\n"
+        f"I can bring: {', '.join(examples[0])}\n"
+        f"I cannot bring: {', '.join(examples[1])}\n"
+        f"What is the rule? State your answer specifically in clear English."
     )
     
     message_history = [

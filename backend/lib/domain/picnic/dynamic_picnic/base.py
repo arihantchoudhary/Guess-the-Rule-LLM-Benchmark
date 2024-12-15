@@ -191,7 +191,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'game_uuid': str(self.uuid),
             'status': self.status,
             'guess_result': result,
-            'system_message': f"{result} \n\n{system_message}",
+            'system_message': system_message
         }
 
     def make_validate_guess_system_message(self, guess_result, guess):
@@ -260,8 +260,8 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             elif "no" in response:
                 return "no"
             else:
-                self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
-        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+                logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+        logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
     def check_example_guess(self, example_guess):
@@ -296,9 +296,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             if "1." in response or "2." in response:
                 return response
             else:
-                self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+                logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
         
-        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+        logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
     def is_rule_guess(self, user_input):
@@ -334,8 +334,8 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 return "give up"
             else:
                 retry_count += 1
-                self.logger.warning(f"Unexpected response from model: {response}. Retrying... ({retry_count}/{max_retries})")
-        self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
+                logger.warning(f"Unexpected response from model: {response}. Retrying... ({retry_count}/{max_retries})")
+        logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 
     def make_more_examples_system_message(self, generated_examples):

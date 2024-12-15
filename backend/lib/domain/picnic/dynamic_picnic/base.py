@@ -183,7 +183,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 'system_message': 'Cannot validate guess after the game is finished.'
             }
         result = self.check_guess(guess)
-        system_message = self.make_validate_guess_system_message(result)
+        system_message = self.make_validate_guess_system_message(result, guess)
         self.add_to_conversation("assistant", system_message)
         
         self.save_game()
@@ -194,12 +194,15 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'system_message': system_message,
         }
 
-    def make_validate_guess_system_message(self, guess_result):
+    def make_validate_guess_system_message(self, guess_result, guess):
         if guess_result is True:
             game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
             return game_master_msg
         elif guess_result == "give up":
             return f"You gave up, the correct rule was: {self.rule}"
+        elif isinstance(guess_result, str):
+            game_master_msg = f'Correct! you can bring {guess} to the picnic.'
+            return
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
             return game_master_msg

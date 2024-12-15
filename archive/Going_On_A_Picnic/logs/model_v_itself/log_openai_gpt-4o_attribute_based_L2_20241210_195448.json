@@ -1,0 +1,97 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that can be represented in emoji form can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 15.2,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"apple\" and \"soccer ball\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master if the item \"orange\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring orange."
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master if the item \"banana\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring banana."
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master if the item \"basketball\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring basketball."
+        },
+        {
+            "role": "user",
+            "content": "Given the examples \"apple,\" \"soccer ball,\" \"orange,\" \"banana,\" and \"basketball,\" it seems like the rule could involve items that are round or spherical in shape. However, \"apple,\" \"orange,\" \"basketball,\" and \"soccer ball\" all fit this category, while \"banana\" does not. An alternative interpretation could be that the rule allows items that can be used or related in sports or games, as \"soccer ball\" and \"basketball\" imply, but again \"banana\" does not fit.\n\nWith this in mind, I will make a new guess:\n\nPlayer: I would like to ask the game master if the item \"tennis ball\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring tennis ball."
+        },
+        {
+            "role": "user",
+            "content": "Given the examples \"apple,\" \"soccer ball,\" \"orange,\" \"banana,\" \"basketball,\" and \"tennis ball,\" one potential rule could be that the item is one that is commonly thrown or can be used in a game, but the inclusion of \"banana\" doesn't quite fit this theory. Another pattern might involve items with an \"a\" in them, which holds true for all the examples given.\n\nTo test this, I would like to ask the game master if the item \"grape\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring grape."
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to ask the game master if the item \"carrot\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring carrot."
+        },
+        {
+            "role": "user",
+            "content": "Given the items that can be brought: \"apple,\" \"soccer ball,\" \"orange,\" \"banana,\" \"basketball,\" \"tennis ball,\" \"grape,\" and \"carrot,\" it seems more likely that the rule involves items that contain the letter \"a.\"\n\nTo confirm this hypothesis, I would like to ask the game master if the item \"hat\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring hat."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided and the previous interactions, it seems reasonable to believe that the rule involves items that contain the letter \"a.\" To further test this hypothesis, I would like to ask the game master if the item \"lamp\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring lamp."
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to ask the game master if the item \"camera\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring camera."
+        },
+        {
+            "role": "user",
+            "content": "Based on the interactions and the examples provided, the most consistent rule seems to be that the item must contain the letter \"a\" somewhere in its name. All the items that were allowed\u2014\"apple,\" \"soccer ball,\" \"orange,\" \"banana,\" \"basketball,\" \"tennis ball,\" \"grape,\" \"carrot,\" \"hat,\" \"lamp,\" and \"camera\"\u2014contain the letter \"a.\" Therefore, my best guess is that the secret rule is that an item can be brought to the game if it contains the letter \"a.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

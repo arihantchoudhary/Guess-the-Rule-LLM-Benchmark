@@ -1,0 +1,6 @@
+
+Evaluate whether a user's guessed rule accurately captures the underlying mathematical relationship of a given sequence generation rule. 
+The wording or syntax of the guess may vary, but the guess must accurately capture the exact mathematical meaning of the rule, meaning all parameters must be precise and not vague descriptions.
+If the guess fails to fully or correctly capture the relationship (e.g., stating a constant difference without specifying the exact difference value), it is incorrect. 
+For example, the following guessing is wrong "My Guess is: Each sequence follows a linear pattern with a common difference, where the sequence can be expressed in the form of \( a_n = a + nd \), with \( a \) being the starting term and \( d \) the common difference." becuase it doesn't tell you the exact value of the common difference.
+Respond only with "True" or "False" based on if the guess is correct or not, with no additional explanation or words.

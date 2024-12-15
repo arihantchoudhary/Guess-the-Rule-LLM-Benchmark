@@ -1,0 +1,41 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'V'.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": true,
+    "duration_seconds": 13.26,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Vegetable\" and \"Vase\"."
+        },
+        {
+            "role": "user",
+            "content": "I will ask the game master for more examples to clarify the rule, as I still feel unsure based on the initial examples provided. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"Violin.\""
+        },
+        {
+            "role": "user",
+            "content": "I think I need some more clarity before making a guess. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"Van.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master \u2014 \"Vegetable,\" \"Vase,\" \"Violin,\" and \"Van\" \u2014 it appears that the rule relates to words that start with the letter \"V.\" Therefore, my best guess about the secret rule is that the items must start with the letter \"V.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'V'."
+        }
+    ]
+}

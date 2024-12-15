@@ -1,0 +1,73 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that have a color in their name can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 9.55,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"red apple\" and \"yellow banana\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a guess based on the provided examples. \n\nCan I bring a \"green grape\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring green grape."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"blueberry\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring blueberry."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"blackberry\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring blackberry."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"purple plum\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring purple plum."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring an \"orange\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring orange."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples and previous interactions, it seems that the rule may involve bringing fruits that can be described with a color adjective combined with the fruit name.\n\nTo explore this further, I will make a new guess. \n\nCan I bring a \"white peach\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring white peach."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples and interactions, my best guess for the rule is: \"You can bring any fruit that can be described with a color adjective combined with the fruit name.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

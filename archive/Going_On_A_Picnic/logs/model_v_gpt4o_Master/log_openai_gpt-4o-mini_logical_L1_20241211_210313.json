@@ -1,0 +1,57 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'Q'.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 10.98,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"quiche\" and \"quilt\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a guess. Can I bring a \"questionnaire\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"questionnaire\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"quokka\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"quokka\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"quasar\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"quasar\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"quiver\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"quiver\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the responses from the Game Master, the secret rule seems to involve words that start with the letter \"q\" and are a noun. The examples \"quiche\" and \"quilt\" fit this pattern, as do the successful guesses \"quokka,\" \"quasar,\" and \"quiver.\" \n\nMy best guess for the secret rule is: **You can bring any noun that begins with the letter \"q.\"**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

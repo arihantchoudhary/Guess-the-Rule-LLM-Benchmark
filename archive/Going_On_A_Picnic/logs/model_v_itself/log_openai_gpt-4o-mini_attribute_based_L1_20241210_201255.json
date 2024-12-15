@@ -1,0 +1,73 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a toolbox can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": true,
+    "duration_seconds": 13.49,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"hammer\" and \"screwdriver\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples to clarify the rule, as I want to ensure I'm on the right track. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"wrench.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples to gather more clarity on the rule:\n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"pliers.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples given so far (\"hammer,\" \"screwdriver,\" \"wrench,\" and \"pliers\"), it seems that the items allowed are tools commonly used for mechanical or construction tasks. \n\nTo further clarify the rule, I will ask for more examples. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"tape measure.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided so far, it looks like the rule pertains to tools commonly used in construction or mechanical tasks. To test this hypothesis further, I will make a guess based on this pattern.\n\n\"I would like to bring 'socket set.' Can I bring that?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"socket set.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the previous items that fit the rule, I'm confident that the rule pertains to tools commonly used in construction or mechanical tasks. To test this hypothesis further, I will make another guess that hasn't been mentioned before.\n\n\"I would like to bring 'level.' Can I bring that?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"level.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the pattern and the examples provided so far, I'm confident that the items allowed are indeed tools commonly used in mechanical or construction tasks. To test this rule further, I will make a new guess that hasn't been mentioned before. \n\n\"I would like to bring 'saw.' Can I bring that?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"saw.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"hammer,\" \"screwdriver,\" \"wrench,\" \"pliers,\" \"tape measure,\" \"socket set,\" \"level,\" and \"saw\"), my best guess about the rule is that the items allowed are **hand tools commonly used in construction or mechanical tasks**."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are typically found in a toolbox can be brought to the picnic."
+        }
+    ]
+}

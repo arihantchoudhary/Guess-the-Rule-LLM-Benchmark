@@ -1,0 +1,57 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are mentioned or depicted in popular superhero comic books can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 10.39,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Batarang\" and \"Infinity Gauntlet\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess and ask if I can bring a \"Lightsaber\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"Lightsaber.\""
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess and ask if I can bring \"Captain America's Shield\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Captain America's Shield.\""
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess and ask if I can bring \"Mjolnir\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"Mjolnir.\""
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess and ask if I can bring the \"Green Lantern Ring\" to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the \"Green Lantern Ring.\""
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can bring items that are associated with superheroes or supervillains in comic books or movies. This includes iconic items tied to specific characters, like \"Batarang\" for Batman, \"Infinity Gauntlet\" for Thanos, \"Captain America's Shield\" for Captain America, \"Mjolnir\" for Thor, and \"Green Lantern Ring\" for Green Lantern. Items like \"Lightsaber,\" which are from different franchises not centered on traditional superheroes, do not fit this pattern. So, my best guess for the rule is: You can bring items that are iconic weapons or gadgets associated with superhero or supervillain characters from comic books or superhero-themed movies."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with classic board games can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 7.71,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"chess pieces\" and \"dice\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring \"playing cards\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring playing cards."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \"poker chips\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring poker chips."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"board game tokens\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring board game tokens."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess. Can I bring \"game pawns\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring game pawns."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the responses from the game master, my best guess about the secret rule is that you can bring items that are specifically components or pieces used in tabletop games (board games, card games, etc.), but not generic gambling or card game items. Therefore, the rule could be: \"You can bring items that are physical game pieces or tokens used in strategy or board games, but not items associated with card games or betting.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

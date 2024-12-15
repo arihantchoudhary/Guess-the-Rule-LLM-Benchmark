@@ -1,0 +1,73 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are a direct translation of a word from a language where English is not the official language can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 20.49,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"tapas\" and \"samosa\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples, as I'm still unsure about the rule based on just \"tapas\" and \"samosa\". \n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"croissant.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples, as I'm still unclear about the rule. \n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"sushi.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"tapas,\" \"samosa,\" \"croissant,\" and \"sushi\"), it seems like the items might be small, often bite-sized foods that are commonly enjoyed in various cultures. However, I'm still not confident in discerning the exact rule.\n\nI'll ask the game master for more examples again to gather more context:\n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"tempura.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the items provided so far, I'm still uncertain about the exact rule. However, it does seem like they are all small, often shared, and culturally significant dishes or snacks. To clarify further, I'll ask the game master for more examples:\n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"pasta.\""
+        },
+        {
+            "role": "user",
+            "content": "Given the examples so far\u2014 \"tapas,\" \"samosa,\" \"croissant,\" \"sushi,\" \"tempura,\" and \"pasta\"\u2014 I am noticing a trend towards various small or shareable dishes that are culturally significant. However, I still feel unsure about the exact criteria.\n\nTo refine my understanding further, I will ask the game master for more examples:\n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"pierogi.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples (\"tapas,\" \"samosa,\" \"croissant,\" \"sushi,\" \"tempura,\" \"pasta,\" and \"pierogi\"), it appears that the items are indeed small, often shareable foods that hold cultural significance and are enjoyed in various settings.\n\nHowever, to try and solidify my understanding of the rule, I will ask the game master for more examples to see if there is a stronger pattern or specific aspect to these items that I'm missing.\n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"falafel.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples you've provided\u2014 \"tapas,\" \"samosa,\" \"croissant,\" \"sushi,\" \"tempura,\" \"pasta,\" \"pierogi,\" and \"falafel\"\u2014 I would guess that the rule is that the items must be small, often shareable dishes that are culturally significant and widely enjoyed in various culinary traditions around the world. These items are typically associated with social or casual dining experiences and are often featured in communal settings. \n\nSo my guess is that the secret rule is: **The items listed are all small or shareable dishes from various cultures that are commonly enjoyed in social dining situations.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

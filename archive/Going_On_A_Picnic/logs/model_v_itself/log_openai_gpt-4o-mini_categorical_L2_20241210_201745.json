@@ -1,0 +1,25 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are used in a typical birthday party can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 4.1,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"cake\" and \"balloons\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"cake\" and \"balloons\"), my best guess for the secret rule is that the items allowed in the game are generally associated with celebrations or parties. Both items are commonly found at events like birthdays, weddings, or other festive occasions."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

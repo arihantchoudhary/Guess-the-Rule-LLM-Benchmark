@@ -56,10 +56,14 @@ export const ConversationDisplay = ({
     <div className="w-full max-w-4xl mx-auto space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <GameDetailsPanel details={gameDetails} />
-        <GameStatsPanel startTime={gameDetails.startTime} turnsTaken={gameDetails.turnsTaken} />
+        <GameStatsPanel 
+          startTime={gameDetails.startTime} 
+          turnsTaken={gameDetails.turnsTaken} 
+          gameStatus={gameDetails.status}
+        />
       </div>
 
-      <div className="h-[500px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300 bg-gray-100/80 backdrop-blur-md border border-white/20">
+      <div className="h-[500px] overflow-y-auto p-6 glass-panel space-y-4 hover:shadow-lg transition-shadow duration-300">
         {messages.map((message, index) => (
           <ChatMessage
             key={message.id}
@@ -69,7 +73,7 @@ export const ConversationDisplay = ({
           />
         ))}
         {isLoading && (
-          <div className="message-bubble mr-auto">
+          <div className="message-bubble mr-auto" data-sender="system">
             <div className="loading-dots">
               <div></div>
               <div></div>

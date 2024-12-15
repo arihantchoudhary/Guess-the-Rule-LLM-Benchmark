@@ -17,10 +17,9 @@ with open(keys_path, 'r') as f:
 OPENAI_KEY = keys['OPENAI_API_KEY']
 client = OpenAI(api_key=OPENAI_KEY)
 
-
 def get_llm_response(prompt, sysprompt="You are a creative and diverse assistant."):
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": sysprompt},
             {"role": "user", "content": prompt}
@@ -31,13 +30,34 @@ def get_llm_response(prompt, sysprompt="You are a creative and diverse assistant
     generated_text = response.choices[0].message.content.strip()
     return generated_text
 
+# prompt_generators = {
+#     "attribute_based": generate_attribute_based_rule_prompt,
+#     "categorical": generate_categorical_rule_prompt,
+#     "relational": generate_relational_rule_prompt,
+#     "logical": generate_logical_rule_prompt,
+#     "semantic": generate_semantic_rule_prompt
+# }
+
 prompt_generators = {
-    "attribute_based": generate_attribute_based_rule_prompt,
-    "categorical": generate_categorical_rule_prompt,
-    "relational": generate_relational_rule_prompt,
-    "logical": generate_logical_rule_prompt,
-    "semantic": generate_semantic_rule_prompt
+    "attribute_based": L1_generate_attribute_based_rule_prompt,
+    "categorical": L1_generate_categorical_rule_prompt,
+    "relational": L1_generate_relational_rule_prompt,
+    "logical": L1_generate_logical_rule_prompt,
+    "semantic": L1_generate_semantic_rule_prompt
 }
+# -- ALL prompt functions -- 
+# generate_attribute_based_rule_prompt
+# generate_categorical_rule_prompt
+# generate_relational_rule_prompt
+# generate_logical_rule_prompt
+# generate_semantic_rule_prompt
+# L1_generate_attribute_based_rule_prompt
+# L1_generate_categorical_rule_prompt
+# L1_generate_relational_rule_prompt
+# L1_generate_logical_rule_prompt
+# L1_generate_semantic_rule_prompt
+
+
 
 def generate_rules(rule_type, n, directory):
     os.makedirs(directory, exist_ok=True)
@@ -109,6 +129,7 @@ def generate_rules(rule_type, n, directory):
 
 if __name__ == "__main__":
     # Base directory for rules
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     rules_base_dir = os.path.join(script_dir, 'rules')
 
     # Directories for each rule type
@@ -119,8 +140,8 @@ if __name__ == "__main__":
     semantic_dir = os.path.join(rules_base_dir, 'semantic')
 
     # Generate rules
-    generate_rules("attribute_based", 10, directory=attribute_based_dir)
-    generate_rules("categorical", 10, directory=categorical_dir)
+    # generate_rules("attribute_based", 10, directory=attribute_based_dir)
+    # generate_rules("categorical", 10, directory=categorical_dir)
     generate_rules("relational", 10, directory=relational_dir)
-    generate_rules("logical", 10, directory=logical_dir)
-    generate_rules("semantic", 10, directory=semantic_dir)
+    # generate_rules("logical", 10, directory=logical_dir)
+    # generate_rules("semantic", 10, directory=semantic_dir)

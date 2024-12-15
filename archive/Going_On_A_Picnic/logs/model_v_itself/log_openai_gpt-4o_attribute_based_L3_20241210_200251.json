@@ -1,0 +1,73 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that were mentioned in the script of the original Star Trek series can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 19.2,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Tricorder\" and \"Communicator\"."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring a \"Holodeck\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"Holodeck.\""
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring a \"Transporter\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Transporter.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"Tricorder,\" \"Communicator,\" and \"Transporter\") and the rejection of \"Holodeck,\" it seems like the rule could involve items related to Star Trek technology that are portable and handheld.\n\nI'd like to make a new guess. Can I bring a \"Phaser\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Phaser.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: I'd like to make a new guess. Can I bring a \"Tricorder Scanner\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Tricorder Scanner.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided and responses from the game master, the rule might involve portable, handheld Star Trek technology or devices that start with a consonant. Given this pattern, I'll make a new guess:\n\nCan I bring a \"PADD\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"PADD.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"Tricorder,\" \"Communicator,\" \"Transporter,\" \"Phaser,\" and \"Tricorder Scanner\") and the rejections (\"Holodeck\" and \"PADD\"), it seems the rule may be related to the names of items from Star Trek that begin with certain letters or meet a specific naming pattern. The accepted items start with either 'T' or 'C' (except for \"Phaser\"). \n\nLet's make a new guess that hasn't been mentioned before: \n\nPlayer: Can I bring a \"Communicator Console\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"Communicator Console.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples and responses, the rule seems to involve items from Star Trek with names comprising two or more syllables and starting with the letters 'C', 'T', or 'P'. Each accepted example follows this pattern, while rejected ones do not meet at least one of these criteria. Given this pattern, my final guess for the rule is:\n\n\"The item must be Star Trek-related, have multiple syllables, and start with the letter 'C', 'T', or 'P'.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

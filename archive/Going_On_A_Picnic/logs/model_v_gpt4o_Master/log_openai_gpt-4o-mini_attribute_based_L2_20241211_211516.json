@@ -1,0 +1,73 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that have an odd number of syllables can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 27.73,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sandwich\" and \"lemonade\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll go with option 2 and ask the game master for more examples. \n\n\"Can you give me more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Sure! You can bring \"chocolate\" to the picnic."
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Can I bring a 'cookie' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"cookie.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Can I bring 'juice' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"juice.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the previous items that fit the rule (\"sandwich,\" \"lemonade,\" \"chocolate,\" and \"cookie\") and the item that doesn't fit (\"juice\"), it seems the rule might pertain to food items that are solid, sweet, or portable items for a picnic.\n\nI will try to make a guess that hasn't been mentioned before.\n\nPlayer: \"Can I bring a 'brownie' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"brownie.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: \"Can I bring 'cupcakes' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"cupcakes.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the history of items that fit the rule and the recent guesses, I'll make a new guess that hasn't been mentioned before to test if the rule pertains to portable food items typically enjoyed outside, such as those at a picnic.\n\nPlayer: \"Can I bring a 'slice of cake' to the game?\""
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"slice of cake.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master and the responses to the various items mentioned, my best guess for the secret rule is that it pertains to portable, solid food items that are typically sweet and can easily be consumed at a picnic. This includes items like sandwiches, cookies, chocolate, and brownies, but excludes items like juice, cupcakes, and slices of cake, which may either be too messy or not portable enough for outdoor consumption.\n\nIn summary, the rule might be: \"You can bring solid, sweet, and easily portable food items that are suitable for a picnic.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

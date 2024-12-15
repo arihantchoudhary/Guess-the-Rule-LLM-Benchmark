@@ -1,0 +1,25 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L2",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both fruits, but one must be a citrus fruit and the other must be a berry.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 10.37,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"orange\" and \"strawberry  \nlemon\" and \"blueberry\"."
+        },
+        {
+            "role": "user",
+            "content": "The secret rule seems to be that you can bring items that are names of fruits. \"Orange,\" \"strawberry,\" \"lemon,\" and \"blueberry\" are all examples of fruits."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

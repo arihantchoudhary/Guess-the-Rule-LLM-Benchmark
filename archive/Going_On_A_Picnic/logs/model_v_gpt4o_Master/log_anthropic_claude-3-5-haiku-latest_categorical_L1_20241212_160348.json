@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are commonly found in a supermarket can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 11.99,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"bread\" and \"milk\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll start by asking about another common food/beverage item to help me understand the potential rule.\n\nCan I bring water?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring water."
+        },
+        {
+            "role": "user",
+            "content": "Based on the current examples of \"bread\", \"milk\", and \"water\", I notice they are all basic/essential consumable items and start with lowercase letters. \n\nI'll ask about another potential consumable item:\n\nCan I bring juice?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring juice."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and confirmed items (bread, milk, water, juice), I notice a clear pattern:\n\nRule Guess: All items are common, everyday consumable items/beverages that are lowercase and represent basic food or drink.\n\nSpecific characteristics of the rule appear to be:\n1. Must be a consumable item (food or beverage)\n2. Written in lowercase letters\n3. Generally considered basic/everyday/essential items\n4. Relatively simple, straightforward names\n\nMy best guess is that the rule requires items that are lowercase consumable/drinkable items that are common in daily life.\n\nWould you confirm if this matches the underlying rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

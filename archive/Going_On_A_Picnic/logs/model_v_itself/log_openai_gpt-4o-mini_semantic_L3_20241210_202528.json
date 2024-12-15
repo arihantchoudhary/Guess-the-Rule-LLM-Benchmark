@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with renowned botanical gardens around the world can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 3.43,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"rose\" and \"orchid\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the Game Master, \"rose\" and \"orchid,\" it seems that the rule may revolve around items that are types of flowers. Therefore, my best guess for the secret rule is that players can only bring items that are names of flowers."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with famous biological discoveries or species can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": true,
+    "duration_seconds": 7.34,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"finch\" and \"double helix\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"finch\" and \"double helix,\" it seems the secret rule could involve items that are scientific in nature. A finch is a type of bird often associated with Charles Darwin and his evolutionary studies, while a double helix refers to the structure of DNA. Therefore, my best guess for the rule is that the items you can bring are related to concepts or entities that are significant in biology or evolutionary science."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are typically associated with famous biological discoveries or species can be brought to the picnic."
+        }
+    ]
+}

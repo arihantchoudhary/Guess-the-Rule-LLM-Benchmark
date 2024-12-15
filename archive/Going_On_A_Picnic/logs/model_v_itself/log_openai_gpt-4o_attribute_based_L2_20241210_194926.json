@@ -1,0 +1,25 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically found in a children's storybook can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 3.17,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Talking animals\" and \"magic wand\"."
+        },
+        {
+            "role": "user",
+            "content": "The rule might be that the items you can bring are related to elements commonly found in fantasy stories or scenarios. These items typically involve magical or fantastical elements, such as \"talking animals\" that are often found in fairy tales and folklore, and \"magic wand,\" which is a standard tool for wizards and magicians in fantasy stories."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

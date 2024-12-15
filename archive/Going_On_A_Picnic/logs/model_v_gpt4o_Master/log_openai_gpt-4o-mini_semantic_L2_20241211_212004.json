@@ -1,0 +1,97 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with popular children's birthday parties can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 35.24,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"balloons\" and \"party hats\"."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"confetti\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring confetti."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"streamers\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring streamers."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"party balloons\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party balloons."
+        },
+        {
+            "role": "user",
+            "content": "Player: I\u2019d like to make a new guess. Can I bring \"decorative banners\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring decorative banners."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"party favors\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party favors."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring \"themed tablecloths\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring themed tablecloths."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"party invitations\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party invitations."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"party decorations\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party decorations."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a new guess. Can I bring \"cupcake toppers\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring cupcake toppers."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master, it seems that the rule allows anything related to party supplies or decorations. All the items that have been approved, such as balloons, party hats, confetti, streamers, decorations, and favors, fall under the category of items typically associated with celebrations or parties. \n\nTherefore, my best guess for the secret rule is: \"You can bring any item that is a supply or decoration for a party.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

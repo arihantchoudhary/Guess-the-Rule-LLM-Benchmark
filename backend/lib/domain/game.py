@@ -3,26 +3,43 @@ import pickle
 import random
 import json
 
-from lib.domain.base import validate_domain
+from lib.domain.base import validate_domain, validate_game_gen_type
 from lib.domain.picnic.static_picnic.base import StaticGoingOnAPicnic
 from lib.domain.picnic.function_picnic.base import LexicalFunctionGame
+from lib.domain.picnic.math_game.base import MathGuessTheRuleGame
+from lib.domain.picnic.dynamic_picnic.base import DynamicGoingOnAPicnic
 from lib.domain.common import GAMES_SAVE_DIR
 
-def select_natural_language_game():
-    natural_language_games = [
-        StaticGoingOnAPicnic,
-        # LexicalFunctionGame  # not a natural language game?
-    ]
-    return random.choice(natural_language_games)
+def select_natural_language_game(game_gen_type):
+    if game_gen_type == 'static':
+        return random.choice ([
+            StaticGoingOnAPicnic
+        ])
+    else:
+        return random.choice ([
+            DynamicGoingOnAPicnic,
+            # LexicalFunctionGame
+        ])
 
-def select_new_game(domain):
+def select_math_game(game_gen_type):
+    if game_gen_type == 'static':
+        pass
+    else:
+        return random.choice ([
+            MathGuessTheRuleGame
+        ])
+
+def select_new_game(domain, game_gen_type):
     validate_domain(domain)
+    validate_game_gen_type(game_gen_type)
 
     if domain == 'natural_language':
-        return select_natural_language_game()
-    elif domain == 'lexical':
+        return select_natural_language_game(game_gen_type)
+    if domain == 'math':
+        return select_math_game(game_gen_type)
+    if domain == 'lexical':
         return LexicalFunctionGame
-    # TODO: add the other games from @Juno and @Michael
+
 
 def get_existing_game(uuid):
     filename = os.path.join(GAMES_SAVE_DIR, f"{uuid}.json")
@@ -34,8 +51,9 @@ def get_existing_game(uuid):
         
         if game_class_name == 'StaticGoingOnAPicnic':
             return StaticGoingOnAPicnic(uuid=uuid)
-        # elif game_class_name == 'LexicalFunctionGame':
-        #     return LexicalFunctionGame(uuid=uuid)
+
+        if game_class_name == 'DynamicGoingOnAPicnic':
+            return DynamicGoingOnAPicnic(uuid=uuid)
     elif os.path.exists(filename2):
         with open(filename2, 'rb') as f:
             saved_game = pickle.load(f)

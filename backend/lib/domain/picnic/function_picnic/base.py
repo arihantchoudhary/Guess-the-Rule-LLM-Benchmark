@@ -2,6 +2,7 @@ import os
 import pickle
 import random
 from openai import OpenAI
+import openai
 import string
 import nltk
 import sys

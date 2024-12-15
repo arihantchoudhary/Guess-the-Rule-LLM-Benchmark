@@ -39,7 +39,7 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
   const [domain, setDomain] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [selectedPlayer, setSelectedPlayer] = useState("");
-  const [initialExamples, setInitialExamples] = useState("3");
+  const [initialExamples, setInitialExamples] = useState("2");
   const [isDynamic, setIsDynamic] = useState(false);
 
   const handleStart = () => {

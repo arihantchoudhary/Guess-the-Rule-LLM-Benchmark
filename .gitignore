@@ -6,3 +6,8 @@ experiment_*
 saved_games*
 *.pyc
 backend.egg-info
+*keys.json
+.history
+
+**/exp_results/
+*.csv

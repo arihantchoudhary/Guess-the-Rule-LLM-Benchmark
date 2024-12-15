@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with renowned elements or theories of quantum physics can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": true,
+    "duration_seconds": 10.29,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"qubit\" and \"photon\"."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to make a guess. Can I bring a \"neutrino\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"neutrino.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring a \"gluon\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a \"gluon.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"qubit\" and \"photon\") and the subsequent items that were accepted (\"neutrino\" and \"gluon\"), it seems that the rule involves particles that are fundamental to quantum mechanics or the field of physics. My best guess is that the rule allows you to bring items that are either quantum particles or related to the principles of quantum mechanics. Therefore, the secret rule is likely: \"You can bring items that are fundamental particles or concepts in quantum physics.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically associated with renowned elements or theories of quantum physics can be brought to the picnic."
+        }
+    ]
+}

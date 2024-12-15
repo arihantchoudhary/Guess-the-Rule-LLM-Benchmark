@@ -1,0 +1,57 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are commonly found in a supermarket can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 86.22,
+    "platform": "anthropic",
+    "model": "claude-3-haiku-20240307",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Bread\" and \"cheese\" and \"apples\" and \"orange juice.\"."
+        },
+        {
+            "role": "user",
+            "content": "Okay, let me think about this. The items that fit the rule so far are all food items, specifically bread, cheese, apples, and orange juice. They seem to be common, everyday food items.\n\nSince the game master hasn't given any hints about the specific rule, I'll make a new guess that hasn't been mentioned before.\n\nHow about \"yogurt\"? Does that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring yogurt."
+        },
+        {
+            "role": "user",
+            "content": "Okay, based on the examples provided so far, I have a hypothesis that the rule is about common, everyday food items. Let me try another guess that hasn't been mentioned yet.\n\nHow about \"milk\"? Can I bring milk to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring milk."
+        },
+        {
+            "role": "user",
+            "content": "Okay, let me think this through.\n\nBased on the examples provided so far - bread, cheese, apples, orange juice, yogurt, and milk - it seems the rule is related to common, everyday food items. \n\nI'll make a new guess that hasn't been mentioned yet:\n\nCan I bring \"eggs\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring eggs."
+        },
+        {
+            "role": "user",
+            "content": "Okay, let me try a new guess that hasn't been mentioned before.\n\nCan I bring \"carrots\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring carrots."
+        },
+        {
+            "role": "user",
+            "content": "Alright, based on the examples provided - bread, cheese, apples, orange juice, yogurt, milk, eggs, and carrots - I believe the secret rule is:\n\nThe rule is that you can bring any common, everyday food items to the game.\n\nThe items provided so far seem to be basic, commonly consumed food products that most people would have access to and consider \"everyday\" items.\n\nTherefore, my final guess for the secret rule is: \n\nThe rule allows you to bring any common, everyday food items to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

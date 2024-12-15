@@ -1,0 +1,25 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that have been referenced in a Nobel Prize-winning piece of literature can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 10.17,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Wine\" and \"bread\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the very limited information provided, I cannot confidently determine the specific rule. With only two examples (\"Wine\" and \"bread\"), there are too many possibilities. \n\nTo make a meaningful guess, I would need more context or additional example responses from the game master showing which items are accepted or rejected. Without more information, any rule guess would be purely speculative.\n\nWould you be willing to provide additional examples or details that could help me understand the underlying pattern or rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "Sure, here's another example: You can bring \"an apple.\""
+        }
+    ]
+}

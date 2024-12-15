@@ -1,0 +1,25 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that have a double letter in their names can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 6.35,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"apple\" and \"butter\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"apple\" and \"butter,\" my best guess for the secret rule is that the items must be food-related nouns. Both \"apple\" and \"butter\" are types of food, one being a fruit and the other a dairy product. Therefore, I would guess that the rule is that the items must be edible or related to food."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+To get the next value in the sequence, square the index and add 2 times the current value, then take the square root of the result and add 1.
+Multiply the input by 2 if the index is even; otherwise, subtract 1 from the input.
+Multiply the current value by the index + 2 and then subtract the index.
+Multiply the current value by the index, then add 1.
+Multiply the current value by the index, then add the index and square the index, and finally subtract the index from the result.
+The sequence multiplies the current value by 2 and adds 1 at each step.
+The sequence multiplies the current value by 3 and subtracts 4 at each step.
+The sequence adds 10 to the current value and then doubles the result at each step.
+The sequence halves the current value (rounded down) and adds 5 at each step.
+The sequence multiplies the current value by 4 and subtracts 6 at each step.

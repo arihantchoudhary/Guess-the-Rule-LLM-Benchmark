@@ -1,0 +1,73 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are commonly found in a supermarket can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 8.66,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Apples\" and \"bread\"."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring \"carrots\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring carrots."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring \"donuts\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring donuts."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring \"eggs\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring eggs."
+        },
+        {
+            "role": "user",
+            "content": "Player: I'd like to make a new guess. Can I bring \"fish\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring fish."
+        },
+        {
+            "role": "user",
+            "content": "Player: I'd like to make a new guess. Can I bring \"grapes\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring grapes."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to make a new guess. Can I bring \"honey\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring honey."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the confirmations from the game master, the pattern appears to be that you can bring items to the game as long as they are one-word food items that start with a lowercase letter. My best guess is that the rule is: \"You can bring any one-word food item that starts with a lowercase letter.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

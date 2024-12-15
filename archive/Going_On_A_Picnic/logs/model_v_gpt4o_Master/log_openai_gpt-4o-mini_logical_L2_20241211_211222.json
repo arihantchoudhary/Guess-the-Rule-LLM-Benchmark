@@ -1,0 +1,25 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L2",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that contains the letter 'a' and ends with the letter 's'.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 14.29,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"fruits\" and \"chairs\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the Game Master\u2014fruits and chairs\u2014it seems that the rule pertains to objects that serve a specific purpose or belong to a particular category. \n\nMy guess is that the rule is: \"Items that can be classified as everyday objects.\" Fruits are edible food items, and chairs are furniture used for sitting. Both items are commonly used in daily life.\n\nTherefore, I would guess that the secret rule is: \"Choose items that are common, everyday objects.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

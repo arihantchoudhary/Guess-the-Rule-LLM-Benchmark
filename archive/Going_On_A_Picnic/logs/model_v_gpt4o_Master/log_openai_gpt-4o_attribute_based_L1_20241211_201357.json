@@ -1,0 +1,57 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a bathroom can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 35.47,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"toothbrush\" and \"shampoo\"."
+        },
+        {
+            "role": "user",
+            "content": "Can I bring \"toothpaste\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring toothpaste."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"toothbrush,\" \"shampoo,\" and \"toothpaste\"), there may be a rule related to hygiene or personal care items. I'll make a new guess:\n\nCan I bring \"soap\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring soap."
+        },
+        {
+            "role": "user",
+            "content": "Based on the items that have been approved\u2014\"toothbrush,\" \"shampoo,\" \"toothpaste,\" and \"soap\"\u2014it seems likely that the rule involves hygiene or personal care items. To test this theory with a fresh guess, I\u2019ll ask:\n\nCan I bring \"deodorant\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring deodorant."
+        },
+        {
+            "role": "user",
+            "content": "Given the pattern of approved items so far\u2014\"toothbrush,\" \"shampoo,\" \"toothpaste,\" \"soap,\" and \"deodorant\"\u2014all of them seem to be items related to personal hygiene or grooming. To further test this theory, I will make a new guess:\n\nCan I bring \"lotion\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring lotion."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the history of approved items\u2014\"toothbrush,\" \"shampoo,\" \"toothpaste,\" \"soap,\" \"deodorant,\" and \"lotion\"\u2014the rule appears to involve items used for personal hygiene or grooming. These are all common products used to maintain cleanliness and hygiene. Therefore, my best guess is that the rule is: \"You can bring items that are related to personal hygiene or grooming.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 import { StartGamePayload, StartGameResponse, GuessResponse } from "@/lib/api";
 
-const API_BASE_URL = 'http://0.0.0.0:8000/guess-the-rule';
+const API_BASE_URL = 'http://localhost:8000/guess-the-rule';
 
 export const handleApiError = async (response: Response) => {
   if (!response.ok) {

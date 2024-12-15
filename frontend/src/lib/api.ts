@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://0.0.0.0:8000/guess-the-rule';
+const API_BASE_URL = 'http://localhost:8000/guess-the-rule';
 
 export interface StartGamePayload {
   domain: string;

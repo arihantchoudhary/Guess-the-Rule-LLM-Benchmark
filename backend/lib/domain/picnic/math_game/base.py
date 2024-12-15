@@ -27,15 +27,12 @@ claude_name_dict = {'claude-3-haiku': 'claude-3-haiku-20240307', 'claude-3.5-hai
 
 class MathBase:
     def __init__(self,
-                uuid,
                 difficulty,
                 rule_str=None,
                 rule_code=None,
                 gen_agent_type='gpt-4o-mini',
                 validate_agent_type='gpt-4o-mini'):
-        self.uuid = uuid
         self.domain = 'math'
-        self.game_gen_type = 'dynamic'
         self.difficulty = difficulty
         self.gen_sys_prompt = self.load_prompt('promptstrings/gen_sys_prompt_easy.txt')
         self.validate_sys_prompt = self.load_prompt('promptstrings/validate_sys_prompt.txt')
@@ -52,7 +49,6 @@ class MathBase:
         self.gen_sys_prompt += 'Here is some examples of L3 level math sequence description: ' + L3_examples_math_str
         self.gen_sys_prompt += 'Here is some examples of L3 level math sequence function: ' + L3_examples_math_fns
 
-        
         self.sequence_length = 15
         self.validate_agent_type = validate_agent_type
         self.gen_agent_type = gen_agent_type
@@ -72,6 +68,7 @@ class MathBase:
         return response
 
     def get_openai_response(self, prompt, model="gpt-4o-mini", sysprompt=None):
+        print(f"prompt: {prompt}")
         response = openai.chat.completions.create(model=model,
                 messages=[
                     {"role": "system", "content": sysprompt},
@@ -100,7 +97,7 @@ class MathBase:
         
     """" Get rule details"""
     def get_math_rule(self):
-        user_prompt = f'Your uuid is {self.uuid}. Please make sure your rule is different every time you generate a rule'
+        user_prompt = f'Please make sure your rule is different every time you generate a rule'
         user_prompt += f'difficulty: {self.difficulty}\n'
         user_prompt += 'please give me the math sequence and math function in the format of your system prompt'
         response = self.get_llm_response(user_prompt, self.gen_agent_type, self.gen_sys_prompt)   
@@ -128,7 +125,14 @@ class MathBase:
         Generate a sequence using the provided Python-style function code.
         """
         # Define the function from the generated code
-        exec(rule_code, globals())
+        while True:
+            try:
+                exec(rule_code, globals())
+                break
+            except Exception as e:
+                prompt = f'there is some bug in this code {rule_code}, and the error is {e}. please fix it. And please return the correct code without other workds'
+                rule_code = self.get_llm_response(prompt, model='gpt-4o-mini')
+                exec(rule_code, globals())
         sequence = []
         current_value = random.randint(-10, 10)
         for i in range(self.sequence_length):
@@ -148,13 +152,15 @@ class MathBase:
         return examples
     
     """ Process """
-    def get_more_examples(self):
+    def get_more_examples(self, num_examples=5):
         if self.rule_str is None:
             self.rule_str, self.rule_code = self.get_math_rule()
-        examples = self.generate_multi_sequence()
+        examples = self.generate_multi_sequence(num_examples)
         return examples
 
     def validate_result(self, guess):
+        if guess == 'give up':
+            return 'give up'
         user_prompt = ''
         user_prompt += f'the rule to guess is: {self.rule_str}\n'
         user_prompt += f'the rule of the generation function is {self.rule_code}\n'
@@ -162,8 +168,6 @@ class MathBase:
         validate_result = self.get_llm_response(user_prompt, self.validate_agent_type, self.validate_sys_prompt)
         return validate_result
     
-    
-
 
 class MathGuessTheRuleGame(GuessTheRuleGame):  
     def __init__(self, uuid=None, domain=None, difficulty=None, num_init_examples=None, game_gen_type=None, rule=None, rule_code=None):
@@ -206,7 +210,6 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         return response
     
     def make_init_system_message(self, generated_examples):
-        generated_examples_str = ', '.join(str(generated_examples))
         return (
             f"Let's play the game 'Find Principle Behind Math Sequence'.\n\n"
             f"I will give you some examples in each turn and you have to guess the underlying rule of the math sequence. "
@@ -214,7 +217,7 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
             f"Your score will be based on the number of turns taken, number of examples seen, "
             f"and overall time elapsed playing the game. The highest score will be for the fewest turns taken, "
             f"fewest examples seen, and shortest game played.\n\n"
-            f"The game master has given examples of items that fit the rule: {generated_examples_str}.\n\n"
+            f"The game master has given examples of items that fit the rule: {str(generated_examples)}.\n\n"
             f"Now given this information, do one of the following:\n"
             f"1. Make a new guess that hasn't been mentioned before.\n"
             f"2. Request more examples.\n"
@@ -231,7 +234,7 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         import uuid
         uuid = uuid.uuid4()
         self.uuid = uuid
-        self.math_base = MathBase(uuid, self.difficulty)
+        self.math_base = MathBase(self.difficulty)
         self.rule_str = self.math_base.rule_str
         self.rule_code = self.math_base.rule_code
         
@@ -245,12 +248,12 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         self.history = {"conversation": []}
         self.game_gen_type = 'dynamic'
 
+        print(f"Rule Str is {self.rule_str}")
+        print(f"Rule code is {self.rule_code}")
 
-
-        generated_examples = self.math_base.get_more_examples()
+        generated_examples = self.math_base.get_more_examples(num_examples=self.num_init_examples)
         system_message = self.make_init_system_message(generated_examples)
         self.add_to_conversation("assistant", system_message)
-        self.system_prompt = self.math_base.gen_sys_prompt
         
         self.save_game()
         return {
@@ -261,7 +264,7 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
             'start_time': time.ctime(int(self.start_time)), # FE IN
             'turns_taken': self.turns, # FE IN
             'status': self.status, # FE IN
-            'system_message': self.system_prompt, # FE IN
+            'system_message': system_message, # FE IN
         }
     
     def load_game(self, uuid_str=None):
@@ -300,7 +303,6 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         state['start_time'] = self.start_time
         state['game_end_time'] = self.game_end_time
 
-        print(f'state type: {type(state)}')
 
         filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
         temp_filename = filename + '.tmp'
@@ -333,6 +335,17 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
             'status': self.status,
             'system_message': system_message
         }
+    
+    def make_more_examples_system_message(self, generated_examples):
+        return (
+            f"The math sequence is {str(generated_examples)}, and they all obey the same rule.\n\n Your task is to guess the rule that generates these sequences.\n\n"
+            f"Now given this information, do one of the following:\n"
+            f"1. Make a new guess that hasn't been mentioned before.\n"
+            f"2. Request more examples.\n"
+            f"3. Type the rule if you think you've guessed it.\n\n"
+            f"What would you like to do?"
+        )
+
 
     def validate_guess(self, guess):
         """
@@ -345,8 +358,11 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
                 'guess_result': False,
                 'system_message': 'Cannot validate guess after the game is finished.'
             }
-        result = self.math_base.validate_result(guess)
+        
+        game = MathBase(difficulty=self.difficulty, rule_str=self.rule_str, rule_code=self.rule_code)
+        result = game.validate_result(guess)
         system_message = self.make_validate_guess_system_message(result)
+        print(f'system_message: {system_message}')
         self.add_to_conversation("assistant", system_message)
         
         self.save_game()
@@ -358,12 +374,26 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         }
     
     def make_validate_guess_system_message(self, guess_result):
-        if guess_result == 'True' or (type(guess_result) is str and "Yes" in guess_result):
+        if guess_result == 'give up':
+            self.status = 'lost'
+            self.game_end_time = time.time()
+            self.total_game_time = self.game_end_time - self.start_time
+            game_master_msg = f"You gave up! The actual rule was: {self.rule_str}"
+        elif guess_result == 'True' or (type(guess_result) is str and "Yes" in guess_result):
             game_master_msg = 'You guessed the rule correctly! Check your performance stats in the panel above. Thanks for playing!'
-            return game_master_msg
+            self.status = 'won'
+            self.game_end_time = time.time()
+            self.total_game_time = self.game_end_time - self.start_time
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
-            return game_master_msg
+        return game_master_msg
+        
+    def generate_examples(self, n):
+        examples = []
+        game = MathBase(difficulty=self.difficulty, rule_str=self.rule_str, rule_code=self.rule_code)
+        for i in range(n):
+            examples.append(game.generate_single_sequence(self.rule_code))
+        return str(examples)
 
     
 

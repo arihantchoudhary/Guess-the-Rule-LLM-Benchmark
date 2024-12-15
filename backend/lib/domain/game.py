@@ -22,9 +22,7 @@ def select_natural_language_game(game_gen_type):
 
 def select_math_game(game_gen_type):
     if game_gen_type == 'static':
-        return random.choice ([
-            MathGuessTheRuleGame
-        ])
+        pass
     else:
         return random.choice ([
             MathGuessTheRuleGame

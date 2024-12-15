@@ -191,7 +191,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'game_uuid': str(self.uuid),
             'status': self.status,
             'guess_result': result,
-            'system_message': system_message,
+            'system_message': f"{result} \n\n{system_message}",
         }
 
     def make_validate_guess_system_message(self, guess_result, guess):
@@ -201,8 +201,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         elif guess_result == "give up":
             return f"You gave up, the correct rule was: {self.rule}"
         elif isinstance(guess_result, str):
-            game_master_msg = f'Correct! you can bring {guess} to the picnic.'
-            return game_master_msg
+            return guess_result
         else:
             game_master_msg = "Incorrect guess. What would you like to do next?"
             return game_master_msg
@@ -221,8 +220,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 return True
         elif is_guess_rule == "example":
             result = self.check_example_guess(guess)
-            if "Yes" in result:
-                return result
+            return result
         elif is_guess_rule == "give up":
             self.status = 'lost'
             self.game_end_time = time.time()
@@ -268,20 +266,22 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
 
     def check_example_guess(self, example_guess):
         sys_prompt = (
-            f"You are an expert at evaluating whether specific examples satisfy a given rule. "
-            f"Your task is to determine if the provided example strictly adheres to the predefined rule. "
-            f"Use precise logic to evaluate the example, and consider only the information given in the predefined rule. "
-            f"Provide an accurate evaluation without additional explanation or commentary."
+            "You are an expert at evaluating whether specific examples satisfy a given rule. "
+            "Your task is to determine if the provided example strictly adheres to the predefined rule. "
+            "Use precise logic to evaluate the example, and consider only the information given in the predefined rule. "
+            "Provide an accurate evaluation without additional explanation or commentary."
         )
 
         prompt = (
             f"The predefined rule is: \"{self.rule}\".\n"
             f"The player's example guess is: \"{example_guess}\".\n\n"
-            f"Determine if the player's example satisfies the predefined rule. "
-            f"Respond with either \"yes\" if the example fits the rule, or \"no\" if it does not fit the rule. "
-            f"Do not provide any additional explanation or commentary.\n\n"
-            f"Format:\n"
-            f"[your final answer: yes or no]"
+            "Determine if the player's example satisfies the predefined rule. "
+            "Respond with only one of the following formats exactly:\n\n"
+            "1. Correct! You can bring <say the player's example guess>\n"
+            "2. Incorrect. You cannot bring <say the player's example guess>\n\n"
+            "Do not provide any additional explanation or commentary.\n\n"
+            "Format:\n"
+            "[your final answer: 1 or 2 with the corresponding message]"
         )
 
         messages = [
@@ -291,14 +291,13 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         
         max_retries = 3
         for attempt in range(max_retries):
-            response = self.get_llm_model_response(messages).strip().lower()
+            response = self.get_llm_model_response(messages).strip()
             
-            if "yes" in response:
-                return f"Yes, you can bring {example_guess} to the picnic!"
-            elif "no" in response:
-                return f"No, you cannot bring {example_guess} to the picnic."
+            if "1." in response or "2." in response:
+                return response
             else:
                 self.logger.warning(f"Unexpected response from model on attempt {attempt + 1}: {response}")
+        
         self.logger.error(f"Model failed to return a valid response after {max_retries} retries: {response}")
         raise ValueError(f"Model failed to return a valid response after {max_retries} retries.")
 

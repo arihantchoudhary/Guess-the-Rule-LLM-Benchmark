@@ -70,7 +70,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
             'total_pos_examples_shown': self.total_pos_examples_shown,
             'total_neg_examples_shown': self.total_neg_examples_shown,
             'status': self.status,
-            'system_message': system_message
+            'system_message': system_message,
+            'generated_examples': list(self.generated_examples) if hasattr(self, 'generated_examples') else [],
+            'player_guesses': list(self.player_guesses) if hasattr(self, 'player_guesses') else []
         }
         if include_rule or self.status in ['won', 'lost']:
             response['rule'] = self.rule
@@ -93,8 +95,13 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         self.history = {"conversation": []}
         self.status = 'ongoing'
 
-        generated_examples = self.generate_examples()
-        system_message = self.make_init_system_message(generated_examples)
+        self.generated_examples = set()
+        self.player_guesses = set()
+
+        genned_examples = self.generate_examples()
+        self.generated_examples.update(example.lower() for example in genned_examples)
+        
+        system_message = self.make_init_system_message(genned_examples)
         self.add_to_conversation("assistant", system_message)
         
         self.save_game()
@@ -127,6 +134,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         game.__dict__.update(state)
         game.uuid = uuid.UUID(game.uuid)
 
+        game.generated_examples = set(example.lower() for example in state.get('generated_examples', []))
+        game.player_guesses = set(guess.lower() for guess in state.get('player_guesses', []))
+
         return game
     
     def save_game(self):
@@ -135,6 +145,9 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         state['uuid'] = str(self.uuid)
         state['start_time'] = self.start_time
         state['game_end_time'] = self.game_end_time
+
+        state['generated_examples'] = list(self.generated_examples)
+        state['player_guesses'] = list(self.player_guesses)
 
         filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.json")
         temp_filename = filename + '.tmp'
@@ -164,6 +177,8 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 'system_message': 'Cannot provide more examples after the game is finished.'
             }
         generated_examples = self.generate_examples(n)
+        self.generated_examples.update(example.lower() for example in generated_examples)
+
         system_message = self.make_more_examples_system_message(generated_examples)
         self.add_to_conversation("assistant", system_message)
 
@@ -219,6 +234,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
                 self.total_game_time = self.game_end_time - self.start_time
                 return True
         elif is_guess_rule == "example":
+            self.player_guesses.add(guess.strip().lower())
             result = self.check_example_guess(guess)
             return result
         elif is_guess_rule == "give up":
@@ -354,12 +370,19 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
     
     def generate_examples(self, num_examples=2):
         self.turns += 1
+
+        existing_generated = ', '.join(self.generated_examples) if self.generated_examples else 'none'
+        existing_guesses = ', '.join(self.player_guesses) if self.player_guesses else 'none'
+
         prompt = (
-            f"You are an assistant helping to generate examples for a game called \"Guess the Rule Games.\"\n\n"
+            f"You are an assistant helping to generate examples for a game called \"Guess the Rule Games.\".\n\n"
             f"The secret rule is: {self.rule}\n\n"
-            f"Your task is to provide {num_examples} examples of items that satisfy the secret rule.\n\n"
+            f"Here are the examples that have already been provided by the game master: {existing_generated}.\n"
+            f"Here are the examples that the player has already guessed: {existing_guesses}.\n\n"
+            f"Your task is to provide {num_examples} new and unique examples of items that satisfy the secret rule.\n\n"
             f"- Only provide the items in a simple, comma-separated list.\n"
             f"- Do not mention the secret rule.\n"
+            f"- Do not repeat any examples already provided by the game master or guessed by the player.\n"
             f"- Do not provide any additional explanation or text.\n\n"
             f"Format:\n\n"
             f"[item1], [item2], ..., [item{num_examples}]"

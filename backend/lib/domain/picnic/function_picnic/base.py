@@ -374,6 +374,7 @@ class LexicalFunctionGame(GuessTheRuleGame):
         print(f"Judge model {self.judge_model} response: {is_correct}")
         if is_correct:
             self.win = True
+            self.status = 'win'
             self.game_end_time = time.time()
             self.total_game_time = self.game_end_time - self.start_time
 
@@ -579,28 +580,26 @@ if __name__ == "__main__":
     difficulties = ['L1']
     # max_turns_options = [1, 3, 5, 7]
     max_turns_options = [3]
-    iterations = 5
+    iterations = 2
     results = []
 
     for platform in llm_models:
         for model in llm_models[platform]:
             for difficulty in difficulties:
-                for max_turns in max_turns_options:
-                    for iteration in range(iterations):
-                        start_time = time.time()
-                        game = GuessingGame(
-                            random.getstate(), 
-                            domain='lexical', 
-                            difficulty=difficulty, 
-                            init_examples=None, 
-                            use_llm=True
-                        )
-                        
-                        pos_exs, neg_exs = [], []
-                        for _ in range(5):
-                            pos, neg = make_example_pair(game)
-                            pos_exs, neg_exs = pos_exs+[pos], neg_exs+[neg]
-
+                for iteration in range(iterations):
+                    start_time = time.time()
+                    game = GuessingGame(
+                        random.getstate(), 
+                        domain='lexical', 
+                        difficulty=difficulty, 
+                        init_examples=None, 
+                        use_llm=True
+                    )
+                    pos_exs, neg_exs = [], []
+                    for _ in range(5):
+                        pos, neg = make_example_pair(game)
+                        pos_exs, neg_exs = pos_exs+[pos], neg_exs+[neg]
+                    for max_turns in max_turns_options:
                         # Game loop
                         turns_taken = 0
                         examples_shown = 10

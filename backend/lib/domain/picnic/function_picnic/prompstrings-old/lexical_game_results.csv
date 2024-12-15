@@ -1,0 +1,439 @@
+Model,Win,Difficulty,Max_Turns,Iteration,Rule,Turns_Taken,Duration,Examples_Shown
+gpt-4o-mini,0,L1,1,1,"def is_first_letter_consonant(word):
+    return word[0].lower() not in 'aeiou'
+generated_fn = is_first_letter_consonant
+",1,7.39,4
+gpt-4o-mini,0,L1,1,2,"def is_length_multiple_of_three(word):
+    return len(word) % 3 == 0
+generated_fn = is_length_multiple_of_three
+",1,6.86,4
+gpt-4o-mini,0,L1,1,3,"def has_more_even_indexed_letters(word):
+    even_indexed_count = sum(1 for i in range(0, len(word), 2))
+    return even_indexed_count > len(word) // 2
+generated_fn = has_more_even_indexed_letters
+",1,7.49,4
+gpt-4o-mini,0,L1,1,4,"def is_three_or_more_vowels(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count >= 3
+generated_fn = is_three_or_more_vowels
+",1,6.12,4
+gpt-4o-mini,0,L1,1,5,"def has_odd_length_and_ends_with_vowel(word):
+    return len(word) % 2 != 0 and word[-1].lower() in 'aeiou'
+generated_fn = has_odd_length_and_ends_with_vowel
+",1,6.18,4
+gpt-4o-mini,0,L1,3,1,"def is_length_greater_than_four(word):
+    return len(word) > 4
+generated_fn = is_length_greater_than_four
+",3,12.63,8
+gpt-4o-mini,0,L1,3,2,"def is_length_prime(word):
+    def is_prime(n):
+        if n < 2:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+    
+    return is_prime(len(word))
+
+generated_fn = is_length_prime
+",1,7.72,4
+gpt-4o-mini,0,L1,3,3,"def is_odd_length_and_contains_s(word):
+    return len(word) % 2 != 0 and 's' in word.lower()
+generated_fn = is_odd_length_and_contains_s
+",3,10.33,8
+gpt-4o-mini,0,L1,3,4,"def has_odd_number_of_vowels(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 2 != 0
+generated_fn = has_odd_number_of_vowels
+",3,11.64,8
+gpt-4o-mini,0,L1,3,5,"def is_unique_length(word):
+    return len(word) == len(set(word.lower()))
+generated_fn = is_unique_length
+",3,15.57,8
+gpt-4o-mini,0,L1,5,1,"def has_distinct_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return vowel_count != len(set(char for char in word.lower() if char in vowels))
+
+generated_fn = has_distinct_vowel_count
+",5,26.9,12
+gpt-4o-mini,0,L1,5,2,"def has_odd_length_and_contains_e(word):
+    return len(word) % 2 != 0 and 'e' in word.lower()
+generated_fn = has_odd_length_and_contains_e
+",5,14.45,12
+gpt-4o-mini,0,L1,5,3,"def is_vowel_end(word):
+    return word[-1].lower() in 'aeiou'
+generated_fn = is_vowel_end
+",5,14.49,12
+gpt-4o-mini,0,L1,5,4,"def is_length_divisible_by_five(word):
+    return len(word) % 5 == 0
+generated_fn = is_length_divisible_by_five
+",5,16.45,12
+gpt-4o-mini,0,L1,5,5,"def has_odd_number_of_letters(word):
+    return len(word) % 2 != 0
+generated_fn = has_odd_number_of_letters
+",5,23.98,12
+gpt-4o-mini,0,L1,7,1,"def is_even_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    count = sum(1 for char in word.lower() if char in consonants)
+    return count % 2 == 0
+generated_fn = is_even_consonant_count
+",7,16.23,16
+gpt-4o-mini,0,L1,7,2,"def has_more_unique_consonants(word):
+    vowels = 'aeiou'
+    unique_consonants = set(char.lower() for char in word if char.isalpha() and char.lower() not in vowels)
+    return len(unique_consonants) > len(set(word.lower())) / 2
+generated_fn = has_more_unique_consonants
+",7,18.63,16
+gpt-4o-mini,0,L1,7,3,"def is_starts_with_consonant_and_even_length(word):
+    return word[0].lower() not in 'aeiou' and len(word) % 2 == 0
+generated_fn = is_starts_with_consonant_and_even_length
+",7,16.15,16
+gpt-4o-mini,0,L1,7,4,"def has_odd_number_of_total_letters(word):
+    return len(word) % 2 != 0
+generated_fn = has_odd_number_of_total_letters
+",7,17.73,16
+gpt-4o-mini,0,L1,7,5,"def is_unique_length_and_contains_vowel(word):
+    return len(word) == len(set(word.lower())) and any(char in 'aeiou' for char in word.lower())
+generated_fn = is_unique_length_and_contains_vowel
+",7,27.13,16
+gpt-4o,0,L1,1,1,"def is_unique_length_with_even_letters(word):
+    return len(word) == len(set(word.lower())) and len(word) % 2 == 0
+generated_fn = is_unique_length_with_even_letters
+",1,6.39,4
+gpt-4o,0,L1,1,2,"def has_odd_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 2 != 0
+generated_fn = has_odd_vowel_count
+",1,11.3,4
+gpt-4o,0,L1,1,3,"def is_even_indexed_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for i in range(0, len(word), 2) if word[i].lower() in vowels)
+    return count % 2 == 0
+
+generated_fn = is_even_indexed_vowel_count
+",1,12.81,4
+gpt-4o,0,L1,1,4,"def is_unique_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count == len(set(char for char in word.lower() if char in vowels))
+
+generated_fn = is_unique_vowel_count
+",1,6.98,4
+gpt-4o,0,L1,1,5,"def is_unique_length_with_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_with_odd_vowel_count
+",1,7.31,4
+gpt-4o,0,L1,3,1,"def is_length_greater_than_three_and_starts_with_consonant(word):
+    return len(word) > 3 and word[0].lower() not in 'aeiou'
+generated_fn = is_length_greater_than_three_and_starts_with_consonant
+",3,9.05,8
+gpt-4o,0,L1,3,2,"def is_consonant_start_and_even_length(word):
+    return word[0].lower() not in 'aeiou' and len(word) % 2 == 0
+generated_fn = is_consonant_start_and_even_length
+",3,12.91,8
+gpt-4o,0,L1,3,3,"def is_unique_length_with_even_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 0
+
+generated_fn = is_unique_length_with_even_vowel_count
+",3,9.84,8
+gpt-4o,0,L1,3,4,"def has_odd_length_and_ends_with_consonant(word):
+    return len(word) % 2 != 0 and word[-1].lower() not in 'aeiou'
+generated_fn = has_odd_length_and_ends_with_consonant
+",3,11.01,8
+gpt-4o,0,L1,3,5,"def has_even_sum_of_ascii_values(word):
+    return sum(ord(char) for char in word) % 2 == 0
+generated_fn = has_even_sum_of_ascii_values
+",3,9.7,8
+gpt-4o,0,L1,5,1,"def is_vowel_count_multiple_of_three(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 3 == 0
+generated_fn = is_vowel_count_multiple_of_three
+",5,12.08,12
+gpt-4o,0,L1,5,2,"def is_length_multiple_of_four(word):
+    return len(word) % 4 == 0
+generated_fn = is_length_multiple_of_four
+",5,15.13,12
+gpt-4o,0,L1,5,3,"def has_distinct_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return vowel_count >= 2 and vowel_count % 2 == 0
+
+generated_fn = has_distinct_vowel_count
+",5,14.08,12
+gpt-4o,0,L1,5,4,"def is_unique_even_length(word):
+    return len(word) == len(set(word.lower())) and len(word) % 2 == 0
+generated_fn = is_unique_even_length
+",4,17.98,10
+gpt-4o,0,L1,5,5,"def has_equal_vowels_and_consonants(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return vowel_count == consonant_count
+generated_fn = has_equal_vowels_and_consonants
+",5,14.09,12
+gpt-4o,0,L1,7,1,"def has_even_length_and_contains_a(word):
+    return len(word) % 2 == 0 and 'a' in word.lower()
+generated_fn = has_even_length_and_contains_a
+",7,21.84,16
+gpt-4o,0,L1,7,2,"def is_multiple_of_three_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 3 == 0
+
+generated_fn = is_multiple_of_three_vowel_count
+",7,17.68,16
+gpt-4o,0,L1,7,3,"def is_length_divisible_by_seven(word):
+    return len(word) % 7 == 0
+generated_fn = is_length_divisible_by_seven
+",7,17.92,16
+gpt-4o,0,L1,7,4,"def is_unique_length_with_odd_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_with_odd_consonants
+",7,15.73,16
+gpt-4o,0,L1,7,5,"def is_even_indexed_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for i in range(0, len(word), 2) if word[i].lower() in vowels)
+    return count % 2 == 0
+
+generated_fn = is_even_indexed_vowel_count
+",7,18.81,16
+claude-3-haiku-20240307,0,L1,1,1,"def is_length_greater_than_two_and_contains_r(word):
+    return len(word) > 2 and 'r' in word.lower()
+generated_fn = is_length_greater_than_two_and_contains_r
+",1,5.13,4
+claude-3-haiku-20240307,0,L1,1,2,"def has_odd_vowel_difference(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return abs(vowel_count - consonant_count) % 2 != 0
+
+generated_fn = has_odd_vowel_difference
+",1,5.74,4
+claude-3-haiku-20240307,0,L1,1,3,"def is_unique_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    count = sum(1 for char in word.lower() if char in consonants)
+    return count == len(set(char for char in word.lower() if char in consonants))
+
+generated_fn = is_unique_consonant_count
+",1,5.51,4
+claude-3-haiku-20240307,0,L1,1,4,"def has_even_length_and_first_letter_vowel(word):
+    return len(word) % 2 == 0 and word[0].lower() in 'aeiou'
+generated_fn = has_even_length_and_first_letter_vowel
+",1,13.82,4
+claude-3-haiku-20240307,0,L1,1,5,"def is_length_greater_than_five_and_contains_t(word):
+    return len(word) > 5 and 't' in word.lower()
+
+generated_fn = is_length_greater_than_five_and_contains_t
+",1,5.23,4
+claude-3-haiku-20240307,0,L1,3,1,"def is_length_odd_and_has_unique_chars(word):
+    return len(word) % 2 != 0 and len(word) == len(set(word.lower()))
+
+generated_fn = is_length_odd_and_has_unique_chars
+",3,6.49,8
+claude-3-haiku-20240307,0,L1,3,2,"def is_unique_length_and_contains_odd_vowels(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_vowels
+",3,5.98,8
+claude-3-haiku-20240307,0,L1,3,3,"def is_length_even_and_starts_with_vowel(word):
+    return len(word) % 2 == 0 and word[0].lower() in 'aeiou'
+generated_fn = is_length_even_and_starts_with_vowel
+",3,17.22,8
+claude-3-haiku-20240307,0,L1,3,4,"def is_length_greater_than_four_and_ends_with_consonant(word):
+    return len(word) > 4 and word[-1].lower() not in 'aeiou'
+generated_fn = is_length_greater_than_four_and_ends_with_consonant
+",3,6.94,8
+claude-3-haiku-20240307,0,L1,3,5,"def has_odd_length_and_contains_y(word):
+    return len(word) % 2 != 0 and 'y' in word.lower()
+generated_fn = has_odd_length_and_contains_y
+",3,11.18,8
+claude-3-haiku-20240307,0,L1,5,1,"def is_length_divisible_by_six(word):
+    return len(word) % 6 == 0
+generated_fn = is_length_divisible_by_six
+",5,12.09,12
+claude-3-haiku-20240307,0,L1,5,2,"def is_unique_vowel_count_even(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    unique_vowels = len(set(char for char in word.lower() if char in vowels))
+    return unique_vowels > 0 and vowel_count % 2 == 0
+
+generated_fn = is_unique_vowel_count_even
+",5,7.19,12
+claude-3-haiku-20240307,0,L1,5,3,"def is_first_half_consonant_count_greater(word):
+    half_length = len(word) // 2
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count_first_half = sum(1 for char in word[:half_length].lower() if char in consonants)
+    return consonant_count_first_half > half_length / 2
+generated_fn = is_first_half_consonant_count_greater
+",5,15.54,12
+claude-3-haiku-20240307,0,L1,5,4,"def has_odd_sum_ascii(word):
+    return sum(ord(char) for char in word) % 2 != 0
+generated_fn = has_odd_sum_ascii
+",5,5.93,12
+claude-3-haiku-20240307,0,L1,5,5,"def is_length_even_and_contains_a(word):
+    return len(word) % 2 == 0 and 'a' in word.lower()
+generated_fn = is_length_even_and_contains_a
+",5,13.85,12
+claude-3-haiku-20240307,0,L1,7,1,"def is_even_indexed_consonant_count_greater(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    even_indexed_consonant_count = sum(1 for i in range(0, len(word), 2) if word[i].lower() in consonants)
+    return even_indexed_consonant_count > len(word) // 2
+
+generated_fn = is_even_indexed_consonant_count_greater
+",7,8.49,16
+claude-3-haiku-20240307,0,L1,7,2,"def is_sum_of_ascii_values_odd(word):
+    return sum(ord(char) for char in word) % 2 != 0
+
+generated_fn = is_sum_of_ascii_values_odd
+",7,6.25,16
+claude-3-haiku-20240307,0,L1,7,3,"def is_length_multiple_of_three_and_contains_e(word):
+    return len(word) % 3 == 0 and 'e' in word.lower()
+generated_fn = is_length_multiple_of_three_and_contains_e
+",7,7.04,16
+claude-3-haiku-20240307,0,L1,7,4,"def has_even_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 2 == 0
+
+generated_fn = has_even_vowel_count
+",7,6.69,16
+claude-3-haiku-20240307,0,L1,7,5,"def is_unique_starting_letter(word):
+    return word[0].lower() not in word[1:].lower()
+
+generated_fn = is_unique_starting_letter
+",7,15.49,16
+gemini-1.5-flash,0,L1,1,1,"def is_odd_vowel_and_consonant_difference(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return abs(vowel_count - consonant_count) % 2 != 0
+
+generated_fn = is_odd_vowel_and_consonant_difference
+",1,14.86,4
+gemini-1.5-flash,0,L1,1,2,"def is_unique_length_with_even_sum_ascii(word):
+    return len(word) == len(set(word.lower())) and sum(ord(char) for char in word) % 2 == 0
+
+generated_fn = is_unique_length_with_even_sum_ascii
+",1,14.27,4
+gemini-1.5-flash,0,L1,1,3,"def is_length_greater_than_five_and_contains_r(word):
+    return len(word) > 5 and 'r' in word.lower()
+generated_fn = is_length_greater_than_five_and_contains_r
+",1,14.68,4
+gemini-1.5-flash,0,L1,1,4,"def is_unique_length_and_ends_with_vowel(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() in 'aeiou'
+generated_fn = is_unique_length_and_ends_with_vowel
+",1,14.84,4
+gemini-1.5-flash,0,L1,1,5,"def is_unique_length_with_odd_ascii_sum(word):
+    return len(word) == len(set(word.lower())) and sum(ord(char) for char in word) % 2 != 0
+
+generated_fn = is_unique_length_with_odd_ascii_sum
+",1,15.04,4
+gemini-1.5-flash,0,L1,3,1,"def has_odd_vowel_count(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 2 != 0
+
+generated_fn = has_odd_vowel_count
+",3,32.96,8
+gemini-1.5-flash,0,L1,3,2,"def is_vowel_count_greater_than_consonant_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return vowel_count > consonant_count
+generated_fn = is_vowel_count_greater_than_consonant_count
+",3,41.41,8
+gemini-1.5-flash,0,L1,3,3,"def is_unique_length_with_odd_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_with_odd_consonants
+",3,48.07,8
+gemini-1.5-flash,0,L1,3,4,"def is_length_greater_than_three_and_has_unique_chars(word):
+    return len(word) > 3 and len(word) == len(set(word.lower()))
+
+generated_fn = is_length_greater_than_three_and_has_unique_chars
+",3,33.2,8
+gemini-1.5-flash,0,L1,3,5,"def is_sum_of_unique_indices_even(word):
+    unique_indices_sum = sum(i for i in range(len(word)) if word[i].lower() not in 'aeiou')
+    return unique_indices_sum % 2 == 0
+generated_fn = is_sum_of_unique_indices_even
+",3,34.27,8
+gemini-1.5-flash,0,L1,5,1,"def is_length_and_vowel_count_rule(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 2 == 0 and vowel_count % 2 != 0
+
+generated_fn = is_length_and_vowel_count_rule
+",5,53.2,12
+gemini-1.5-flash,0,L1,5,2,"def is_repeating_consonant_pattern(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    return any(word.lower().count(char) > 1 for char in consonants if char in word.lower())
+
+generated_fn = is_repeating_consonant_pattern
+",5,53.73,12
+gemini-1.5-flash,0,L1,5,3,"def is_odd_length_and_consonant_start(word):
+    return len(word) % 2 != 0 and word[0].lower() not in 'aeiou'
+generated_fn = is_odd_length_and_consonant_start
+",5,51.26,12
+gemini-1.5-flash,0,L1,5,4,"def is_length_multiple_of_five(word):
+    return len(word) % 5 == 0
+generated_fn = is_length_multiple_of_five
+",5,51.12,12
+gemini-1.5-flash,0,L1,5,5,"def is_alternating_vowel_consonant_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = len(word) - vowel_count
+    return (vowel_count + consonant_count) % 2 == 0
+
+generated_fn = is_alternating_vowel_consonant_count
+",5,52.31,12
+gemini-1.5-flash,0,L1,7,1,"def is_length_and_unique_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) % 2 == 0 and len(set(char for char in word.lower() if char in consonants)) == consonant_count
+
+generated_fn = is_length_and_unique_consonant_count
+",7,71.16,16
+gemini-1.5-flash,0,L1,7,2,"def is_unique_length_and_even_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 == 0
+
+generated_fn = is_unique_length_and_even_consonant_count
+",7,72.0,16
+gemini-1.5-flash,0,L1,7,3,"def is_unique_end_and_odd_length(word):
+    return word[-1].lower() not in word[:-1].lower() and len(word) % 2 != 0
+
+generated_fn = is_unique_end_and_odd_length
+",7,74.43,16
+gemini-1.5-flash,0,L1,7,4,"def is_unique_length_and_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_vowel_count
+",7,71.0,16
+gemini-1.5-flash,0,L1,7,5,"def is_odd_length_with_even_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 2 != 0 and vowel_count % 2 == 0
+
+generated_fn = is_odd_length_with_even_vowel_count
+",7,70.24,16

@@ -11,8 +11,12 @@ import time
 import json
 from lib.domain.base import GuessTheRuleGame
 from lib.domain.common import GAMES_SAVE_DIR
+import anthropic
+import google.generativeai
 
 import pdb
+
+import pandas as pd
 
 # Set your OpenAI API key (or any other LLM provider's key)
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
@@ -23,7 +27,25 @@ if not OPENAI_KEY and os.path.exists('/mnt/c/Users/juno/Desktop/llmstuff/secretk
         OPENAI_KEY = f.read().strip()
         OpenAI.api_key = OPENAI_KEY
 
-client = OpenAI(api_key=OPENAI_KEY)
+openai_client = client = OpenAI(api_key=OPENAI_KEY)
+
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+google.generativeai.configure(api_key=GOOGLE_API_KEY)
+
+# juno : for testing purposes
+if not GOOGLE_API_KEY and os.path.exists('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_goog'):
+    with open('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_goog', 'r') as f:
+        GOOGLE_API_KEY = f.read().strip()
+        google.generativeai.configure(api_key=GOOGLE_API_KEY)
+
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
+# juno : for testing purposes
+if not GOOGLE_API_KEY and os.path.exists('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_claude'):
+    with open('/mnt/c/Users/juno/Desktop/llmstuff/secretkey_claude', 'r') as f:
+        ANTHROPIC_API_KEY = f.read().strip()
+        anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 # Function to send a prompt to the LLM and get the response
 def get_llm_response(prompt, sysprompt=None):
@@ -56,7 +78,7 @@ def write_history(filename, txt):
     return
 class GuessingGame:
 
-    def __init__(self, rngstate, domain=None, difficulty=None, init_examples=None, use_llm=False):
+    def __init__(self, rngstate, domain=None, difficulty=None, init_examples=None, use_llm=True):
         self.rngstate = rngstate
         self.domain = domain
         self.difficulty = difficulty
@@ -77,6 +99,9 @@ class GuessingGame:
         if self.init_examples:
             prompt += f"Examples: {self.init_examples}\n\n"
         # don't repeat
+        prompt += 'Here are some BAD examples, which did not evenly split between True/False:\n'
+        prompt += read_promptstring(f'negative_history_{self.difficulty}.txt')
+        prompt += 'Here are some GOOD examples (which you should reference, but not copy):\n'
         prompt += read_promptstring(f'history_{self.difficulty}.txt')
         prompt += "Generated code:"
 
@@ -100,7 +125,15 @@ class GuessingGame:
         except SyntaxError as e:
             print("Syntax Error in Generated Code:", e)
             return
-        # print(generated_fn)
+        # test if it's a reasonable rule (sometimes true/false)
+        exs = [self.wordgen_fn() for _ in range(50)]
+        exs = [generated_fn(ex) for ex in exs]
+        if not 4 < sum(exs) < 46:
+            print('debug: rule failed', sum(exs))
+            write_history(f'negative_history_{self.difficulty}.txt', ans_strip)
+            return self.generate_rule_chatgpt()
+        else:
+            print('debug: rule success', sum(exs))
         self.rngstate = random.getstate()
         write_history(f'history_{self.difficulty}.txt', ans_strip)
         return ans_strip, generated_fn
@@ -152,7 +185,8 @@ class GuessingGame:
         prompt += guess
         ans = get_llm_response(prompt=prompt, sysprompt=sysprompt)
         ans = ans.strip()
-        print('debug: ' + ans)
+        print('debug (guess): ' + guess)
+        print('debug (judge): ' + ans)
         ans_last = ans.split()[-1]
         print('debug: ' + ans_last)
         if ans_last not in ['YES', 'NO']:
@@ -349,18 +383,163 @@ class LexicalFunctionGame(GuessTheRuleGame):
 #             random_word, is_rule_true = game.generate_example()
 #             print(random_word, is_rule_true)
 
-# if __name__ == "__main__":
-#     if sys.flags.interactive:
-#         print('Interactive mode')
-#         print('Help (Function Signatures):')
-#         print('------------------------------')
-#         print('request_game_instance(domain=None, difficulty=None, init_examples=None, use_llm=False)')
-#         print('request_more_examples(game_id)')
-#         print('request_guess_validation(game_id, guess)')
-#         init_examples_std_lexical_fns = read_promptstring('init_examples_std_lexical_fns.txt')
-#         print('------------------------------')
-#         game = GuessingGame(random.getstate(), init_examples=init_examples_std_lexical_fns,
-#             use_llm=True)
-#         pass
-#     else:
-#         main()
+def get_llm_model_response(platform, model, message_history):
+    if platform == 'openai':
+        response = openai_client.chat.completions.create(
+            model=model,
+            messages=message_history
+        )
+        return response.choices[0].message.content.strip().lower()
+    elif platform == 'anthropic':
+        system_prompt = ''
+        user_prompts = []
+        for m in message_history:
+            if not system_prompt and m['role'] == 'system':
+                system_prompt += m['content']
+            elif m['role'] == 'user':
+                user_prompts.append(m)
+
+        response = anthropic_client.messages.create(
+            max_tokens=1024,
+            system=system_prompt,
+            messages=user_prompts,
+            model=model,
+        )
+        return response.content[0].text.strip().lower()
+    elif platform == 'google':
+        # change the format of message history for google's model
+        google_messages_history = []
+        for m in range(len(message_history) - 1):
+            curr_message = message_history[m]
+            if curr_message['role'] == 'system':
+                google_messages_history.append({'role': 'model', 'parts': curr_message['content']})
+            elif curr_message['role'] == 'user':
+                google_messages_history.append({'role': 'user', 'parts': curr_message['content']})
+
+        gen_model = google.generativeai.GenerativeModel(model)
+        chat = gen_model.start_chat(
+            history=google_messages_history
+        )
+        response = chat.send_message(message_history[-1]['content'])
+        return response.text
+    else:
+        assert False, f'Unknown platform {platform} given'
+
+def simulate_llm_guess(game, examples, platform, model):
+    prompt = (
+        f"You are playing a game called 'Going on a Picnic'. Your goal is to guess the rule behind a set of examples.\n"
+        f"Examples of items I can bring: {', '.join(examples[0])}\n"
+        f"Examples of items I cannot bring: {', '.join(examples[1])}\n"
+        f"Based on these examples, what do you think is the rule for items that can be brought on the picnic?\n"
+        f"Your answer should be in the format: 'Items from the category/categories <category>'"
+    )
+    
+    message_history = [
+        {"role": "system", "content": "You are playing a game called 'Going on a Picnic'. Your goal is to guess the rule behind a set of examples."},
+        {"role": "user", "content": prompt}
+    ]
+    
+    try:
+        llm_guess = get_llm_model_response(platform, model, message_history)
+        return llm_guess
+    except Exception as e:
+        print(f"Error during LLM interaction: {e}")
+        return None
+
+def make_example_pair(game):
+    ans = [None, None]
+    while not (ans[0] and ans[1]):
+        word, boole = game.generate_example()
+        print('debug pair', word, boole)
+        boole = int(boole)
+        ans[boole] = word
+    return ans
+
+if __name__ == "__main__":
+    # game = GuessingGame(random.getstate(), domain='lexical', difficulty='L1', init_examples=None, use_llm=True)
+    # print(game.rule_code)
+    llm_models = {
+        'openai': ['gpt-4o-mini', 'gpt-4o'],
+        'anthropic': ['claude-3-haiku-20240307'],
+        'google': ['gemini-1.5-flash']
+    }
+
+    # Test parameters
+    difficulties = ['L1']
+    max_turns_options = [1, 3, 5, 7]
+    iterations = 5
+    results = []
+
+    for platform in llm_models:
+        for model in llm_models[platform]:
+            for difficulty in difficulties:
+                for max_turns in max_turns_options:
+                    for iteration in range(iterations):
+                        start_time = time.time()
+                        game = GuessingGame(
+                            random.getstate(), 
+                            domain='lexical', 
+                            difficulty=difficulty, 
+                            init_examples=None, 
+                            use_llm=True
+                        )
+                        
+                        pos, neg = make_example_pair(game)
+                        pos_exs, neg_exs = [pos], [neg]
+
+                        # Game loop
+                        turns_taken = 0
+                        examples_shown = 2
+                        win = False
+                        
+                        while turns_taken < max_turns:
+                            turns_taken += 1
+                            # examples = game.generate_example()
+                            pos, neg = make_example_pair(game)
+                            pos_exs.append(pos)
+                            neg_exs.append(neg)
+
+                            examples_shown += 2
+                            
+                            # Simulate LLM guess (you'll need to implement actual LLM interaction)
+                            try:
+                                llm_guess = simulate_llm_guess(game, (pos_exs, neg_exs), platform, model)
+                                if llm_guess:
+                                    guess = game.validate_guess(llm_guess)
+                                    if guess:
+                                        win = True
+                                        break
+                            except Exception as e:
+                                print(f"Error during validation: {e}")
+                                break
+                        
+                        duration = time.time() - start_time
+                        
+                        # Record results
+                        results.append({
+                            "Model": model,
+                            "Win": 1 if win else 0,
+                            "Difficulty": difficulty,
+                            "Max_Turns": max_turns,
+                            "Iteration": iteration + 1,
+                            "Rule": game.rule_code,
+                            "Turns_Taken": turns_taken,
+                            "Duration": round(duration, 2),
+                            "Examples_Shown": examples_shown
+                        })
+
+    # Create and save results
+    df = pd.DataFrame(results)
+    df.to_csv(f"lexical_game_results.csv", index=False)
+
+    # Generate summary statistics
+    summary = df.groupby(['Model', 'Difficulty', 'Max_Turns']).agg({
+        'Win': 'mean',
+        'Turns_Taken': 'mean',
+        'Duration': 'mean',
+        'Examples_Shown': 'mean'
+    }).round(2)
+
+    summary.to_csv(f"lexical_game_summary.csv")
+    print("\nResults Summary:")
+    print(summary)

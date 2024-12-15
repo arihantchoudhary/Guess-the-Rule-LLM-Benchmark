@@ -1,0 +1,122 @@
+def is_palindrome(word):
+    return word.lower() == word[::-1].lower()
+generated_fn = is_palindrome
+def is_containing_digit(word):
+    return any(char.isdigit() for char in word)
+generated_fn = is_containing_digit
+def has_more_vowels_than_consonants(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return vowel_count > consonant_count
+generated_fn = has_more_vowels_than_consonants
+def has_more_than_two_unique_letters(word):
+    return len(set(word.lower())) > 2
+generated_fn = has_more_than_two_unique_letters
+def is_alternating_case(word):
+    return all(word[i].islower() != word[i + 1].islower() for i in range(len(word) - 1))
+generated_fn = is_alternating_case
+def is_alphabetical_order(word):
+    return list(word.lower()) == sorted(word.lower())
+generated_fn = is_alphabetical_order
+def has_distinct_first_and_last_letters(word):
+    return word[0].lower() != word[-1].lower()
+generated_fn = has_distinct_first_and_last_letters
+def has_even_length_and_starts_with_vowel(word):
+    return len(word) % 2 == 0 and word[0].lower() in 'aeiou'
+generated_fn = has_even_length_and_starts_with_vowel
+def has_more_letters_than_digits(word):
+    letter_count = sum(char.isalpha() for char in word)
+    digit_count = sum(char.isdigit() for char in word)
+    return letter_count > digit_count
+generated_fn = has_more_letters_than_digits
+def has_repeating_pattern(word):
+    return len(word) != len(set(word[i:i+2] for i in range(0, len(word)-1, 2)))
+
+generated_fn = has_repeating_pattern
+def is_mirror_image(word):
+    return word.lower() == word[::-1].lower() and len(word) % 2 == 0
+generated_fn = is_mirror_image
+def has_ascending_letter_sequence(word):
+    return all(word[i] < word[i + 1] for i in range(len(word) - 1))
+
+generated_fn = has_ascending_letter_sequence
+def has_odd_length_with_special_char(word):
+    special_characters = '!@#$%^&*()-_=+[]{};:"\',.<>?/~`'
+    return len(word) % 2 != 0 and any(char in special_characters for char in word)
+
+generated_fn = has_odd_length_with_special_char
+def is_alphabetical_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return vowel_count == len(word) - vowel_count and all(word[i] <= word[i + 1] for i in range(len(word) - 1))
+
+generated_fn = is_alphabetical_vowel_count
+def has_repeated_substring(word):
+    return any(word.count(word[i:i+2]) > 1 for i in range(len(word) - 1))
+
+generated_fn = has_repeated_substring
+def is_first_half_vowel_count_greater(word):
+    half_length = len(word) // 2
+    vowels = 'aeiou'
+    vowel_count_first_half = sum(1 for char in word[:half_length].lower() if char in vowels)
+    return vowel_count_first_half > half_length / 2
+generated_fn = is_first_half_vowel_count_greater
+def has_more_unique_vowels_than_consonants(word):
+    vowels = 'aeiou'
+    unique_vowel_count = len(set(char.lower() for char in word if char.lower() in vowels))
+    unique_consonant_count = len(set(char.lower() for char in word if char.isalpha() and char.lower() not in vowels))
+    return unique_vowel_count > unique_consonant_count
+
+generated_fn = has_more_unique_vowels_than_consonants
+def is_length_multiple_of_nine(word):
+    return len(word) % 9 == 0
+generated_fn = is_length_multiple_of_nine
+def is_unique_vowel_start(word):
+    vowels = 'aeiou'
+    return word[0].lower() in vowels and len(set(char for char in word.lower() if char in vowels)) == 1
+
+generated_fn = is_unique_vowel_start
+def is_unique_length_and_even_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 0
+
+generated_fn = is_unique_length_and_even_vowel_count
+def is_symmetric_length(word):
+    return len(word) % 2 == 0 and word.lower() == word.lower()[::-1]
+
+generated_fn = is_symmetric_length
+def is_length_multiple_of_eight(word):
+    return len(word) % 8 == 0
+generated_fn = is_length_multiple_of_eight
+def is_reversed_length_even(word):
+    return len(word) % 2 == 0 and word.lower() == word[::-1].lower()
+
+generated_fn = is_reversed_length_even
+def is_vowel_count_multiple_of_four(word):
+    vowels = 'aeiou'
+    count = sum(1 for char in word.lower() if char in vowels)
+    return count % 4 == 0
+
+generated_fn = is_vowel_count_multiple_of_four
+def is_length_divisible_by_four_and_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 4 == 0 and vowel_count % 2 != 0
+generated_fn = is_length_divisible_by_four_and_odd_vowel_count
+def is_unique_consonant_start(word):
+    return word[0].lower() not in 'aeiou' and len(set(char for char in word if char.lower() not in 'aeiou')) == len(word) - 1
+
+generated_fn = is_unique_consonant_start
+def is_unique_vowel_end(word):
+    vowels = 'aeiou'
+    return word[-1].lower() in vowels and len(set(char.lower() for char in word if char.lower() in vowels)) == 1
+generated_fn = is_unique_vowel_end
+def is_odd_length_and_contains_z(word):
+    return len(word) % 2 != 0 and 'z' in word.lower()
+generated_fn = is_odd_length_and_contains_z
+def is_alternating_case_and_even_length(word):
+    return len(word) % 2 == 0 and all(word[i].islower() != word[i + 1].islower() for i in range(len(word) - 1))
+
+generated_fn = is_alternating_case_and_even_length

@@ -1,115 +1,794 @@
 def is_vowel_start(word):
-    return word[0] in 'aeiou'
-pass
-
+    return word[0].lower() in 'aeiou'
 generated_fn = is_vowel_start
-def is_even_length(word):
-    return len(word) % 2 == 0
-    pass
-
-generated_fn = is_even_length
-def is_palindrome(word):
-    return word == word[::-1]
-    pass
-
-generated_fn = is_palindrome
-def is_consonant_end(word):
-    return word[-1] not in 'aeiou'
-    pass
-
-generated_fn = is_consonant_end
-def is_contains_digit(word):
-    return any(char.isdigit() for char in word)
-    pass
-
-generated_fn = is_contains_digit
-def is_all_lowercase(word):
-    return word.islower()
-    pass
-
-generated_fn = is_all_lowercase
-def is_plural(word):
-    return word.endswith('s')
-    pass
-
-generated_fn = is_plural
-def is_even_sum_ascii(word):
-    return sum(ord(char) for char in word) % 2 == 0
-    pass
-
-generated_fn = is_even_sum_ascii
-def is_contains_vowel(word):
-    return any(char in 'aeiou' for char in word)
-    pass
-
-generated_fn = is_contains_vowel
-def is_length_greater_than_five(word):
+def is_longer_than_five(word):
     return len(word) > 5
-    pass
+generated_fn = is_longer_than_fivedef is_unique_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return unique_consonant_count > 3
 
-generated_fn = is_length_greater_than_five
-def is_ends_with_y(word):
-    return word.endswith('y')
-    pass
+generated_fn = is_unique_consonant_count
+def is_even_length_and_contains_a(word):
+    return len(word) % 2 == 0 and 'a' in word.lower()
+generated_fn = is_even_length_and_contains_a
+def is_unique_last_letter(word):
+    return word[-1].lower() not in word[:-1].lower()
 
-generated_fn = is_ends_with_y
-def is_reverse_alphabetical(word):
-    return word == ''.join(sorted(word, reverse=True))
-    pass
+generated_fn = is_unique_last_letter
+def is_even_length_and_contains_e(word):
+    return len(word) % 2 == 0 and 'e' in word.lower()
+generated_fn = is_even_length_and_contains_e
+def is_unique_letter_count(word):
+    return len(set(word.lower())) == len(word)
 
-generated_fn = is_reverse_alphabetical
-def is_starts_with_consonant(word):
-    return word[0] not in 'aeiou'
-    pass
+generated_fn = is_unique_letter_count
+def is_first_half_contains_a(word):
+    half_length = len(word) // 2
+    return 'a' in word[:half_length].lower()
 
-generated_fn = is_starts_with_consonant
-def is_odd_number_of_vowels(word):
-    return sum(1 for char in word if char in 'aeiou') % 2 != 0
-    pass
+generated_fn = is_first_half_contains_a
+def is_unique_start_and_even_length(word):
+    return word[0].lower() not in 'aeiou' and len(word) % 2 == 0 and len(set(word.lower())) == len(word)
 
-generated_fn = is_odd_number_of_vowels
-def is_five_or_more_characters(word):
-    return len(word) >= 5
-    pass
+generated_fn = is_unique_start_and_even_length
+def is_unique_second_letter(word):
+    return len(word) > 1 and word[1].lower() not in word[2:].lower()
 
-generated_fn = is_five_or_more_characters
-def is_alternating_vowels_consonants(word):
-    return all(char in 'aeiou' if i % 2 == 0 else char not in 'aeiou' for i, char in enumerate(word))
-    pass
+generated_fn = is_unique_second_letter
+def is_unique_length_and_odd_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
 
-generated_fn = is_alternating_vowels_consonants
-def is_odd_length(word):
-    return len(word) % 2 != 0
-    pass
+generated_fn = is_unique_length_and_odd_consonant_count
+def is_even_length_and_contains_vowel(word):
+    return len(word) % 2 == 0 and any(char in 'aeiou' for char in word.lower())
+generated_fn = is_even_length_and_contains_vowel
+def is_unique_even_length_with_vowel(word):
+    vowels = 'aeiou'
+    return len(word) % 2 == 0 and len(set(word.lower())) == len(word) and any(char in vowels for char in word.lower())
 
-generated_fn = is_odd_length
-def is_contains_special_char(word):
-    return any(not char.isalnum() for char in word)
-    pass
+generated_fn = is_unique_even_length_with_vowel
+def is_unique_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return unique_consonant_count > 3
 
-generated_fn = is_contains_special_char
-def is_palindrome_length_odd(word):
-    return len(word) % 2 != 0 and word == word[::-1]
-    pass
+generated_fn = is_unique_consonant_count
+def is_unique_letter_count_and_odd_length(word):
+    return len(set(word.lower())) == len(word) and len(word) % 2 != 0
 
-generated_fn = is_palindrome_length_odd
-def is_contains_double_letters(word):
-    return any(word[i] == word[i+1] for i in range(len(word) - 1))
-    pass
+generated_fn = is_unique_letter_count_and_odd_length
+def is_length_divisible_by_three(word):
+    return len(word) % 3 == 0
 
-generated_fn = is_contains_double_letters
-def is_six_or_more_vowels(word):
-    return sum(1 for char in word if char in 'aeiou') >= 6
-    pass
+generated_fn = is_length_divisible_by_three
+def is_length_greater_than_five_and_contains_s(word):
+    return len(word) > 5 and 's' in word.lower()
 
-generated_fn = is_six_or_more_vowels
-def is_word_has_even_ascii_sum(word):
-    return sum(ord(char) for char in word) % 2 == 0
-    pass
+generated_fn = is_length_greater_than_five_and_contains_s
+def is_even_length_with_consonant_start(word):
+    return len(word) % 2 == 0 and word[0].lower() not in 'aeiou'
+generated_fn = is_even_length_with_consonant_start
+def is_vowel_end_and_odd_length(word):
+    return word[-1].lower() in 'aeiou' and len(word) % 2 != 0
 
-generated_fn = is_word_has_even_ascii_sum
-def is_ends_with_vowel(word):
-    return word[-1] in 'aeiou'
-    pass
+generated_fn = is_vowel_end_and_odd_length
+def is_even_length_and_contains_unique_characters(word):
+    return len(word) % 2 == 0 and len(set(word.lower())) == len(word)
 
-generated_fn = is_ends_with_vowel
+generated_fn = is_even_length_and_contains_unique_characters
+def is_vowel_count_less_than_three(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return vowel_count < 3
+
+generated_fn = is_vowel_count_less_than_three
+def is_unique_length_and_vowel_start(word):
+    return len(word) == len(set(word.lower())) and word[0].lower() in 'aeiou'
+generated_fn = is_unique_length_and_vowel_start
+def is_length_multiple_of_three_and_contains_r(word):
+    return len(word) % 3 == 0 and 'r' in word.lower()
+
+generated_fn = is_length_multiple_of_three_and_contains_r
+def is_unique_consonant_count_greater_than_two(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return unique_consonant_count > 2
+
+generated_fn = is_unique_consonant_count_greater_than_two
+def is_odd_length_and_contains_unique_vowel(word):
+    unique_vowels = len(set(char for char in word.lower() if char in 'aeiou'))
+    return len(word) % 2 != 0 and unique_vowels == 1
+
+generated_fn = is_odd_length_and_contains_unique_vowel
+def is_even_length_with_unique_characters(word):
+    return len(word) % 2 == 0 and len(set(word.lower())) == len(word)
+
+generated_fn = is_even_length_with_unique_characters
+def is_unique_even_length_with_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    return len(word) % 2 == 0 and len(set(char.lower() for char in word if char.lower() in consonants)) > 2
+
+generated_fn = is_unique_even_length_with_consonants
+def is_unique_length_and_contains_d(word):
+    return len(word) == len(set(word.lower())) and 'd' in word.lower()
+
+generated_fn = is_unique_length_and_contains_d
+def is_unique_vowel_count_and_odd_length(word):
+    vowels = 'aeiou'
+    unique_vowel_count = len(set(char.lower() for char in word if char.lower() in vowels))
+    return unique_vowel_count % 2 != 0 and len(word) % 2 != 0
+
+generated_fn = is_unique_vowel_count_and_odd_length
+def is_length_multiple_of_six(word):
+    return len(word) % 6 == 0
+
+generated_fn = is_length_multiple_of_six
+def is_unique_length_and_odd_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_consonant_count
+def is_unique_length_and_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_vowel_count
+def is_consonant_start_and_odd_length(word):
+    return len(word) % 2 != 0 and word[0].lower() not in 'aeiou'
+generated_fn = is_consonant_start_and_odd_length
+def is_unique_character_count(word):
+    return len(set(word.lower())) == len(word) and len(word) % 2 == 1
+
+generated_fn = is_unique_character_count
+def is_unique_consonant_and_odd_length(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return unique_consonant_count % 2 != 0 and len(word) % 2 != 0
+
+generated_fn = is_unique_consonant_and_odd_length
+def has_even_position_vowel_count(word):
+    vowels = 'aeiou'
+    even_position_vowel_count = sum(1 for i in range(1, len(word), 2) if word[i].lower() in vowels)
+    return even_position_vowel_count % 2 == 0
+
+generated_fn = has_even_position_vowel_count
+def is_length_greater_than_three_and_contains_t(word):
+    return len(word) > 3 and 't' in word.lower()
+generated_fn = is_length_greater_than_three_and_contains_t
+def is_unique_first_character(word):
+    return len(set(word.lower())) == len(word) and word[0].lower() not in word[1:].lower()
+
+generated_fn = is_unique_first_character
+def is_even_length_with_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 2 == 0 and vowel_count % 2 != 0
+generated_fn = is_even_length_with_odd_vowel_count
+def is_unique_length_with_even_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 == 0
+
+generated_fn = is_unique_length_with_even_consonants
+def is_unique_length_and_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_vowel_count
+def is_even_length_and_contains_unique_vowel(word):
+    vowels = 'aeiou'
+    unique_vowels = len(set(char.lower() for char in word if char.lower() in vowels))
+    return len(word) % 2 == 0 and unique_vowels == 1
+
+generated_fn = is_even_length_and_contains_unique_vowel
+def is_even_length_and_unique_vowels(word):
+    vowels = 'aeiou'
+    unique_vowel_count = len(set(char.lower() for char in word if char.lower() in vowels))
+    return len(word) % 2 == 0 and unique_vowel_count == 2
+
+generated_fn = is_even_length_and_unique_vowels
+def is_unique_second_to_last_letter(word):
+    return word[-2].lower() not in word[:-2].lower() and len(word) > 2
+
+generated_fn = is_unique_second_to_last_letter
+def is_length_multiple_of_seven_and_contains_r(word):
+    return len(word) % 7 == 0 and 'r' in word.lower()
+
+generated_fn = is_length_multiple_of_seven_and_contains_r
+def is_even_length_and_contains_odd_vowels(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 2 == 0 and vowel_count % 2 != 0
+
+generated_fn = is_even_length_and_contains_odd_vowels
+def is_length_odd_and_contains_a(word):
+    return len(word) % 2 != 0 and 'a' in word.lower()
+
+generated_fn = is_length_odd_and_contains_a
+def is_unique_letter_count_and_odd_length(word):
+    return len(set(word.lower())) == len(word) and len(word) % 2 != 0
+
+generated_fn = is_unique_letter_count_and_odd_length
+def is_unique_length_and_odd_letter_count(word):
+    letter_count = sum(1 for char in word if char.isalpha())
+    return len(word) == len(set(word.lower())) and letter_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_letter_count
+def is_length_greater_than_five_and_contains_vowel(word):
+    return len(word) > 5 and any(char in 'aeiou' for char in word.lower())
+generated_fn = is_length_greater_than_five_and_contains_vowel
+def is_even_length_and_has_unique_vowels(word):
+    unique_vowels = len(set(char.lower() for char in word if char.lower() in 'aeiou'))
+    return len(word) % 2 == 0 and unique_vowels > 1
+generated_fn = is_even_length_and_has_unique_vowels
+def is_length_even_and_has_odd_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) % 2 == 0 and consonant_count % 2 != 0
+
+generated_fn = is_length_even_and_has_odd_consonants
+def is_unique_length_and_contains_y(word):
+    return len(word) == len(set(word.lower())) and 'y' in word.lower()
+
+generated_fn = is_unique_length_and_contains_y
+def is_alternating_vowel_consonant_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return vowel_count % 2 != consonant_count % 2
+
+generated_fn = is_alternating_vowel_consonant_count
+def is_unique_length_and_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_vowel_count
+def is_unique_length_and_odd_count(word):
+    return len(word) == len(set(word.lower())) and sum(1 for char in word if char.lower() in 'aeiou') % 2 != 0
+
+generated_fn = is_unique_length_and_odd_count
+def is_consonant_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return word[0].lower() not in vowels and vowel_count % 2 != 0
+
+generated_fn = is_consonant_odd_vowel_count
+def is_unique_length_and_ends_with_consonant(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() not in 'aeiou'
+
+generated_fn = is_unique_length_and_ends_with_consonant
+def is_odd_length_with_unique_last_letter(word):
+    return len(word) % 2 != 0 and word[-1].lower() not in word[:-1].lower()
+
+generated_fn = is_odd_length_with_unique_last_letter
+def is_unique_length_and_contains_vowel(word):
+    return len(word) == len(set(word.lower())) and any(char in 'aeiou' for char in word.lower())
+generated_fn = is_unique_length_and_contains_vowel
+def is_length_greater_than_four_and_contains_c(word):
+    return len(word) > 4 and 'c' in word.lower()
+generated_fn = is_length_greater_than_four_and_contains_c
+def is_even_length_and_has_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 2 == 0 and vowel_count % 2 != 0
+
+generated_fn = is_even_length_and_has_odd_vowel_count
+def is_unique_length_and_not_contains_s(word):
+    return len(word) == len(set(word.lower())) and 's' not in word.lower()
+generated_fn = is_unique_length_and_not_contains_s
+def is_prime_length(word):
+    def is_prime(n):
+        if n <= 1:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    return is_prime(len(word))
+
+generated_fn = is_prime_length
+def is_length_greater_than_five_and_contains_vowel(word):
+    return len(word) > 5 and any(char in 'aeiou' for char in word.lower())
+generated_fn = is_length_greater_than_five_and_contains_vowel
+def is_length_even_and_starts_with_consonant(word):
+    return len(word) % 2 == 0 and word[0].lower() not in 'aeiou'
+generated_fn = is_length_even_and_starts_with_consonant
+def is_unique_length_and_contains_t(word):
+    return len(word) == len(set(word.lower())) and 't' in word.lower()
+
+generated_fn = is_unique_length_and_contains_t
+def is_consonant_start_with_even_length(word):
+    return len(word) % 2 == 0 and word[0].lower() not in 'aeiou'
+
+generated_fn = is_consonant_start_with_even_length
+def is_length_greater_than_three_and_contains_unique_letter(word):
+    return len(word) > 3 and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_greater_than_three_and_contains_unique_letter
+def is_unique_vowel_consonant_ratio(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return vowel_count != 0 and consonant_count / vowel_count > 1
+
+generated_fn = is_unique_vowel_consonant_ratio
+def is_different_letter_pattern(word):
+    return len(set(word.lower())) % 2 == 1
+
+generated_fn = is_different_letter_pattern
+def is_length_multiple_of_five(word):
+    return len(word) % 5 == 0
+
+generated_fn = is_length_multiple_of_five
+def is_unique_length_and_contains_even_letter_count(word):
+    letter_count = sum(1 for char in word if char.isalpha())
+    return len(word) == len(set(word.lower())) and letter_count % 2 == 0
+
+generated_fn = is_unique_length_and_contains_even_letter_count
+def is_unique_length_with_even_digit_count(word):
+    digit_count = sum(char.isdigit() for char in word)
+    return len(word) == len(set(word.lower())) and digit_count % 2 == 0
+
+generated_fn = is_unique_length_with_even_digit_count
+def is_unique_length_and_contains_vowel(word):
+    return len(word) == len(set(word.lower())) and any(char in 'aeiou' for char in word.lower())
+
+generated_fn = is_unique_length_and_contains_vowel
+def is_unique_length_with_odd_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_with_odd_consonant_count
+def is_unique_length_and_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_vowel_count
+def is_alternating_start_end_vowel(word):
+    return (word[0].lower() in 'aeiou' and word[-1].lower() in 'aeiou') or (word[0].lower() not in 'aeiou' and word[-1].lower() not in 'aeiou')
+
+generated_fn = is_alternating_start_end_vowel
+def is_unique_length_and_has_unique_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return len(word) == len(set(word.lower())) and unique_consonant_count > 2
+
+generated_fn = is_unique_length_and_has_unique_consonants
+def is_length_odd_and_second_letter_vowel(word):
+    return len(word) % 2 != 0 and word[1].lower() in 'aeiou' if len(word) > 1 else False
+
+generated_fn = is_length_odd_and_second_letter_vowel
+def is_unique_length_and_ends_with_vowel(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() in 'aeiou'
+generated_fn = is_unique_length_and_ends_with_vowel
+def is_length_greater_than_four_and_contains_d(word):
+    return len(word) > 4 and 'd' in word.lower()
+
+generated_fn = is_length_greater_than_four_and_contains_d
+def is_unique_length_and_contains_p(word):
+    return len(word) == len(set(word.lower())) and 'p' in word.lower()
+
+generated_fn = is_unique_length_and_contains_p
+def is_length_odd_and_contains_unique_vowel(word):
+    unique_vowels = len(set(char for char in word.lower() if char in 'aeiou'))
+    return len(word) % 2 != 0 and unique_vowels == 1
+
+generated_fn = is_length_odd_and_contains_unique_vowel
+def is_odd_length_with_repeated_first_character(word):
+    return len(word) % 2 != 0 and word.lower().count(word[0].lower()) > 1
+generated_fn = is_odd_length_with_repeated_first_character
+def is_length_even_and_has_unique_first_letter(word):
+    return len(word) % 2 == 0 and word[0].lower() not in word[1:].lower()
+
+generated_fn = is_length_even_and_has_unique_first_letter
+def is_unique_consonant_count_greater_than_three(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return unique_consonant_count > 3
+
+generated_fn = is_unique_consonant_count_greater_than_three
+def is_unique_length_and_contains_n(word):
+    return len(word) == len(set(word.lower())) and 'n' in word.lower()
+
+generated_fn = is_unique_length_and_contains_n
+def is_length_reversed_even(word):
+    return len(word) % 2 == 0 and len(word) == len(word[::-1])
+generated_fn = is_length_reversed_even
+def is_length_prime_and_ends_with_vowel(word):
+    def is_prime(n):
+        if n <= 1:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    return is_prime(len(word)) and word[-1].lower() in 'aeiou'
+
+generated_fn = is_length_prime_and_ends_with_vowel
+def is_unique_length_and_contains_r(word):
+    return len(word) == len(set(word.lower())) and 'r' in word.lower()
+
+generated_fn = is_unique_length_and_contains_r
+def is_unique_length_and_contains_even_letters(word):
+    letter_count = sum(1 for char in word if char.isalpha())
+    return len(word) == len(set(word.lower())) and letter_count % 2 == 0
+
+generated_fn = is_unique_length_and_contains_even_letters
+def is_even_length_with_unique_consonants(word):
+    unique_consonants = len(set(char.lower() for char in word if char.isalpha() and char.lower() not in 'aeiou'))
+    return len(word) % 2 == 0 and unique_consonants > 2
+
+generated_fn = is_even_length_with_unique_consonants
+def is_length_odd_and_contains_vowel(word):
+    return len(word) % 2 != 0 and any(char in 'aeiou' for char in word.lower())
+
+generated_fn = is_length_odd_and_contains_vowel
+def is_unique_vowel_consonant_pattern(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return (vowel_count % 2 == 0) != (consonant_count % 2 == 0)
+
+generated_fn = is_unique_vowel_consonant_pattern
+def is_unique_length_with_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 == 0
+
+generated_fn = is_unique_length_with_consonant_count
+def is_unique_and_ends_with_consonant(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() not in 'aeiou'
+
+generated_fn = is_unique_and_ends_with_consonant
+def is_odd_length_with_repeated_last_character(word):
+    return len(word) % 2 != 0 and word.lower().count(word[-1].lower()) > 1
+generated_fn = is_odd_length_with_repeated_last_character
+def is_unique_length_and_vowel_count_even(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 0
+
+generated_fn = is_unique_length_and_vowel_count_even
+def is_unique_length_and_has_odd_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_and_has_odd_consonants
+def is_length_and_unique_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 1
+
+generated_fn = is_length_and_unique_vowel_count
+def is_consonant_vowel_ratio(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return consonant_count > vowel_count
+
+generated_fn = is_consonant_vowel_ratio
+def is_length_and_unique_characters(word):
+    return len(word) == len(set(word.lower())) and len(word) > 3
+
+generated_fn = is_length_and_unique_characters
+def is_length_greater_than_three_and_starts_with_vowel(word):
+    return len(word) > 3 and word[0].lower() in 'aeiou'
+generated_fn = is_length_greater_than_three_and_starts_with_vowel
+def is_length_odd_and_contains_n(word):
+    return len(word) % 2 != 0 and 'n' in word.lower()
+
+generated_fn = is_length_odd_and_contains_n
+def is_unique_length_and_contains_even_count(word):
+    return len(word) == len(set(word.lower())) and sum(1 for char in word if char.isalpha()) % 2 == 0
+
+generated_fn = is_unique_length_and_contains_even_count
+def is_unique_length_and_even_position_vowel_count(word):
+    vowels = 'aeiou'
+    even_position_vowel_count = sum(1 for i in range(1, len(word), 2) if word[i].lower() in vowels)
+    return len(word) == len(set(word.lower())) and even_position_vowel_count % 2 == 0
+
+generated_fn = is_unique_length_and_even_position_vowel_count
+def is_even_length_and_contains_a(word):
+    return len(word) % 2 == 0 and 'a' in word.lower()
+
+generated_fn = is_even_length_and_contains_a
+def is_unique_length_and_ends_with_consonant(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() not in 'aeiou'
+
+generated_fn = is_unique_length_and_ends_with_consonant
+def is_length_greater_than_half_and_contains_e(word):
+    return len(word) > len(word) / 2 and 'e' in word.lower()
+generated_fn = is_length_greater_than_half_and_contains_e
+def is_even_length_with_odd_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) % 2 == 0 and consonant_count % 2 != 0
+
+generated_fn = is_even_length_with_odd_consonants
+def is_unique_even_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 0
+
+generated_fn = is_unique_even_vowel_count
+def is_unique_length_and_has_even_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 == 0
+
+generated_fn = is_unique_length_and_has_even_consonants
+def is_unique_letter_count_and_odd_length(word):
+    return len(set(word.lower())) == len(word) and len(word) % 2 != 0
+
+generated_fn = is_unique_letter_count_and_odd_length
+def is_even_length_and_contains_unique_consonants(word):
+    unique_consonants = len(set(char.lower() for char in word if char.isalpha() and char.lower() not in 'aeiou'))
+    return len(word) % 2 == 0 and unique_consonants > 2
+
+generated_fn = is_even_length_and_contains_unique_consonants
+def is_unique_length_and_not_contains_x(word):
+    return len(word) == len(set(word.lower())) and 'x' not in word.lower()
+
+generated_fn = is_unique_length_and_not_contains_x
+def is_length_odd_and_contains_repeated_char(word):
+    return len(word) % 2 != 0 and any(word.lower().count(char) > 1 for char in set(word.lower()))
+
+generated_fn = is_length_odd_and_contains_repeated_char
+def is_length_greater_than_five_and_contains_unique_char(word):
+    return len(word) > 5 and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_greater_than_five_and_contains_unique_char
+def is_vowel_count_divisible_by_three(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return vowel_count % 3 == 0
+
+generated_fn = is_vowel_count_divisible_by_three
+def is_length_even_and_unique_start(word):
+    return len(word) % 2 == 0 and word[0].lower() not in 'aeiou' and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_even_and_unique_start
+def is_unique_length_and_contains_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_vowel_count
+def is_length_greater_than_four_and_contains_r(word):
+    return len(word) > 4 and 'r' in word.lower()
+generated_fn = is_length_greater_than_four_and_contains_r
+def is_alternating_length(word):
+    return len(word) % 2 == 0 and all(word[i].lower() != word[i + 1].lower() for i in range(len(word) - 1))
+
+generated_fn = is_alternating_length
+def is_length_prime_and_odd_vowel_count(word):
+    def is_prime(n):
+        if n <= 1:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return is_prime(len(word)) and vowel_count % 2 != 0
+
+generated_fn = is_length_prime_and_odd_vowel_count
+def is_unique_length_and_odd_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_consonant_count
+def is_vowel_count_equal_to_consonant_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return vowel_count == consonant_count
+
+generated_fn = is_vowel_count_equal_to_consonant_count
+def is_unique_length_and_ends_with_vowel(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() in 'aeiou'
+generated_fn = is_unique_length_and_ends_with_vowel
+def is_length_divisible_by_three_and_even(word):
+    return len(word) % 3 == 0 and len(word) % 2 == 0
+
+generated_fn = is_length_divisible_by_three_and_even
+def is_length_greater_than_five_and_contains_n(word):
+    return len(word) > 5 and 'n' in word.lower()
+
+generated_fn = is_length_greater_than_five_and_contains_n
+def is_consonant_count_greater_than_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return consonant_count > vowel_count
+generated_fn = is_consonant_count_greater_than_vowel_count
+def is_length_greater_than_five_and_contains_e(word):
+    return len(word) > 5 and 'e' in word.lower()
+
+generated_fn = is_length_greater_than_five_and_contains_e
+def is_unique_and_ends_with_vowel(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() in 'aeiou'
+generated_fn = is_unique_and_ends_with_vowel
+def is_unique_length_and_has_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_has_odd_vowel_count
+def is_alternating_vowel_consonant_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    consonant_count = sum(1 for char in word.lower() if char.isalpha() and char not in vowels)
+    return (vowel_count % 2 == 0) != (consonant_count % 2 == 0)
+
+generated_fn = is_alternating_vowel_consonant_count
+def is_length_odd_with_unique_letter_count(word):
+    return len(word) % 2 != 0 and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_odd_with_unique_letter_count
+def is_unique_length_and_contains_s(word):
+    return len(word) == len(set(word.lower())) and 's' in word.lower()
+
+generated_fn = is_unique_length_and_contains_s
+def is_unique_length_and_second_last_vowel(word):
+    return len(word) == len(set(word.lower())) and word[-2].lower() in 'aeiou' if len(word) > 1 else False
+
+generated_fn = is_unique_length_and_second_last_vowel
+def is_unique_length_and_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    unique_consonant_count = len(set(char.lower() for char in word if char.lower() in consonants))
+    return len(word) == len(set(word.lower())) and unique_consonant_count % 2 == 1
+
+generated_fn = is_unique_length_and_consonant_count
+def is_length_multiple_of_three_and_contains_vowel(word):
+    return len(word) % 3 == 0 and any(char in 'aeiou' for char in word.lower())
+
+generated_fn = is_length_multiple_of_three_and_contains_vowel
+def is_vowel_ending_and_length_odd(word):
+    return len(word) % 2 != 0 and word[-1].lower() in 'aeiou'
+generated_fn = is_vowel_ending_and_length_odd
+def is_unique_length_and_has_odd_consonants(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_and_has_odd_consonants
+def is_unique_length_with_even_sum(word):
+    return len(word) == len(set(word.lower())) and sum(ord(char) for char in word) % 2 == 0
+
+generated_fn = is_unique_length_with_even_sum
+def is_unique_length_and_contains_mixed_vowels(word):
+    vowels = 'aeiou'
+    unique_vowel_count = len(set(char.lower() for char in word if char.lower() in vowels))
+    return len(word) == len(set(word.lower())) and unique_vowel_count % 2 == 1
+
+generated_fn = is_unique_length_and_contains_mixed_vowels
+def is_unique_length_and_contains_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_vowel_count
+def is_unique_length_and_ends_with_consonant(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() not in 'aeiou'
+
+generated_fn = is_unique_length_and_ends_with_consonant
+def is_unique_length_and_contains_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_vowel_count
+def is_length_even_and_contains_unique_vowels(word):
+    unique_vowels = len(set(char for char in word.lower() if char in 'aeiou'))
+    return len(word) % 2 == 0 and unique_vowels == 2
+
+generated_fn = is_length_even_and_contains_unique_vowels
+def is_unique_length_and_has_odd_character_count(word):
+    return len(word) == len(set(word.lower())) and sum(1 for char in word if char.isalpha()) % 2 != 0
+
+generated_fn = is_unique_length_and_has_odd_character_count
+def is_length_greater_than_three_and_contains_e(word):
+    return len(word) > 3 and 'e' in word.lower()
+
+generated_fn = is_length_greater_than_three_and_contains_e
+def is_length_and_unique_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 1
+
+generated_fn = is_length_and_unique_vowel_count
+def is_unique_length_and_odd_consonant_count(word):
+    consonants = 'bcdfghjklmnpqrstvwxyz'
+    consonant_count = sum(1 for char in word.lower() if char in consonants)
+    return len(word) == len(set(word.lower())) and consonant_count % 2 != 0
+
+generated_fn = is_unique_length_and_odd_consonant_count
+def is_length_even_and_contains_unique_characters(word):
+    return len(word) % 2 == 0 and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_even_and_contains_unique_characters
+def is_unique_length_and_contains_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_vowel_count
+def is_unique_length_and_contains_even_vowel(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 == 0
+
+generated_fn = is_unique_length_and_contains_even_vowel
+def is_length_odd_and_has_even_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) % 2 != 0 and vowel_count % 2 == 0
+
+generated_fn = is_length_odd_and_has_even_vowel_count
+def is_length_greater_than_three_and_contains_unique_char(word):
+    return len(word) > 3 and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_greater_than_three_and_contains_unique_char
+def is_unique_length_with_odd_vowel_count(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_with_odd_vowel_count
+def is_unique_length_and_ends_with_vowel(word):
+    return len(word) == len(set(word.lower())) and word[-1].lower() in 'aeiou'
+
+generated_fn = is_unique_length_and_ends_with_vowel
+def is_length_odd_and_consonant_start(word):
+    return len(word) % 2 != 0 and word[0].lower() not in 'aeiou'
+generated_fn = is_length_odd_and_consonant_start
+def is_unique_length_and_vowel_count_odd(word):
+    vowels = 'aeiou'
+    vowel_count = sum(1 for char in word.lower() if char in vowels)
+    return len(word) == len(set(word.lower())) and vowel_count % 2 != 0
+
+generated_fn = is_unique_length_and_vowel_count_odd
+def is_length_multiple_of_three_and_contains_e(word):
+    return len(word) % 3 == 0 and 'e' in word.lower()
+
+generated_fn = is_length_multiple_of_three_and_contains_e
+def is_even_length_with_consonant_start(word):
+    return len(word) % 2 == 0 and word[0].lower() not in 'aeiou'
+generated_fn = is_even_length_with_consonant_start
+def is_unique_length_and_contains_odd_letter_count(word):
+    letter_count = sum(1 for char in word if char.isalpha())
+    return len(word) == len(set(word.lower())) and letter_count % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_letter_count
+def is_unique_length_and_has_prime_letter_count(word):
+    def is_prime(n):
+        if n <= 1:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    return len(word) == len(set(word.lower())) and is_prime(len(word))
+
+generated_fn = is_unique_length_and_has_prime_letter_count
+def is_unique_length_and_contains_odd_count(word):
+    return len(word) == len(set(word.lower())) and sum(1 for char in word if char.isalpha()) % 2 != 0
+
+generated_fn = is_unique_length_and_contains_odd_count

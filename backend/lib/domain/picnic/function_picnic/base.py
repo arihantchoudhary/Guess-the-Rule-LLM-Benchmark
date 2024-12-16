@@ -6,15 +6,11 @@ import string
 import nltk
 import uuid
 import time
-import json
 from lib.domain.base import GuessTheRuleGame
 from lib.domain.common import GAMES_SAVE_DIR
 import anthropic
 import google.generativeai
-
-import pdb
-
-import pandas as pd
+# import pandas as pd
 
 # Set your OpenAI API key (or any other LLM provider's key)
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
@@ -218,9 +214,8 @@ class CodeFunctionsPicnic(GuessTheRuleGame):
             f"Your score will be based on the number of turns taken, number of examples seen, and overall time elapsed playing the game. The highest score will be for the fewest turns taken, fewest examples seen, and shortest game played.\n"
             f"The rule you will guess should only encompass the positive examples. The negative examples are only for additional guidance and they do not form the underlying rule itself.\n"
             f"To play the game you can only do one of the following actions in a turn:\n"
-            f"1. type 'more N' to request N more examples for that rule.\n"
-            f"2. type the rule if you think you've guessed it. The format must be 'Items from the category/categories <category>'.\n"
-            f"3. type 'give up' if you want to end the game and see the rule.\n\n"
+            f"1. Request N more examples for that rule.\n"
+            f"2. Type the rule if you think you've guessed it.\n\n"
             f"I can bring: {positives_string}\n"
             f"I cannot bring: {negatives_string}\n\n"
             f"What would you like to do?"
@@ -306,7 +301,7 @@ class CodeFunctionsPicnic(GuessTheRuleGame):
             return
 
         # Create a new instance of the class
-        # game = LexicalFunctionGame(uuid=state['uuid'])
+        # game = CodeFunctionsPicnic(uuid=state['uuid'])
         # # Update the instance's __dict__ with the loaded state
         # game.__dict__.update(state)
 

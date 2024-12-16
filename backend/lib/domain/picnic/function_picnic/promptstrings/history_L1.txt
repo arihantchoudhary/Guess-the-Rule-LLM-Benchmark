@@ -792,3 +792,13 @@ def is_unique_length_and_contains_odd_count(word):
     return len(word) == len(set(word.lower())) and sum(1 for char in word if char.isalpha()) % 2 != 0
 
 generated_fn = is_unique_length_and_contains_odd_count
+def is_first_letter_vowel(word):
+    return word[0].lower() in 'aeiou'
+generated_fn = is_first_letter_vowel
+def has_odd_length_and_starts_with_consonant(word):
+    return len(word) % 2 != 0 and word[0].lower() not in 'aeiou'
+generated_fn = has_odd_length_and_starts_with_consonant
+def is_length_odd_and_contains_unique_char(word):
+    return len(word) % 2 != 0 and len(set(word.lower())) == len(word)
+
+generated_fn = is_length_odd_and_contains_unique_char

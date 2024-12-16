@@ -41,5 +41,5 @@ def get_existing_game(uuid):
     elif os.path.exists(filename2):
         with open(filename2, 'rb') as f:
             saved_game = pickle.load(f)
-            assert saved_game.game_class_name == 'LexicalFunctionGame'
+            assert saved_game.game_class_name == 'CodeFunctionsPicnic'
         return CodeFunctionsPicnic(uuid=uuid)

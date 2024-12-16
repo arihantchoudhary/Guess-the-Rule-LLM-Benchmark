@@ -5,6 +5,7 @@ import { GameDetailsPanel } from "./game/GameDetailsPanel";
 import { GameStatsPanel } from "./game/GameStatsPanel";
 import { ChatMessage } from "./game/ChatMessage";
 import { ChatInput } from "./game/ChatInput";
+import { useEffect, useRef } from "react";
 
 interface Message {
   id: string;
@@ -40,6 +41,15 @@ export const ConversationDisplay = ({
   onSendMessage
 }: ConversationDisplayProps) => {
   const { toast } = useToast();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const copyConversation = () => {
     const text = messages
@@ -81,6 +91,7 @@ export const ConversationDisplay = ({
             </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       {isUserPlaying && (

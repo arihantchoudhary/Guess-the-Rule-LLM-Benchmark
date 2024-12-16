@@ -1,3 +1,0 @@
-def generate_next(current_value, index):
-    next_value = ((index**2) + (2 * current_value))**0.5 + 1
-    return next_value

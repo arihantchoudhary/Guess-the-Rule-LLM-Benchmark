@@ -1,1 +1,0 @@
-Multiply the current value by the index, then add 1.

@@ -27,7 +27,8 @@ export const streamLLMGameplay = async (
   difficulty: string,
   player: string,
   numInitExamples: number,
-  onMessage: (content: string, sender: string) => void
+  onMessage: (content: string, sender: string) => void,
+  onGameStatusChange?: (status: "ongoing" | "won" | "lost") => void
 ) => {
   const url = new URL(`${API_BASE_URL}/llm-gameplay`);
   url.searchParams.append('game_name', game);
@@ -57,6 +58,14 @@ export const streamLLMGameplay = async (
       try {
         const parsedMessage = JSON.parse(message);
         onMessage(parsedMessage.content, parsedMessage.sender.toLowerCase());
+
+        // Check message content for game status updates (case insensitive)
+        const content = parsedMessage.content.toLowerCase();
+        if (content.includes('game over!')) {
+          onGameStatusChange?.('lost');
+        } else if (content.includes('guessed the rule correctly!')) {
+          onGameStatusChange?.('won');
+        }
       } catch (err) {
         console.error("Error parsing message:", err);
       }

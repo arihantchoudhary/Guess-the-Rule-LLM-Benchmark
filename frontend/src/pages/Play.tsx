@@ -76,7 +76,7 @@ const Play = () => {
           gameId: `llm-${Date.now()}`  // Generate a temporary ID for LLM games
         });
 
-        // Start streaming LLM gameplay
+        // Start streaming LLM gameplay with status updates
         await streamLLMGameplay(
           game,
           difficulty,
@@ -96,6 +96,12 @@ const Play = () => {
                 turnsTaken: prev.turnsTaken + 1
               }));
             }
+          },
+          (status: "ongoing" | "won" | "lost") => {
+            setGameDetails(prev => ({
+              ...prev,
+              status
+            }));
           }
         );
       } else {

@@ -1,44 +1,24 @@
 import os
 import pickle
-import random
 import json
 
-from lib.domain.base import validate_domain, validate_game_gen_type
 from lib.domain.picnic.static_picnic.base import StaticGoingOnAPicnic
-from lib.domain.picnic.function_picnic.base import LexicalFunctionGame
-from lib.domain.picnic.math_game.base import MathGuessTheRuleGame
+from lib.domain.picnic.function_picnic.base import CodeFunctionsPicnic
+from lib.domain.math_game.base import MathGuessTheRuleGame
 from lib.domain.picnic.dynamic_picnic.base import DynamicGoingOnAPicnic
 from lib.domain.common import GAMES_SAVE_DIR
 
-def select_natural_language_game(game_gen_type):
-    if game_gen_type == 'static':
-        return random.choice ([
-            StaticGoingOnAPicnic
-        ])
-    else:
-        return random.choice ([
-            DynamicGoingOnAPicnic,
-            # LexicalFunctionGame
-        ])
 
-def select_math_game(game_gen_type):
-    if game_gen_type == 'static':
-        pass
-    else:
-        return random.choice ([
-            MathGuessTheRuleGame
-        ])
-
-def select_new_game(domain, game_gen_type):
-    validate_domain(domain)
-    validate_game_gen_type(game_gen_type)
-
-    if domain == 'natural_language':
-        return select_natural_language_game(game_gen_type)
-    if domain == 'math':
-        return select_math_game(game_gen_type)
-    if domain == 'lexical':
-        return LexicalFunctionGame
+def select_new_game(game_name):
+    if game_name == 'static_picnic':
+        return StaticGoingOnAPicnic
+    if game_name == 'dynamic_picnic':
+        return DynamicGoingOnAPicnic
+    if game_name == 'code_functions_picnic':
+        return CodeFunctionsPicnic
+    if game_name == 'math':
+        return MathGuessTheRuleGame
+    assert False, f'Could not find a game with name {game_name}'
 
 
 def get_existing_game(uuid):
@@ -54,8 +34,12 @@ def get_existing_game(uuid):
 
         if game_class_name == 'DynamicGoingOnAPicnic':
             return DynamicGoingOnAPicnic(uuid=uuid)
+
+        if game_class_name == 'MathGuessTheRuleGame':
+            return MathGuessTheRuleGame(uuid=uuid)
+
     elif os.path.exists(filename2):
         with open(filename2, 'rb') as f:
             saved_game = pickle.load(f)
             assert saved_game.game_class_name == 'LexicalFunctionGame'
-        return LexicalFunctionGame(uuid=uuid)
+        return CodeFunctionsPicnic(uuid=uuid)

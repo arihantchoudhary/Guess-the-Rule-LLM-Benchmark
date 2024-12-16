@@ -1,22 +1,20 @@
 import os
  
 from lib.domain.common import (
-    safe_lowercase, safe_uppercase, safe_int,
+    safe_uppercase, safe_int,
     validate_domain, validate_difficulty, validate_num_init_examples, validate_game_gen_type,
     GAMES_SAVE_DIR
 )
 
 class GuessTheRuleGame:
 
-    def __init__(self, uuid=None, domain=None, difficulty=None, num_init_examples=None, game_gen_type=None):
+    def __init__(self, uuid=None, difficulty=None, num_init_examples=None):
         if not os.path.exists(GAMES_SAVE_DIR):
             os.makedirs(GAMES_SAVE_DIR)
 
         self.uuid = uuid
-        self.domain = safe_lowercase(domain)
         self.difficulty = safe_uppercase(difficulty)
         self.num_init_examples = safe_int(num_init_examples)
-        self.game_gen_type = safe_lowercase(game_gen_type)
         self.validate_init()
 
     def validate_init(self):

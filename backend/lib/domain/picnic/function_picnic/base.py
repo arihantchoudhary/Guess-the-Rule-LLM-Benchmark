@@ -2,12 +2,9 @@ import os
 import pickle
 import random
 from openai import OpenAI
-import openai
 import string
 import nltk
-import sys
 import uuid
-import __main__ as main
 import time
 import json
 from lib.domain.base import GuessTheRuleGame
@@ -205,7 +202,12 @@ class GuessingGame:
             raise Exception
         return ans_last == 'YES'
 
-class LexicalFunctionGame(GuessTheRuleGame):
+class CodeFunctionsPicnic(GuessTheRuleGame):
+
+    def __init__(self, uuid=None, difficulty=None, num_init_examples=None):
+        self.domain = 'lexical'
+        self.game_gen_type = 'dynamic'
+        super().__init__(uuid, difficulty, num_init_examples)
 
     def make_init_system_message(self, positive_examples, negative_examples):
         positives_string = ', '.join(positive_examples)

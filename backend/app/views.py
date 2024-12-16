@@ -49,13 +49,10 @@ def create_game(payload: CreateGame):
     # logging.info(f"Response: {res}")
     # return res
     try:
-        cls = select_new_game(payload.domain, payload.game_gen_type)
-        print(cls)
+        cls = select_new_game(payload.game_name)
         res = cls(
-            domain=payload.domain,
             difficulty=payload.difficulty,
             num_init_examples=payload.num_init_examples,
-            game_gen_type=payload.game_gen_type
         ).create_game_instance()
         logging.info(f"Response: {res}")
         return res

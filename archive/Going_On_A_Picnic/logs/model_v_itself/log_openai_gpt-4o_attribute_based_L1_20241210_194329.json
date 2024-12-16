@@ -1,0 +1,73 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a bedroom can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": true,
+    "duration_seconds": 12.16,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Pillow\" and \"alarm clock\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring a \"blanket\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a blanket."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring a \"towel\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a towel."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring a \"mattress\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a mattress."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring a \"blanket\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a blanket."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring a \"lamp\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a lamp."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring a \"sheet\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a sheet."
+        },
+        {
+            "role": "user",
+            "content": "Based on the given examples and responses from the game master, it seems like the rule might involve items that are typically found in a bedroom or items related to sleeping. All the items you can bring\u2014pillow, alarm clock, blanket, mattress, lamp, sheet\u2014are commonly associated with a bedroom setting. The item you cannot bring, a towel, is generally associated with a bathroom instead. \n\nMy best guess for the rule is: You can bring items that are typically found in a bedroom or related to sleep."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically found in a bedroom can be brought to the picnic."
+        }
+    ]
+}

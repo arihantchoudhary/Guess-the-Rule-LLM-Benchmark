@@ -1,0 +1,57 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with groundbreaking inventions in the field of technology can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 10.51,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"smartphone\" and \"laptop\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the examples provided. My guess is: \"tablet\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a tablet."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the existing examples and the previous confirmation. My guess is: \"smartwatch\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a smartwatch."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the examples provided and the previous confirmations. My guess is: \"e-reader\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring an e-reader."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess based on the pattern observed in the prior examples and confirmations. My guess is: \"portable gaming console.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a portable gaming console."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the confirmed guesses, the rule appears to be that the items you can bring are all portable electronic devices. Therefore, my final guess for the rule is: \"You can bring any portable electronic device.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

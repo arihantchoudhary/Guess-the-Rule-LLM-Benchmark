@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with ghost stories or legends can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 6.74,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"old lantern\" and \"Ouija board\"."
+        },
+        {
+            "role": "user",
+            "content": "I will ask the game master for more examples since I'm still unsure about the rule. \n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring a \"haunted mirror.\""
+        },
+        {
+            "role": "user",
+            "content": "Given the items provided so far\u2014\"old lantern,\" \"Ouija board,\" and \"haunted mirror\"\u2014there seems to be a theme related to objects that have a supernatural or mystical connotation.\n\nSince I'm still unsure about the precise nature of the rule and want to gather more information, I will ask for additional examples.\n\n\"Could you please provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring a \"crystal ball.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided\u2014\"old lantern,\" \"Ouija board,\" \"haunted mirror,\" and \"crystal ball\"\u2014the rule seems to involve items that are associated with the supernatural, mystical, or paranormal. These objects are often used in folklore or spiritual practices for divination or communication with spirits. \n\nTherefore, my best guess for the rule is: \"The items must be related to the supernatural or mystical in nature.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

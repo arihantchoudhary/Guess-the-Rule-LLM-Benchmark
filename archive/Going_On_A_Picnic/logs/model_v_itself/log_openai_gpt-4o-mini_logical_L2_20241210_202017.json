@@ -1,0 +1,73 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L2",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun and ends with the letter 'd'.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 11.7,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"bread\" and \"card\"."
+        },
+        {
+            "role": "user",
+            "content": "I will make a new guess based on the examples provided. Can I bring \u201cpaper\u201d?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring paper."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \u201cbiscuit\u201d?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring biscuit."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \"coin\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring coin."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \"envelope\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring envelope."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples and the responses, it seems difficult to pinpoint the exact rule yet. To gather more clues, I will ask for more examples.\n\nPlayer: Can you provide more examples of items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "Sure! You can bring \"muffin.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \"croissant\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring croissant."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided (\"bread,\" \"card,\" and \"muffin\") and the responses to your guesses, it seems that the rule might involve items that are either food-related or commonly associated with specific concepts. \n\nHowever, the rejection of items like \"paper,\" \"biscuit,\" \"coin,\" and \"envelope,\" which all seem fairly general or commonly used for various purposes, suggests that the rule is not merely about being a noun or specific category.\n\nConsidering that \"bread,\" \"card,\" and \"muffin\" are all items that are consumable food or items associated with food and card games, it seems the rule could involve items that are primarily associated with food or dining experiences.\n\nTherefore, my best guess for the secret rule is: **You can bring items that are related to food or food consumption.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,97 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with popular children's birthday parties can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 17.56,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"balloons\" and \"party hats\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"streamers\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring streamers."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"confetti\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring confetti."
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to make a new guess. Can I bring \"noisemakers\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring noisemakers."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"party favors\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party favors."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"pi\u00f1atas\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring pi\u00f1atas."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"streamer rolls\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring streamer rolls."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"wedding decorations\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring wedding decorations."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"party balloons\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party balloons."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"carnival masks\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring carnival masks."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and responses provided by the Game Master, it appears that the rule involves bringing items that are associated with festive or celebratory occasions, specifically items commonly found at parties or celebrations. \n\nThe examples given (balloons, party hats, streamers, confetti, noisemakers, party favors, pi\u00f1atas) are all items typically used for parties or celebrations. The items that were not allowed (streamer rolls, wedding decorations, carnival masks) do not fit this specific party theme as neatly.\n\nTherefore, my best guess for the secret rule is: **You can bring items that are typically associated with party celebrations.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with a wedding can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": true,
+    "duration_seconds": 8.42,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"wedding cake\" and \"bouquet\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a guess based on the given examples. Can I bring a \"wedding ring\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a wedding ring."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring a \"bride's dress\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a bride's dress."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"groom's suit\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a groom's suit."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"best man's speech\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a best man's speech."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided and your interactions with the game master, it seems that the rule is related to items typically associated with a wedding. So, my best guess about the secret rule is:\n\n**You can bring items that are commonly found or used at a wedding ceremony or celebration.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are typically associated with a wedding can be brought to the picnic."
+        }
+    ]
+}

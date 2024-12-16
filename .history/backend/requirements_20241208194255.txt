@@ -1,0 +1,24 @@
+# Core Backend Dependencies
+<<<<<<< HEAD
+-e ./backend
+=======
+-e .
+>>>>>>> 6dc61c65e62dc10f25ee246d7e3a613bf640d6ad
+fastapi==0.95.2            # FastAPI for building the backend
+pydantic==1.10.9           # Data validation and settings (used by FastAPI)
+openai==1.56.0             # OpenAI API client
+python-dotenv==1.0.0       # To load environment variables from .env files
+uvicorn==0.23.2            # ASGI server for running FastAPI apps
+sqlalchemy==2.0.20         # SQLAlchemy ORM for database interactions
+<<<<<<< HEAD
+=======
+nltk==3.8.1                # Natural Language Toolkit
+>>>>>>> 6dc61c65e62dc10f25ee246d7e3a613bf640d6ad
+
+# Testing Dependencies
+pytest==7.3.1              # Testing framework
+httpx==0.24.0              # For testing FastAPI endpoints
+
+# Linting and Formatting Tools
+black==23.7.0              # Code formatter
+flake8==6.1.0              # Linter for Python code

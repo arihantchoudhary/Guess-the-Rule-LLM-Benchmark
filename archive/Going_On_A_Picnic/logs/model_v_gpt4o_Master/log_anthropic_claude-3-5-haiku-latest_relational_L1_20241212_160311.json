@@ -1,0 +1,25 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L1",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both the same color.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 7.73,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"red apple\" and \"red wagon\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the limited information provided, my best initial guess is that the rule involves the color \"red\" - that any item that is red would be acceptable. \n\nHowever, with only two examples, I cannot be 100% certain. The examples seem to suggest the color red is important, but there could be other underlying patterns or criteria that I'm not seeing.\n\nI would propose the rule is: \"Items that are red in color are allowed.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

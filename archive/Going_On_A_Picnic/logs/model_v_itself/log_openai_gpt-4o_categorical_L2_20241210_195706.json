@@ -1,0 +1,137 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are used in a standard yoga practice can be brought to the picnic.",
+    "max_turns_allowed": 15,
+    "turns_taken": 15,
+    "rule_guessed": true,
+    "duration_seconds": 37.29,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"yoga mat\" and \"yoga blocks\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga strap\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga strap.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga towel\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga towel.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga socks\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga socks.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga clothes\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga clothes.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga bolster\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga bolster.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga wheel\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga wheel.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga strap\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga strap.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga book\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"yoga book.\""
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to make a new guess: Can I bring \"yoga bag\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga bag.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga belt\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga belt.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga cushion\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga cushion.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga blanket\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga blanket.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga block\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga block.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"yoga towel\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"yoga towel.\""
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can bring any item that starts with the word \"yoga\" as long as it is commonly considered a piece of yoga equipment or accessory. This includes items like mats, blocks, straps, towels, socks, clothes, bolsters, wheels, bags, belts, cushions, and blankets, which are all related to yoga practice. However, you cannot bring items that aren't typically associated with yoga equipment, such as a \"yoga book.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are used in a standard yoga practice can be brought to the picnic."
+        }
+    ]
+}

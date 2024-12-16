@@ -1,0 +1,97 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are found in a typical home garden can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 15.08,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Tomato\" and \"Basil\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"Rosemary\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Rosemary."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"Thyme\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Thyme."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess. Can I bring \"Parsley\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Parsley."
+        },
+        {
+            "role": "user",
+            "content": "Given the examples \"Tomato,\" \"Basil,\" \"Rosemary,\" \"Thyme,\" and \"Parsley,\" it seems the rule may involve herbs or possibly certain types of plants. I will make a new guess based on this pattern.\n\nPlayer: I would like to make a new guess. Can I bring \"Cilantro\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Cilantro."
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to make a new guess. Can I bring \"Oregano\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Oregano."
+        },
+        {
+            "role": "user",
+            "content": "Based on the conversation history, the items that can be brought to the game seem to include various herbs and certain plants that are commonly used in cooking. Since all of the previous examples fit this category, here\u2019s a new guess:\n\nPlayer: I would like to make a new guess. Can I bring \"Mint\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Mint."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided: \"Tomato,\" \"Basil,\" \"Rosemary,\" \"Thyme,\" \"Parsley,\" \"Cilantro,\" \"Oregano,\" and \"Mint,\" it seems that the rule involves either herbs or plants commonly used in cooking, particularly those you might find in a kitchen garden.\n\nTo make a new guess that hasn't been mentioned before:\n\nPlayer: I would like to make a new guess. Can I bring \"Sage\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Sage."
+        },
+        {
+            "role": "user",
+            "content": "Based on the items that have been allowed\u2014\"Tomato,\" \"Basil,\" \"Rosemary,\" \"Thyme,\" \"Parsley,\" \"Cilantro,\" \"Oregano,\" \"Mint,\" and \"Sage\"\u2014it seems the rule might involve herbs and plants commonly used in cooking or perhaps specifically culinary herbs. \n\nTo make a new guess that hasn't been mentioned before:\n\nPlayer: I would like to make a new guess. Can I bring \"Chives\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Chives."
+        },
+        {
+            "role": "user",
+            "content": "Based on the previous items that were allowed\u2014\"Tomato,\" \"Basil,\" \"Rosemary,\" \"Thyme,\" \"Parsley,\" \"Cilantro,\" \"Oregano,\" \"Mint,\" \"Sage,\" and \"Chives\"\u2014it seems the rule involves herbs and plants commonly used in cooking. Therefore, I will make a new guess with another culinary herb that hasn't been mentioned yet:\n\nPlayer: I would like to make a new guess. Can I bring \"Dill\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring Dill."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the conversation history, the rule for the items that can be brought to the game seems to involve herbs and plants commonly used in cooking, particularly those associated with a kitchen or culinary herbs. None of the guesses were disallowed, and each item can typically be found in a herb garden or is used as a common culinary ingredient. Thus, my best guess for the secret rule is: \"You can bring culinary herbs and plants commonly used in cooking.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that have been featured in a Nobel Prize-winning author's literature can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 10.18,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"grapes\" and \"bread\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples \"grapes\" and \"bread,\" my best guess for the secret rule is that the rule pertains to items that are edible and commonly associated with food. Both grapes and bread are food items that can be consumed. Therefore, my guess is that the rule allows for any food item that can be eaten."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

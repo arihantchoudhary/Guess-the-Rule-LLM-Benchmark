@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically associated with a traditional beach day can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": true,
+    "duration_seconds": 3.53,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"beach towel\" and \"sunscreen\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master, it seems that the rule pertains to items typically associated with a beach or swimming. Therefore, my guess for the secret rule is that the items must be things that one would use or bring to the beach or while swimming."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are typically associated with a traditional beach day can be brought to the picnic."
+        }
+    ]
+}

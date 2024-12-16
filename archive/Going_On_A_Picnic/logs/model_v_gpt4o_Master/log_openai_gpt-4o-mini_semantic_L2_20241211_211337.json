@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with traditional birthday celebrations can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 7.75,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"birthday cake\" and \"balloons\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. How about \"party hats\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party hats."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. How about \"streamers\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring streamers."
+        },
+        {
+            "role": "user",
+            "content": "The secret rule seems to be that the items must be related to a celebration or party theme. Based on the provided examples (\"birthday cake,\" \"balloons,\" \"party hats,\" and \"streamers\"), I would guess that the rule is: \"Items that are typically associated with celebrations or parties are allowed.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with famous speeches delivered by women's rights activists can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 31.66,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sash\" and \"microphone\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to propose a new guess: Can I bring a \"chessboard\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"chessboard\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to propose a new guess: Can I bring a \"flashlight\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring a \"flashlight\"."
+        },
+        {
+            "role": "user",
+            "content": "Given the examples \"sash\" and \"microphone\" and the rejections of \"chessboard\" and \"flashlight,\" the rule seems to involve items containing the letter \"s\". Both \"sash\" and \"microphone\" contain an \"s\", while \"chessboard\" and \"flashlight\" do not. Therefore, my best guess for the rule is that you can bring items that contain the letter \"s\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

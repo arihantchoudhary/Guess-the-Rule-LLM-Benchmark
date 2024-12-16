@@ -1,0 +1,25 @@
+{
+    "rule_type": "logical",
+    "level_difficulty": "L1",
+    "secret_rule": "The item can be brought to the picnic only if its name is a single-word noun that starts with the letter 'R'.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 5.42,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"racket\" and \"rake\"."
+        },
+        {
+            "role": "user",
+            "content": "based on the examples \"racket\" and \"rake\", my best guess for the secret rule is that the words must:\n\n1. start with the letters \"ra\"\n2. be 4-5 letters long\n3. end with a consonant\n\nso my proposed rule is: words that start with \"ra\" and have 4-5 letters, ending in a consonant."
+        },
+        {
+            "role": "assistant",
+            "content": "incorrect. please try again."
+        }
+    ]
+}

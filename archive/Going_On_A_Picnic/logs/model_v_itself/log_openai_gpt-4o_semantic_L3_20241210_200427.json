@@ -1,0 +1,73 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with renowned landmark court cases or legal precedents can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 14.97,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Brown v. Board of Education transcript\" and \"Miranda rights card\"."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to guess another item: \"The U.S. Constitution document\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the U.S. Constitution document."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to guess another item: \"The Federalist Papers\"."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring The Federalist Papers."
+        },
+        {
+            "role": "user",
+            "content": "I'd like to guess another item: \"The Emancipation Proclamation document\"."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring the Emancipation Proclamation document."
+        },
+        {
+            "role": "user",
+            "content": "Based on the items that are allowed, it seems like the rule may involve items related to legal rights or landmark legal decisions directly tied to individual rights. However, The Federalist Papers and The Emancipation Proclamation are not allowed, which may suggest historical legal texts not directly associated with a single landmark rights decision affecting individuals may not fit the rule.\n\nI'll make a new guess:\n\nPlayer: I'd like to guess another item: \"The United States Bill of Rights\"."
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring the United States Bill of Rights."
+        },
+        {
+            "role": "user",
+            "content": "Based on the responses so far, it seems the items that can be brought are documents directly linked to specific landmark judicial decisions or legal statements that focus on individual rights as interpreted or enforced by the judiciary, rather than foundational legal documents or historical documents that don't specify individual rights through a landmark judicial lens.\n\nConsidering this, I will make a new guess:\n\nPlayer: I'd like to guess another item: \"Roe v. Wade court decision document\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the Roe v. Wade court decision document."
+        },
+        {
+            "role": "user",
+            "content": "Based on the existing pattern, the items allowed seem to be documents directly related to landmark court decisions or legal rights specifically enforced or interpreted by the judiciary. With that understanding, here's a new guess:\n\nPlayer: I'd like to guess another item: \"Obergefell v. Hodges court decision document\"."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring the Obergefell v. Hodges court decision document."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the responses from the game master, it seems that the rule focuses on items that are documents directly tied to landmark U.S. Supreme Court decisions that specifically interpret or enforce individual rights, particularly through judicial review. These decisions must be significant in interpreting the Constitution or expanding protections of individual rights in specific cases.\n\nTherefore, my best guess for the rule is: \"You can bring documents that are final decisions from landmark U.S. Supreme Court cases that directly address or establish individual legal rights through judicial interpretation or mandates.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

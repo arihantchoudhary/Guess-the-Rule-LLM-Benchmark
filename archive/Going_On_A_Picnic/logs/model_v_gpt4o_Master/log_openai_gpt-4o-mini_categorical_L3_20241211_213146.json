@@ -1,0 +1,97 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that have been mentioned or referenced in a globally recognized Haiku can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 17.16,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"cherry blossoms\" and \"mountain stream\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"ocean waves\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"ocean waves.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"forest trees\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"forest trees.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"river rocks\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"river rocks.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"desert sands\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"desert sands.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"hill flowers\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"hill flowers.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"lake reeds\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"lake reeds.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"river cypress\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"river cypress.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the previous examples and responses, it seems the rule involves natural elements. Items that are generally found in a natural environment, especially flora, seem to be acceptable.\n\nI would like to make a new guess: Can I bring \"valley flowers\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring \"valley flowers.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess: Can I bring \"prairie grass\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "No, you cannot bring \"prairie grass.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided and the responses from the game master, it seems the rule pertains to elements that are found in nature, specifically focusing on certain types of plants or geographic features. The items that are accepted generally have a connection to specific locations or distinct natural settings (like \"cherry blossoms\" representing a type of flower and \"mountain stream\" depicting a geographical feature).\n\nHowever, there appears to be a pattern where accepted entries consist of certain types of flora or geographical features with a specific descriptor, while others with less specificity or broader terms are rejected. \n\nThus, my final guess for the rule is: \"You can bring items that include a specific natural descriptor associated with a geographic feature or plant that reflects a certain location. Specifically, items must consist of a specific type of flora or a unique natural element related to a defined landscape.\" \n\nTo confirm: Can I bring \"meadow daisies\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

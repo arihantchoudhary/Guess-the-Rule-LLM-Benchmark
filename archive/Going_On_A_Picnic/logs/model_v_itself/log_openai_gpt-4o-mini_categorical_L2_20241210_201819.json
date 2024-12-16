@@ -1,0 +1,41 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are used in a typical camping trip can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 5.22,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"tent\" and \"sleeping bag\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to help clarify the rule. Could you provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring a \"flashlight.\""
+        },
+        {
+            "role": "user",
+            "content": "I would like to ask the game master for more examples to help clarify the rule. Could you provide additional items that fit the rule?"
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring a \"camp stove.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the provided examples (\"tent,\" \"sleeping bag,\" \"flashlight,\" and \"camp stove\"), the rule appears to be that the items are all related to camping or outdoor activities. Therefore, my best guess about the rule is: \"The items must be gear or equipment that are commonly used for camping.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+/test/
+.env
+train-annotations-human-imagelabels.csv
+**/.DS_Store
+experiment_*
+saved_games*
+*.pyc
+backend.egg-info
+archive/Going_On_A_Picnic/keys.json
+archive/Going_On_A_Picnic/temp_key.json
+/Users/mikel/Documents/Research/Guess-the-Rule-LLM-Benchmark/archive/Going_On_A_Picnic/logs/llm_player

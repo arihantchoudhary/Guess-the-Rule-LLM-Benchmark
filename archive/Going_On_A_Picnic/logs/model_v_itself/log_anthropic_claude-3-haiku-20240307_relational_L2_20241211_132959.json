@@ -1,0 +1,25 @@
+{
+    "rule_type": "relational",
+    "level_difficulty": "L2",
+    "secret_rule": "Pairs of items can be brought to the picnic if they are both fruits, but one must be a citrus fruit and the other must be a berry.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 11.63,
+    "platform": "anthropic",
+    "model": "claude-3-haiku-20240307",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"orange\" and \"blueberry\n\nlemon\" and \"raspberry\"."
+        },
+        {
+            "role": "user",
+            "content": "Hmm, based on the examples provided by the game master, it seems that the secret rule might be:\n\nThe items must be types of fruits or berries.\n\nThe first two examples, \"orange\" and \"blueberry\", are both types of fruits. The second two examples, \"lemon\" and \"raspberry\", are also types of fruits or berries.\n\nTherefore, my best guess for the secret rule in this \"Guess the Rule Games\" is that the items must be some form of fruit or berry."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

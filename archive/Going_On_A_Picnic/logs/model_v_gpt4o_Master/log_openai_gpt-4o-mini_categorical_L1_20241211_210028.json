@@ -1,0 +1,25 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are used in a typical school classroom can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 5.23,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"pencil\" and \"notebook\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided by the game master (\"pencil\" and \"notebook\"), the rule seems to involve items that are commonly associated with writing or school supplies. Both examples are tools or materials used for writing or taking notes.\n\nTherefore, my best guess about the secret rule is: **The items must be writing or stationery-related.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

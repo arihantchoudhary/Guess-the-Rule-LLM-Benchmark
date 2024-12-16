@@ -1,0 +1,352 @@
+[
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are compound words can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have their vowels in alphabetical order can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are homophones of another English word can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are anagrams of a plant or animal species can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are palindromes can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are named after a person or place can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are associated with a famous event in history can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be typed using only the top row of a QWERTY keyboard can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are synonyms of a word in a Beatles song title can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be represented in emoji form can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are a direct translation of a word from a language where English is not the official language can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been featured in a Nobel Prize-winning author's literature can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have a prime number of letters in their names can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be spelled without repeating a letter can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that were mentioned in the script of the original Star Trek series can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have a scientific name in Latin can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been referenced in a Shakespearean play can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been depicted in a painting housed in the Louvre can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are onomatopoeic can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have appeared in the title of a New York Times Best Seller within the last decade can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be visually expressed as a mathematical equation can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are the title of a song by a Grammy Award-winning artist can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are mentioned in the lyrics of a Disney movie song can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been portrayed in an Academy Award-winning film can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be broken down into two English words, without rearranging the letters, can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are associated with a mythical creature or folklore can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are made up of words from the titles of Agatha Christie's mystery novels can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that contain the same number of consonants and vowels in their names can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be formed by the chemical symbols from the Periodic Table of Elements can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are spelled with letters that, when converted to their corresponding numbers in the alphabet (A=1, B=2... Z=26), the sum of these numbers is a Fibonacci number can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that share a common characteristic or ingredient with a dish mentioned in an episode of the \"Great British Bake Off\" can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are named in a Beatles song, but not in the song title, can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been depicted on a national postage stamp can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been mentioned in a Nobel Peace Prize laureate's acceptance speech can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been given as a reward in a fairy tale can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have appeared in a Nobel Prize-winning physicist's published research can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are associated with a constellation or celestial body can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have their name included in a UNESCO World Heritage Site can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are formed by combining the first letters of the planets in our solar system can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that, when their letters are arranged in alphabetical order, can still form a valid English word can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been featured in a riddle from folklore or literature can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have an odd number of syllables can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are commonly associated with a famous painting and its symbolism can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are associated with a well-known idiom or proverb can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that, when translated into Morse Code, contain an equal number of dots and dashes can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be spelled using the names of U.S. states, without any letter repetition, can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been used as a currency or form of trade in a historical civilization can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have been mentioned in a universally recognized nursery rhyme can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that can be categorized as a natural phenomenon or event (e.g., eclipse, avalanche) can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are a common slang or colloquial term in at least two different English-speaking countries can be brought to the picnic.",
+        "level": "L3"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a school classroom can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have a color in their name can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are also the name of a major city in the world can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a children's storybook can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically used in a birthday celebration can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically associated with a traditional Christmas celebration can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that have a double letter in their names can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a doctor's office can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a kitchen can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a grocery store can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are made entirely of recyclable materials can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a park can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a garden can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that start with the letter 'F' can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically associated with a beach vacation can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically associated with a wedding can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically used for camping can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a bakery can be brought to the picnic.",
+        "level": "L1"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a zoo can be brought to the picnic.",
+        "level": "L2"
+    },
+    {
+        "rule_type": "attribute_based",
+        "rule": "Only items that are typically found in a library can be brought to the picnic.",
+        "level": "L2"
+    }
+]

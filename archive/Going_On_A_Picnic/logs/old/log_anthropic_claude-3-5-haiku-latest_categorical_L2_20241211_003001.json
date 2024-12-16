@@ -1,0 +1,25 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are used in a standard yoga practice can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 7.99,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"yoga mat\" and \"yoga block\"."
+        },
+        {
+            "role": "user",
+            "content": "based on the limited example of \"yoga mat\" and \"yoga block\", my initial guess is that the secret rule is related to:\n\nyoga equipment/accessories\n\nthis seems like the most straightforward connection between the two provided examples. both items are specific pieces of equipment or accessories used in yoga practice. the rule might involve things like yoga props, tools, or gear associated with yoga.\n\nhowever, i acknowledge this is a very tentative guess since i have minimal information, and the actual rule could be something more nuanced or unexpected that i cannot confidently determine from just two examples.\n\nwould you be able to confirm if my guess about yoga equipment is correct?"
+        },
+        {
+            "role": "assistant",
+            "content": "incorrect. please try again.\n\nwhile your reasoning about yoga equipment seems logical, it is not the exact rule. please continue asking about specific items you want to bring to the picnic to help you deduce the secret rule."
+        }
+    ]
+}

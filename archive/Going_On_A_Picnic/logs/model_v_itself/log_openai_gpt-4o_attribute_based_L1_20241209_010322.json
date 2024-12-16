@@ -1,0 +1,25 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a supermarket can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 4.39,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Milk\" and \"Bread\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples \"Milk\" and \"Bread,\" it seems the rule might be related to common grocery items or perhaps basic necessities. Both items are staples in many households and are commonly found in a lot of different types of meals. Therefore, my best guess for the secret rule is that the items must be staple grocery items or essential food items typically found in a household."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

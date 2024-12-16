@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with a wedding can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": true,
+    "duration_seconds": 9.54,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"wedding cake\" and \"bouquet\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples to clarify the rule since the previous examples were too limited for me to confidently guess. \n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"wedding rings.\""
+        },
+        {
+            "role": "user",
+            "content": "I'll ask the game master for more examples to help clarify the rule since I'm still unsure:\n\n\"Can you provide more examples of items that fit the rule?\""
+        },
+        {
+            "role": "assistant",
+            "content": "You can bring \"bride's dress.\""
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples provided\u2014\"wedding cake,\" \"bouquet,\" \"wedding rings,\" and \"bride's dress\"\u2014I would guess that the secret rule pertains to items that are traditionally associated with a wedding. Therefore, my best guess is that the rule is: **The items must be related to a wedding ceremony or wedding celebration.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is Only items that are typically associated with a wedding can be brought to the picnic."
+        }
+    ]
+}

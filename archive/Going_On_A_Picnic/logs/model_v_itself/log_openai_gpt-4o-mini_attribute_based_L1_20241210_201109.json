@@ -1,0 +1,41 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a bakery can be brought to the picnic.",
+    "max_turns_allowed": 3,
+    "turns_taken": 3,
+    "rule_guessed": false,
+    "duration_seconds": 5.43,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"bread\" and \"croissant\"."
+        },
+        {
+            "role": "user",
+            "content": "I\u2019d like to guess if \"baguette\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring baguette."
+        },
+        {
+            "role": "user",
+            "content": "Player: Can I bring \"roll\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring roll."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples given (\"bread,\" \"croissant,\" and \"baguette,\" and \"roll\") and the Game Master's affirmations, it seems that the secret rule is that any type of bread or baked good is allowed. Therefore, I guess the rule is: \"You can bring any type of bread or bread-based baked goods.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

@@ -1,0 +1,97 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are typically found in a bathroom can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": false,
+    "duration_seconds": 14.53,
+    "platform": "openai",
+    "model": "gpt-4o-mini",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"towels\" and \"soap\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a guess. Can I bring \"shampoo\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring shampoo."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"conditioner\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring conditioner."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"body wash\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring body wash."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"face wash\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring face wash."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"loofah\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a loofah."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"bath oils\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring bath oils."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"bath bombs\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring bath bombs."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"face scrub\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring face scrub."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess. Can I bring \"exfoliating gloves\"?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring exfoliating gloves."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the responses from the game master, the secret rule seems to be that you can bring items that are commonly used in personal hygiene and bathing. The items mentioned, such as towels, soap, shampoo, conditioner, body wash, face wash, loofah, bath oils, bath bombs, face scrub, and exfoliating gloves, are all related to cleaning and maintaining personal care. \n\nSo my final guess about the rule is: **You can bring items that are used for personal hygiene and bathing.**"
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

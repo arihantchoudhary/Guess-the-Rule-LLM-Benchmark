@@ -1,0 +1,25 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L3",
+    "secret_rule": "Only items that are typically associated with famous music compositions or instruments can be brought to the picnic.",
+    "max_turns_allowed": 1,
+    "turns_taken": 1,
+    "rule_guessed": false,
+    "duration_seconds": 6.84,
+    "platform": "anthropic",
+    "model": "claude-3-5-haiku-latest",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"violin bow\" and \"sheet music\"."
+        },
+        {
+            "role": "user",
+            "content": "Based on the limited information provided, I don't have enough context to confidently determine a specific rule. The only examples given are \"violin bow\" and \"sheet music\", which are both related to classical music, but this single pattern is not enough to definitively identify a comprehensive rule.\n\nMy current best guess would be that the rule relates to something about musical instruments or items associated with musical performance, but I cannot be certain without more examples or clarification.\n\nTo make a more precise guess, I would need additional information such as more example items or context about how these items are being classified or connected."
+        },
+        {
+            "role": "assistant",
+            "content": "Would you like to try bringing an item to the picnic?"
+        }
+    ]
+}

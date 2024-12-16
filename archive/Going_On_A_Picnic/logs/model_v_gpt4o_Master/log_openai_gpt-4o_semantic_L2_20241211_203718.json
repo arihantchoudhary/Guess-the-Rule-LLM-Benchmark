@@ -1,0 +1,57 @@
+{
+    "rule_type": "semantic",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with popular children's birthday parties can be brought to the picnic.",
+    "max_turns_allowed": 5,
+    "turns_taken": 5,
+    "rule_guessed": false,
+    "duration_seconds": 9.64,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"balloons\" and \"party hats\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to guess that \"streamers\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring streamers."
+        },
+        {
+            "role": "user",
+            "content": "I would like to guess that \"confetti\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring confetti."
+        },
+        {
+            "role": "user",
+            "content": "I would like to guess that \"party favors\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring party favors."
+        },
+        {
+            "role": "user",
+            "content": "Player: I would like to guess that \"pinatas\" can be brought to the game."
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring pinatas."
+        },
+        {
+            "role": "user",
+            "content": "The rule seems to be that you can bring items that are typically associated with parties or celebrations. Items like \"balloons,\" \"party hats,\" \"streamers,\" \"confetti,\" \"party favors,\" and \"pinatas\" all fit this theme. Therefore, the rule might be: \"Items that are typically used in parties or celebrations can be brought to the game.\""
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

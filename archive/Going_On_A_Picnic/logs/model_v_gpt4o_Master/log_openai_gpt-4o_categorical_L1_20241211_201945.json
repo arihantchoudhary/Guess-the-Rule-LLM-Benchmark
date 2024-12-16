@@ -1,0 +1,73 @@
+{
+    "rule_type": "categorical",
+    "level_difficulty": "L1",
+    "secret_rule": "Only items that are commonly found in a supermarket can be brought to the picnic.",
+    "max_turns_allowed": 7,
+    "turns_taken": 7,
+    "rule_guessed": false,
+    "duration_seconds": 17.45,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"Bread\" and \"milk\"."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring \"cheese\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring cheese."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring \"butter\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring butter."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring \"yogurt\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring yogurt."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring \"cream\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring cream."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring \"eggs\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring eggs."
+        },
+        {
+            "role": "user",
+            "content": "I'll make a new guess: Can I bring \"buttermilk\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring buttermilk."
+        },
+        {
+            "role": "user",
+            "content": "Based on the examples and the game master's responses, the items you can bring seem to be dairy products or dairy-related items. Bread, although not strictly a dairy product, is often associated with breakfast items similar to the rest, or could be included as a staple food, which can sometimes pair with dairy. My best guess for the rule is: You can bring items that are dairy products or are commonly consumed in a breakfast context with dairy items."
+        },
+        {
+            "role": "assistant",
+            "content": "Incorrect. Please try again."
+        }
+    ]
+}

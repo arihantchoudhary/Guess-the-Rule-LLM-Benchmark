@@ -1,0 +1,97 @@
+{
+    "rule_type": "attribute_based",
+    "level_difficulty": "L2",
+    "secret_rule": "Only items that are typically associated with a beach vacation can be brought to the picnic.",
+    "max_turns_allowed": 10,
+    "turns_taken": 10,
+    "rule_guessed": true,
+    "duration_seconds": 18.38,
+    "platform": "openai",
+    "model": "gpt-4o",
+    "conversation": [
+        {
+            "role": "assistant",
+            "content": "To start, here are some examples of items you can bring: \"sunscreen\" and \"beach towel\"."
+        },
+        {
+            "role": "user",
+            "content": "I would like to guess a new item to see if it fits the rule. Can I bring \"flip-flops\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring flip-flops."
+        },
+        {
+            "role": "user",
+            "content": "I would like to guess a new item to see if it fits the rule. Can I bring \"swimsuit\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a swimsuit."
+        },
+        {
+            "role": "user",
+            "content": "I would like to guess a new item to see if it fits the rule. Can I bring \"sunglasses\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring sunglasses."
+        },
+        {
+            "role": "user",
+            "content": "Based on the items that have been allowed so far\u2014\"sunscreen,\" \"beach towel,\" \"flip-flops,\" \"swimsuit,\" and \"sunglasses\"\u2014it seems like the secret rule might be related to items you typically bring to a beach.\n\nI would like to make a new guess to see if it fits the rule:\nCan I bring \"sandcastle bucket\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a sandcastle bucket."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess to see if it fits the rule: Can I bring \"beach ball\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach ball."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess to see if it fits the rule: Can I bring \"snorkel\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a snorkel."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess to see if it fits the rule: Can I bring \"surfboard\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a surfboard."
+        },
+        {
+            "role": "user",
+            "content": "I would like to make a new guess to see if it fits the rule: Can I bring \"beach umbrella\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach umbrella."
+        },
+        {
+            "role": "user",
+            "content": "Based on the items that have been allowed so far, it seems like the rule is related to items typically associated with the beach or beach activities. To further confirm this pattern, I would like to make a new guess:\n\nCan I bring \"beach chair\" to the game?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, you can bring a beach chair."
+        },
+        {
+            "role": "user",
+            "content": "The rule appears to be that you can bring items that are typically associated with the beach or beach activities. This includes items that are commonly brought to or used at the beach for leisure, play, or sun protection."
+        },
+        {
+            "role": "assistant",
+            "content": "Correct! The rule is: Only items that are typically associated with a beach vacation can be brought to the picnic."
+        }
+    ]
+}

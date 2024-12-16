@@ -1,11 +1,17 @@
-import { ConversationSetup } from "@/components/ConversationSetup";
-import { ConversationDisplay } from "@/components/ConversationDisplay";
-import { LoadGameForm } from "@/components/game/LoadGameForm";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { startGameService, getExamplesService, validateGuessService, loadGameService } from "@/services/gameService";
 import { StartGamePayload } from "@/lib/api";
+import { 
+  startGameService, 
+  getExamplesService, 
+  validateGuessService, 
+  loadGameService,
+  streamLLMGameplay 
+} from "@/services/gameService";
+import { ConversationSetup } from "@/components/ConversationSetup";
+import { GameLayout } from "@/components/game/GameLayout";
+import { LoadGameForm } from "@/components/game/LoadGameForm";
+import { GameModeSelection } from "@/components/game/GameModeSelection";
 
 interface Message {
   id: string;
@@ -23,15 +29,13 @@ interface GameDetails {
   gameId: string;
 }
 
-type GameMode = "new" | "load" | null;
-
 const Play = () => {
   const { toast } = useToast();
-  const [gameMode, setGameMode] = useState<GameMode>(null);
+  const [gameMode, setGameMode] = useState<"new" | "load" | null>(null);
   const [isConversationStarted, setIsConversationStarted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState<string>("");
+  const [currentPlayer, setCurrentPlayer] = useState("");
   const [isUserPlaying, setIsUserPlaying] = useState(false);
   const [gameDetails, setGameDetails] = useState<GameDetails>({
     domain: "",
@@ -44,52 +48,95 @@ const Play = () => {
   });
 
   const handleStart = async (
-    domain: string, 
+    game: string, 
     difficulty: string, 
     player: string, 
-    initialExamples: number, 
-    isDynamic: boolean
+    initialExamples: number
   ) => {
     try {
       setIsLoading(true);
-      const payload: StartGamePayload = {
-        domain,
-        difficulty,
-        player,
-        num_init_examples: initialExamples.toString(),
-        game_gen_type: isDynamic ? "dynamic" : "static"
-      };
-
-      const response = await startGameService(payload);
-
-      setIsConversationStarted(true);
-      setCurrentPlayer(player);
-      setIsUserPlaying(player === "user");
       
-      setGameDetails({
-        domain,
-        difficulty,
-        datasetType: isDynamic ? "Dynamic" : "Static",
-        startTime: new Date(response.start_time),
-        status: response.status as "ongoing" | "won" | "lost",
-        turnsTaken: response.turns_taken,
-        gameId: response.game_uuid
-      });
+      // Check if the player is an LLM
+      const isLLMPlayer = player !== "user";
+      
+      if (isLLMPlayer) {
+        // Handle LLM gameplay with streaming
+        setIsConversationStarted(true);
+        setCurrentPlayer(player);
+        setIsUserPlaying(false);
+        
+        // Set initial game details based on selection
+        setGameDetails({
+          domain: game,
+          difficulty,
+          datasetType: "Dynamic",
+          startTime: new Date(),
+          status: "ongoing",
+          turnsTaken: 0,
+          gameId: `llm-${Date.now()}`  // Generate a temporary ID for LLM games
+        });
 
-      const initialMessage: Message = {
-        id: Date.now().toString(),
-        content: response.system_message,
-        sender: "system",
-      };
+        // Start streaming LLM gameplay
+        await streamLLMGameplay(
+          game,
+          difficulty,
+          player,
+          initialExamples,
+          (content: string, sender: string) => {
+            setMessages(prev => [...prev, {
+              id: Date.now().toString(),
+              content,
+              sender
+            }]);
+            
+            // Update turns taken for user messages
+            if (sender === "user") {
+              setGameDetails(prev => ({
+                ...prev,
+                turnsTaken: prev.turnsTaken + 1
+              }));
+            }
+          }
+        );
+      } else {
+        // Handle regular user gameplay
+        const payload: StartGamePayload = {
+          game_name: game,
+          difficulty,
+          player,
+          num_init_examples: initialExamples.toString()
+        };
 
-      setMessages([initialMessage]);
+        const response = await startGameService(payload);
 
+        setIsConversationStarted(true);
+        setCurrentPlayer(player);
+        setIsUserPlaying(true);
+        
+        setGameDetails({
+          domain: response.domain,
+          difficulty,
+          datasetType: response.game_gen_type,
+          startTime: new Date(response.start_time),
+          status: response.status as "ongoing" | "won" | "lost",
+          turnsTaken: response.turns_taken,
+          gameId: response.game_uuid
+        });
+
+        const initialMessage = {
+          id: Date.now().toString(),
+          content: response.system_message,
+          sender: "system"
+        };
+
+        setMessages([initialMessage]);
+      }
     } catch (error: any) {
       console.error("Error starting game:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: error.message,
+        description: error.message
       });
     } finally {
       setIsLoading(false);
@@ -102,7 +149,7 @@ const Play = () => {
       const response = await loadGameService(gameId);
 
       setIsConversationStarted(true);
-      setCurrentPlayer("user"); // Assuming loaded games are for user play
+      setCurrentPlayer("user");
       setIsUserPlaying(true);
       
       setGameDetails({
@@ -140,6 +187,7 @@ const Play = () => {
     setMessages([]);
     setCurrentPlayer("");
     setIsUserPlaying(false);
+    setGameMode(null);
     setGameDetails({
       domain: "",
       difficulty: "",
@@ -211,21 +259,8 @@ const Play = () => {
     return (
       <div className="p-6 bg-gradient-to-br from-purple-50 via-white to-blue-50">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-            Guess the Rule Game
-          </h1>
-          
           {!gameMode ? (
-            <div className="space-y-6">
-              <div className="flex flex-col items-center gap-4">
-                <Button onClick={() => setGameMode("new")} size="lg" className="w-64">
-                  Start New Game
-                </Button>
-                <Button onClick={() => setGameMode("load")} variant="outline" size="lg" className="w-64">
-                  Load Existing Game
-                </Button>
-              </div>
-            </div>
+            <GameModeSelection onSelectMode={setGameMode} />
           ) : gameMode === "new" ? (
             <ConversationSetup onStart={handleStart} />
           ) : (
@@ -240,7 +275,7 @@ const Play = () => {
   }
 
   return (
-    <ConversationDisplay
+    <GameLayout
       messages={messages}
       isLoading={isLoading}
       onReset={handleReset}

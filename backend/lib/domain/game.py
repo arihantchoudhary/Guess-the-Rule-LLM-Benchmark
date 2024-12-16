@@ -1,4 +1,5 @@
 import os
+import pickle
 import json
 
 from lib.domain.picnic.static_picnic.base import StaticGoingOnAPicnic
@@ -22,15 +23,23 @@ def select_new_game(game_name):
 
 def get_existing_game(uuid):
     filename = os.path.join(GAMES_SAVE_DIR, f"{uuid}.json")
-    with open(filename) as f:
-        saved_game = json.load(f)
-        game_class_name = saved_game['game_class_name']
-    
-    if game_class_name == 'StaticGoingOnAPicnic':
-        return StaticGoingOnAPicnic(uuid=uuid)
+    filename2 = os.path.join(GAMES_SAVE_DIR, f'{uuid}.pkl')
+    if os.path.exists(filename):
+        with open(filename) as f:
+            saved_game = json.load(f)
+            game_class_name = saved_game['game_class_name']
+        
+        if game_class_name == 'StaticGoingOnAPicnic':
+            return StaticGoingOnAPicnic(uuid=uuid)
 
-    if game_class_name == 'DynamicGoingOnAPicnic':
-        return DynamicGoingOnAPicnic(uuid=uuid)
-    
-    if game_class_name == 'MathGuessTheRuleGame':
-        return MathGuessTheRuleGame(uuid=uuid)
+        if game_class_name == 'DynamicGoingOnAPicnic':
+            return DynamicGoingOnAPicnic(uuid=uuid)
+
+        if game_class_name == 'MathGuessTheRuleGame':
+            return MathGuessTheRuleGame(uuid=uuid)
+
+    elif os.path.exists(filename2):
+        with open(filename2, 'rb') as f:
+            saved_game = pickle.load(f)
+            assert saved_game.game_class_name == 'CodeFunctionsPicnic'
+        return CodeFunctionsPicnic(uuid=uuid)

@@ -22,6 +22,51 @@ export const startGameService = async (payload: StartGamePayload): Promise<Start
   return handleApiError(response);
 };
 
+export const streamLLMGameplay = async (
+  game: string,
+  difficulty: string,
+  player: string,
+  numInitExamples: number,
+  onMessage: (content: string, sender: string) => void
+) => {
+  const url = new URL(`${API_BASE_URL}/llm-gameplay`);
+  url.searchParams.append('game_name', game);
+  url.searchParams.append('difficulty', difficulty);
+  url.searchParams.append('player', player);
+  url.searchParams.append('num_init_examples', numInitExamples.toString());
+
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Failed to start LLM gameplay');
+  if (!response.body) throw new Error('No response body');
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+
+  let buffer = '';
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+
+    // Split buffer into complete JSON messages
+    const messages = buffer.split('\n').filter((line) => line.trim() !== '');
+    while (messages.length > 0) {
+      const message = messages.shift();
+      try {
+        const parsedMessage = JSON.parse(message);
+        onMessage(parsedMessage.content, parsedMessage.sender.toLowerCase());
+      } catch (err) {
+        console.error("Error parsing message:", err);
+      }
+    }
+
+    // Retain any incomplete data in the buffer
+    buffer = messages.join('\n');
+  }
+};
+
 export const getExamplesService = async (gameId: string, numExamples: number): Promise<GuessResponse> => {
   const response = await fetch(
     `${API_BASE_URL}/game/${gameId}/examples?n_examples=${numExamples}`,

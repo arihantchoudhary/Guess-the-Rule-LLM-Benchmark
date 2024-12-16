@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
-import { Input } from "@/components/ui/input";
 import { Info } from "lucide-react";
 import {
   Tooltip,
@@ -11,18 +9,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useState } from "react";
 
-const PLAYER_OPTIONS = [
-  { id: "user", name: "User (Self)", description: "Play the game yourself" },
-  { id: "gpt4o", name: "GPT-4o", description: "Most capable OpenAI model" },
-  { id: "gpt4o-mini", name: "GPT-4o Mini", description: "Faster OpenAI model" },
-  { id: "claude-3-haiku", name: "Claude 3 Haiku", description: "Fast and efficient" },
-  { id: "claude-3.5-haiku", name: "Claude 3.5 Haiku", description: "Latest Anthropic model" },
+const GAME_OPTIONS = [
+  { id: "static_picnic", name: "Static Picnic", description: "Classic picnic game with predefined rules" },
+  { id: "dynamic_picnic", name: "Dynamic Picnic", description: "Picnic game with dynamic rule and data generation" },
+  { id: "code_functions_picnic", name: "Code Functions Picnic", description: "Picnic game with code functions based rules" },
+  { id: "math", name: "Math", description: "Mathematical rule-based game" },
 ];
 
-const DOMAIN_OPTIONS = [
-  { id: "natural_language", name: "Natural Language" },
-  { id: "lexical", name: "Lexical" },
-  { id: "math", name: "Math" },
+const PLAYER_OPTIONS = [
+  { id: "user", name: "User (Self)", description: "Play the game yourself" },
+  { id: "gpt-4o", name: "GPT-4o", description: "Most capable OpenAI model" },
+  { id: "gpt-4o-mini", name: "GPT-4o Mini", description: "Faster OpenAI model" },
+  // { id: "claude-3-haiku", name: "Claude 3 Haiku", description: "Fast and efficient" },
+  // { id: "claude-3.5-haiku", name: "Claude 3.5 Haiku", description: "Latest Anthropic model" },
 ];
 
 const DIFFICULTY_OPTIONS = [
@@ -31,42 +30,90 @@ const DIFFICULTY_OPTIONS = [
   { id: "l3", name: "L3", description: "Advanced difficulty" },
 ];
 
+const EXAMPLES_OPTIONS = [
+  { value: "1", label: "1 Example" },
+  { value: "2", label: "2 Examples" },
+  { value: "3", label: "3 Examples" },
+  { value: "4", label: "4 Examples" },
+  { value: "5", label: "5 Examples" },
+];
+
 interface ConversationSetupProps {
-  onStart: (domain: string, difficulty: string, player: string, initialExamples: number, isDynamic: boolean) => void;
+  onStart: (game: string, difficulty: string, player: string, initialExamples: number) => void;
 }
 
 export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
-  const [domain, setDomain] = useState("");
+  const [selectedGame, setSelectedGame] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [selectedPlayer, setSelectedPlayer] = useState("");
   const [initialExamples, setInitialExamples] = useState("2");
-  const [isDynamic, setIsDynamic] = useState(false);
 
   const handleStart = () => {
-    if (domain && difficulty && selectedPlayer) {
-      onStart(domain, difficulty, selectedPlayer, parseInt(initialExamples), isDynamic);
+    if (selectedGame && difficulty && selectedPlayer) {
+      onStart(selectedGame, difficulty, selectedPlayer, parseInt(initialExamples));
     }
   };
 
-  const handleExamplesChange = (value: string) => {
-    const num = parseInt(value);
-    if (!isNaN(num) && num >= 1 && num <= 5) {
-      setInitialExamples(value);
+  const isPlayerEnabled = (playerId: string) => {
+    if (selectedGame === "static_picnic") return true;
+    return playerId === "user";
+  };
+
+  const isDifficultyEnabled = (difficultyId: string) => {
+    if (selectedGame === "code_functions_picnic") {
+      return difficultyId === "l1";
     }
+    return true;
+  };
+
+  const isExamplesInputEnabled = () => {
+    return selectedGame !== "dynamic_picnic";
+  };
+
+  const renderTooltip = (children: React.ReactNode, disabled: boolean) => {
+    if (!disabled) return children;
+
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div>{children}</div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Option not currently enabled for this game</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
   };
 
   return (
     <div className="animate-fade-in-slow space-y-6 w-full max-w-md mx-auto p-6 glass-panel hover:shadow-lg transition-shadow duration-300 bg-white/30 backdrop-blur-md border border-white/20">
+      <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+        Guess the Rule Bench
+      </h1>
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Domain</label>
-        <Select value={domain} onValueChange={setDomain}>
+        <label className="text-sm font-medium">Game</label>
+        <Select value={selectedGame} onValueChange={(value) => {
+          setSelectedGame(value);
+          if (value !== "static_picnic" && selectedPlayer !== "user") {
+            setSelectedPlayer("user");
+          }
+          if (value === "code_functions_picnic" && difficulty !== "l1") {
+            setDifficulty("l1");
+          }
+        }}>
           <SelectTrigger className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all text-left">
-            <SelectValue placeholder="Select domain" />
+            <SelectValue placeholder="Select game" />
           </SelectTrigger>
           <SelectContent>
-            {DOMAIN_OPTIONS.map((option) => (
+            {GAME_OPTIONS.map((option) => (
               <SelectItem key={option.id} value={option.id} className="text-left">
-                {option.name}
+                <div className="flex flex-col">
+                  <span>{option.name}</span>
+                  <span className="text-xs text-muted-foreground">{option.description}</span>
+                </div>
               </SelectItem>
             ))}
           </SelectContent>
@@ -81,12 +128,20 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
           </SelectTrigger>
           <SelectContent>
             {DIFFICULTY_OPTIONS.map((option) => (
-              <SelectItem key={option.id} value={option.id} className="text-left">
-                <div className="flex flex-col">
-                  <span>{option.name}</span>
-                  <span className="text-xs text-muted-foreground">{option.description}</span>
-                </div>
-              </SelectItem>
+              renderTooltip(
+                <SelectItem 
+                  key={option.id} 
+                  value={option.id} 
+                  className={`text-left ${!isDifficultyEnabled(option.id) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={!isDifficultyEnabled(option.id)}
+                >
+                  <div className="flex flex-col">
+                    <span>{option.name}</span>
+                    <span className="text-xs text-muted-foreground">{option.description}</span>
+                  </div>
+                </SelectItem>,
+                !isDifficultyEnabled(option.id)
+              )
             ))}
           </SelectContent>
         </Select>
@@ -100,12 +155,20 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
           </SelectTrigger>
           <SelectContent>
             {PLAYER_OPTIONS.map((player) => (
-              <SelectItem key={player.id} value={player.id} className="text-left">
-                <div className="flex flex-col">
-                  <span>{player.name}</span>
-                  <span className="text-xs text-muted-foreground">{player.description}</span>
-                </div>
-              </SelectItem>
+              renderTooltip(
+                <SelectItem 
+                  key={player.id} 
+                  value={player.id} 
+                  className={`text-left ${!isPlayerEnabled(player.id) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={!isPlayerEnabled(player.id)}
+                >
+                  <div className="flex flex-col">
+                    <span>{player.name}</span>
+                    <span className="text-xs text-muted-foreground">{player.description}</span>
+                  </div>
+                </SelectItem>,
+                !isPlayerEnabled(player.id)
+              )
             ))}
           </SelectContent>
         </Select>
@@ -113,45 +176,27 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
 
       <div className="space-y-2">
         <label className="text-sm font-medium">Number of Initial Examples</label>
-        <Input
-          type="number"
-          min={1}
-          max={5}
-          value={initialExamples}
-          onChange={(e) => handleExamplesChange(e.target.value)}
-          className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all"
-        />
-      </div>
-
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <Switch
-            id="dataset-type"
-            checked={isDynamic}
-            onCheckedChange={setIsDynamic}
-          />
-          <label htmlFor="dataset-type" className="text-sm font-medium">
-            Dynamic Dataset
-          </label>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="w-4 h-4 text-muted-foreground cursor-help transition-colors hover:text-primary" />
-              </TooltipTrigger>
-              <TooltipContent 
-                side="right"
-                className="max-w-xs bg-white/90 backdrop-blur-sm"
-              >
-                <p>Static datasets are predefined and pre-vetted by us. Dynamic datasets will be generated on the fly by our LLM, powered by OpenAI's GPT models, based on the game rule.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
+        <Select 
+          value={initialExamples} 
+          onValueChange={setInitialExamples}
+          disabled={!isExamplesInputEnabled()}
+        >
+          <SelectTrigger className={`bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all ${!isExamplesInputEnabled() ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            <SelectValue placeholder="Select number of examples" />
+          </SelectTrigger>
+          <SelectContent>
+            {EXAMPLES_OPTIONS.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Button 
         onClick={handleStart}
-        disabled={!domain || !difficulty || !selectedPlayer}
+        disabled={!selectedGame || !difficulty || !selectedPlayer}
         className="w-full transition-all hover:scale-[1.02] active:scale-[0.98] bg-primary/90 hover:bg-primary"
       >
         Start Game

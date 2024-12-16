@@ -1,14 +1,17 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.responses import StreamingResponse
 import logging
 import sys
 import os
+import asyncio
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import traceback
 
 from lib.models import CreateGame, ValidateGuess
 from lib.domain.game import select_new_game, get_existing_game
+from lib.domain.picnic.static_picnic.llm_gameplay import play_game_with_llms
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -97,3 +100,16 @@ def validate_user_guess(payload: ValidateGuess):
         logging.error("An error occurred while validating the guess:")
         logging.error(traceback.format_exc())
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/guess-the-rule/llm-gameplay")
+async def stream_strings(game_name: str, difficulty: str, player: str, num_init_examples: int):
+    game_name = game_name.lower()
+    difficulty = difficulty.upper()
+    player = player.lower()
+    
+    # Return JSON-formatted stream with appropriate media type
+    return StreamingResponse(
+        play_game_with_llms(difficulty, 5, player, num_init_examples),
+        media_type="application/json"
+    )

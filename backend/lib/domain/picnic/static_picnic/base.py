@@ -49,6 +49,11 @@ L3_triplets = [triplet for triplet, count in l3_counts.items() if count > 4]  # 
 
 class StaticGoingOnAPicnic(GuessTheRuleGame):
 
+    def __init__(self, uuid=None, difficulty=None, num_init_examples=None):
+        self.domain = 'natural_language'
+        self.game_gen_type = 'static'
+        super().__init__(uuid, difficulty, num_init_examples)
+
     def save_game(self):
         # Create a serializable copy of the instance's __dict__
         state = self.__dict__.copy()

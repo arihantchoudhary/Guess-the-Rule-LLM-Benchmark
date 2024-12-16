@@ -170,8 +170,10 @@ class MathBase:
     
 
 class MathGuessTheRuleGame(GuessTheRuleGame):  
-    def __init__(self, uuid=None, domain=None, difficulty=None, num_init_examples=None, game_gen_type=None, rule=None, rule_code=None):
-        super().__init__(uuid, domain, difficulty, num_init_examples, game_gen_type)
+    def __init__(self, uuid=None, difficulty=None, num_init_examples=None):
+        self.domain = 'math'
+        self.game_gen_type = 'dynamic'
+        super().__init__(uuid, difficulty, num_init_examples)
         self.rule_str = None
         self.rule_code = None
     

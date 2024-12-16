@@ -40,15 +40,10 @@ async def log_request(request: Request, call_next):
 def create_game(payload: CreateGame):
     """Create a new game instance."""
     try:
-        print(f'payload.domain: {payload.domain}')
-        print(f'payload.game_gen_type: {payload.game_gen_type}')
-        cls = select_new_game(payload.domain, payload.game_gen_type)
-        print(cls)
+        cls = select_new_game(payload.game_name)
         res = cls(
-            domain=payload.domain,
             difficulty=payload.difficulty,
             num_init_examples=payload.num_init_examples,
-            game_gen_type=payload.game_gen_type
         ).create_game_instance()
         logging.info(f"Response: {res}")
         return res
@@ -92,8 +87,6 @@ def get_more_examples(game_id: str, n_examples: int):
 def validate_user_guess(payload: ValidateGuess):
     """Validate a guess against the game instance."""
     try:
-        print(f'payload.game_id: {payload.game_id}')
-        print(f'payload.guess: {payload.guess}')
         cls = get_existing_game(payload.game_id)
         restored_game = cls.load_game()
         res = restored_game.validate_guess(payload.guess)

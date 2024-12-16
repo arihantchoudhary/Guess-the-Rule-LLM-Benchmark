@@ -29,6 +29,11 @@ openai_client = OpenAI()
 
 class DynamicGoingOnAPicnic(GuessTheRuleGame):
 
+    def __init__(self, uuid=None, difficulty=None, num_init_examples=None):
+        self.domain = 'natural_language'
+        self.game_gen_type = 'dynamic'
+        super().__init__(uuid, difficulty, num_init_examples)
+
     def make_game_history_system_message(self):
         if self.status == 'ongoing':
             current_conversation = "\n".join([

@@ -1,12 +1,9 @@
 import os
 import random
 from openai import OpenAI
-import openai
 import string
 import nltk
-import sys
 import uuid
-import __main__ as main
 import time
 import json
 from lib.domain.base import GuessTheRuleGame
@@ -14,12 +11,6 @@ from lib.domain.common import GAMES_SAVE_DIR
 
 # Set your OpenAI API key (or any other LLM provider's key)
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
-
-# juno : for testing purposes
-if not OPENAI_KEY and os.path.exists('/mnt/c/Users/juno/Desktop/llmstuff/secretkey'):
-    with open('/mnt/c/Users/juno/Desktop/llmstuff/secretkey', 'r') as f:
-        OPENAI_KEY = f.read().strip()
-        OpenAI.api_key = OPENAI_KEY
 
 client = OpenAI(api_key=OPENAI_KEY)
 
@@ -204,7 +195,12 @@ class GuessingGame:
             raise Exception
         return ans_last == 'YES'
 
-class LexicalFunctionGame(GuessTheRuleGame):
+class CodeFunctionsPicnic(GuessTheRuleGame):
+
+    def __init__(self, uuid=None, difficulty=None, num_init_examples=None):
+        self.domain = 'lexical'
+        self.game_gen_type = 'dynamic'
+        super().__init__(uuid, difficulty, num_init_examples)
 
     def create_game_instance(self):
         assert not self.uuid, 'Cannot create a new game with an already generated UUID'
@@ -284,7 +280,7 @@ class LexicalFunctionGame(GuessTheRuleGame):
             raise
 
         # Create a new instance of the class
-        game = LexicalFunctionGame(uuid=state['uuid'])
+        game = CodeFunctionsPicnic(uuid=state['uuid'])
         # Update the instance's __dict__ with the loaded state
         game.__dict__.update(state)
 

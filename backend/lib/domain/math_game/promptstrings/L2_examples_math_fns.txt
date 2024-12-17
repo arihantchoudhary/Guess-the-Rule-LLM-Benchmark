@@ -1,14 +1,11 @@
 def generate_next(current_value, index):
-    next_value = current_value * 2 + 1
+    next_value = current_value + 5
 
 def generate_next(current_value, index):
-    next_value = current_value * 3 - 4
+    next_value = current_value // 2
 
 def generate_next(current_value, index):
-    next_value = current_value + 10 * 2
+    next_value = current_value * 3
 
 def generate_next(current_value, index):
-    next_value = current_value // 2 + 5
-
-def generate_next(current_value, index):
-    next_value = current_value * 4 - 6
+    next_value = current_value - 7

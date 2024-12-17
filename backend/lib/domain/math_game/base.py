@@ -11,6 +11,7 @@ import uuid
 import __main__ as main
 import time
 import json
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
 from lib.domain.base import GuessTheRuleGame
 from lib.domain.common import GAMES_SAVE_DIR
 import pdb
@@ -68,7 +69,7 @@ class MathBase:
         return response
 
     def get_openai_response(self, prompt, model="gpt-4o-mini", sysprompt=None):
-        print(f"prompt: {prompt}")
+        # print(f"prompt: {prompt}")
         response = openai.chat.completions.create(model=model,
                 messages=[
                     {"role": "system", "content": sysprompt},
@@ -134,7 +135,12 @@ class MathBase:
                 rule_code = self.get_llm_response(prompt, model='gpt-4o-mini')
                 exec(rule_code, globals())
         sequence = []
-        current_value = random.randint(-10, 10)
+        if self.difficulty == 'L1':
+            current_value = random.randint(0, 10)
+        elif self.difficulty == 'L2':
+            current_value = random.randint(-10, 0)
+        elif self.difficulty == 'L3':
+            current_value = random.randint(0, 10)
         for i in range(self.sequence_length):
             sequence.append(current_value)
             try:
@@ -250,8 +256,8 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         self.history = {"conversation": []}
         self.game_gen_type = 'dynamic'
 
-        print(f"Rule Str is {self.rule_str}")
-        print(f"Rule code is {self.rule_code}")
+        # print(f"Rule Str is {self.rule_str}")
+        # print(f"Rule code is {self.rule_code}")
 
         generated_examples = self.math_base.get_more_examples(num_examples=self.num_init_examples)
         system_message = self.make_init_system_message(generated_examples)
@@ -364,7 +370,6 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
         game = MathBase(difficulty=self.difficulty, rule_str=self.rule_str, rule_code=self.rule_code)
         result = game.validate_result(guess)
         system_message = self.make_validate_guess_system_message(result)
-        print(f'system_message: {system_message}')
         self.add_to_conversation("assistant", system_message)
         
         self.save_game()
@@ -400,7 +405,7 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
     
 
 def demo_play(difficulty, admin=False):
-    game = MathBase(uuid=0, difficulty=difficulty)
+    game = MathBase(difficulty=difficulty)
     welcome_message = "Welcome to the Math Function Game! In this game, you will be given a sequence of numbers and you have to guess the function that generates the sequence. Let's get started!"
     print(welcome_message)
     flag = True
@@ -436,11 +441,6 @@ def demo_play(difficulty, admin=False):
 
 
 if __name__ == "__main__":
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
-    demo_play(difficulty='L2', admin=True)
     demo_play(difficulty='L2', admin=True)
 
     

@@ -66,13 +66,42 @@ def get_claude_response(prompt, model="claude-3.5-haiku", sysprompt=None):
 def load_prompt(filename):
         with open(filename, 'r') as f:
             return f.read()
+        
 
-def play_math_with_llms(difficulty, max_turns, model, uuid):
-    game = MathBase(uuid=uuid, difficulty=difficulty)
+def save_results(results, save_dir):
+    current_date = datetime.now()
+    formatted_date = current_date.strftime("%m_%d_%Y")
+
+    df = pd.DataFrame(results)
+    # print(f"\n*** FINAL RESULTS {formatted_date} ***")
+    # print(df)
+
+    experiment_results_file_name_csv = os.path.join(save_dir, f"experiment_{formatted_date}.csv")
+    experiment_results_file_name_excel = os.path.join(save_dir, f"experiment_{formatted_date}.xlsx")
+
+    # to csv file
+    if os.path.exists(experiment_results_file_name_csv):
+        existing_df = pd.read_csv(experiment_results_file_name_csv)
+        updated_df = pd.concat([existing_df, df], ignore_index=True)
+        updated_df.to_csv(experiment_results_file_name_csv, index=False)
+    else:
+        df.to_csv(experiment_results_file_name_csv, index=False)
+
+    # to excel file
+    if os.path.exists(experiment_results_file_name_excel):
+        existing_df = pd.read_excel(experiment_results_file_name_excel, engine='openpyxl')
+        updated_df = pd.concat([existing_df, df], ignore_index=True)
+        updated_df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')
+    else:
+        df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')
+
+def play_math_with_llms(difficulty, max_turns, model):
+    game = MathBase(difficulty=difficulty)
     turns = 1
     test_llm_sys_prompt = load_prompt('promptstrings/test_llm_sys_prompt.txt')
     test_prompt = ''
     rule = game.rule_str
+    rule_code = game.rule_code
     time_start = time.time()
     time_end = None
     llm_actions = []
@@ -112,7 +141,7 @@ def play_math_with_llms(difficulty, max_turns, model, uuid):
                     continue
         except Exception as e:
             print(f"Error: {e}")
-            game = MathBase(uuid=uuid, difficulty=difficulty)
+            game = MathBase(difficulty=difficulty)
             turns = 1
             test_llm_sys_prompt = load_prompt('promptstrings/test_llm_sys_prompt.txt')
             test_prompt = ''
@@ -129,74 +158,48 @@ def play_math_with_llms(difficulty, max_turns, model, uuid):
     if time_end is None:
         time_end = time.time()
     duration = time_end - time_start
-    # print("\n***Game Summary***")
-    # print(f"Rule: {rule}")
-    # print(f"Turns taken: {turns}")
-    # print(f"Duration: {duration:.2f} seconds")
-    # print(f'Test Prompt: {test_prompt}')
-    # print(f'LLM Actions: {llm_actions}')
-    # print(f'LLM Won: {llm_won}')
-    return rule, turns, duration, test_prompt, llm_actions, llm_won, examples_num
+    return rule, rule_code, turns, duration, test_prompt, llm_actions, llm_won, examples_num
     
 
 if __name__ == "__main__":
-    save_dir = 'exp_results'
-    # valid_difficulties = ['L1', 'L2', 'L3']
-    valid_difficulties = ['L2']
-    # max_turns = [3, 5, 7, 10]
+    save_dir = './exp_results'
+    valid_difficulties = ['L1', 'L2', 'L3']
     max_turn_dict = {'L1': 10, 'L2': 15, 'L3': 20}
 
-    total_iterations = 5
+    total_iterations = 1
+    models = ['claude-3.5-haiku']
+
     # models = ['gpt-4o-mini', 'gpt-4o', 'claude-3-haiku', 'claude-3.5-haiku']
-    # models = ['claude-3.5-haiku']
-    models = ['gpt-4o-mini']
 
     results = []
-    for model in models:
-    # run experiments 
-        for difficulty in valid_difficulties:
-            max_turns = [max_turn_dict[difficulty]]
-            for curr_max_turns in max_turns:
-                for iteration in range(total_iterations):
-                    current_uuid = str(uuid.uuid4())
-                    rule, turns, duration, test_prompt, llm_actions, llm_won, examples_num = play_math_with_llms(difficulty, curr_max_turns, model, current_uuid)
-                    # Append the results to the list
-                    results.append({
-                        "Model": model,
-                        "Win": 1 if llm_won else 0, # 1 or 0
-                        "Difficulty": difficulty,
-                        "Max Turns": curr_max_turns,
-                        "Iteration": iteration+1,
-                        "Turns Taken": turns,
-                        "Duration (s)": round(duration, 2),
-                        "Total Examples Avaiable": examples_num,
-                        "Rule": rule,
-                        "LLM Final Answer": llm_actions[-1]
-                    })
-                    print(f'down: {model} - {difficulty} - {curr_max_turns} - {iteration+1} - {rule} - {llm_won} - {turns} - {duration:.2f} - {examples_num}')
-
-    current_date = datetime.now()
-    formatted_date = current_date.strftime("%m_%d_%Y")
-
-    df = pd.DataFrame(results)
-    print(f"\n*** FINAL RESULTS {formatted_date} ***")
-    print(df)
-
-    experiment_results_file_name_csv = os.path.join(save_dir, f"experiment_{formatted_date}.csv")
-    experiment_results_file_name_excel = os.path.join(save_dir, f"experiment_{formatted_date}.xlsx")
-
-    # to csv file
-    if os.path.exists(experiment_results_file_name_csv):
-        existing_df = pd.read_csv(experiment_results_file_name_csv)
-        updated_df = pd.concat([existing_df, df], ignore_index=True)
-        updated_df.to_csv(experiment_results_file_name_csv, index=False)
-    else:
-        df.to_csv(experiment_results_file_name_csv, index=False)
-
-    # to excel file
-    if os.path.exists(experiment_results_file_name_excel):
-        existing_df = pd.read_excel(experiment_results_file_name_excel, engine='openpyxl')
-        updated_df = pd.concat([existing_df, df], ignore_index=True)
-        updated_df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')
-    else:
-        df.to_excel(experiment_results_file_name_excel, index=False, engine='openpyxl')
+    num = 0
+    try:
+        for model in models:
+        # run experiments 
+            for iteration in range(total_iterations):
+                for difficulty in valid_difficulties:
+                    max_turns = [max_turn_dict[difficulty]]
+                    for curr_max_turns in max_turns:
+                        current_uuid = str(uuid.uuid4())
+                        rule, rule_code, turns, duration, test_prompt, llm_actions, llm_won, examples_num = play_math_with_llms(difficulty, curr_max_turns, model)
+                        # Append the results to the list
+                        results.append({
+                            "Model": model,
+                            "Win": 1 if llm_won else 0, # 1 or 0
+                            "Difficulty": difficulty,
+                            "Max Turns": curr_max_turns,
+                            "Iteration": iteration+1,
+                            "Turns Taken": turns,
+                            "Duration (s)": round(duration, 2),
+                            "Total Examples Avaiable": examples_num,
+                            "Rule-Str": rule,
+                            "Rule-Code": rule_code,
+                            "LLM Final Answer": llm_actions[-1]
+                        })
+                        num += 1
+                        print(f'num: {num}')
+    except Exception as e:
+        save_results(results, save_dir)
+    
+    save_results(results, save_dir)
+    print("Done!")

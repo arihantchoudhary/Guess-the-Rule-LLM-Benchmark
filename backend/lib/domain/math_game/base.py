@@ -225,7 +225,7 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
             f"Your score will be based on the number of turns taken, number of examples seen, "
             f"and overall time elapsed playing the game. The highest score will be for the fewest turns taken, "
             f"fewest examples seen, and shortest game played.\n\n"
-            f"The game master has given examples of items that fit the rule: {str(generated_examples)}.\n\n"
+            f"The game master has given examples of numbers that fit the rule: {str(generated_examples)}.\n\n"
             f"Now given this information, do one of the following:\n"
             f"1. Make a new guess that hasn't been mentioned before.\n"
             f"2. Request more examples.\n"
@@ -290,10 +290,8 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
             raise
         
         game = MathGuessTheRuleGame(uuid=state['uuid'], 
-                        difficulty=state['difficulty'], 
-                        rule=state['rule_str'], 
-                        rule_code=state['rule_code']
-                        )
+            difficulty=state['difficulty']
+        )
         game.__dict__.update(state)
         game.uuid = uuid.UUID(game.uuid)
 
@@ -303,6 +301,7 @@ class MathGuessTheRuleGame(GuessTheRuleGame):
     
 
     def save_game(self):
+        print(f"THE RULE IS {self.rule_str}")
         state = self.__dict__.copy()
         state.pop('math_base', None)
 

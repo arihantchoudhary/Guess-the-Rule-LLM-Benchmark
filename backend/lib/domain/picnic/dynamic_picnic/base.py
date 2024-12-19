@@ -145,6 +145,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         return game
     
     def save_game(self):
+        print(f"THE RULE IS {self.rule}")
         state = self.__dict__.copy()
 
         state['uuid'] = str(self.uuid)
@@ -234,6 +235,7 @@ class DynamicGoingOnAPicnic(GuessTheRuleGame):
         if is_guess_rule == "actual":
             result = self.check_rule_guess(guess)
             if result == "yes":
+                self.turns -= 1 # if the user won, this turn doesnt count in their tally
                 self.status = 'won'
                 self.game_end_time = time.time()
                 self.total_game_time = self.game_end_time - self.start_time

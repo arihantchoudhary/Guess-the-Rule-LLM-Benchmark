@@ -261,6 +261,7 @@ class CodeFunctionsPicnic(GuessTheRuleGame):
         }
     
     def save_game(self):
+        print(f"THE RULE IS {self.rule}")
         filename = os.path.join(GAMES_SAVE_DIR, f"{self.uuid}.pkl")
         temp_filename = filename + '.tmp'
         try:

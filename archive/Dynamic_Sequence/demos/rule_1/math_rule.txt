@@ -1,1 +1,0 @@
-Multiply the input by 2 if the index is even; otherwise, subtract 1 from the input.

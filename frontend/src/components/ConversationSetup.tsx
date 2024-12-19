@@ -67,7 +67,8 @@ export const ConversationSetup = ({ onStart }: ConversationSetupProps) => {
   };
 
   const isExamplesInputEnabled = () => {
-    return selectedGame !== "dynamic_picnic";
+    // return selectedGame !== "dynamic_picnic";
+    return true;
   };
 
   const renderTooltip = (children: React.ReactNode, disabled: boolean) => {

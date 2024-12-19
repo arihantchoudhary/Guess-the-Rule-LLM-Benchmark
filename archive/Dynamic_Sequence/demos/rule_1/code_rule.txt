@@ -1,5 +1,0 @@
-def generate_next(current_value, index):
-    if index % 2 == 0:
-        return current_value * 2
-    else:
-        return current_value - 1

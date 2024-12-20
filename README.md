@@ -132,8 +132,8 @@ Select the game configurations to start a new game.
 Game play UI.
 ![](/docs/play.png)
 
-## Benchmark Experiment Results Screenshot
-Win rate of different models across games and difficulty levels. Bold values highlight the best performances
+## Benchmark Experiments High-Level Results
+Below is a summary of the average win rate of different models across all games and difficulty levels. Bold values highlight the best performances
 in their respective columns.
 ![](/docs/evaluation-results.png)
 

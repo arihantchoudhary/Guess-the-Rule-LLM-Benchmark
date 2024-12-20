@@ -1,10 +1,17 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 interface DocsSidebarProps {
   openSections: Record<string, boolean>;
   toggleSection: (section: string) => void;
-  scrollToSection: (sectionRef: React.RefObject<HTMLDivElement>, section: string) => void;
+  scrollToSection: (
+    sectionRef: React.RefObject<HTMLDivElement>,
+    section: string
+  ) => void;
   contentRefs: Record<string, React.RefObject<HTMLDivElement>>;
 }
 
@@ -18,18 +25,21 @@ export const DocsSidebar = ({
     <div className="w-64 bg-white border-r shadow-sm">
       <ScrollArea className="h-screen py-6 px-4">
         <div className="space-y-4">
+          {/* Dataset Overview Section */}
           <Collapsible>
-            <CollapsibleTrigger 
-              onClick={() => toggleSection('overview')}
+            <CollapsibleTrigger
+              onClick={() => toggleSection("overview")}
               className="font-semibold text-lg mb-2 w-full text-left hover:text-primary transition-colors duration-200"
             >
               Dataset Overview
             </CollapsibleTrigger>
             <CollapsibleContent>
-              {openSections['overview'] && (
-                <div 
+              {openSections["overview"] && (
+                <div
                   className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                  onClick={() => scrollToSection(contentRefs.datasetSize, 'datasetSize')}
+                  onClick={() =>
+                    scrollToSection(contentRefs.datasetSize, "datasetSize")
+                  }
                 >
                   Dataset Size
                 </div>
@@ -37,31 +47,41 @@ export const DocsSidebar = ({
             </CollapsibleContent>
           </Collapsible>
 
+          {/* Getting Started Section */}
           <Collapsible>
-            <CollapsibleTrigger 
-              onClick={() => toggleSection('gettingStarted')}
+            <CollapsibleTrigger
+              onClick={() => toggleSection("gettingStarted")}
               className="font-semibold text-lg mb-2 w-full text-left hover:text-primary transition-colors duration-200"
             >
               Getting Started
             </CollapsibleTrigger>
             <CollapsibleContent>
-              {openSections['gettingStarted'] && (
+              {openSections["gettingStarted"] && (
                 <>
-                  <div 
+                  <div
                     className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                    onClick={() => scrollToSection(contentRefs.chooseGame, 'chooseGame')}
+                    onClick={() =>
+                      scrollToSection(contentRefs.chooseGame, "chooseGame")
+                    }
                   >
                     Choose a Game
                   </div>
-                  <div 
+                  <div
                     className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                    onClick={() => scrollToSection(contentRefs.playOrPick, 'playOrPick')}
+                    onClick={() =>
+                      scrollToSection(contentRefs.playOrPick, "playOrPick")
+                    }
                   >
                     Play or Pick LLMs
                   </div>
-                  <div 
+                  <div
                     className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                    onClick={() => scrollToSection(contentRefs.analyzeResults, 'analyzeResults')}
+                    onClick={() =>
+                      scrollToSection(
+                        contentRefs.analyzeResults,
+                        "analyzeResults"
+                      )
+                    }
                   >
                     Analyze Results
                   </div>
@@ -70,25 +90,29 @@ export const DocsSidebar = ({
             </CollapsibleContent>
           </Collapsible>
 
-          <div 
+          {/* Paradigm Section */}
+          <div
             className="font-semibold text-lg cursor-pointer hover:text-primary transition-colors duration-200"
-            onClick={() => scrollToSection(contentRefs.paradigm, 'paradigm')}
+            onClick={() => scrollToSection(contentRefs.paradigm, "paradigm")}
           >
             Paradigm
           </div>
 
+          {/* Static Dataset Section */}
           <Collapsible>
-            <CollapsibleTrigger 
-              onClick={() => toggleSection('static')}
+            <CollapsibleTrigger
+              onClick={() => toggleSection("static")}
               className="font-semibold text-lg mb-2 w-full text-left hover:text-primary transition-colors duration-200"
             >
               Static Dataset
             </CollapsibleTrigger>
             <CollapsibleContent>
-              {openSections['static'] && (
-                <div 
+              {openSections["static"] && (
+                <div
                   className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                  onClick={() => scrollToSection(contentRefs.picnicGame, 'picnicGame')}
+                  onClick={() =>
+                    scrollToSection(contentRefs.picnicGame, "picnicGame")
+                  }
                 >
                   Picnic Game
                 </div>
@@ -96,36 +120,53 @@ export const DocsSidebar = ({
             </CollapsibleContent>
           </Collapsible>
 
+          {/* Dynamic Dataset Section */}
           <Collapsible>
-            <CollapsibleTrigger 
-              onClick={() => toggleSection('dynamic')}
+            <CollapsibleTrigger
+              onClick={() => toggleSection("dynamic")}
               className="font-semibold text-lg mb-2 w-full text-left hover:text-primary transition-colors duration-200"
             >
               Dynamic Dataset
             </CollapsibleTrigger>
             <CollapsibleContent>
-              {openSections['dynamic'] && (
+              {openSections["dynamic"] && (
                 <>
-                  <div 
+                  <div
                     className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                    onClick={() => scrollToSection(contentRefs.syntaxGame, 'syntaxGame')}
+                    onClick={() =>
+                      scrollToSection(contentRefs.syntaxGame, "syntaxGame")
+                    }
                   >
                     Syntax Game
                   </div>
-                  <div 
+                  <div
                     className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
-                    onClick={() => scrollToSection(contentRefs.mathSequence, 'mathSequence')}
+                    onClick={() =>
+                      scrollToSection(contentRefs.mathSequence, "mathSequence")
+                    }
                   >
                     Mathematical Sequence
+                  </div>
+                  <div
+                    className="ml-4 cursor-pointer hover:text-primary transition-colors duration-200"
+                    onClick={() =>
+                      scrollToSection(
+                        contentRefs.codeFunctions,
+                        "codeFunctions"
+                      )
+                    }
+                  >
+                    Code Functions Picnic
                   </div>
                 </>
               )}
             </CollapsibleContent>
           </Collapsible>
 
-          <div 
+          {/* Experiment Results Section */}
+          <div
             className="font-semibold text-lg cursor-pointer hover:text-primary transition-colors duration-200"
-            onClick={() => scrollToSection(contentRefs.results, 'results')}
+            onClick={() => scrollToSection(contentRefs.results, "results")}
           >
             Experiment Results
           </div>
